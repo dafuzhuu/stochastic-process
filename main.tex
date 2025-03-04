@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[serif]{lindrew}
+\usepackage{cancel}
+\usepackage{pgf, tikz}
+\usepackage{pdfpages}
+\usepackage{mathdots}
+\usepackage{subcaption}
+\usetikzlibrary{arrows, automata}
+\usepackage{upgreek}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[fontset=windows]{ctex}
+% change to frozencache for uploading to arXiv, and include the _minted files in the arXiv submission
+\usepackage[frozencache,cachedir=_minted]{minted}
+\setCJKmainfont{KaiTi}[BoldFont=KaiTi, ItalicFont=KaiTi] % 设置正文字体为楷体
+\setCJKsansfont{华文中宋} % 设置无衬线字体为黑体
+\setCJKmonofont{KaiTi} % 设置等宽字体为仿宋
+\setlength{\parindent}{0pt} % 取消缩进
+\usepackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setdescription{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+%\usepackage{todonotes}
+\newcommand{\todo}[1]{}
+
+\title{随机过程}
+\author{\textbf{讲师：吴明燕} \\ 笔记由Dafu Zhu编写 \\ 基于2025春季厦大数院《随机过程》}
+
+\renewcommand{\d}{d}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\cofactor}{\mathrm{cofactor}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\vecm}{\operatorname{vec}}
+\newcommand{\dotstar}{\mathbin{.*}}
+\newcommand{\evalat}[2]{\left. #1 \right|_{#2}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+\usepackage{kbordermatrix}
+\renewcommand{\kbldelim}{(} % change array delimiters to (...)
+\renewcommand{\kbrdelim}{)}
+
+\newcommand{\alan}[1]{\textcolor{blue}{#1}}
+
+\date{最后修改：2025/03/05}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\pagebreak
+
+\addcontentsline{toc}{section}{准备知识}
+\input{lectures/0-Preliminary}
+
+\pagebreak
+
+\section{马氏链}
+\input{lectures/01-Markov-Chain}
+
+\pagebreak
+
+\section{泊松过程}
+\input{lectures/02-Posson-Process}
+
+\pagebreak
+
+
+\end{document}

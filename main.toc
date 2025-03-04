@@ -1,0 +1,11 @@
+\contentsline {section}{准备知识}{2}{Doc-Start}%
+\contentsline {subsection}{\numberline {0.1}事件概率}{3}{subsection.0.1}%
+\contentsline {subsubsection}{\numberline {0.1.1}事件域}{3}{subsubsection.0.1.1}%
+\contentsline {subsubsection}{\numberline {0.1.2}概率测度}{4}{subsubsection.0.1.2}%
+\contentsline {subsection}{\numberline {0.2}独立性}{7}{subsection.0.2}%
+\contentsline {subsection}{\numberline {0.3}条件概率与条件独立}{11}{subsection.0.3}%
+\contentsline {subsection}{\numberline {0.4}期望与条件期望}{13}{subsection.0.4}%
+\contentsline {subsubsection}{\numberline {0.4.1}离散随机变量的期望}{13}{subsubsection.0.4.1}%
+\contentsline {subsubsection}{\numberline {0.4.2}条件期望}{15}{subsubsection.0.4.2}%
+\contentsline {section}{\numberline {1}马氏链}{24}{section.1}%
+\contentsline {section}{\numberline {2}泊松过程}{25}{section.2}%
