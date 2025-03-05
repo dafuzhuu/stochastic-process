@@ -11,12 +11,13 @@
 \usepackage{amsmath, amssymb}
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{fontspec,xeCJK}
 \usepackage[fontset=windows]{ctex}
 % change to frozencache for uploading to arXiv, and include the _minted files in the arXiv submission
 \usepackage[frozencache,cachedir=_minted]{minted}
-\setCJKmainfont{KaiTi}[BoldFont=KaiTi, ItalicFont=KaiTi] % 设置正文字体为楷体
-\setCJKsansfont{华文中宋} % 设置无衬线字体为黑体
-\setCJKmonofont{KaiTi} % 设置等宽字体为仿宋
+\setCJKmainfont[Path=./fonts/]{simkai.ttf}
+\setCJKsansfont[Path=./fonts/]{STZHONGS.ttf} % 设置无衬线字体为 华文中宋
+\setCJKmonofont[Path=./fonts/]{simkai.ttf} % 设置等宽字体为 KaiTi
 \setlength{\parindent}{0pt} % 取消缩进
 \usepackage{enumitem}
 \setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}

@@ -1,0 +1,56 @@
+\subsection{离散时间马氏链}
+
+马尔可夫性 $\leftrightarrow$ 已知现在，过去与未来不相干/独立
+
+\begin{definition}[(离散时间)马氏链]
+    称 $S$ 值随机过程 $\{X_n,n\geq 0\}$ 为马氏链，若 $X$ 满足以下马氏性：$\forall n\geq 0,x_0,x_1,\cdots,x_n,y\in S$，
+    \[
+    \PP(\underbrace{X_{n+1}=y}_{\text{未来}}|\underbrace{X_0=x_0,\cdots,X_{n-1}=x_{n-1}}_{\text{过去}},\underbrace{X_n=x_n}_{\text{现在}})=\PP(X_{n+1}=y|X_n=x_n)\tag{$M_1$}
+    \]
+    其中 $X_0$ 的分布称为 $X$ 的初始分布
+\end{definition}
+
+\begin{definition}
+    当 $S$ 为有限集，称链为有限链，当 $S$ 为无限集，称链为无限链
+\end{definition}
+
+注：改写 $(M_1)$
+\[
+LHS=\PP_{X_n=x_n}(X_{n+1}=y|X_0=x_0,\cdots,X_{n-1}=x_{n-1})
+\]
+\[
+RHS=\PP_{X_n=x_n}(X_{n+1}=y)
+\]
+\[
+\begin{aligned}
+    M_1 &\Leftrightarrow \{X_{n+1}=y\}\ind_{\{X_n=x_n\}}\{X_0=x_0,\cdots,X_{n-1}=x_{n-1}\}\\
+    &\Leftrightarrow X_{n+1}\ind_{\{X_n=x_n\}} (X_0,\cdots,X_{n-1})
+\end{aligned}
+\]
+$(M_1)\quad \text{未来}\ind_{\text{现在}}\text{过去}$
+\[
+\PP_{\text{现在}}(\text{未来}|\text{过去})=\PP_{\text{现在}}(\text{未来})
+\]
+
+\begin{lemma}[马氏性的等价表示]
+    [G S] 下面三个命题等价
+    \begin{enumerate}
+        \item $(M_1)$ 马氏性
+        \item $\forall k\geq 0, 0\leq n_1< \cdots<n_k\leq n$，对于 $y,x_{n_1},\cdots,x_{n_k}\in S$，
+        \[
+        \PP(X_{n+1}=y|X_{n_1}=x_{n_1},\cdots,X_{n_k}=x_{n_k})=\PP(X_{n+1}=y|X_{n_k}=x_{n_k})\tag{$M_2$}
+        \]
+        即
+        \[
+        \{X_{n+1}=y \}\ind_{\{X_{n_k}=x_{n_k}\}}\{X_{n_1}=x_{n_1},\cdots,X_{n_{k-1}}=x_{n_{k-1}}\}
+        \]
+        \item 对 $\forall m\geq 1,n\geq 0, \{y,x_i,0\leq i\leq n\}\st S$，有
+        \[
+        \PP(X_{n+m}=y|X_0=x_0,\cdots,X_n=x_n)=\PP(X_{n+m}=y|X_n=x_n)\tag{$M_3$}
+        \]
+        即
+        \[
+        \{X_{n+m}=y\}\ind_{\{X_n=x_n\}}\{X_0=x_0,\cdots,X_{n_1}=x_{n-1}\}
+        \]
+    \end{enumerate}
+\end{lemma}
