@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.6.29)  7 MAR 2025 10:02
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.6.29)  7 MAR 2025 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1156,29 +1156,29 @@ Package cleveref Info: always capitalise cross-reference names on input line 78
 Package thmtools Info: Key `mdframed' (with value `style = mdredbox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=defbox' on input line 198.
+(thmtools)             that uses `style=defbox' on input line 200.
 Package thmtools Info: Key `mdframed' (with value `style = mdpurplebox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=thmbox' on input line 199.
+(thmtools)             that uses `style=thmbox' on input line 201.
 Package thmtools Info: Key `mdframed' (with value `style = mdgreenbox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=exbox' on input line 200.
+(thmtools)             that uses `style=exbox' on input line 202.
 Package thmtools Info: Key `mdframed' (with value `style = mdorangebox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=notebox' on input line 201.
+(thmtools)             that uses `style=notebox' on input line 203.
 Package thmtools Info: Key `mdframed' (with value `style = mdazurebox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=lembox' on input line 202.
+(thmtools)             that uses `style=lembox' on input line 204.
 Package thmtools Info: Key `mdframed' (with value `style = mdyellowbox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=exerbox' on input line 203.
+(thmtools)             that uses `style=exerbox' on input line 205.
 Package thmtools Info: Automatically pulling in `thmdef-mdframed' on input line
- 208.
+ 210.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thmdef-mdframed.sty
 Package: thmdef-mdframed 2023/02/17 v0.75
@@ -2140,21 +2140,57 @@ Package mdframed Info: mdframed detected package amsthm
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 35.
-) [26]
-(./lectures/02-Posson-Process.tex) [27] (./main.aux)
+ [26] [27]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 117.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 136.
+
+Overfull \hbox (35.2005pt too wide) detected at line 179
+[][]
+ []
+
+[28]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 182.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 190.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 198.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 223.
+ [29]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 239.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 262.
+File: figures/Gambler's Ruin.png Graphic file (type bmp)
+<figures/Gambler's Ruin.png>
+ [30]) [31] (./lectures/02-Posson-Process.tex) [32] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3A12FB6215B483761AFB0F5A7C0FB033;1783.
+(rerunfilecheck)             Checksum: 64D3A36E3A2235F5B396A95A2470C82E;1921.
  ) 
 Here is how much of TeX's memory you used:
- 50297 strings out of 476683
- 1237481 string characters out of 5804047
+ 50337 strings out of 476683
+ 1238351 string characters out of 5804047
  1870018 words of memory out of 5000000
- 69656 multiletter control sequences out of 15000+600000
+ 69694 multiletter control sequences out of 15000+600000
  528736 words of font info for 124 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,15n,99p,769b,1060s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (27 pages).
+Output written on main.pdf (32 pages).
