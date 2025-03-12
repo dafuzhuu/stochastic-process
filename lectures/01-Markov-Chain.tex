@@ -372,3 +372,76 @@ $\Leftarrow$
     &=\mu_{i_0}\sum_{i_1\in S}(P_{i_0,i_1}P_{i_1,i_2})\cdots P_{i_{n-1},i_n}
 \end{aligned}
 \]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/split_steps.png}
+\end{figure}
+
+\subsection{多步转移概率与矩阵乘法}
+
+\begin{definition}
+    设 $X=\{X_n,n\geq 0\}$ 为马氏链，称
+    \[
+    p_{ij}(m,m+n):=\PP(X_{n+m}=j|X_m=i)\quad (i,j\in S, m,n\geq 0)
+    \]
+    为 $X$ 的 $n$ 步转移概率，并称 $P(m,m+n)=(p_{ij}(m,m+n))_{i,j\in S}$ 为 $X$ 的 $n$ 步转移（概率）矩阵，其中
+    \[
+    p_{i,j}(0,0)=\delta_{ij}=\begin{cases}
+        1 & i=j\\
+        0 & i\neq j
+    \end{cases}
+    \]
+\end{definition}
+
+当 $X$ 时齐，$P(m,m+1)=(p_{ij}(m,m+1))_{i,j\in S}=(p_{ij}(0,1))_{i,j\in S}=(p_{ij})_{i,j\in S}$
+
+可见 $n=1$ 时，$P(m,m+1)$ 与 $m$ 无关。那 $n>1$ 时呢？
+
+\subsubsection{Chapman-Komolgorov方程}
+
+\begin{theorem}[C-K方程]
+    设 $\{X_n,x\geq 0\}$ 为马氏链
+    \[
+    p_{ij}(m,m+n+r)=\sum_{k\in S}p_{ik}(m,m+n)p_{kj}(m+n,m+n+r)
+    \]
+    其中 $i,j\in S,m,n,r\geq 0$，即
+    \[
+    P(m,m+n+r)=P(m,m+n)P(m+n,m+n+r)
+    \]
+\end{theorem}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\textwidth]{figures/multi_steps.jpg}
+    \caption{Multi-steps}
+\end{figure}
+
+证明：
+
+\[
+\begin{aligned}
+    p_{ij}(m,m+n+r)&=P(X_{m+n+r}=j|X_m=i)\\
+    &=\sum_{k\in S}P(X_{m+n+r}=j,X_{m+n}=k|X_m=i)\\
+    &=\sum_{k\in S}\PP_{\{X_m=i\}}(X_{m+n+r}=j|X_{m+n}=k)\PP_{\{X_m=i\}}(X_{m+n}=k)\quad [\text{乘法公式}]\\
+    &=\sum_{k\in S}p_{ik}(m,m+n)p_{kj}(m+n,m+n+r)\quad [\text{Markov}]
+\end{aligned}
+\]
+
+\begin{corollary}
+    设 $X$ 为时齐马氏链，则 $P(m,m+n)=P^n(m,n\geq 0)$. 其中，$n=0$时，$P(m,m)=P^0:=I$(单位矩阵)
+
+    从而，可记 $p_{ij}^{(n)}:=p_{ij}(n):=p_{ij}(m,m+n)$，$P(n):=P(m,m+n)=P^n$
+
+    由 C-K 方程，$P(m+n)=P(m)P(n), p_{ij}(m+n)=\sum_{k\in S}p_{ik}(m)p_{kj}(n)$
+\end{corollary}
+
+证明：
+
+\[
+\begin{aligned}
+    P(m,m+n)&=P(m,m+1)\cdot P(m+1,m+n)\quad [C-K]\\
+    &=P\cdot P(m+1,m+n)\quad [\text{时齐}]\\
+    &=P^n\qed
+\end{aligned}
+\]
