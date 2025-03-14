@@ -32,8 +32,8 @@ $(M_1)\quad \text{未来}\ind_{\text{现在}}\text{过去}$
 \PP_{\text{现在}}(\text{未来}|\text{过去})=\PP_{\text{现在}}(\text{未来})
 \]
 
-\begin{lemma}[马氏性的等价表示]
-    [G S] 下面三个命题等价
+\begin{lemma}[马氏性的等价表示]\label{lem:markov_equiv}
+    [Grimmett\cite{grimmett}] 下面三个命题等价
     \begin{enumerate}
         \item $(M_1)$ 马氏性
         \item $\forall k\geq 0, 0\leq n_1< \cdots<n_k\leq n$，对于 $y,x_{n_1},\cdots,x_{n_k}\in S$，
@@ -220,7 +220,7 @@ $\Rightarrow$
 \end{aligned}
 \]
 
-\begin{theorem}[转移矩阵的刻画]
+\begin{theorem}[转移矩阵的刻画]\label{thm:random_matrix}
     转移矩阵是一个随机矩阵，即
     \begin{enumerate}
         \item $\forall i,j\in S,p_{ij}\geq 0$
@@ -260,7 +260,7 @@ $\Rightarrow$
 即然有 $(M_1)$，为什么还要定义\ref{def:homo-markov}？因为该定义决定了马氏链的有限维分布
 
 \begin{example}[Gambler's Ruin]
-    [Durrett, 3rd ed] P1 
+    [Durrett\cite{durrett}] P1 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{figures/Gambler's Ruin.png}
@@ -303,7 +303,7 @@ e.g.
 \end{figure}
 
 \begin{example}[Two-Stage Markov Chains]
-    [Durrett, 3rd ed] P7
+    [Durrett\cite{durrett}] P7
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{figures/two_stage_markov_chains.png}
@@ -333,12 +333,12 @@ $Y_n=(X_n,X_{n-1}), n\geq 1$ 则 $\{Y_n,n\geq 1\}$ 是（时齐）马氏链，$Y
 
 对 1.2. 同理\qed
 
-\begin{claim}
+\begin{proposition}
     设 $P=(p_{ij})_{i,j\in S}$ 为随机矩阵，$\mu=(\mu_i)_{i\in S}$ 为概率分布，$X=\{X_n,n\geq 0\}$ 为 $S$ 值离散时间的随机过程，则 $X\sim \text{Markov}(\mu,P)$ 当且仅当 $X$ 有有限维分布，
     \[
     \PP(X_0=i_0,X_1=i_1,\cdots,X_n=i_n)=\mu_{i_0}P_{i_0,i_1}P_{i_1,i_2}\cdots P_{i_{n-1},i_n}\quad (\forall n\geq 0,i_j\in S)
     \]
-\end{claim}
+\end{proposition}
 
 证明：$\Rightarrow$ 
 \[
@@ -348,7 +348,7 @@ $Y_n=(X_n,X_{n-1}), n\geq 1$ 则 $\{Y_n,n\geq 1\}$ 是（时齐）马氏链，$Y
     &=\mu_{i_0}P_{i_0,i_1}\cdots P_{i_{n-1},i_n}
 \end{aligned}
 \]
-严格地讲，$\PP(\cdot|A)$ 需保证 $\PP(A)>0$。对 $\PP(A)=0$ 情况的分类讨论，见 Adventures in stochastic processes, prop 2.1.1
+严格地讲，$\PP(\cdot|A)$ 需保证 $\PP(A)>0$。对 $\PP(A)=0$ 情况的分类讨论，见 Resnick\cite{resnick}, prop 2.1.1
 
 $\Leftarrow$ 
 
@@ -429,11 +429,20 @@ $\Leftarrow$
 \]
 
 \begin{corollary}
-    设 $X$ 为时齐马氏链，则 $P(m,m+n)=P^n(m,n\geq 0)$. 其中，$n=0$时，$P(m,m)=P^0:=I$(单位矩阵)
-
-    从而，可记 $p_{ij}^{(n)}:=p_{ij}(n):=p_{ij}(m,m+n)$，$P(n):=P(m,m+n)=P^n$
-
-    由 C-K 方程，$P(m+n)=P(m)P(n), p_{ij}(m+n)=\sum_{k\in S}p_{ik}(m)p_{kj}(n)$
+    设 $X$ 为具有（一步）转移矩阵 $P$ 的时齐马氏链，则
+    \begin{enumerate}
+        \item $\forall m,n\geq 0$，有 $P(m,m+n)=P(0,n)=P^n$。其中，约定 $P^0=I$（单位矩阵）
+        
+        从而，可记 $X$ 的 $n$ 步转移概率为 $P_{ij}(n)$ 或 $P_{ij}^{(n)}$，$n$ 步转移概率矩阵为 $P(n)$，且有
+        \[
+        P(n)=P^n=(p_{ij}^{(n)})_{i,j\in S}
+        \]
+        \item C-K 方程可改写为
+        \[
+        p_{ij}(m+n)=\sum_{k\in S}p_{ik}^{(m)}p_{kj}^{(n)}
+        \]
+        $P(m+n)=P(m){(n)}$，即 $P^{m+n}=P^mP^n$
+    \end{enumerate}
 \end{corollary}
 
 证明：
@@ -443,5 +452,204 @@ $\Leftarrow$
     P(m,m+n)&=P(m,m+1)\cdot P(m+1,m+n)\quad [C-K]\\
     &=P\cdot P(m+1,m+n)\quad [\text{时齐}]\\
     &=P^n\qed
+\end{aligned}
+\]
+
+\begin{proposition}
+    $\forall n\geq 0, P(n)=P^n$ 仍是一个随机矩阵（定理\ref{thm:random_matrix}）
+\end{proposition}
+
+证明：$n=2$时，$P^2=(p_{ij}(2))_{i,j\in S}$
+
+$\Rightarrow$
+\[
+\begin{aligned}
+    \sum_{j\in S}p_{ij}(2)&=\sum_{j\in S}\sum_{k\in S}p_{ik}p_{kj}\quad [C-K, \text{默认}p_{ik}(1)=p_{ik}]\\
+    &=\sum_{k\in S}\sum_{j\in S}p_{ik}p_{kj}\\
+    &=\sum_{k\in S}p_{ik}p_{ik}\cdot(\sum_{j\in S}p_{kj})\\
+    &=\sum_{k\in S}p_{ik}=1\qed
+\end{aligned}
+\]
+第二个等号，级数可交换是因为非负，要么有限（收敛）、要么$+\infty$（发散）
+
+\subsubsection{马氏链的任意有限维分布}
+
+\begin{proposition}
+    $X\sim\text{Markov}(\mu, P)$，其中 $\mu=(\mu_i)_{i\in S}, P=(p_{ij})_{i,j\in S}$，则
+    \[
+    \PP(X_{u_1}=i_1,\cdots,X_{u_n}=i_n)=\mu_{i_1}^{(u_1)}\prod_{k=1}^{n-1}p_{i_k,i_{k+1}}^{(u_{k+1}-u_k)}
+    \]
+    其中，$0<u_1<u_2<\cdots<u_n$，$i_1,i_2,\cdots,i_n\in S$，$\mu^{(u_1)}=(\mu_i^{(u_1)})_{i\in S}$ 为 $X_{u_1}$ 的有限维分布
+\end{proposition}
+
+证明：
+
+\[
+\begin{aligned}
+    \PP(X_{u_1}=i_1,\cdots,X_{u_n}=i_n)&=\PP(X_{u_1}=i_1)\cdot \PP(X_{u_2}=i_2|X_{u_1}=i_1)\cdots \PP(X_{u_n}=i_n|X_{u_1}=i_1,\cdots,X_{u_{n-1}}=i_{n-1})\\
+    &=(\mu_{i_1}^{(u_1)})p_{i_1,i_2}^{(u_2-u_1)}\cdots p_{i_{n-1},i_n}^{(u_n-u_{n-1})}\quad [\text{Markov}]\\
+    &=\mu_{i_1}^{(u_1)}\prod_{k=1}^{n-1}p_{i_k,i_{k+1}}^{(u_{k+1}-u_k)}
+\end{aligned}
+\]
+
+用概率表示不够直观，尝试用转移矩阵来表示
+
+\begin{lemma}
+   $\mu^{(m+n)}=\mu^{(n)}P^m(\forall m,n\geq 0)$，即
+   \[
+   \mu_i^{(m+n)}=(\mu^{(n)}P^m)_i=\sum_{j\in S}\mu_i^{(n)}p_{ij}^{(m)}
+   \]
+   特别地，取 $n=0$，则 $\mu^{(m)}=\mu\cdot P^m$（$\mu$看成行向量），即 $\mu_j^{(m)}=(\mu P^m)_j=\sum_{j\in S}\mu_i\cdot p_{ij}^{(m)}$ ()
+\end{lemma}
+
+证明：
+\[
+\begin{aligned}
+    \PP(X_{n+m}=j)&=\sum_{i\in S}\PP(X_{n+m}=j|X_n=i)\PP(X_n=i)\\
+    &=\sum_{i\in S}p_{ij}(m)\mu_i^{(n)}\\
+    &=(\mu^{(n)}P^m)_j\qed
+\end{aligned}
+\]
+
+$\Rightarrow \mu^{(m+n)}=\mu^{(n)}P^m$
+
+\begin{theorem}[任意有限维分布II]
+    $\forall o\leq u_1<u_2<\cdots<u_n, i_1,\cdots,i_n\in S$
+    \[
+    \PP(X_{u_1}=i_1,\cdots,X_{u_n}=i_n)=(\mu P^{u_1})_{i_1}\prod_{k=1}^{n-1}P_{i_k,i_{k+1}}^{u_{k+1}-u_k}
+    \]
+    其中，$P_{i,j}^m=:(P^m)_{i,j}=:p_{i,j}^{(m)}$
+\end{theorem}
+
+讨论随机过程地存在性：
+
+抽象地，$\mu,P\xrightarrow{\text{定理}\eqref{thm:Kolmogorov}}\text{有限维分布族}\rightarrow X\sim \text{Markov}(\mu,P)$，$\mu,P$可以刻画具备对称性、相容性的有限维分布
+
+具体地，参考Resnick\cite{resnick}, P62, Section 2.1
+
+\subsection{（从固定点出发的）马氏链}
+
+固定 $i\in S$，定义 $\PP_i(\cdot)=\PP(\cdot|X_0=i)$, $\EE_i(X)=\EE(X|X_0=i)=\sum_{x\in S}x\PP_i(X=x)$
+
+\subsubsection{链的状态：常返和暂留}
+
+\begin{definition}
+    称状态 $i$ 为常返的，若
+    \[
+    \PP_i(X_n=i\text{对某个}n\geq 1)=1
+    \]
+    如果上面的概率$<1$，则称为暂留的/非常返的
+\end{definition}
+
+注：$i$ 常返 $\Leftrightarrow$ $\PP_i(\cup_{n\geq 1}\{X_n=i\})=1$
+
+思考：$i$ 常返 $\Leftrightarrow$ “不停地/无数次回到$i$”
+
+$\qquad \Leftrightarrow$ $\PP_i(\omega|\omega\in \text{无数多个} \{X_n=i\})$
+
+$\qquad \Leftrightarrow$ $\PP_i(\omega|\omega\in\cap_{k\geq 1}\cup_{n\geq k}\{X_n=i\},\forall k)$
+
+$\qquad \Leftrightarrow$ $\PP_i(X_n=i, i.o.)$ (infinitely often)
+
+第三个$\Leftrightarrow$有点费解，从反方向理解，
+\[
+\PP_i(\cup_{k\geq 1}\cap_{n\geq k}\{X_n=i\})=\PP_i(\omega|\omega\text{至多不属于有限个}\{X_n=i\})
+\]
+但我们推理得到的“常返”和定义里的并不等价
+\[
+\bigcap_{k\geq 1}\bigcup_{n\geq k}\{X_n=i\}\nLeftrightarrow \bigcup_{n\geq 1}\{X_n=i\}
+\]
+且LHS是RHS的子集，因此由定义的$\PP(RHS)=1$不能推出$\PP(LHS)=1$。于是我们疑惑为什么会叫它常返。这里要用到高阶知识“停时”，我们最后会回到这个问题。
+
+下面给出几种判断常返/暂留的方法。
+
+\subsubsection*{$1^{\circ}$从数学角度：并改写成不交并}
+
+$i$ 常返 $\Leftrightarrow$ $\PP_i(\cup_{n\geq 1}\{X_n=i\})=1$
+
+$\qquad \Leftrightarrow \PP_i(\text{有限步到达}i)=1$
+
+$\qquad \Leftrightarrow \PP(\text{从}i\text{出发条件下，有限时间内回到}i)=1$
+
+$B_1(i)=\{X_1=i\},B_2(i)=\{X_2=i\}\backslash \{X_1=i\}=\{X_2=i,X_1\neq i\},$ $\cdots,$ $B_n(i)=\{X_n=i,X_{n-1}\neq i\cdots,X_1\neq i\}$
+\[
+\Rightarrow\quad \sum_{n\geq 1}B_n(i)=\bigcup_{n\geq 1}\{X_n=i\} [\text{练习}\eqref{exer:disjoint_union}]
+\]
+$i$ 常返 $\Leftrightarrow$ $1=\PP_i(\sum_{n\geq 1}B_n(i))=\sum_{n\geq 1}\PP_i(B_n(i))$
+\[
+\begin{aligned}
+    \PP_i(B_n(j))&=\PP_i(X_n=j,X_{n-1}\neq j,\cdots,X_1\neq j)\\
+    &=\PP_i(\text{首次访问}j\text{的时刻为}n)\\
+    &=\PP_i(\text{走}n\text{步首次到达}j)
+\end{aligned}
+\]
+故
+\[
+\begin{aligned}
+    \PP_i(\sum_{n\geq 1}B_n(i))&=\PP_i(\text{首次访问}j\text{的时刻为有限时间})\\
+    &=\PP_i(\text{有限时间内首次访问}j)
+\end{aligned}
+\]
+记号
+\[
+f_{ij}:=\PP_i(\text{首次访问}j\text{的时刻为有限时间})
+\]
+\[
+f_{ij}(n):=\PP_i(B_n(j))=\PP_i(\text{首次访问}j\text{的时刻为}n)
+\]
+
+\begin{proposition}
+    常返和暂留的等价命题
+    \begin{enumerate}
+        \item $i$ 常返 $\Leftrightarrow$ $1=f_{ii}=\sum_{n\geq 1}f_{ii}(n)$
+        \item $i$ 暂留 $\Leftrightarrow$ $1=f_{ii}>\sum_{n\geq 1}f_{ii}(n)$
+    \end{enumerate}
+\end{proposition}
+
+\subsubsection*{$2^{\circ}$从“多步转移概率”角度判别}
+
+定义新记号（$P$不是转移矩阵）
+\[
+P_{ij}(s):=\sum_{n\geq 0}s^n p_{ij}(n)\qquad F_{ij}(s):=\sum_{n\geq 0}s^n f_{ij}(n)
+\]
+其中，$p_{ij}(0)=\delta_{ij},f_{ij}(0)=0$
+
+注：当 $|s|<1$ 时，$P_{ij}(s),F_{ij}(s)$ 绝对收敛
+
+由 Abel 连续性定理，
+\[
+\lim_{s\uparrow 1}F_{ij}(s)=\sum_{n\geq 1}f_{ij}(n)=f_{ij}\in [0,1]
+\]
+\[
+\lim_{s\uparrow 1}P_{ij}(s)=\sum_{n\geq 0}p_{iij}(0)=\text{finite}/+\infty
+\]
+\begin{lemma}
+    $|s|<1$，则
+    \[
+    P_{ij}(s)=\delta_{ij}+P_{ii}(s)F_{ij}(s)
+    \]
+\end{lemma}
+
+证明：构造不交并，$B_m(i)=\{X_m=i,X_{m-1}\neq i,\cdots,X_1\neq i\}, m\geq 1$
+
+$\Rightarrow$ $\sum_{m\geq 1}B_m(i)=\cup_{m\geq 1}\{X_n=i\}, B_m(i)\st \{X_n\neq i\}, m\geq n+1$
+\[
+\begin{aligned}
+    p_{ij}(n)=\PP_i(X_n=j)&=\PP_i(\{X_n=j\}\cap \sum_{m\geq 1}B_m(j))\\
+    &=\sum_{m\geq 1}\PP_i(\{X_n=j\}\cap B_m(j))
+    &=\sum_{m=1}^n\PP_i(\{X_n=j\}\cap B_m(j))
+\end{aligned}
+\]
+最后一个等号成立是因为 $m\geq n+1$ 时 $\{X_n=j\}\cap B_m(j)$ 为空集
+\[
+\sum_{m=1}^n\PP_i(\{X_n=j\}\cap B_m(j))=\sum_{m=1}^n\PP_i(X_n=j|B_m(j))\PP_i(B_m(j))
+\]
+其中 $X_m=j,X_{n-1}\neq j,\cdots,X_1\neq j$，$X_{n-1}\in S\backslash \{j\}$
+
+用一般而非单点的马氏性（引理\ref{lem:markov_equiv}$M_3$）
+\[
+\begin{aligned}
+    \sum_{m=1}^n\PP_i(X_n=j|B_m(j))\PP_i(B_m(j))&=\sum_{m=1}^n\PP(X_n=j|X_m=j)\cdot f_{ij}(m)\\
+    &=\sum_{m=1}^n p_{jj}(n-m)\cdot f_{ij}(m)
 \end{aligned}
 \]

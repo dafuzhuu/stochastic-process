@@ -170,7 +170,7 @@ $\PP$ 满足有限可加性（可列可加一定有限可加，如果既不是�
 
 $B_n\subset A_n$，由可列可加性和推论\ref{cor:set_operation}(2)
 
-\begin{problem}[作业1-2]\label{exer:subadditivity}
+\begin{problem}[作业1-2]\label{exer:disjoint_union}
 证明 $\cup_{n\geq 1}A_n=\sum_{n\geq 1}B_n$
 \end{problem}
 
@@ -416,7 +416,7 @@ $\Leftarrow$
 \end{aligned}
 \]
 
-第一个等式中，$\{X=x\}\cap \{Y\in E_2\}$ 看作一整个集合 $\st \{X=x\}$，因为离散、每个 $x$ 不相交，所以这是个不交并，由练习\ref{exer:subadditivity}，可以改写成加法形式。
+第一个等式中，$\{X=x\}\cap \{Y\in E_2\}$ 看作一整个集合 $\st \{X=x\}$，因为离散、每个 $x$ 不相交，所以这是个不交并，由练习\ref{exer:disjoint_union}，可以改写成加法形式。
 
 第四个等式由条件 $\PP(X=x,Y=y)=\PP(X=x)\PP(Y=y)$ 成立。\qed
 
@@ -1162,7 +1162,7 @@ $\EE(Y|X_1,\cdots,X_n)$
 这两个性质是随机过程存在的必要条件
 \end{property}
 
-\begin{theorem}[Kolmogorov定理]
+\begin{theorem}[Kolmogorov定理]\label{thm:Kolmogorov}
     设分布函数族
     \[
     \{F_{t_1,\cdots,t_n}|t_1,\cdots,t_n\in \TT,n\geq 1\}
