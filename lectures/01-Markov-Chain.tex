@@ -108,7 +108,7 @@ $(3)\rightarrow (1)$，取 $m=1$，显然
 \[
 \begin{aligned}
     \tilde{\PP}_n(X_{n+k+1}=y)&=\sum_{x_{n+1}\in S}\tilde{\PP}_n(X_{n+k+1}=y|X_{n+1}=x_{n+1})\cdot \tilde{\PP}_n(X_{n+1}=x_{n+1})\quad [\text{定理}\eqref{thm:law_total_prob}]\\
-    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y|X_{n+1}=x_{n+1},X_n=x_n)\cdot \PP(X_{n+1}=x_{n+1}|X_n=x_n)\quad [(*), \text{归纳法假设}]\\
+    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y|X_{n+1}=x_{n+1},X_n=x_n)\cdot \PP(X_{n+1}=x_{n+1}|X_n=x_n)\quad [\text{(*), 归纳法假设}]\\
     &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y,X_{n+1}=x_{n+1},X_n=x_n)/\PP(X_n=x_n)\quad [\text{乘法公式-定理\eqref{thm:multiply_func}}]\\
     &=\PP(X_{n+k+1}=y,X_n=x_n)/\PP(X_n=x_n)\\
     &=\PP(X_{n+k+1}=y|X_n=x_n)
@@ -134,7 +134,7 @@ $(3)\rightarrow (1)$，取 $m=1$，显然
 \end{remark}
 
 \begin{corollary}\label{cor:markov_con_cut}
-    若 $X$ 时马氏链，则 $\forall n\geq 1,\{x_i,n\geq i\geq 0,y\}\st S$，有 
+    若 $X$ 是马氏链，则 $\forall n\geq 1,\{x_i,n\geq i\geq 0,y\}\st S$，有 
     \[
     \PP(X_{n+1}=y|X_0=x_0,\cdots,X_n=x_n)=\PP(X_{n+1}=y|X_n=x_n,X_{n-1}=x_{n-1})
     \]
@@ -164,7 +164,7 @@ $(3)\rightarrow (1)$，取 $m=1$，显然
     \end{aligned}
     \]
     即 $(X_0,\cdots,X_{n-1})\ind_{\{X_n=x_n\}}(X_{n+1},\cdots,X_{n+m})$ 的定义
-    \item $\PN((X_{n+1},\cdots,X_{n+k+1})\in B|(X_0,\cdots,X_{n-1})\in A)=\PN((X_{n+1},\cdots,X_{n+k+1})\in B)$
+    \item $\PN((X_{n+1},\cdots,X_{n+m})\in B|(X_0,\cdots,X_{n-1})\in A)=\PN((X_{n+1},\cdots,X_{n+m})\in B)$
 \end{enumerate}
 \end{property}
 
@@ -178,9 +178,9 @@ $(3)\rightarrow (1)$，取 $k=0$ 显然
 \[
 \PN((X_{n+1},\cdots,X_{n+m})=x_{n+1}^{n+m}|(X_0,\cdots,X_{n-1})=x_0^{n-1})=\PN((X_{n+1},\cdots,X_{n+m})=x_{n+1}^{n+m})
 \]
-其中 $x_{n+1}^{n+m}=(x_{n+1},\cdots,x_{n+m}),x_{n+1}^{n+m}=(x_0,\cdots,x_{n-1})$
+其中 $x_{n+1}^{n+m}=(x_{n+1},\cdots,x_{n+m}),x_{0}^{n-1}=(x_0,\cdots,x_{n-1})$
 
-*只要对单点集合成立，对一般情况也成立，证明见独立性部分
+*只要对单点集合成立，对一般情况也成立，证明见定理\ref{thm:independent_rv}
 
 只证 $m=2$，令
 \[
@@ -189,7 +189,7 @@ $(3)\rightarrow (1)$，取 $k=0$ 显然
 $\Rightarrow$
 \[
 \begin{aligned}
-    \tilde{\PP}_n((X_{n+1},X_{n+2})=(x_{n+1},x_{n+2}))&=\tilde{\PP}_n(X_{n+1}=x_{n+1})\cdot \tilde{\PP}_n(X{n+2}=x_{n+2}|X_{n+1}=x_{n+2})\\
+    \tilde{\PP}_n((X_{n+1},X_{n+2})=(x_{n+1},x_{n+2}))&=\tilde{\PP}_n(X_{n+1}=x_{n+1})\cdot \tilde{\PP}_n(X_{n+2}=x_{n+2}|X_{n+1}=x_{n+1})\\
     &=\PP(X_{n+1}=x_{n+1}|X_n=x_n)\cdot \PP(X_{n+2}=x_{n+2}|X_{n+1}=x_{n+1})\qquad [M_1]\\
     &=\PP(X_{n+1}=x_{n+1}|X_n=x_n)\cdot \PP(X_{n+2}=x_{n+2}|X_{n+1}=x_{n+1},X_n=x_n)\qquad [\text{推论\eqref{cor:markov_con_cut}}]\\
     &=\PN(X_{n+1}=x_{n+1})\cdot \PN(X_{n+2}=x_{n+2}|X_{n+1}=x_{n+1})\\
@@ -259,7 +259,7 @@ $\Rightarrow$
     设 $X=\{X_n,n\geq 0\}$ 为一随机过程，若
     \begin{enumerate}
         \item 初值 $X_0$ 满足分布 $\mu=(\mu_i)_{i\in S}$，即 $\PP(X_0=i)=\mu_i,i\in S$
-        \item 存在一个随机矩阵 $P=(p_{ij})_{i,j\in S}$ 使得 $\forall n\geq 1,i_n,\cdots,i_{n-1},i,j\in S$
+        \item 存在一个随机矩阵 $P=(p_{ij})_{i,j\in S}$ 使得 $\forall n\geq 1,i_0,\cdots,i_{n-1},i,j\in S$
         \[
         \PP(X_{n+1}=j|X_0=i_0,\cdots,X_{n-1}=i_{n-1},X_n=i)=p_{ij}
         \]
@@ -271,11 +271,13 @@ $\Rightarrow$
 
 证明：$(2)\rightarrow (M_1)$
 \[
-\PN(X_{n+1}=j)=\sum_{(i_0,\cdots,i_{n-1})\in S^n}\PN (X_{n+1}=j|X_0=i_0,\cdots,X_{n-1}=i_{n-1})
+\begin{aligned}
+    \PP(X_{n+1}=j|X_n=i)&=\sum_{(i_0,\cdots,i_{n-1})\in S^n}\PP(X_{n+1}=j|X_n=i,X_0=i_0,\cdots,X_{n-1}=i_{n-1})\PP(X_0=i_0,\cdots,X_{n-1}=i_{n-1})\\
+    &=\sum_{(i_0,\cdots,i_{n-1})\in S^n}p_{ij}\cdot \PP(X_0=i_0,\cdots,X_{n-1}=i_{n-1})=p_{ij}
+\end{aligned}
 \]
-\[
-\PN(X_0=i_0,X_{n-1}=i_{n-1})\overset{(2)}{=}p_{ij}\sum_{(i_0,\cdots,i_{n-1})\in S^n}\PP(X_0=i_0,\cdots,X_{n-1}=x_{n-1}|X_n=i)=p_{ij}
-\]
+所以 $\PP(X_{n+1}=j|X_0=i_0,\cdots,X_{n-1}=i_{n-1},X_n=i)=\PP(X_{n+1}=j|X_n=i)$
+
 即然有 $(M_1)$，为什么还要定义\ref{def:homo-markov}？因为该定义决定了马氏链的有限维分布
 
 \begin{example}[Gambler's Ruin]
@@ -307,7 +309,7 @@ $\{X_n,n\geq 0\}$ 为（时齐）马氏链
 
 2. $\PP(X_{n+1}=0|X_n=0,X_0=i_0,\cdots,X_{n-1}=i_{n-1})=1=\PP(X_{n+1}=0|X_n=0)$
 
-$\PP(X_{n+1}=N|X_n=N, X_0=i_0,\cdots, X_{n-1}=i_{n-1})=1=\PP(X_{n+1=N|X_n=N})$
+$\PP(X_{n+1}=N|X_n=N, X_0=i_0,\cdots, X_{n-1}=i_{n-1})=1=\PP(X_{n+1}=N|X_n=N)$
 
 最后一个等号是由题目设定得到，从 $0\to 0$ 或 $N\to N$ 的概率都为1，因为游戏结束
 
