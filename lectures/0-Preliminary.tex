@@ -480,7 +480,7 @@ $\Leftarrow$
     \]
 \end{theorem}
 
-\begin{theorem}[全概公式]
+\begin{theorem}[全概公式]\label{thm:law_total_prob}
     (1) $\Omega=\sum_{k\geq 1}\Lambda_k$ 划分 $\PP(\Lambda_k)>0$，则 $\forall A\in \CF,$
     \[
     \PP(A)=\sum_{k\geq 1}\PP(A|\Lambda_k)\PP(\Lambda_k)
@@ -1038,7 +1038,7 @@ $\EE(Y|X_1,\cdots,X_n)$
 \end{definition}
 
 \begin{definition}\label{def:multi_rv_indep}
-    $\Omega,\CF,\PP, Y:\Omega\rightarrow S_Y, X_1:\Omega\rightarrow S_1,X_2:\Omega\rightarrow S_2$ 为离散随机变量，称 $Y$ 和 $(X_1,X_2)$ 独立，若 $\sigma(Y)\ind \sigma(X_1,X_2)$. [$\sigma(Y)=Y^{-1}(2^{S_Y}),\sigma(X_1,X_2)=(X_1,X_2)^{-1}(2^{S_1}\times 2^{S_2})$]
+    $(\Omega,\CF,\PP), Y:\Omega\to S_Y, X_1:\Omega\to S_1,X_2:\Omega\to S_2$ 为离散随机变量，称 $Y$ 和 $(X_1,X_2)$ 独立，若 $\sigma(Y)\ind \sigma(X_1,X_2)$. [$\sigma(Y)=Y^{-1}(2^{S_Y}),\sigma(X_1,X_2)=(X_1,X_2)^{-1}(2^{S_1}\times 2^{S_2})$]
 
     即 $\forall A\st S_Y,B\st 2^{S_1}\times 2^{S_2}, B=B_1\times B_2$，有 
     \[

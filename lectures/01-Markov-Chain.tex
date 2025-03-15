@@ -57,11 +57,9 @@ $(M_1)\quad \text{未来}\ind_{\text{现在}}\text{过去}$
 
 证明：思路 $1\leftrightarrows 3\leftrightarrows 2$
 
-$(2)\rightarrow (1)$，取 $n_1=0,\cdots,n_k=n-1$，显然
-
 $(2)\rightarrow (3)$，先处理一些记号的问题。记(2)中的 $n$ 为 $n^{(2)}$, (3)中的 $n$ 为 $n^{(3)}$。则取 $n_k=n^{(3)}=n^{(2)}+1-m\leq n^{(2)}$，所以 $n^{(3)}+m=(n^{(2)}+1-m)+m=n^{(2)}+1$，即已知(2)可推(3)
 
-$(3)\rightarrow (1)$ 显然
+$(3)\rightarrow (1)$，取 $m=1$，显然
 
 只需证 $(3)\rightarrow (2),(1)\rightarrow (3)$
 
@@ -74,9 +72,11 @@ $(3)\rightarrow (1)$ 显然
 
 (Step 1) 证明 $(3)\rightarrow (2)$
 
+思路：(2)(3)条件不同，想要由(3)推(2)，则切换到(2)的条件概率测度，展开，再用(3)的条件瘦身
+
 对 $\forall k\geq 2, 0\leq n_1<n_2<\cdots<n_k=n$
 
-令 $J=\{0,1,\cdots,n_k\}\backslash \{n_1,\cdots,n_k\}$, $\tilde{\PP}(\cdot)=\PP(\cdot|X_{n_1}=x_{n_1},\cdots,X_{n_k}=x_{n_k})$
+令 $J=\{0,1,\cdots,n_k-1,n_k\}\backslash \{n_1,\cdots,n_k\}$, $\tilde{\PP}(\cdot)=\PP(\cdot|X_{n_1}=x_{n_1},\cdots,X_{n_k}=x_{n_k})$
 
 \[
 \begin{aligned}
@@ -107,14 +107,31 @@ $(3)\rightarrow (1)$ 显然
 令 $\tilde{\PP}_n(\cdot):=\PP(\cdot|X_0=x_0,\cdots,X_n=x_n)$
 \[
 \begin{aligned}
-    \tilde{\PP}_n(X_{n+k+1}=y)&=\sum_{x_{n+1}\in S}\tilde{\PP}_n(X_{n+k+1}=y|X_{n+1}=x_{n+1})\cdot \tilde{\PP}_n(X_{n+1}=x_{n+1})\\
-    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y|X_{n+1}=x_{n+1},X_n=x_n)\cdot \PP(X_{n+1}=x_{n+1}|X_n=x_n)\qquad [\text{by (*)}]\\
-    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y,X_{n+1}=x_{n+1},X_n=x_n)/\PP(X_n=x_n)\qquad [\text{乘法公式-定理\eqref{thm:multiply_func}}]\\
+    \tilde{\PP}_n(X_{n+k+1}=y)&=\sum_{x_{n+1}\in S}\tilde{\PP}_n(X_{n+k+1}=y|X_{n+1}=x_{n+1})\cdot \tilde{\PP}_n(X_{n+1}=x_{n+1})\quad [\text{定理}\eqref{thm:law_total_prob}]\\
+    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y|X_{n+1}=x_{n+1},X_n=x_n)\cdot \PP(X_{n+1}=x_{n+1}|X_n=x_n)\quad [(*), \text{归纳法假设}]\\
+    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y,X_{n+1}=x_{n+1},X_n=x_n)/\PP(X_n=x_n)\quad [\text{乘法公式-定理\eqref{thm:multiply_func}}]\\
     &=\PP(X_{n+k+1}=y,X_n=x_n)/\PP(X_n=x_n)\\
     &=\PP(X_{n+k+1}=y|X_n=x_n)
 \end{aligned}
 \]
 即 $m=k+1$ 得证\qed
+
+证明 (Step 2) 时如果在 $x_{n+k}$ 处展开而不是在 $x_{n+1}$，也是可以的。实际上在 $x_{n+j}, \forall j, 1\leq j\leq k$ 展开都可以，关键在于用性质\ref{prop:pairwise_indep}和全概公式\ref{thm:law_total_prob}凑出乘法公式\ref{thm:multiply_func}，消元即可。
+
+\begin{remark}
+    三种写法的直觉
+    \begin{enumerate}
+        \item $M_1$：未来“下一步”跟过去“每一步”都无关
+        \item $M_2$：未来“下一步”跟过去的“任意若干步”都无关
+        \item $M_3$：未来“下m步”跟过去“每一步”都无关
+    \end{enumerate}
+    可以推出，由(2)(3)，下式也成立：
+    
+    对 $\forall m\geq 1,n\geq 0, \{y,x_i,0\leq i\leq n\}\st S$
+    \[
+    \PP(X_{n+m}=y|X_{n_1}=x_{n_1},\cdots,X_{n_k}=x_{n_k})=\PP(X_{n+m}=y|X_{n_k}=x_{n_k})
+    \]
+\end{remark}
 
 \begin{corollary}\label{cor:markov_con_cut}
     若 $X$ 时马氏链，则 $\forall n\geq 1,\{x_i,n\geq i\geq 0,y\}\st S$，有 
