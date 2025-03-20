@@ -419,7 +419,7 @@ $\Leftarrow$
 
 可见 $n=1$ 时，$P(m,m+1)$ 与 $m$ 无关。那 $n>1$ 时呢？
 
-\subsubsection{Chapman-Komolgorov方程}
+\subsubsection{Chapman-Kolmogorov方程}
 
 \begin{theorem}[C-K方程]
     设 $\{X_n,x\geq 0\}$ 为马氏链
@@ -454,7 +454,7 @@ $\Leftarrow$
     \begin{enumerate}
         \item $\forall m,n\geq 0$，有 $P(m,m+n)=P(0,n)=P^n$。其中，约定 $P^0=I$（单位矩阵）
         
-        从而，可记 $X$ 的 $n$ 步转移概率为 $P_{ij}(n)$ 或 $P_{ij}^{(n)}$，$n$ 步转移概率矩阵为 $P(n)$，且有
+        从而，可记 $X$ 的 $n$ 步转移概率为 $p_{ij}(n)$ 或 $p_{ij}^{(n)}$，$n$ 步转移概率矩阵为 $P(n)$，且有
         \[
         P(n)=P^n=(p_{ij}^{(n)})_{i,j\in S}
         \]
@@ -462,7 +462,7 @@ $\Leftarrow$
         \[
         p_{ij}(m+n)=\sum_{k\in S}p_{ik}^{(m)}p_{kj}^{(n)}
         \]
-        $P(m+n)=P(m){(n)}$，即 $P^{m+n}=P^mP^n$
+        $P(m+n)=P(m)P(n)$，即 $P^{m+n}=P^m P^n$
     \end{enumerate}
 \end{corollary}
 
@@ -470,7 +470,7 @@ $\Leftarrow$
 
 \[
 \begin{aligned}
-    P(m,m+n)&=P(m,m+1)\cdot P(m+1,m+n)\quad [C-K]\\
+    P(m,m+n)&=P(m,m+1)\cdot P(m+1,m+n)\quad [\text{C-K}]\\
     &=P\cdot P(m+1,m+n)\quad [\text{时齐}]\\
     &=P^n\qed
 \end{aligned}
@@ -485,7 +485,7 @@ $\Leftarrow$
 $\Rightarrow$
 \[
 \begin{aligned}
-    \sum_{j\in S}p_{ij}(2)&=\sum_{j\in S}\sum_{k\in S}p_{ik}p_{kj}\quad [C-K, \text{默认}p_{ik}(1)=p_{ik}]\\
+    \sum_{j\in S}p_{ij}(2)&=\sum_{j\in S}\sum_{k\in S}p_{ik}p_{kj}\quad [\text{C-K}, \text{ 默认}p_{ik}(1)=p_{ik}]\\
     &=\sum_{k\in S}\sum_{j\in S}p_{ik}p_{kj}\\
     &=\sum_{k\in S}p_{ik}p_{ik}\cdot(\sum_{j\in S}p_{kj})\\
     &=\sum_{k\in S}p_{ik}=1\qed
@@ -504,7 +504,6 @@ $\Rightarrow$
 \end{proposition}
 
 证明：
-
 \[
 \begin{aligned}
     \PP(X_{u_1}=i_1,\cdots,X_{u_n}=i_n)&=\PP(X_{u_1}=i_1)\cdot \PP(X_{u_2}=i_2|X_{u_1}=i_1)\cdots \PP(X_{u_n}=i_n|X_{u_1}=i_1,\cdots,X_{u_{n-1}}=i_{n-1})\\
@@ -518,15 +517,15 @@ $\Rightarrow$
 \begin{lemma}
    $\mu^{(m+n)}=\mu^{(n)}P^m(\forall m,n\geq 0)$，即
    \[
-   \mu_i^{(m+n)}=(\mu^{(n)}P^m)_i=\sum_{j\in S}\mu_i^{(n)}p_{ij}^{(m)}
+   \mu_j^{(m+n)}=(\mu^{(n)}P^m)_j=\sum_{i\in S}\mu_i^{(n)}p_{ij}^{(m)}
    \]
-   特别地，取 $n=0$，则 $\mu^{(m)}=\mu\cdot P^m$（$\mu$看成行向量），即 $\mu_j^{(m)}=(\mu P^m)_j=\sum_{j\in S}\mu_i\cdot p_{ij}^{(m)}$ ()
+   特别地，取 $n=0$，则 $\mu^{(m)}=\mu\cdot P^m$（$\mu$看成行向量），即 $\mu_j^{(m)}=(\mu P^m)_j=\sum_{i\in S}\mu_i\cdot p_{ij}^{(m)}$
 \end{lemma}
 
 证明：
 \[
 \begin{aligned}
-    \PP(X_{n+m}=j)&=\sum_{i\in S}\PP(X_{n+m}=j|X_n=i)\PP(X_n=i)\\
+    \mu_j^{(n+m)}=\PP(X_{n+m}=j)&=\sum_{i\in S}\PP(X_{n+m}=j|X_n=i)\PP(X_n=i)\\
     &=\sum_{i\in S}p_{ij}(m)\mu_i^{(n)}\\
     &=(\mu^{(n)}P^m)_j\qed
 \end{aligned}
@@ -535,7 +534,7 @@ $\Rightarrow$
 $\Rightarrow \mu^{(m+n)}=\mu^{(n)}P^m$
 
 \begin{theorem}[任意有限维分布II]
-    $\forall o\leq u_1<u_2<\cdots<u_n, i_1,\cdots,i_n\in S$
+    $\forall 0\leq u_1<u_2<\cdots<u_n, i_1,\cdots,i_n\in S$
     \[
     \PP(X_{u_1}=i_1,\cdots,X_{u_n}=i_n)=(\mu P^{u_1})_{i_1}\prod_{k=1}^{n-1}P_{i_k,i_{k+1}}^{u_{k+1}-u_k}
     \]
@@ -572,10 +571,16 @@ $\qquad \Leftrightarrow$ $\PP_i(\omega|\omega\in\cap_{k\geq 1}\cup_{n\geq k}\{X_
 
 $\qquad \Leftrightarrow$ $\PP_i(X_n=i, i.o.)$ (infinitely often)
 
-第三个$\Leftrightarrow$有点费解，从反方向理解，
+无数多次返回 $i$ 可严格定义为：
 \[
-\PP_i(\cup_{k\geq 1}\cap_{n\geq k}\{X_n=i\})=\PP_i(\omega|\omega\text{至多不属于有限个}\{X_n=i\})
+\bigcap_{k\geq 1}\bigcup_{n\geq k}\{X_n=i\}
 \]
+集合的语言中，$cup$即$\exists$，$cap$即$\forall$，因此
+\begin{itemize}
+    \item $\bigcup_{n\geq k}\{X_n=i\}$ 表示 $\exists n_0\geq k$ 使得 $X_{n_0}=i$
+    \item 对 $\forall k$ 取交集 $\bigcap_{k\geq 1}$，即无论 $k$ 多大，总存在更大的 $n$ 满足 $X_n=i$，从而保证无限次返回
+\end{itemize}
+
 但我们推理得到的“常返”和定义里的并不等价
 \[
 \bigcap_{k\geq 1}\bigcup_{n\geq k}\{X_n=i\}\nLeftrightarrow \bigcup_{n\geq 1}\{X_n=i\}
@@ -596,7 +601,7 @@ $B_1(i)=\{X_1=i\},B_2(i)=\{X_2=i\}\backslash \{X_1=i\}=\{X_2=i,X_1\neq i\},$ $\c
 \[
 \Rightarrow\quad \sum_{n\geq 1}B_n(i)=\bigcup_{n\geq 1}\{X_n=i\} [\text{练习}\eqref{exer:disjoint_union}]
 \]
-$i$ 常返 $\Leftrightarrow$ $1=\PP_i(\sum_{n\geq 1}B_n(i))=\sum_{n\geq 1}\PP_i(B_n(i))$
+$i$ 常返 $\Leftrightarrow$ $1=\PP_i(\sum_{n\geq 1}B_n(i))=\sum_{n\geq 1}\PP_i(B_n(i))$，第二个等号由可列可加性得到（定义\ref{def:prob_measure}）
 \[
 \begin{aligned}
     \PP_i(B_n(j))&=\PP_i(X_n=j,X_{n-1}\neq j,\cdots,X_1\neq j)\\
@@ -635,10 +640,10 @@ P_{ij}(s):=\sum_{n\geq 0}s^n p_{ij}(n)\qquad F_{ij}(s):=\sum_{n\geq 0}s^n f_{ij}
 \]
 其中，$p_{ij}(0)=\delta_{ij},f_{ij}(0)=0$
 \[
-\delta=\begin{aligned}
+\delta=\begin{cases}
     1 & i=j\\
     0 & i\neq j
-\end{aligned}
+\end{cases}
 \]
 
 注：当 $|s|<1$ 时，$P_{ij}(s),F_{ij}(s)$ 绝对收敛
@@ -648,18 +653,18 @@ P_{ij}(s):=\sum_{n\geq 0}s^n p_{ij}(n)\qquad F_{ij}(s):=\sum_{n\geq 0}s^n f_{ij}
 \lim_{s\uparrow 1}F_{ij}(s)=\sum_{n\geq 1}f_{ij}(n)=f_{ij}\in [0,1]
 \]
 \[
-\lim_{s\uparrow 1}P_{ij}(s)=\sum_{n\geq 0}p_{iij}(0)=\text{finite}/+\infty
+\lim_{s\uparrow 1}P_{ij}(s)=\sum_{n\geq 0}p_{ij}(0)=\text{finite}/+\infty
 \]
 \begin{lemma}
-    [Grimmett\cite{grimmett}] 设 $|s|<1$，则
+    [Grimmett\cite{grimmett}, Thm 6.3.3] 设 $|s|<1$，则
     \[
-    P_{ij}(s)=\delta_{ij}+P_{ii}(s)F_{ij}(s)
+    P_{ij}(s)=\delta_{ij}+P_{jj}(s)F_{ij}(s)
     \]
 \end{lemma}
 
 证明：构造不交并，$B_m(i)=\{X_m=i,X_{m-1}\neq i,\cdots,X_1\neq i\}, m\geq 1$
 
-$\Rightarrow$ $\sum_{m\geq 1}B_m(i)=\cup_{m\geq 1}\{X_n=i\}, B_m(i)\st \{X_n\neq i\}, m\geq n+1$
+$\Rightarrow$ $\sum_{m\geq 1}B_m(i)=\cup_{n\geq 1}\{X_n=i\}, B_m(i)\st \{X_n\neq i\}, m\geq n+1$
 \[
 \begin{aligned}
     p_{ij}(n)=\PP_i(X_n=j)&=\PP_i(\{X_n=j\}\cap \sum_{m\geq 1}B_m(j))\\
@@ -683,14 +688,14 @@ $\Rightarrow$ $\sum_{m\geq 1}B_m(i)=\cup_{m\geq 1}\{X_n=i\}, B_m(i)\st \{X_n\neq
 当 $n\geq 1$ 时，
 \[
 \begin{aligned}
-    P_{ij}(s)&=s^0p_{ij}(0)+\sum_{n\geq 1}s^n\cdot p_{ij}(s)\\
+    P_{ij}(s)&=s^0p_{ij}(0)+\sum_{n\geq 1}s^n\cdot p_{ij}(n)\\
     &=\delta_{ij}+\sum_{n\geq 1}s^n\sum_{m=1}^n p_{jj}(n-m)f_{ij}(m)\\
     &=\delta_{ij}+\sum_{n\geq 1}\sum_{m=1}^n s^n p_{jj}(n-m)f_{ij}(m)\\
     &=\delta_{ij}+\sum_{n\geq 1}\sum_{m=1}^n(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))\\
-    &=\delta_{ij}+\sum_{n=1}^{\infty}\sum_{m=1}^{\infty}\II_{\{1\leq m\leq n\}}\sum_{m=1}^n(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))
+    &=\delta_{ij}+\sum_{n=1}^{\infty}\sum_{m=1}^{\infty}\II_{\{1\leq m\leq n\}}(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))
 \end{aligned}
 \]
-把 $\II_{\{1\leq m\leq n\}}\sum_{m=1}^n(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))$ 看作 $a_{n,m}$，由推论\ref{lem:abs_convergence}考察绝对收敛
+把 $\II_{\{1\leq m\leq n\}}(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))$ 看作 $a_{n,m}$，由推论\ref{lem:abs_convergence}考察绝对收敛
 
 $0\leq s<1, |s|=s$
 
@@ -720,11 +725,12 @@ $0\leq s<1, |s|=s$
 \end{proposition}
 
 证明：$|s|<1$时，$P_{ij}(s)=\delta_{ij}+P_{jj}(s)F_{ij}(s)$
+
+$\Rightarrow P_{jj}(s)=1+P_{jj}(s)F_{jj}(s)$
+
+$\Rightarrow$
 \[
-\Rightarrow P_{jj}(s)=1+P_{jj}(s)F_{jj}(s)
-\]
-\[
-\Rightarrow P_{jj}(s)=\frac{1}{1-F_{jj}(s)}\tag{*}
+P_{jj}(s)=\frac{1}{1-F_{jj}(s)}\tag{*}
 \]
 $j$ 常返 $\Leftrightarrow$ $1=f_{jj}=F_{jj}(1)\overset{\text{Abel}}{=}\lim_{s\uparrow 1}F_{jj}(s)$
 
@@ -793,7 +799,7 @@ $\quad \Rightarrow \EE T_j=\EE T_j\II_{\{T_j=\infty\}}+\EE T_j\II_{\{T_j<\infty\
 \begin{aligned}
     \EE_j T_j&=\EE_j T_j\II_{\{T_j<\infty\}}\\
     &=\EE_j T_j\II_{\sum_{n\geq 1}\{T_j=n\}}\\
-    &=\EE_j\sum_{n\geq 1}T_j\II_{\{T_j=n\}}\\
+    &=\EE_j\sum_{n\geq 1}T_j\II_{\{T_j=n\}}\quad [\text{定义\eqref{def:discrete_rv}}]\\
     &=\sum_{n\geq 1}n\PP_j(T_j=n)\\
     &=\sum_{n\geq 1}n f_{jj}(n)
 \end{aligned}

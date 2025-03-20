@@ -126,12 +126,16 @@ $(S,\mathcal{S})=(\mathbb{R},\mathcal{B}(\mathbb{R}))$: S 为实数集时，取�
 \subsubsection{概率测度}
 
 \begin{definition}[概率测度]\label{def:prob_measure}
-    $(\Omega, \mathcal{F})$ 称 $\PP: \mathcal{F}\rightarrow [0,1]$ 是概率测度
+    $(\Omega, \CF)$ 称 $\PP: \mathcal{F}\rightarrow [0,1]$ 是概率测度
     \begin{enumerate}
         \item 非负性
         \item 归一性
         \item 可列可加性*
     \end{enumerate}
+    其中，可列可加性的表述为：设 $\{E_n, n\geq 1\}$ 是 $\CF$ 中互不相交的集合序列($E_i\cap E_j=\emp, i\neq j$)，则
+    \[
+    \PP(\cup_{n=1}^{\infty}E_n)=\sum_{n=1}^{\infty}\PP(E_n)
+    \]
 \end{definition}
 
 \begin{property}
