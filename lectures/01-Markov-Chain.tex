@@ -623,7 +623,7 @@ f_{ij}(n):=\PP_i(B_n(j))=\PP_i(\text{首次访问}j\text{的时刻为}n)
     常返和暂留的等价命题
     \begin{enumerate}
         \item $i$ 常返 $\Leftrightarrow$ $1=f_{ii}=\sum_{n\geq 1}f_{ii}(n)$
-        \item $i$ 暂留 $\Leftrightarrow$ $1=f_{ii}>\sum_{n\geq 1}f_{ii}(n)$
+        \item $i$ 暂留 $\Leftrightarrow$ $1>f_{ii}=\sum_{n\geq 1}f_{ii}(n)$
     \end{enumerate}
 \end{proposition}
 
@@ -634,6 +634,12 @@ f_{ij}(n):=\PP_i(B_n(j))=\PP_i(\text{首次访问}j\text{的时刻为}n)
 P_{ij}(s):=\sum_{n\geq 0}s^n p_{ij}(n)\qquad F_{ij}(s):=\sum_{n\geq 0}s^n f_{ij}(n)
 \]
 其中，$p_{ij}(0)=\delta_{ij},f_{ij}(0)=0$
+\[
+\delta=\begin{aligned}
+    1 & i=j\\
+    0 & i\neq j
+\end{aligned}
+\]
 
 注：当 $|s|<1$ 时，$P_{ij}(s),F_{ij}(s)$ 绝对收敛
 
@@ -645,7 +651,7 @@ P_{ij}(s):=\sum_{n\geq 0}s^n p_{ij}(n)\qquad F_{ij}(s):=\sum_{n\geq 0}s^n f_{ij}
 \lim_{s\uparrow 1}P_{ij}(s)=\sum_{n\geq 0}p_{iij}(0)=\text{finite}/+\infty
 \]
 \begin{lemma}
-    $|s|<1$，则
+    [Grimmett\cite{grimmett}] 设 $|s|<1$，则
     \[
     P_{ij}(s)=\delta_{ij}+P_{ii}(s)F_{ij}(s)
     \]
@@ -674,3 +680,201 @@ $\Rightarrow$ $\sum_{m\geq 1}B_m(i)=\cup_{m\geq 1}\{X_n=i\}, B_m(i)\st \{X_n\neq
     &=\sum_{m=1}^n p_{jj}(n-m)\cdot f_{ij}(m)
 \end{aligned}
 \]
+当 $n\geq 1$ 时，
+\[
+\begin{aligned}
+    P_{ij}(s)&=s^0p_{ij}(0)+\sum_{n\geq 1}s^n\cdot p_{ij}(s)\\
+    &=\delta_{ij}+\sum_{n\geq 1}s^n\sum_{m=1}^n p_{jj}(n-m)f_{ij}(m)\\
+    &=\delta_{ij}+\sum_{n\geq 1}\sum_{m=1}^n s^n p_{jj}(n-m)f_{ij}(m)\\
+    &=\delta_{ij}+\sum_{n\geq 1}\sum_{m=1}^n(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))\\
+    &=\delta_{ij}+\sum_{n=1}^{\infty}\sum_{m=1}^{\infty}\II_{\{1\leq m\leq n\}}\sum_{m=1}^n(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))
+\end{aligned}
+\]
+把 $\II_{\{1\leq m\leq n\}}\sum_{m=1}^n(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))$ 看作 $a_{n,m}$，由推论\ref{lem:abs_convergence}考察绝对收敛
+
+$0\leq s<1, |s|=s$
+
+正向级数一定有意义，就看是有限/$\infty$
+\[
+\begin{aligned}
+    &\sum_{n=1}^{\infty}\sum_{m=1}^{\infty}\II_{\{1\leq m\leq n\}}s^{n-m}p_{jj}(n-m)s^m f_{ij}(m)\\
+    =&\sum_{m=1}^{\infty}\sum_{n=1}^{\infty}\II_{\{1\leq m\leq n\}}s^{n-m}p_{jj}(n-m)s^m f_{ij}(m)\\
+    =&\sum_{m=1}^{\infty}(\sum_{n=m}^{\infty}s^{n-m}p_{jj}(n-m))s^m f_{ij}(m)\\
+    =&(\sum_{n=0}^{\infty}s^{n}p_{jj}(n))(\sum_{m=1}^{\infty}s^m f_{ij}(m))<\infty\quad [\text{变量代换}n\leftarrow n-m]
+\end{aligned}
+\]
+
+\begin{proposition}\label{prop:states_equiv}
+    (1) $j$ 常返 $\Leftrightarrow$
+    \[
+        1=f_{jj}\Leftrightarrow \sum_{n\geq 0}p_{jj}(n)=\infty
+    \]
+    (2) $j$ 暂留 $\Leftrightarrow$
+    \[
+    \begin{aligned}
+        1>f_{jj}&\Leftrightarrow \sum_{n\geq 0}p_{jj}(n)<\infty\\
+        &\Rightarrow \sum_{n\geq 0}p_{jj}(n)<\infty, \forall i\in S\\
+        &\Rightarrow \limit{n}p_{ij}(n)=0,\forall i\in S
+    \end{aligned}
+    \]
+\end{proposition}
+
+证明：$|s|<1$时，$P_{ij}(s)=\delta_{ij}+P_{jj}(s)F_{ij}(s)$
+\[
+\Rightarrow P_{jj}(s)=1+P_{jj}(s)F_{jj}(s)
+\]
+\[
+\Rightarrow P_{jj}(s)=\frac{1}{1-F_{jj}(s)}\tag{*}
+\]
+$j$ 常返 $\Leftrightarrow$ $1=f_{jj}=F_{jj}(1)\overset{\text{Abel}}{=}\lim_{s\uparrow 1}F_{jj}(s)$
+
+对 (*)，令 $s\to 1$，有 $\sum_{n\geq 0}p_{jj}(n)=+\infty$
+
+\subsubsection*{$3^{\circ}$从“首次回访时间”角度判别}
+\[
+\begin{aligned}
+    j\text{常返}&\Leftrightarrow 1=\PP_j(X_n=j\text{ 对某个}n\geq 1)=\PP_j(\text{有限时间内回访}j)\\
+    &\Leftrightarrow 1=f_{jj}=\PP_j(\underbrace{\text{首次回访}j\text{的时刻}}_{T_j<\infty}\text{有限})\\
+    &\quad =\sum_{n\geq 1}f_{jj}(n)=\sum_{n\geq 1}\PP_j(\underbrace{\text{首次回访}j\text{的时刻}}_{T_j=n}\text{是}n)
+\end{aligned}
+\]
+\begin{definition}
+    首次回访$j$的时刻
+    \[
+    T_j=\min\{n\geq 1|X_n=j\}
+    \]
+    约定 $\min \emp=+\infty$
+\end{definition}
+
+注：$\{T_j=\infty\}\Leftrightarrow \{\omega|\{n\geq 1|X_n(\omega)=j\}=\emp\}$
+
+$\quad \Leftrightarrow \{\omega|X_n(\omega)\neq j,\forall n\geq 1\}=\cap_{n\geq 1}\{X_n\neq j\}$
+
+\begin{property}
+    $f_{jj}=\PP_j(T_j<\infty), f_{jj}(n)=\PP_j(T_j=n)$
+\end{property}
+
+定义 $\PP_j(T_j<\infty)=\rho_{jj}$
+
+\begin{proposition}
+    联系命题\ref{prop:states_equiv}
+    \begin{enumerate}
+        \item $j$ 常返 $\Leftrightarrow$ $1=\rho_{jj}=\PP_j(T_j<\infty)\Leftrightarrow 0=\PP_j(T_j=\infty)$
+        \item $j$ 暂留 $\Leftrightarrow$ $1>\rho_{jj}=\PP_j(T_j<\infty)\Leftrightarrow 0<\PP_j(T_j=\infty)$
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    $j$ 的平均回访时间
+    \[
+    m_j:=\EE_jT_j=\EE(T_j|X_0=j)
+    \]
+\end{definition}
+
+\begin{theorem}
+    \[
+    m_j=\EE_j T_j=\begin{cases}
+        \sum_{n\geq 1}nf_{jj}(n) & j\text{常返}\\
+        \infty & j\text{暂留}
+    \end{cases}
+    \]
+\end{theorem}
+
+证明：
+
+(1) $j$暂留 $\Rightarrow$ $\PP_j(T_j=\infty)>0$
+
+$\quad \Rightarrow \EE T_j=\EE T_j\II_{\{T_j=\infty\}}+\EE T_j\II_{\{T_j<\infty\}}\geq \EE T_j\II_{\{T_j=\infty\}}=\infty\cdot \PP_{T_j=\infty}=\infty$
+
+(2) $j$常返 $\Rightarrow$ $\PP_j(T_j=\infty)=0$
+
+取期望时不起作用，因为 $0\cdot \infty$ 是不定形
+\[
+\begin{aligned}
+    \EE_j T_j&=\EE_j T_j\II_{\{T_j<\infty\}}\\
+    &=\EE_j T_j\II_{\sum_{n\geq 1}\{T_j=n\}}\\
+    &=\EE_j\sum_{n\geq 1}T_j\II_{\{T_j=n\}}\\
+    &=\sum_{n\geq 1}n\PP_j(T_j=n)\\
+    &=\sum_{n\geq 1}n f_{jj}(n)
+\end{aligned}
+\]
+\begin{definition}
+    $j$常返时
+    \begin{enumerate}
+        \item $\EE_j T_j<\infty$ 称$j$是正常返
+        \item $\EE_j T_j=\infty$ 称$j$是零常返（平均意义上再也不回来）
+    \end{enumerate}
+\end{definition}
+
+$j$ 常返 $\Leftrightarrow 1=f_{jj}\Leftrightarrow \sum_{n\geq 0}p_{jj}(n)=\infty$
+
+$\Leftrightarrow 1=\rho_{jj}=\PP_j(T_j<\infty)\Leftrightarrow 0=\PP_j(T_j=\infty)$
+\[
+\begin{aligned}
+    \PP_j(T_j<\infty)&=\PP(\text{从j出发条件下，首次回到j的时刻有限})\\
+    &=\PP(\text{从j出发条件下，有限时间内至少访问j有1次})\\
+    &=\PP(\text{从j出发条件下，有限时间内回访j的次数}\geq 1)
+\end{aligned}
+\]
+
+\begin{definition}
+    链在时刻$0$之后，访问$j$的次数
+    \[
+    N(j):=\# \{n\geq 1|X_n=j\}=\sum_{n\geq 1}\II_{X_n=j}
+    \]
+\end{definition}
+
+注：$N(j):\Omega\to \{0,1,2,\cdots\}\cup \{+\infty\}$
+
+$j$常返 $\Leftrightarrow 1=\rho_{jj}=\PP_j(T_j<\infty)=\PP_j(N(j)\geq 1)$
+
+无数次返回$j$ $\Leftrightarrow \PP_j(N(j)=+\infty)=1$
+
+两种表述的等价条件互相等价吗？即
+\[
+    \PP_j(N(j)\geq 1)\overset{?}{\Leftrightarrow} \PP_j(N(j)=+\infty)=1
+\]
+需要 Strong Markov Property (SMP) 使上面$\Leftrightarrow$成立。之后会回到SMP。
+
+$\{N(y)=\infty\}=\cap_{k\geq 1}\{N(y)\geq k\}$
+
+由概率测度的连续性（性质\ref{prt:measure_continuity}）
+\[
+    \PP_y(N(y)=\infty)=\limit{k}\PP_y(N(y)\geq k)
+\]
+其中，
+\[
+\begin{aligned}
+    \PP_x(N(y)\geq k) &= \PP(\text{从x出发条件下，访问j的次数}\geq k)\\
+    &=\PP(\text{从x出发条件下，至少访问y有k次})\\
+    &=\PP(\text{从x出发条件下，第k次访问y的时刻有限})
+\end{aligned}
+\]
+$T_y^{(1)}:=T_y:=\min\{n\geq 1|X_n=y\}$
+
+$T_y^{(2)}:=\min\{n>T_y^{(1)}|X_n=y\}$
+
+$\vdots$
+
+$k\geq 2, T_y^{(k)}:=\min\{n>T_y^{(k-1)}|X_n=y\}$
+\[
+\Rightarrow \quad \PP_x(N(y)\geq k)=\PP_x(T_y^{(k)}<\infty)
+\]
+
+\begin{definition}
+    \[
+    \rho_{xy}^{(k)}:=\PP_x(T_y^{(k)}<\infty)
+    \]
+    其中，$\rho_{xy}^{(1)}=\rho_{xy}$
+\end{definition}
+
+注：$\rho_{yy}^{(2)}\overset{?}{=}\rho_{yy}\cdot \rho_{yy}$
+
+直观上是这样，但严格证明要求SMP
+
+这是因为不同时间对应的是不同的随机过程，如
+\begin{itemize}
+    \item $t=0$时，过程是$\{X_n,n\geq 0\}$
+    \item $t=T_j$时，过程是$\{X_{T_j+n},n\geq 0\}$
+\end{itemize}
+SMP是一个使得 $X_{T_j+n}=X_n,\forall T_j$ 的性质，之后会详细说。

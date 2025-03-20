@@ -207,7 +207,7 @@ $B_n\subset A_n$，由可列可加性和推论\ref{cor:set_operation}(2)
     \(\therefore \bigcup_{n \geqslant 1} A_n = \sum_{n \geqslant 1} B_n\)\qed
 \end{enumerate}
 
-\begin{property}[连续性]
+\begin{property}[连续性]\label{prt:measure_continuity}
     (1) $A_n\uparrow$单调上升，即$A_n\subset A_{n+1}$，$\lim_{n\rightarrow \infty}A_n=\cup_{n\geq 1}A_n$，则 $\PP(\lim_{n\rightarrow \infty}A_n)=\lim_{n\rightarrow \infty}\PP(A_n)$
 
     (2) $B_n\downarrow$单调下降，即$B_n\supset B_{n+1}$，$\lim_{n\rightarrow \infty}B_n=\cap_{n\geq 1}B_n$，则 $\PP(\lim_{n\rightarrow \infty}B_n)=\lim_{n\rightarrow \infty}\PP(B_n)$
@@ -909,7 +909,7 @@ $\sigma(X)=\{\sum_{k\in J}\Lambda_k|J\st \NN\}$
 
 我们知道 $\sum_{x\in S}|x|\sum_{k\geq 1}\PP(\Lambda_k\cap \{X=x\})$ 绝对收敛，若求和次序交换后的 $\sum_{k\geq 1}\sum_{x\in S}|x|\PP(\{X=x\}\cap \Lambda_k)$ 也绝对收敛，则 $\EE|Y|<\infty$ 得证。有一个引理可以保证绝对收敛：
 
-\begin{lemma}[菲赫金哥尔茨《微积分学教程》(2).P280.推论]
+\begin{lemma}[\cite{calculus}.P280.推论]\label{lem:abs_convergence}
     从 273-280
 \end{lemma}
 
