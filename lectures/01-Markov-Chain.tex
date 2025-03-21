@@ -575,11 +575,38 @@ $\qquad \Leftrightarrow$ $\PP_i(X_n=i, i.o.)$ (infinitely often)
 \[
 \bigcap_{k\geq 1}\bigcup_{n\geq k}\{X_n=i\}
 \]
-集合的语言中，$cup$即$\exists$，$cap$即$\forall$，因此
+集合的语言中，$\cup$即$\exists$，$\cap$即$\forall$，因此
 \begin{itemize}
     \item $\bigcup_{n\geq k}\{X_n=i\}$ 表示 $\exists n_0\geq k$ 使得 $X_{n_0}=i$
     \item 对 $\forall k$ 取交集 $\bigcap_{k\geq 1}$，即无论 $k$ 多大，总存在更大的 $n$ 满足 $X_n=i$，从而保证无限次返回
 \end{itemize}
+即 $\forall k, \exists n_k, s.t. \{X_{n_k}=i\}$发生
+\[
+\begin{aligned}
+    k=1&, n_1\geq k\\
+    k=n_1+1&, n_2\geq n_1+1>n_1\\
+    &\cdots
+\end{aligned}
+\]
+
+\begin{remark}[如何进一步理解]
+    无界和$\infty$的区别是什么？
+
+无界：$\forall M>0,\exists k, s.t. |x_k|>M$
+\begin{example}
+    $1,2,3,4,\cdots$ 为 $\infty$/无界
+
+    $1,0,2,0,3,0,4,\cdots$ 并非 $\infty$，但是无界的
+\end{example}
+迁移到$\bigcap_{k\geq 1}\bigcup_{n\geq k}$的例子
+\begin{example}
+    $A_1=\{0,1\},A_2=\{2\},A_3=\{0,3\},\cdots$，则
+    \[
+    \bigcap_{k=1}^{\infty}\bigcup_{n\geq k}A_n=\{0\},\qquad \bigcap_{k=1}^{\infty}A_k=\emp
+    \]
+    其中 $\bigcap_{k=1}^{\infty}\bigcup_{n\geq k}$ 也即 $\limsup$
+\end{example}
+\end{remark}
 
 但我们推理得到的“常返”和定义里的并不等价
 \[
@@ -589,7 +616,7 @@ $\qquad \Leftrightarrow$ $\PP_i(X_n=i, i.o.)$ (infinitely often)
 
 下面给出几种判断常返/暂留的方法。
 
-\subsubsection*{$1^{\circ}$从数学角度：并改写成不交并}
+\subsubsection{从数学角度：并改写成不交并}
 
 $i$ 常返 $\Leftrightarrow$ $\PP_i(\cup_{n\geq 1}\{X_n=i\})=1$
 
@@ -632,7 +659,7 @@ f_{ij}(n):=\PP_i(B_n(j))=\PP_i(\text{首次访问}j\text{的时刻为}n)
     \end{enumerate}
 \end{proposition}
 
-\subsubsection*{$2^{\circ}$从“多步转移概率”角度判别}
+\subsubsection{从“多步转移概率”角度判别}
 
 定义新记号（$P$不是转移矩阵）
 \[
@@ -736,7 +763,7 @@ $j$ 常返 $\Leftrightarrow$ $1=f_{jj}=F_{jj}(1)\overset{\text{Abel}}{=}\lim_{s\
 
 对 (*)，令 $s\to 1$，有 $\sum_{n\geq 0}p_{jj}(n)=+\infty$
 
-\subsubsection*{$3^{\circ}$从“首次回访时间”角度判别}
+\subsubsection{从“首次回访时间”角度判别}
 \[
 \begin{aligned}
     j\text{常返}&\Leftrightarrow 1=\PP_j(X_n=j\text{ 对某个}n\geq 1)=\PP_j(\text{有限时间内回访}j)\\
@@ -817,9 +844,9 @@ $j$ 常返 $\Leftrightarrow 1=f_{jj}\Leftrightarrow \sum_{n\geq 0}p_{jj}(n)=\inf
 $\Leftrightarrow 1=\rho_{jj}=\PP_j(T_j<\infty)\Leftrightarrow 0=\PP_j(T_j=\infty)$
 \[
 \begin{aligned}
-    \PP_j(T_j<\infty)&=\PP(\text{从j出发条件下，首次回到j的时刻有限})\\
-    &=\PP(\text{从j出发条件下，有限时间内至少访问j有1次})\\
-    &=\PP(\text{从j出发条件下，有限时间内回访j的次数}\geq 1)
+    \PP_j(T_j<\infty)&=\PP(\text{从}j\text{出发条件下，首次回到}j\text{的时刻有限})\\
+    &=\PP(\text{从}j\text{出发条件下，有限时间内至少访问}j\text{有1次})\\
+    &=\PP(\text{从}j\text{出发条件下，有限时间内回访}j\text{的次数}\geq 1)
 \end{aligned}
 \]
 
@@ -832,46 +859,58 @@ $\Leftrightarrow 1=\rho_{jj}=\PP_j(T_j<\infty)\Leftrightarrow 0=\PP_j(T_j=\infty
 
 注：$N(j):\Omega\to \{0,1,2,\cdots\}\cup \{+\infty\}$
 
-$j$常返 $\Leftrightarrow 1=\rho_{jj}=\PP_j(T_j<\infty)=\PP_j(N(j)\geq 1)$
-
-无数次返回$j$ $\Leftrightarrow \PP_j(N(j)=+\infty)=1$
+至此，做个阶段性小结，回顾 $i$ 常返的几种等价表示
+\[
+\begin{aligned}
+    i\text{常返} &\overset{\text{Def}}{\Leftrightarrow}1=\PP_i(\bigcup_{n\geq 1}\{X_n=i\})\\
+    &\Leftrightarrow 1=f_{ii}:=\sum_{n\geq 1}f_{ii}(n)=\sum_{n\geq 1}\PP_i(X_1\neq i,\cdots, X_{n-1}\neq i,X_n=i)\Leftrightarrow \sum_{n\geq 1}p_{ii}(n)=\infty\\
+    &\Leftrightarrow 1=\rho_{ii}=\PP_i(T_i^{(1)}:=T_i<\infty)=\PP_i\{N(i)\geq 1\}=1
+\end{aligned}
+\]
+无数次地回访 $\leftrightarrow$ 访问次数$=\infty$ $\leftrightarrow$ $\PP_i(N(i):=\sum_{n\geq 1}\II_{\{X_n=i\}}=\infty)=1$
 
 两种表述的等价条件互相等价吗？即
 \[
-    \PP_j(N(j)\geq 1)\overset{?}{\Leftrightarrow} \PP_j(N(j)=+\infty)=1
+\PP_i(N(i)\geq 1)\overset{?}{\Leftrightarrow} \PP_i(N(i)=\infty)=1
 \]
-需要 Strong Markov Property (SMP) 使上面$\Leftrightarrow$成立。之后会回到SMP。
+需要 Strong Markov Property (SMP) 使上面$\Leftrightarrow$成立。这里先补充一些关于 $N(j)$ 的内容，然后再回到证明。
 
-$\{N(y)=\infty\}=\cap_{k\geq 1}\{N(y)\geq k\}$
+考察 $\{N(y)=\infty\}=\cap_{k\geq 1}\{N(y)\geq k\}$
 
 由概率测度的连续性（性质\ref{prt:measure_continuity}）
 \[
-    \PP_y(N(y)=\infty)=\limit{k}\PP_y(N(y)\geq k)
+    \PP_x(N(y)=\infty)=\limit{k}\PP_x(N(y)\geq k)
 \]
 其中，
 \[
 \begin{aligned}
-    \PP_x(N(y)\geq k) &= \PP(\text{从x出发条件下，访问j的次数}\geq k)\\
-    &=\PP(\text{从x出发条件下，至少访问y有k次})\\
-    &=\PP(\text{从x出发条件下，第k次访问y的时刻有限})
+    \PP_x(N(y)\geq k) &= \PP(\text{从}x\text{出发条件下，访问}j\text{的次数}\geq k)\\
+    &=\PP(\text{从}x\text{出发条件下，至少访问}y\text{有k次})\\
+    &=\PP(\text{从}x\text{出发条件下，第}k\text{次访问}y\text{的时刻有限})
 \end{aligned}
 \]
 $T_y^{(1)}:=T_y:=\min\{n\geq 1|X_n=y\}$
 
 $T_y^{(2)}:=\min\{n>T_y^{(1)}|X_n=y\}$
 
-$\vdots$
+$\quad \vdots$
 
-$k\geq 2, T_y^{(k)}:=\min\{n>T_y^{(k-1)}|X_n=y\}$
+$T_y^{(k)}:=\min\{n>T_y^{(k-1)}|X_n=y\}, \forall k\geq 2$
 \[
 \Rightarrow \quad \PP_x(N(y)\geq k)=\PP_x(T_y^{(k)}<\infty)
 \]
 
 \begin{definition}
+    第$k$次访问概率
     \[
     \rho_{xy}^{(k)}:=\PP_x(T_y^{(k)}<\infty)
     \]
     其中，$\rho_{xy}^{(1)}=\rho_{xy}$
+    
+    第$k$次回访概率
+    \[
+    \rho_{yy}^{(k)}:=\PP_y(T_y^{(k)}<\infty)
+    \]
 \end{definition}
 
 注：$\rho_{yy}^{(2)}\overset{?}{=}\rho_{yy}\cdot \rho_{yy}$
@@ -883,4 +922,154 @@ $k\geq 2, T_y^{(k)}:=\min\{n>T_y^{(k-1)}|X_n=y\}$
     \item $t=0$时，过程是$\{X_n,n\geq 0\}$
     \item $t=T_j$时，过程是$\{X_{T_j+n},n\geq 0\}$
 \end{itemize}
-SMP是一个使得 $X_{T_j+n}=X_n,\forall T_j$ 的性质，之后会详细说。
+SMP是一个使得 $X_{T_j+n}=X_n,\forall T_j$ 的性质，之后会详细说。以上结论可总结成下面引理。
+
+\begin{lemma}
+    (由SMP知) $\rho_{xy}^{(k)}=\rho_{xy}\rho_{yy}^{(k-1)}$
+
+    特别地，$\rho_{yy}^{(k)}=\rho_{yy}^k$
+\end{lemma}
+
+接着我们回到证明
+\[
+    \PP_i(N(i)\geq 1)=1 \Leftrightarrow \PP_i(N(i)=\infty)=1
+\]
+
+证明：$\Leftarrow$ 显然，因为 $\{N(i)=\infty\}$ 相对 $N(i)\geq 1$ 是小集合
+
+$\Rightarrow$
+\[
+\PP_i(N(i)=\infty)=\limit{k}\PP_i(N(i)\geq k)\overset{\text{SMP}}{=}\limit{k}\rho_{ii}^k=1
+\]
+暂留的证明同理：
+\[
+\begin{aligned}
+    i\text{暂留}&\Leftrightarrow \PP_i(N(i)=\infty)=\limit{k}\rho_{ii}^k=0\\
+    &\Leftrightarrow 1> \rho_{ii}
+\end{aligned}
+\]
+
+\subsubsection{从“平均回访次数”角度判别}
+
+\[
+N(y)=\sum_{n\geq 1}\II_{\{X_n=y\}}=\sum_{k\geq 1}\II_{\{N(y)\geq k\}}
+\]
+\begin{lemma}[Durrett\cite{durrett}, lem 1.11]
+    \[
+    \EE_yN(y)=\begin{cases}
+        \infty & y\text{常返}\\
+        \frac{\rho_{yy}}{1-\rho_{yy}} & y\text{暂留}
+    \end{cases}
+    \]
+\end{lemma}
+
+证明：
+\[
+\begin{aligned}
+    \EE_yN(y)&=\sum_{k\geq 1}\PP(N(y)\geq k)=\sum_{k\geq 1}\PP_y(T_y^{(k)}<\infty)\\
+    &=\sum_{k\geq 1}\rho_{yy}^{(k)}\overset{\text{SMP}}{=}\sum_{k\geq 1}\rho_{yy}^k
+\end{aligned}
+\]
+$\rho_{yy}=1\Rightarrow \EE_yN(y)=\infty$
+
+$\rho_{yy}<1\Rightarrow \EE_yN(y)=\rho_{yy}/(1-\rho_{yy})$
+
+下面证：$i$常返 $\Leftrightarrow$ $\EE_i N(i)=\infty$，也就是证 $\PP_i(N(i)=\infty)=1\Leftrightarrow \EE_i N(i)=\infty$
+
+证明：$\Rightarrow$ 显然
+
+$\Leftarrow$ $N(y)$ 为非负r.v.，有当$k\to\infty$时，$\forall \omega, \sum_{n=1}^k\II_{\{X_n=y\}}(\omega)\uparrow \sum_{n=1}^{\infty}\II_{\{X_n=y\}}(\omega)$
+\[
+\begin{aligned}
+    \EE_yN(y)&:=\limit{k}\EE_y\sum_{n=1}^k\II_{X_n=y}\\
+    &=\limit{k}\sum_{n=1}^k\EE_y\II_{\{X_n=y\}}\\
+    &=\limit{k}\sum_{n=1}^k\PP_y(X_n=y)=\sum_{n=1}^{\infty}p_{yy}(n)
+\end{aligned}
+\]
+将上面几个角度总结成下面定理
+\begin{theorem}[链的状态：等价表述]\label{thm:states_equiv}
+\[
+\begin{aligned}
+    i\text{常返} &\overset{\text{Def}}{\Leftrightarrow}1=\PP_i(\bigcup_{n\geq 1}\{X_n=i\})\quad [\text{回访发生的概率}]\\
+    &\Leftrightarrow 1=f_{ii}:=\sum_{n\geq 1}f_{ii}(n)=\sum_{n\geq 1}\PP_i(X_1\neq i,\cdots, X_{n-1}\neq i,X_n=i)\Leftrightarrow \sum_{n\geq 1}p_{ii}(n)=\infty\quad [\text{首次回访发生}]\\
+    &\Leftrightarrow 1=\rho_{ii}=\PP_i(T_i^{(1)}:=T_i<\infty)=\PP_i\{N(i)\geq 1\}=1\\
+    &\overset{\text{why the name}}{\Leftrightarrow} \PP_i(N(i)=\infty)=\limit{k}\PP_i(N(i)\geq k)\overset{\text{SMP}}{=}\limit{k}\rho_{ii}^k=1\\
+    &\Leftrightarrow \EE_i N(i)=\infty
+\end{aligned}
+\]
+\end{theorem}
+
+\subsubsection{停时与强马氏性}
+
+\begin{definition}[停时/Stopping time]
+    随机变量 $\tau:\Omega\to \{0,1,2,\cdots\}\cup\{+\infty\}$，满足 $\forall \infty>n\geq 0, \{T=n\}\in \sigma(X_0,\cdots,X_n)$，称 $\tau$ 是关于 $(X_n)_{n\geq 0}$ 的停时
+\end{definition}
+
+\begin{example}
+    $T_y^{(1)}:=T_y:=\min\{n\geq 1|X_n=y\}$
+    \[
+    \begin{aligned}
+        \{T_y^{(1)}=n\} &=\{X_1\neq y,\cdots,X_{n-1}\neq y,X_n=y\}\quad n\geq 1\\
+        &=\{(X_0,X_1,\cdots,X_n)\in S\times(S\backslash \{y\})\times\cdots\times(S\backslash \{y\})\times \{y\}\}\\
+        &\in \sigma(X_0,\cdots,X_n)=(X_0,\cdots,X_n)^{-1}(\bigotimes_{n+1}2^S)
+    \end{aligned}
+    \]
+\end{example}
+
+\begin{definition}[停时$\sigma$代数]
+    $\tau$是关于 $(X_n)_{n\geq 0}$ 的停时，定义
+    \[
+    \CF_{\tau}:=\{A|A\cap\{\tau=n\}\in\sigma(X_0,\cdots,X_n),\forall n\}
+    \]
+\end{definition}
+
+注：$B\in \CF_i\Leftrightarrow B$是由$X_0,\cdots,X_{\tau}$决定的事件（这是直观上的解释，因为$\tau$是随机的，我们不知道“$\cdots$”是什么）
+
+$\quad \Leftrightarrow B\cap\{T=n\}\in \sigma(X_0,\cdots,X_n),\forall n$
+
+\begin{proposition}[强马氏性]
+    $X:=\{X_n,n\geq 0\}\sim \text{Markov}(\mu,P)$，$\tau$是关于$(X_n)_{n\geq 0}$的停时，则
+    \begin{enumerate}
+        \item 在$\{\tau<\infty\}$和$\{X_{\tau}=x\}$条件下
+        \[
+        (X_{\tau+n})_{n\geq 0}\sim\text{Markov}(\delta_x,P)
+        \]
+        其中 $\delta_x=(\delta_{xy})_{y\in S}$，记号
+        \[
+        \delta_{xy}=\begin{cases}
+            1 & y=x\\
+            0 & y\neq x
+        \end{cases}
+        \]
+        注：$(X_{\tau+n})_{n\geq 0}\sim \text{Markov}(\delta_x,P)$ under $\PP(\cdot|\tau<\infty,X_{\tau}=x)$。在原先的概率测度 $\PP$ 下， $(X_{\tau+n})_{n\geq 0}$ 不是马氏链
+        \item $\forall J\st \NN_0, \#J<\infty$，有
+        \[
+        \sigma(X_{\tau+n},n\in J)\ind_{\{\tau<\infty,X_{\tau}=x\}}\CF_{\tau}
+        \]
+        注：\begin{enumerate}
+            \item $(X_{\tau+n})_{n\geq 0}$与$X_0,\cdots,X_{\tau}$独立
+            \item $(X_{\tau+n})_{n\geq 0}\ind \CF_{\tau}$ under $\PP(\cdot|\tau<\infty,X_{\tau}=x)$
+        \end{enumerate}
+    \end{enumerate}
+\end{proposition}
+
+证明：只证(1)，(2)留作作业
+\[
+\begin{aligned}
+    &\PP(X_{\tau+0}=i_0,\cdots,X_{\tau+n}=i_n,\tau=m,X_{\tau}=x)\\
+    =&\PP(X_m=i_0,X_{m+1}=i_1,\cdots,X_{m+n}=i_n,\tau=m)\\
+    =&\PP(X_{m+1}=i_1,\cdots,X_{m+n}=i_n,\tau=m|X_m=i)\PP(X_m=i)\\
+    =&\PP(X_{m+1}=i_1,\cdots,X_{m+n}=i_n|X_m=i)\PP(\tau=m,X_m=i)\\
+    =&\frac{\delta_{xi_0}p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_{n-1},i_n}}{\delta_{xi_0}}\PP(\tau=m,X_{\tau}=i)\\
+    =&p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_{n-1},i_n}\PP(\tau=m,X_{\tau}=i)
+\end{aligned}
+\]
+其中第二个等号位置，$X_{m+1}=i_1,\cdots,X_{m+n}=i_n\in \sigma(X_{m+1},\cdots,X_{m+n})$为未来，$X_m=i$为现在，$\tau=m\in \sigma(X_0,\cdots,X_m)$中多出来个“现在”($X_m$)。但不影响，因为可证
+\[
+X_m\ind_{\{X_m=i\}}X_{m+1}
+\]
+对$m$求和，两边同除$\PP(\tau<\infty,X_{\tau}=i)$
+\[
+\Rightarrow \PP(X_{\tau+0}=i_0,\cdots,X_{\tau+n}=i_n|\tau<\infty,X_{\tau}=i)=\delta_{xi_0}p_{i_0,i_1}\cdots p_{i_{n-1},i_n}
+\]
+$\Rightarrow (X_{\tau+n})_{n\geq 0}\sim\text{Markov}(\delta_x,P)$ under $\PP(\cdot|\tau=\infty,X_{\tau}=x)$
