@@ -1073,3 +1073,16 @@ X_m\ind_{\{X_m=i\}}X_{m+1}
 \Rightarrow \PP(X_{\tau+0}=i_0,\cdots,X_{\tau+n}=i_n|\tau<\infty,X_{\tau}=i)=\delta_{xi_0}p_{i_0,i_1}\cdots p_{i_{n-1},i_n}
 \]
 $\Rightarrow (X_{\tau+n})_{n\geq 0}\sim\text{Markov}(\delta_x,P)$ under $\PP(\cdot|\tau=\infty,X_{\tau}=x)$
+
+$T_y^{(0)}:=0, T_y^{(1)}:=T_y$，对于 $k\geq 2, T_y^{(k)}:=\min\{n\geq T_{y+1}^{(k-1)}|X_n=y\}$
+\[
+S_y^{(k)}=\begin{cases}
+    T_y^{(k)}-T_y^{(k-1)}&\text{若 }T_y^{(k-1)}<\infty\\
+    0 & \text{否则}
+\end{cases}
+\]
+注意到 $T_y^{(k)}=T_y^{(k-1)}+\min\{n\geq 1|X_{T_y^{(k-1)}+n}=y\}$
+\[
+\Rightarrow S_y^{(k)}=\min\{n\geq 1|X_{T_y^{(k-1)}+n}=y\}, \text{if }T_y^{(k-1)}<\infty
+\]
+即 $(X_{T_y^{(k-1)}+n})_{n\geq 0}$ 的首次回访时刻 $S_y^{(k)}$

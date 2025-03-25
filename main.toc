@@ -25,4 +25,4 @@
 \contentsline {subsubsection}{\numberline {1.4.4}从“首次回访时间”角度判别}{41}{subsubsection.1.4.4}%
 \contentsline {subsubsection}{\numberline {1.4.5}从“平均回访次数”角度判别}{45}{subsubsection.1.4.5}%
 \contentsline {subsubsection}{\numberline {1.4.6}停时与强马氏性}{46}{subsubsection.1.4.6}%
-\contentsline {section}{\numberline {2}泊松过程}{48}{section.2}%
+\contentsline {section}{\numberline {2}泊松过程}{49}{section.2}%
