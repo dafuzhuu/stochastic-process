@@ -29,4 +29,3 @@
 \contentsline {subsubsection}{\numberline {1.5.1}状态$i$间的关系：可达与互通}{48}{subsubsection.1.5.1}%
 \contentsline {subsubsection}{\numberline {1.5.2}常返与暂留是类性质}{49}{subsubsection.1.5.2}%
 \contentsline {subsubsection}{\numberline {1.5.3}状态空间分解}{51}{subsubsection.1.5.3}%
-\contentsline {section}{\numberline {2}泊松过程}{52}{section.2}%

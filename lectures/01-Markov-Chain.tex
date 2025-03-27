@@ -667,7 +667,7 @@ P_{ij}(s):=\sum_{n\geq 0}s^n p_{ij}(n)\qquad F_{ij}(s):=\sum_{n\geq 0}s^n f_{ij}
 \]
 其中，$p_{ij}(0)=\delta_{ij},f_{ij}(0)=0$
 \[
-\delta=\begin{cases}
+\delta_{ij}=\begin{cases}
     1 & i=j\\
     0 & i\neq j
 \end{cases}
@@ -742,6 +742,10 @@ $0\leq s<1, |s|=s$
     =&(\sum_{n=0}^{\infty}s^{n}p_{jj}(n))(\sum_{m=1}^{\infty}s^m f_{ij}(m))<\infty\quad [\text{变量代换}n\leftarrow n-m]
 \end{aligned}
 \]
+因为 $s^0f_{ij}(0)=0$，则 $\sum_{m=0}^{\infty}s^m f_{ij}(m)=\sum_{m=1}^{\infty}s^m f_{ij}(m)$。代回原式
+\[
+P_{ij}(s)=\delta_{ij}+P_{jj}(s)\cdot F_{ij}(s)
+\]
 
 \begin{proposition}\label{prop:states_equiv}
     (1) $j$ 常返 $\Leftrightarrow$
@@ -758,7 +762,7 @@ $0\leq s<1, |s|=s$
     \]
 \end{proposition}
 
-证明：$|s|<1$时，$P_{ij}(s)=\delta_{ij}+P_{jj}(s)F_{ij}(s)$
+证明：只证(1). $|s|<1$时，$P_{ij}(s)=\delta_{ij}+P_{jj}(s)F_{ij}(s)$
 
 $\Rightarrow P_{jj}(s)=1+P_{jj}(s)F_{jj}(s)$
 
@@ -769,6 +773,10 @@ P_{jj}(s)=\frac{1}{1-F_{jj}(s)}\tag{*}
 $j$ 常返 $\Leftrightarrow$ $1=f_{jj}=F_{jj}(1)\overset{\text{Abel}}{=}\lim_{s\uparrow 1}F_{jj}(s)$
 
 对 (*)，令 $s\to 1$，有 $\sum_{n\geq 0}p_{jj}(n)=+\infty$
+
+\begin{problem}[作业5-1]
+证明：$j$ 暂留 $\Rightarrow \sum_{n\geq 0}p_{ij}(n)<\infty, \forall i\in S$
+\end{problem}
 
 \subsubsection{从“首次回访时间”角度判别}
 \[
@@ -874,6 +882,7 @@ $\Leftrightarrow 1=\rho_{jj}=\PP_j(T_j<\infty)\Leftrightarrow 0=\PP_j(T_j=\infty
     &\Leftrightarrow 1=\rho_{ii}=\PP_i(T_i^{(1)}:=T_i<\infty)=\PP_i\{N(i)\geq 1\}=1
 \end{aligned}
 \]
+
 无数次地回访 $\leftrightarrow$ 访问次数$=\infty$ $\leftrightarrow$ $\PP_i(N(i):=\sum_{n\geq 1}\II_{\{X_n=i\}}=\infty)=1$
 
 两种表述的等价条件互相等价吗？即
@@ -891,8 +900,8 @@ $\Leftrightarrow 1=\rho_{jj}=\PP_j(T_j<\infty)\Leftrightarrow 0=\PP_j(T_j=\infty
 其中，
 \[
 \begin{aligned}
-    \PP_x(N(y)\geq k) &= \PP(\text{从}x\text{出发条件下，访问}j\text{的次数}\geq k)\\
-    &=\PP(\text{从}x\text{出发条件下，至少访问}y\text{有k次})\\
+    \PP_x(N(y)\geq k) &= \PP(\text{从}x\text{出发条件下，访问}y\text{的次数}\geq k)\\
+    &=\PP(\text{从}x\text{出发条件下，至少访问}y\text{有}k\text{次})\\
     &=\PP(\text{从}x\text{出发条件下，第}k\text{次访问}y\text{的时刻有限})
 \end{aligned}
 \]
@@ -973,7 +982,7 @@ N(y)=\sum_{n\geq 1}\II_{\{X_n=y\}}=\sum_{k\geq 1}\II_{\{N(y)\geq k\}}
 证明：
 \[
 \begin{aligned}
-    \EE_yN(y)&=\sum_{k\geq 1}\PP(N(y)\geq k)=\sum_{k\geq 1}\PP_y(T_y^{(k)}<\infty)\\
+    \EE_yN(y)&=\EE_y\sum_{k\geq 1}\II_{\{N(y)\geq k\}}\overset{\text{Exa\eqref{exa:expec_of_indica}}}{=}\sum_{k\geq 1}\PP(N(y)\geq k)=\sum_{k\geq 1}\PP_y(T_y^{(k)}<\infty)\\
     &=\sum_{k\geq 1}\rho_{yy}^{(k)}\overset{\text{SMP}}{=}\sum_{k\geq 1}\rho_{yy}^k
 \end{aligned}
 \]
@@ -1009,7 +1018,7 @@ $\Leftarrow$ $N(y)$ 为非负r.v.，有当$k\to\infty$时，$\forall \omega, \su
 \subsubsection{停时与强马氏性}
 
 \begin{definition}[停时/Stopping time]
-    随机变量 $\tau:\Omega\to \{0,1,2,\cdots\}\cup\{+\infty\}$，满足 $\forall \infty>n\geq 0, \{T=n\}\in \sigma(X_0,\cdots,X_n)$，称 $\tau$ 是关于 $(X_n)_{n\geq 0}$ 的停时
+    随机变量 $\tau:\Omega\to \{0,1,2,\cdots\}\cup\{+\infty\}$，满足 $\forall \infty>n\geq 0, \{\tau=n\}\in \sigma(X_0,\cdots,X_n)$，称 $\tau$ 是关于 $(X_n)_{n\geq 0}$ 的停时
 \end{definition}
 
 \begin{example}
@@ -1125,7 +1134,7 @@ S_y^{(k)}=\begin{cases}
     对不同的 $i$ 与 $j$，下面命题等价
     \begin{enumerate}
         \item $i\to j$
-        \item [Durrett\cite{durrett}] $0<f_{ij}=\rho_{ij}=\PP_i(T_j<\infty)$
+        \item $0<f_{ij}=\rho_{ij}=\PP_i(T_j<\infty)$ [Durrett\cite{durrett}]
         \item $\exists$某些状态，$i_0=i,i_1,\cdots,i_{n-1},i_n=j,s.t.p_{i_0,i_1}\cdots p_{i_{n-1},i_n}>0$
         \item $\PP_i(\exists n\geq 0,X_n=j)>0$
     \end{enumerate}
