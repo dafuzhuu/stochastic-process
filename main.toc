@@ -22,7 +22,11 @@
 \contentsline {subsubsection}{\numberline {1.4.1}链的状态：常返和暂留}{37}{subsubsection.1.4.1}%
 \contentsline {subsubsection}{\numberline {1.4.2}从数学角度：并改写成不交并}{39}{subsubsection.1.4.2}%
 \contentsline {subsubsection}{\numberline {1.4.3}从“多步转移概率”角度判别}{39}{subsubsection.1.4.3}%
-\contentsline {subsubsection}{\numberline {1.4.4}从“首次回访时间”角度判别}{41}{subsubsection.1.4.4}%
+\contentsline {subsubsection}{\numberline {1.4.4}从“首次回访时间”角度判别}{42}{subsubsection.1.4.4}%
 \contentsline {subsubsection}{\numberline {1.4.5}从“平均回访次数”角度判别}{45}{subsubsection.1.4.5}%
 \contentsline {subsubsection}{\numberline {1.4.6}停时与强马氏性}{46}{subsubsection.1.4.6}%
-\contentsline {section}{\numberline {2}泊松过程}{49}{section.2}%
+\contentsline {subsection}{\numberline {1.5}类结构}{48}{subsection.1.5}%
+\contentsline {subsubsection}{\numberline {1.5.1}状态$i$间的关系：可达与互通}{48}{subsubsection.1.5.1}%
+\contentsline {subsubsection}{\numberline {1.5.2}常返与暂留是类性质}{49}{subsubsection.1.5.2}%
+\contentsline {subsubsection}{\numberline {1.5.3}状态空间分解}{51}{subsubsection.1.5.3}%
+\contentsline {section}{\numberline {2}泊松过程}{52}{section.2}%
