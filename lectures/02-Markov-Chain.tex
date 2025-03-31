@@ -5,7 +5,7 @@
 \begin{definition}[(离散时间)马氏链]\label{def:M_1}
     称 $S$ 值随机过程 $\{X_n,n\geq 0\}$ 为马氏链，若 $X$ 满足以下马氏性：$\forall n\geq 0,x_0,x_1,\cdots,x_n,y\in S$，
     \[
-    \PP(\underbrace{X_{n+1}=y}_{\text{未来}}|\underbrace{X_0=x_0,\cdots,X_{n-1}=x_{n-1}}_{\text{过去}},\underbrace{X_n=x_n}_{\text{现在}})=\PP(X_{n+1}=y|X_n=x_n)\tag{$M_1$}
+    \PP(\underbrace{X_{n+1}=y}_{\text{未来}}|\underbrace{X_0=x_0,\cdots,X_{n-1}=x_{n-1}}_{\text{过去}},\underbrace{X_n=x_n}_{\text{现在}})=\PP(X_{n+1}=y|X_n=x_n)\label{eq:M1}\tag{$M_1$}
     \]
     其中 $X_0$ 的分布称为 $X$ 的初始分布
 \end{definition}
@@ -109,14 +109,14 @@ $(3)\rightarrow (1)$，取 $m=1$，显然
 \begin{aligned}
     \tilde{\PP}_n(X_{n+k+1}=y)&=\sum_{x_{n+1}\in S}\tilde{\PP}_n(X_{n+k+1}=y|X_{n+1}=x_{n+1})\cdot \tilde{\PP}_n(X_{n+1}=x_{n+1})\quad [\text{定理}\eqref{thm:law_total_prob}]\\
     &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y|X_{n+1}=x_{n+1},X_n=x_n)\cdot \PP(X_{n+1}=x_{n+1}|X_n=x_n)\quad [\text{(*), 归纳法假设}]\\
-    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y,X_{n+1}=x_{n+1},X_n=x_n)/\PP(X_n=x_n)\quad [\text{乘法公式-定理\eqref{thm:multiply_func}}]\\
+    &=\sum_{x_{n+1}\in S}\PP(X_{n+k+1}=y,X_{n+1}=x_{n+1},X_n=x_n)/\PP(X_n=x_n)\quad [\text{乘法公式\eqref{eq:multiply_func}}]\\
     &=\PP(X_{n+k+1}=y,X_n=x_n)/\PP(X_n=x_n)\\
     &=\PP(X_{n+k+1}=y|X_n=x_n)
 \end{aligned}
 \]
 即 $m=k+1$ 得证\qed
 
-证明 (Step 2) 时如果在 $x_{n+k}$ 处展开而不是在 $x_{n+1}$，也是可以的。实际上在 $x_{n+j}, \forall j, 1\leq j\leq k$ 展开都可以，关键在于用性质\ref{prop:pairwise_indep}和全概公式\ref{thm:law_total_prob}凑出乘法公式\ref{thm:multiply_func}，消元即可。
+证明 (Step 2) 时如果在 $x_{n+k}$ 处展开而不是在 $x_{n+1}$，也是可以的。实际上在 $x_{n+j}, \forall j, 1\leq j\leq k$ 展开都可以，关键在于用性质\ref{prop:pairwise_indep}和全概公式\ref{thm:law_total_prob}凑出乘法公式\eqref{eq:multiply_func}，消元即可。
 
 \begin{remark}
     三种写法的直觉
@@ -152,17 +152,18 @@ $(3)\rightarrow (1)$，取 $m=1$，显然
     \]
 \end{itemize}
 
-\begin{property}[马氏性的等价条件]
+\begin{property}[马氏性的等价条件]\label{prt:markov_equiv_condition}
 下列三个命题等价
 \begin{enumerate}
     \item 马氏性 $(M_1)$
     \item 对 $\forall n\geq 1,m\geq 1,A\in \otimes_n 2^S,B\in \otimes_m 2^S$，即 $(A\st S^n,B\st S^m)$，有
-    \[
+    \begin{equation}
     \begin{aligned}
         &\PN((X_0,\cdots,X_{n-1})\in A,(X_{n+1},\cdots,X_{n+m})\in B)\\
         =&\PN((X_0,\cdots,X_{n-1})\in A)\cdot \PN((X_{n+1},\cdots,X_{n+m})\in B)
     \end{aligned}
-    \]
+    \label{eq:markov_equiv_condition_M2}
+    \end{equation}
     即 $(X_0,\cdots,X_{n-1})\ind_{\{X_n=x_n\}}(X_{n+1},\cdots,X_{n+m})$ 的定义
     \item $\PN((X_{n+1},\cdots,X_{n+m})\in B|(X_0,\cdots,X_{n-1})\in A)=\PN((X_{n+1},\cdots,X_{n+m})\in B)$
 \end{enumerate}
@@ -193,7 +194,7 @@ $\Rightarrow$
     &=\PP(X_{n+1}=x_{n+1}|X_n=x_n)\cdot \PP(X_{n+2}=x_{n+2}|X_{n+1}=x_{n+1})\qquad [M_1]\\
     &=\PP(X_{n+1}=x_{n+1}|X_n=x_n)\cdot \PP(X_{n+2}=x_{n+2}|X_{n+1}=x_{n+1},X_n=x_n)\qquad [\text{推论\eqref{cor:markov_con_cut}}]\\
     &=\PN(X_{n+1}=x_{n+1})\cdot \PN(X_{n+2}=x_{n+2}|X_{n+1}=x_{n+1})\\
-    &=\PN((X_{n+1},X_{n+2})=(x_{n+1},x_{n+2}))\qquad [\text{乘法公式-定理\eqref{thm:multiply_func}}]
+    &=\PN((X_{n+1},X_{n+2})=(x_{n+1},x_{n+2}))\qquad [\text{乘法公式\eqref{eq:multiply_func}}]
 \end{aligned}
 \]
 
@@ -354,19 +355,22 @@ $Y_n=(X_n,X_{n-1}), n\geq 1$ 则 $\{Y_n,n\geq 1\}$ 是（时齐）马氏链，$Y
 
 对 1.2. 同理\qed
 
-\begin{proposition}
-    设 $P=(p_{ij})_{i,j\in S}$ 为随机矩阵，$\mu=(\mu_i)_{i\in S}$ 为概率分布，$X=\{X_n,n\geq 0\}$ 为 $S$ 值离散时间的随机过程，则 $X\sim \text{Markov}(\mu,P)$ 当且仅当 $X$ 有有限维分布，
-    \[
-    \PP(X_0=i_0,X_1=i_1,\cdots,X_n=i_n)=\mu_{i_0}P_{i_0,i_1}P_{i_1,i_2}\cdots P_{i_{n-1},i_n}\quad (\forall n\geq 0,i_j\in S)
-    \]
+\begin{proposition}[初见马氏链的有限维分布]\label{prop:markov_dist}
+设 \(P = (p_{ij})_{i,j \in S}\) 为随机矩阵，\(\mu = (\mu_i)_{i \in S}\) 为概率分布，\(X = \{X_n, n \geq 0\}\) 为 \(S\) 值离散时间随机过程。则过程 \(X \sim \text{Markov}(\mu, P)\) 当且仅当对任意的 \(n \geq 0, i_0, i_1, \cdots, i_n \in S\)，\(X\) 有有限维分布：
+\begin{equation}
+P(X_0 = i_0, X_1 = i_1, \cdots, X_n = i_n) = \mu_{i_0} \prod_{k=0}^{n-1} p_{i_k i_{k+1}}
+\label{eq:markov_dist}
+\end{equation}
+
 \end{proposition}
 
 证明：$\Rightarrow$ 
 \[
 \begin{aligned}
-    \PP(X_0=i_0,X_1=i_1,\cdots,X_n=i_n)&=\PP(X_0=i_0)\PP(X_1=i_1|X_0=i_0)\cdots \PP(X_n=i_n|X_0=i_0,\cdots X_{n-1}=i_{n-1})\quad [\text{乘法公式}]\\
-    &=\PP(X_0=i_0)\PP(X_1=i_1|X_0=i_0)\cdots \PP(X_n=i_n|X_{n-1}=i_{n-1})\quad [\text{Markov}]\\
-    &=\mu_{i_0}P_{i_0,i_1}\cdots P_{i_{n-1},i_n}
+    &\PP(X_0=i_0,X_1=i_1,\cdots,X_n=i_n)\\
+    =&\PP(X_0=i_0)\PP(X_1=i_1|X_0=i_0)\cdots \PP(X_n=i_n|X_0=i_0,\cdots X_{n-1}=i_{n-1})\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
+    =&\PP(X_0=i_0)\PP(X_1=i_1|X_0=i_0)\cdots \PP(X_n=i_n|X_{n-1}=i_{n-1})\quad [\text{Markov}]\\
+    =&\mu_{i_0}P_{i_0,i_1}\cdots P_{i_{n-1},i_n}
 \end{aligned}
 \]
 严格地讲，$\PP(\cdot|A)$ 需保证 $\PP(A)>0$。对 $\PP(A)=0$ 情况的分类讨论，见 Resnick\cite{resnick}, prop 2.1.1 (\href{https://dafuzhuu.github.io/stochastic-process/pdf/Resnick.pdf}{PDF链接})
@@ -444,7 +448,7 @@ $\Leftarrow$
 \begin{aligned}
     p_{ij}(m,m+n+r)&=P(X_{m+n+r}=j|X_m=i)\\
     &=\sum_{k\in S}P(X_{m+n+r}=j,X_{m+n}=k|X_m=i)\\
-    &=\sum_{k\in S}\PP_{\{X_m=i\}}(X_{m+n+r}=j|X_{m+n}=k)\PP_{\{X_m=i\}}(X_{m+n}=k)\quad [\text{乘法公式}]\\
+    &=\sum_{k\in S}\PP_{\{X_m=i\}}(X_{m+n+r}=j|X_{m+n}=k)\PP_{\{X_m=i\}}(X_{m+n}=k)\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
     &=\sum_{k\in S}p_{ik}(m,m+n)p_{kj}(m+n,m+n+r)\quad [\text{Markov}]
 \end{aligned}
 \]
@@ -1022,6 +1026,8 @@ $\Leftarrow$ $N(y)$ 为非负r.v.，有当$k\to\infty$时，$\forall \omega, \su
 \end{definition}
 
 \begin{example}
+首次回访时刻是一个停时
+
     $T_y^{(1)}:=T_y:=\min\{n\geq 1|X_n=y\}$
     \[
     \begin{aligned}
@@ -1032,7 +1038,7 @@ $\Leftarrow$ $N(y)$ 为非负r.v.，有当$k\to\infty$时，$\forall \omega, \su
     \]
 \end{example}
 
-\begin{definition}[停时$\sigma$代数]
+\begin{definition}[停止$\sigma$代数]
     $\tau$是关于 $(X_n)_{n\geq 0}$ 的停时，定义
     \[
     \CF_{\tau}:=\{A|A\cap\{\tau=n\}\in\sigma(X_0,\cdots,X_n),\forall n\}
@@ -1041,7 +1047,71 @@ $\Leftarrow$ $N(y)$ 为非负r.v.，有当$k\to\infty$时，$\forall \omega, \su
 
 注：$B\in \CF_i\Leftrightarrow B$是由$X_0,\cdots,X_{\tau}$决定的事件（这是直观上的解释，因为$\tau$是随机的，我们不知道“$\cdots$”是什么）
 
+停时 $\sigma$-代数的定义是为了形式化“到随机时间 $\tau$ 为止的信息”。因为 $\tau$ 本身是随机的，我们不能直接写 $\sigma(X_0,\cdots,X_{\tau})$（因为 $\tau$ 不确定），所以需要通过对所有可能的 $\tau=n$ 进行分解。
+
 $\quad \Leftrightarrow B\cap\{T=n\}\in \sigma(X_0,\cdots,X_n),\forall n$
+
+\begin{problem}[作业5-2]
+设 $\tau$ 为关于 $(X_n)_{n\geq 0}$ 的停时，即对任意的 $\infty>n\geq 0$，有
+\[
+\{\tau=n\}\in\sigma(X_0,\cdots,X_n)
+\]
+证明：
+\begin{enumerate}
+\item (停止$\sigma$代数的定义) $\CF_{\tau}:=\{A|A\cap \{\tau=n\}\in \sigma(X_0,\cdots,X_n),\forall n\geq 1\}$ 是一个$\sigma$-代数
+\item $\sigma(X_{\tau})\in \CF_{\tau}$
+\end{enumerate}
+\end{problem}
+
+
+\begin{lemma}[马氏性的小推广]\label{lem:markov_extend}
+若 \( X \) 为马氏链，则对任意 \( n,m \geq 0, x_n \in S, A \in \otimes_{n+1}2^S, B \in \otimes_{m+1}2^S \)（即 \( A \subset S^{n+1}, B \subset S^{m+1} \)），有
+\begin{equation}
+\begin{aligned}
+&P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B)\\
+=&P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) \times P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B)
+\end{aligned}
+\label{eq:markov_extend}
+\end{equation}
+即 \((X_0, \cdots , X_n) \perp \!\!\! \perp_{\{X_n=x_n\}} (X_n, \cdots , X_{n+m})\) 的定义
+\end{lemma}
+
+证明：回顾马氏性\eqref{eq:markov_equiv_condition_M2}
+
+不妨设 \( A = A_0 \times \cdots \times A_n, B = B_0 \times \cdots \times B_{n+m} \)
+
+(Case 1) 若 \( x_n \notin A_n \) 或 \( x_n \notin B_0 \)，则
+\[
+P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = 0 \text{ 或 } P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = 0
+\]
+且
+\[
+P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B) = 0
+\]
+从而，\eqref{eq:markov_extend} 得证
+
+(Case 2) 设 \( x_n \in A_n \)，且 \( x_n \in B_0 \)。若 \( n = 0, m = 0 \)，则显然有
+\[
+P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = 1
+\]
+\[
+P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B) = 1
+\]
+此时，显然有 \eqref{eq:markov_extend} 成立。若 \( n \geq 1, m \geq 1 \)，则
+\[
+P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = P_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1 \right\}
+\]
+\[
+P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = P_{\{X_n=x_n\}} \left\{ X_j \in B_j, n+1 \leq j \leq n+m \right\}
+\]
+且
+\[
+\begin{aligned}
+&P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B)\\ =& P_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1, X_k \in B_k, n+1 \leq k \leq n+m \right\}\\
+=& P_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1 \right\} P_{\{X_n=x_n\}} \left\{ X_k \in B_k, n+1 \leq k \leq n+m \right\}
+\end{aligned}
+\]
+故而 \eqref{eq:markov_extend} 得证。对于其他情形 \( n \geq 1, m = 0 \) 或 \( n = 0, m \geq 1 \)，可类似证明。\qed
 
 \begin{proposition}[强马氏性]
     $X:=\{X_n,n\geq 0\}\sim \text{Markov}(\mu,P)$，$\tau$是关于$(X_n)_{n\geq 0}$的停时，则
@@ -1069,26 +1139,78 @@ $\quad \Leftrightarrow B\cap\{T=n\}\in \sigma(X_0,\cdots,X_n),\forall n$
     \end{enumerate}
 \end{proposition}
 
-证明：只证(1)，(2)留作作业
+证明：(1) 回顾命题\ref{prop:markov_dist}，
+
+根据此结论，我们只需考察链 \(\{X_{\tau + n}, n \geq 0\}\) 的有限维分布。
+
+(Step 1) 设 \(j_0 \neq x\)。则对任意的 \(n \geq 1, m \geq 0\)，有
+\[
+\PP(X_{\tau + 0} = j_0, \cdots, X_{\tau + n} = j_n, \tau = m, X_\tau = x) = 0
+\]
+关于 \(m \geq 0\) 求和，并注意到 \(\{\tau < \infty\} = \sum_{m=0}^{\infty} \{\tau = m\}\)，得：
+\[
+\PP(X_{\tau + 0} = j_0, \cdots, X_{\tau + n} = j_n, \tau < \infty, X_\tau = x) = 0
+\]
+两边同除 \(P(\tau < \infty, X_\tau = x)\)，有
+\[
+\PP(X_{\tau + 0} = j_0, \cdots, X_{\tau + n} = j_n | \tau < \infty, X_\tau = x) = 0 = \delta_{x j_0} \prod_{k=0}^{n-1} p_{j_k j_{k+1}}
+\]
+
+(Step 2) 设 \(j_0 = x\)。注意到，对任意的 \(m \geq 0\)，有
+\[
+\{\tau = m\} \in \sigma(X_0, \cdots, X_m)
+\]
+故而，由引理\ref{lem:markov_extend}知：对任意的 \(n \geq 1, m \geq 0\)，有
+\[
+\{\tau = m\} \ind_{\{X_m = x\}} \{X_m = j_0, X_{m+1} = j_1, \cdots, X_{m+n} = j_n\}
+\]
+从而，对任意的 \(m \geq 0\)，有
 \[
 \begin{aligned}
-    &\PP(X_{\tau+0}=i_0,\cdots,X_{\tau+n}=i_n,\tau=m,X_{\tau}=x)\\
-    =&\PP(X_m=i_0,X_{m+1}=i_1,\cdots,X_{m+n}=i_n,\tau=m)\\
-    =&\PP(X_{m+1}=i_1,\cdots,X_{m+n}=i_n,\tau=m|X_m=i)\PP(X_m=i)\\
-    =&\PP(X_{m+1}=i_1,\cdots,X_{m+n}=i_n|X_m=i)\PP(\tau=m,X_m=i)\\
-    =&\frac{\delta_{xi_0}p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_{n-1},i_n}}{\delta_{xi_0}}\PP(\tau=m,X_{\tau}=i)\\
-    =&p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_{n-1},i_n}\PP(\tau=m,X_{\tau}=i)
+\PP(X_{\tau + 0} = j_0, \tau = m, X_\tau = x) &= P(X_{m + 0} = j_0, \tau = m, X_m = x)\\
+&=\PP(X_{m + 0} = j_0, \tau = m| X_m = x) \times \PP(X_m = x)\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
+&=\PP(X_{m + 0} = j_0 | X_m = x) \times \PP(\tau=m|X_m = x)\times \PP(X_m=x)\quad [\text{马氏性}\eqref{eq:M1}]\\
+&=1\times \PP(\tau=m,X_m=x)\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
+&=\delta_{xx}\PP(\tau=m,X_m=x)
 \end{aligned}
 \]
-其中第二个等号位置，$X_{m+1}=i_1,\cdots,X_{m+n}=i_n\in \sigma(X_{m+1},\cdots,X_{m+n})$为未来，$X_m=i$为现在，$\tau=m\in \sigma(X_0,\cdots,X_m)$中多出来个“现在”($X_m$)。但不影响，因为可证
+以及，对任意的 \(n \geq 1, m \geq 0\)，有
 \[
-X_m\ind_{\{X_m=i\}}X_{m+1}
+\begin{aligned}
+&\PP(X_{\tau + 0} = j_0, X_{\tau + 1} = j_1, \cdots, X_{\tau + n} = j_n, \tau = m, X_\tau = x)\\
+=& \PP(X_{m + 1} = j_1, \cdots, X_{m + n} = j_n, \tau = m, X_m = x)\\
+=& \PP(X_{m + 1} = j_1, \cdots, X_{m + n} = j_n, \tau = m | X_m = x) \times \PP(X_m = x)\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
+=& \PP(X_{m + 1} = j_1, \cdots, X_{m + n} = j_n | X_m = x) \times \PP(\tau=m|X_m = x)\times \PP(X_m=x)\quad [\text{马氏性}\eqref{eq:M1}]\\
+=& \frac{\PP(X_{m + 1} = j_1, \cdots, X_{m + n} = j_n , X_m = x)}{\PP(X_m=x)}\times \PP(\tau=m|X_m = x)\times \PP(X_m=x)\\
+=&\frac{\mu_x^{(m)}p_{x,j_1}p_{j_2,j_3}\cdots p_{j_{n-1},j_n}}{\mu_x^{(m)}}\times \PP(\tau=m,X_m=x)\quad [\text{马氏链}X\text{的有限维分布}\eqref{eq:markov_dist}]\\
+=&\delta_{xx}p_{x,j_1}p_{j_2,j_3}\cdots p_{j_{n-1},j_n}\times \PP(\tau=m,X_m=x)
+\end{aligned}
 \]
-对$m$求和，两边同除$\PP(\tau<\infty,X_{\tau}=i)$
+其中，\(\mu_x^{(m)} := P(X_m = x)\)。综上，关于 \(m \geq 0\) 求和（注意到 \(\{\tau < \infty\} = \sum_{m=0}^{\infty} \{\tau = m\}\)），再两边同除以 \(P(\tau < \infty, X_\tau = x)\)，得：当 \(j_0 = x\)，对任意的 \(n \geq 0\)，有
 \[
-\Rightarrow \PP(X_{\tau+0}=i_0,\cdots,X_{\tau+n}=i_n|\tau<\infty,X_{\tau}=i)=\delta_{xi_0}p_{i_0,i_1}\cdots p_{i_{n-1},i_n}
+\PP(X_{\tau + 0} = j_0, \cdots, X_{\tau + n} = j_n | \tau < \infty, X_\tau = x) = \delta_{x j_0} \prod_{k=0}^{n-1} p_{j_k j_{k+1}}.
 \]
-$\Rightarrow (X_{\tau+n})_{n\geq 0}\sim\text{Markov}(\delta_x,P)$ under $\PP(\cdot|\tau=\infty,X_{\tau}=x)$
+
+(Step 3) 综上，链的 \((X_{\tau + n})_{n \geq 0}\) 的有限维分布为
+\[
+\PP(X_{\tau + 0} = j_0, \cdots, X_{\tau + n} = j_n | \tau < \infty, X_\tau = x) = \delta_{x j_0} \prod_{k=0}^{n-1} p_{j_k j_{k+1}}.
+\]
+即有 \((X_{\tau + n})_{n \geq 0} \sim \text{Markov}(\delta_x, P)\) under $\PP(\cdot|\tau=\infty,X_{\tau}=x)$.
+
+(2) 作业。
+
+\begin{problem}[作业5-3]
+$\forall J\st \NN_0, \#J<\infty$，有
+\[
+\sigma(X_{\tau+n},n\in J)\ind_{\{\tau<\infty,X_{\tau}=x\}}\CF_{\tau}
+\]
+注：\begin{enumerate}
+    \item $(X_{\tau+n})_{n\geq 0}$与$X_0,\cdots,X_{\tau}$独立
+    \item $(X_{\tau+n})_{n\geq 0}\ind \CF_{\tau}$ under $\PP(\cdot|\tau<\infty,X_{\tau}=x)$
+\end{enumerate}
+\end{problem}
+
+用下面方法表述两次返回之间的等待时间 $S_y^{(k)}$
 
 $T_y^{(0)}:=0, T_y^{(1)}:=T_y$，对于 $k\geq 2, T_y^{(k)}:=\min\{n\geq T_{y+1}^{(k-1)}|X_n=y\}$
 \[
@@ -1245,7 +1367,7 @@ $\forall r\geq 0, p_{jj}(n+r+m)\overset{\text{C-K}}{\geq} p_{ji}(n)p_{ii}(r)p_{i
 \therefore \sum_{r\geq 0}p_{jj}(r)=\infty\quad \Rightarrow j\text{常返}\qed
 \]
 
-\begin{corollary}
+\begin{corollary}\label{cor:trans_recurrent}
     $i\leftrightarrow j$，则 $i$ 常返 $\Leftrightarrow$ $j$ 常返
 \end{corollary}
 
@@ -1280,3 +1402,55 @@ $\forall r\geq 0, p_{jj}(n+r+m)\overset{\text{C-K}}{\geq} p_{ji}(n)p_{ii}(r)p_{i
 \begin{theorem}
     每一个有限的不可约闭集都是常返的
 \end{theorem}
+
+证明之前先介绍一个引理
+
+\begin{lemma}
+    每一个有限闭集中都至少有一个常返态
+\end{lemma}
+
+(反证法) 设 $C$ 为有限闭集，非常返的
+
+$\forall i\in C\Rightarrow i$暂留 $\Rightarrow \sum_{n\geq 1}p_{ji}(n)<\infty,\forall j\in S$
+\[
+\infty\overset{C\text{有限}}{>}\sum_{i\in C}\sum_{n\geq 1}p_{ji}^{(n)}=\sum_{n\geq 1}\sum_{i\in C}p_{ji}^{(n)}
+\]
+这里不是 $i\in S$ 而是 $i\in C$，所以还要考虑 $i\in C^c$
+
+$\forall i\in C^c,j\in C\overset{C\text{闭}}{\Rightarrow}j\nrightarrow i \Rightarrow \forall n\geq 0,p_{ji}(n)=0$
+\[
+\infty>\sum_{n\geq 1}\sum_{i\in C}p_{ji}^{(n)}=\sum_{n\geq 1}\left(\sum_{i\in S}p_{ji}^{(n)}\right)=\sum_{n\geq 1}1=\infty
+\]
+矛盾\qed
+
+在一个不可约闭集 $C$ 中，至少有一个常返态 $i\in C$，由不可约定义和推论\ref{cor:trans_recurrent}，$\forall j\in C,j\leftrightarrow i,j$常返\qed
+
+\begin{corollary}
+    状态空间 $S$ 有限，则 $S$ 中必存在一个常返态
+\end{corollary}
+
+\begin{theorem}[分解定理]
+    状态空间 $S$ 可分解为
+    \[
+    S=T+R_1+R_2+\cdots
+    \]
+    其中 $T$ 中所有状态非常返，$R_r$ 为常返不可约闭集
+\end{theorem}
+
+证明：(Step 1) 首先把所有暂留态拿出来
+\[
+T:=\{j\in S|j\text{暂留}\}
+\]
+(Step 2) $i_1\in S\backslash T\neq \emp$(若$S\backslash T=\emp$，则在Step 1结束)
+
+$i_1$ 常返，定义 $R_1=\{j\in S|j\leftrightarrow i_1\}$
+
+$R_1\st S\backslash T$，$R_1$常返互通类
+
+(Step 3) $i_2\in S\backslash (T\cup R_1),R_2=\{j\in S|i_2\leftrightarrow j\}\Rightarrow R_2\st S\backslash (T\cup R_1)$
+
+若 $j\in R_2,j\in R_1\Rightarrow j\leftrightarrow i_2,j\leftrightarrow i_1\Rightarrow i_1\leftrightarrow i_2\Rightarrow i_2\in R_1$，矛盾
+
+(Step 4) 迭代
+
+\subsection{平稳分布与特殊例子}
