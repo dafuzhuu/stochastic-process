@@ -63,8 +63,8 @@ X:(\Omega, \mathcal{F}, \PP)\rightarrow (S,\mathcal{S}, \mu_X)
     若 $A\cap B=\varnothing$，则称 $A$ 与 $B$ 不相交，更一般地，若 $A_i\cap A_j=\varnothing (i\neq j)$，则称 $\{A_i\}_{i\geq 1}$ 互不相交
 \end{definition}
 
-\begin{definition}
-    称 $\mathcal{F}\subset 2^{\Omega}=\{A|A\subset \Omega\}$ 是一个 $\sigma$代数/事件域（其中 $2^{\Omega}$ 表示所有 $\Omega$ 的子集构成的集合，是一个集类）
+\begin{definition}[$\sigma$-代数]
+    称 $\mathcal{F}\subset 2^{\Omega}=\{A|A\subset \Omega\}$ 是一个 $\sigma$-代数/事件域（其中 $2^{\Omega}$ 表示所有 $\Omega$ 的子集构成的集合，是一个集类）
 
     若\begin{enumerate}
         \item $\Omega\subset \mathcal{F}$
@@ -541,9 +541,10 @@ $\PP_B(\cdot|C)$ 见定义\ref{def:con_prob}
 
 \begin{definition}
     称 $C$ 条件发生下，$A$ 与 $B$ 独立，若
-    \[
-    \PP_C(AB)=\PP_C(A)\PP_C(B)
-    \]
+    \begin{equation}
+		\PP_C(AB)=\PP_C(A)\PP_C(B)
+		\label{eq:con_indep}
+		\end{equation}
     记为 $A\ind_C B$（条件独立）
 \end{definition}
 

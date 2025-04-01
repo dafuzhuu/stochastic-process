@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{handout_SMP}
+强马氏性v2.
+\newblock 03 2025.
+\newblock
+  \href{https://dafuzhuu.github.io/stochastic-process/pdf/强马氏性v2.pdf}{[Link]}.
+
+\bibitem{durrett}
+Rick Durrett.
+\newblock {\em Essentials of Stochastic Processes}.
+\newblock 01 1999.
+\newblock \href {https://doi.org/10.1007/978-1-4614-3615-7}
+  {\path{doi:10.1007/978-1-4614-3615-7}}.
+
+\bibitem{grimmett}
+Geoffrey Grimmett and David Stirzaker.
+\newblock {\em Probability and random processes}.
+\newblock Oxford University Press, Oxford; New York.
+\newblock \href {https://doi.org/10.1017/mag.2022.154}
+  {\path{doi:10.1017/mag.2022.154}}.
+
+\bibitem{resnick}
+Sidney~I. Resnick.
+\newblock {\em Adventures in stochastic processes}.
+\newblock Birkhauser Verlag, CHE, 1992.
+\newblock
+  \href{https://dafuzhuu.github.io/stochastic-process/pdf/Resnick.pdf}{[Link]}.
+
+\bibitem{calculus}
+菲赫金哥尔茨.
+\newblock {\em 微积分学教程}, volume~2.
+\newblock 高等教育出版社, 北京, 8 edition, 2006.
+
+\end{thebibliography}

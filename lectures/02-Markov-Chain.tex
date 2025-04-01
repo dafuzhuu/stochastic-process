@@ -37,17 +37,21 @@ $(M_1)\quad \text{未来}\ind_{\text{现在}}\text{过去}$
     \begin{enumerate}
         \item $(M_1)$ 马氏性
         \item $\forall k\geq 0, 0\leq n_1< \cdots<n_k\leq n$，对于 $y,x_{n_1},\cdots,x_{n_k}\in S$，
-        \[
-        \PP(X_{n+1}=y|X_{n_1}=x_{n_1},\cdots,X_{n_k}=x_{n_k})=\PP(X_{n+1}=y|X_{n_k}=x_{n_k})\tag{$M_2$}
-        \]
+        \begin{equation}
+				\PP(X_{n+1}=y|X_{n_1}=x_{n_1},\cdots,X_{n_k}=x_{n_k})=\PP(X_{n+1}=y|X_{n_k}=x_{n_k})
+				\label{eq:markov_equiv_M2}
+				\tag{$M_2$}
+				\end{equation}
         即
         \[
         \{X_{n+1}=y \}\ind_{\{X_{n_k}=x_{n_k}\}}\{X_{n_1}=x_{n_1},\cdots,X_{n_{k-1}}=x_{n_{k-1}}\}
         \]
         \item 对 $\forall m\geq 1,n\geq 0, \{y,x_i,0\leq i\leq n\}\st S$，有
-        \[
-        \PP(X_{n+m}=y|X_0=x_0,\cdots,X_n=x_n)=\PP(X_{n+m}=y|X_n=x_n)\tag{$M_3$}
-        \]
+        \begin{equation}
+        \PP(X_{n+m}=y|X_0=x_0,\cdots,X_n=x_n)=\PP(X_{n+m}=y|X_n=x_n)
+        \label{eq:markov_equiv_M3}
+        \tag{$M_3$}
+        \end{equation}
         即
         \[
         \{X_{n+m}=y\}\ind_{\{X_n=x_n\}}\{X_0=x_0,\cdots,X_{n-1}=x_{n-1}\}
@@ -370,26 +374,23 @@ P(X_0 = i_0, X_1 = i_1, \cdots, X_n = i_n) = \mu_{i_0} \prod_{k=0}^{n-1} p_{i_k 
     &\PP(X_0=i_0,X_1=i_1,\cdots,X_n=i_n)\\
     =&\PP(X_0=i_0)\PP(X_1=i_1|X_0=i_0)\cdots \PP(X_n=i_n|X_0=i_0,\cdots X_{n-1}=i_{n-1})\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
     =&\PP(X_0=i_0)\PP(X_1=i_1|X_0=i_0)\cdots \PP(X_n=i_n|X_{n-1}=i_{n-1})\quad [\text{Markov}]\\
-    =&\mu_{i_0}P_{i_0,i_1}\cdots P_{i_{n-1},i_n}
+    =&\mu_{i_0}p_{i_0,i_1}\cdots p_{i_{n-1},i_n}
 \end{aligned}
 \]
-严格地讲，$\PP(\cdot|A)$ 需保证 $\PP(A)>0$。对 $\PP(A)=0$ 情况的分类讨论，见 Resnick\cite{resnick}, prop 2.1.1 (\href{https://dafuzhuu.github.io/stochastic-process/pdf/Resnick.pdf}{PDF链接})
+严格地讲，$\PP(\cdot|A)$ 需保证 $\PP(A)>0$。对 $\PP(A)=0$ 情况的分类讨论，见 Resnick\cite{resnick}, prop 2.1.1
 
 $\Leftarrow$ 
 
 1. $n=0, \PP(X_0=i_0)=\mu_{i_0}\Rightarrow X_0\sim (\mu_i)_{i\in S}$
 
-2. 
+2. $n\geq 1$
 \[
-\PP(X_{n+1}=i_{n+1}|X_0=i_0,\cdots,X_n=x_n)=\frac{\PP(X_0=i_0,\cdots,X_{n+1}=i_{n+1})}{\PP(X_0=i_0,\cdots, X_n=i_n)}=P_{i_n,i_{n+1}}
+\PP(X_{n+1}=i_{n+1}|X_0=i_0,\cdots,X_n=x_n)=\frac{\PP(X_0=i_0,\cdots,X_{n+1}=i_{n+1})}{\PP(X_0=i_0,\cdots, X_n=i_n)}=p_{i_n,i_{n+1}}
 \]
-
 由时齐马氏链定义，初始分布和转移矩阵都符合定义\ref{def:homo-markov}
-
 \[
-\therefore \quad X\sim \text{Markov}(\mu,P)
+\therefore \quad X\sim \text{Markov}(\mu,P)\qed
 \]
-
 对于 $\PP(X_0=i_0,X_1=i_1,\cdots,X_{n}=i_{n})$，如果我们想把 $X_1$ 挖掉，即
 \[
 \begin{aligned}
@@ -549,7 +550,7 @@ $\Rightarrow \mu^{(m+n)}=\mu^{(n)}P^m$
 
 抽象地，$\mu,P\xrightarrow{\text{定理}\eqref{thm:Kolmogorov}}\text{有限维分布族}\rightarrow X\sim \text{Markov}(\mu,P)$，$\mu,P$可以刻画具备对称性、相容性的有限维分布
 
-具体地，参考Resnick\cite{resnick}, P62, Section 2.1 (\href{https://dafuzhuu.github.io/stochastic-process/pdf/Resnick.pdf}{PDF链接})
+具体地，参考Resnick\cite{resnick}, P62, Section 2.1
 
 \subsection{（从固定点出发的）马氏链}
 
@@ -716,7 +717,7 @@ $\Rightarrow$ $\sum_{m\geq 1}B_m(i)=\cup_{n\geq 1}\{X_n=i\}, B_m(i)\st \{X_n\neq
 \]
 其中 $X_m=j,X_{n-1}\neq j,\cdots,X_1\neq j$，$X_{n-1}\in S\backslash \{j\}$
 
-用一般而非单点的马氏性（引理\ref{lem:markov_equiv}$M_3$）
+用一般而非单点的马氏性\eqref{eq:markov_equiv_M3}
 \[
 \begin{aligned}
     \sum_{m=1}^n\PP_i(X_n=j|B_m(j))\PP_i(B_m(j))&=\sum_{m=1}^n\PP(X_n=j|X_m=j)\cdot f_{ij}(m)\\
@@ -806,7 +807,9 @@ $\quad \Leftrightarrow \{\omega|X_n(\omega)\neq j,\forall n\geq 1\}=\cap_{n\geq 
     $f_{jj}=\PP_j(T_j<\infty), f_{jj}(n)=\PP_j(T_j=n)$
 \end{property}
 
-定义 $\PP_j(T_j<\infty)=\rho_{jj}$
+\begin{definition}\label{def:rho}
+$\PP_j(T_j<\infty)=\rho_{jj}$
+\end{definition}
 
 \begin{proposition}
     联系命题\ref{prop:states_equiv}
@@ -1045,11 +1048,9 @@ $\Leftarrow$ $N(y)$ 为非负r.v.，有当$k\to\infty$时，$\forall \omega, \su
     \]
 \end{definition}
 
-注：$B\in \CF_i\Leftrightarrow B$是由$X_0,\cdots,X_{\tau}$决定的事件（这是直观上的解释，因为$\tau$是随机的，我们不知道“$\cdots$”是什么）
+注：$B\in \CF_i\Leftrightarrow B$是由$X_0,\cdots,X_{\tau}$决定的事件（这是直观上的解释，因为$\tau$是随机的，我们不知道“$\cdots$”是什么）$\quad \Leftrightarrow B\cap\{T=n\}\in \sigma(X_0,\cdots,X_n),\forall n$
 
-停时 $\sigma$-代数的定义是为了形式化“到随机时间 $\tau$ 为止的信息”。因为 $\tau$ 本身是随机的，我们不能直接写 $\sigma(X_0,\cdots,X_{\tau})$（因为 $\tau$ 不确定），所以需要通过对所有可能的 $\tau=n$ 进行分解。
-
-$\quad \Leftrightarrow B\cap\{T=n\}\in \sigma(X_0,\cdots,X_n),\forall n$
+停止 $\sigma$-代数的定义是为了形式化“到随机时间 $\tau$ 为止的信息”。因为 $\tau$ 本身是随机的，我们不能直接写 $\sigma(X_0,\cdots,X_{\tau})$（因为 $\tau$ 不确定），所以需要通过对所有可能的 $\tau=n$ 进行分解。
 
 \begin{problem}[作业5-2]
 设 $\tau$ 为关于 $(X_n)_{n\geq 0}$ 的停时，即对任意的 $\infty>n\geq 0$，有
@@ -1063,52 +1064,53 @@ $\quad \Leftrightarrow B\cap\{T=n\}\in \sigma(X_0,\cdots,X_n),\forall n$
 \end{enumerate}
 \end{problem}
 
+以下内容来自强马氏性讲义\cite{handout_SMP}.
 
 \begin{lemma}[马氏性的小推广]\label{lem:markov_extend}
 若 \( X \) 为马氏链，则对任意 \( n,m \geq 0, x_n \in S, A \in \otimes_{n+1}2^S, B \in \otimes_{m+1}2^S \)（即 \( A \subset S^{n+1}, B \subset S^{m+1} \)），有
 \begin{equation}
 \begin{aligned}
-&P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B)\\
-=&P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) \times P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B)
+&\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B)\\
+=&\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) \times \PP_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B)
 \end{aligned}
 \label{eq:markov_extend}
 \end{equation}
-即 \((X_0, \cdots , X_n) \perp \!\!\! \perp_{\{X_n=x_n\}} (X_n, \cdots , X_{n+m})\) 的定义
+即 \((X_0, \cdots , X_n) \perp \!\!\! \perp_{\{X_n=x_n\}} (X_n, \cdots , X_{n+m})\) 的定义\eqref{eq:con_indep}
 \end{lemma}
 
 证明：回顾马氏性\eqref{eq:markov_equiv_condition_M2}
 
-不妨设 \( A = A_0 \times \cdots \times A_n, B = B_0 \times \cdots \times B_{n+m} \)
+不妨设 \( A = A_0 \times \cdots \times A_n, B = B_n \times \cdots \times B_{n+m} \)
 
-(Case 1) 若 \( x_n \notin A_n \) 或 \( x_n \notin B_0 \)，则
+(Case 1) 若 \( x_n \notin A_n \) 或 \( x_n \notin B_n \)，则
 \[
-P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = 0 \text{ 或 } P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = 0
+\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = 0 \text{ 或 } \PP_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = 0
 \]
 且
 \[
-P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B) = 0
+\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B) = 0
 \]
 从而，\eqref{eq:markov_extend} 得证
 
-(Case 2) 设 \( x_n \in A_n \)，且 \( x_n \in B_0 \)。若 \( n = 0, m = 0 \)，则显然有
+(Case 2) 设 \( x_n \in A_n \)，且 \( x_n \in B_n \)。若 \( n = 0, m = 0 \)，则显然有
 \[
-P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = 1
+\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = \PP_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = 1
 \]
 \[
-P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B) = 1
+\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B) = 1
 \]
 此时，显然有 \eqref{eq:markov_extend} 成立。若 \( n \geq 1, m \geq 1 \)，则
 \[
-P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = P_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1 \right\}
+\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A) = \PP_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1 \right\}
 \]
 \[
-P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = P_{\{X_n=x_n\}} \left\{ X_j \in B_j, n+1 \leq j \leq n+m \right\}
+\PP_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = \PP_{\{X_n=x_n\}} \left\{ X_j \in B_j, n+1 \leq j \leq n+m \right\}
 \]
 且
 \[
 \begin{aligned}
-&P_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B)\\ =& P_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1, X_k \in B_k, n+1 \leq k \leq n+m \right\}\\
-=& P_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1 \right\} P_{\{X_n=x_n\}} \left\{ X_k \in B_k, n+1 \leq k \leq n+m \right\}
+&\PP_{\{X_n=x_n\}}((X_0, \cdots , X_n) \in A, (X_n, \cdots , X_{n+m}) \in B)\\ =& \PP_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1, X_k \in B_k, n+1 \leq k \leq n+m \right\}\\
+\overset{\eqref{eq:markov_equiv_condition_M2}}{=}& \PP_{\{X_n=x_n\}} \left\{ X_j \in A_j, 0 \leq j \leq n-1 \right\} \PP_{\{X_n=x_n\}} \left\{ X_k \in B_k, n+1 \leq k \leq n+m \right\}
 \end{aligned}
 \]
 故而 \eqref{eq:markov_extend} 得证。对于其他情形 \( n \geq 1, m = 0 \) 或 \( n = 0, m \geq 1 \)，可类似证明。\qed
@@ -1167,7 +1169,7 @@ P_{\{X_n=x_n\}}((X_n, \cdots , X_{n+m}) \in B) = P_{\{X_n=x_n\}} \left\{ X_j \in
 从而，对任意的 \(m \geq 0\)，有
 \[
 \begin{aligned}
-\PP(X_{\tau + 0} = j_0, \tau = m, X_\tau = x) &= P(X_{m + 0} = j_0, \tau = m, X_m = x)\\
+\PP(X_{\tau + 0} = j_0, \tau = m, X_\tau = x) &= \PP(X_{m + 0} = j_0, \tau = m, X_m = x)\\
 &=\PP(X_{m + 0} = j_0, \tau = m| X_m = x) \times \PP(X_m = x)\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
 &=\PP(X_{m + 0} = j_0 | X_m = x) \times \PP(\tau=m|X_m = x)\times \PP(X_m=x)\quad [\text{马氏性}\eqref{eq:M1}]\\
 &=1\times \PP(\tau=m,X_m=x)\quad [\text{乘法公式}\eqref{eq:multiply_func}]\\
@@ -1256,7 +1258,7 @@ S_y^{(k)}=\begin{cases}
     对不同的 $i$ 与 $j$，下面命题等价
     \begin{enumerate}
         \item $i\to j$
-        \item $0<f_{ij}=\rho_{ij}=\PP_i(T_j<\infty)$ [Durrett\cite{durrett}]
+        \item $0<f_{ij}=\rho_{ij}=\PP_i(T_j<\infty)$ [Durrett\cite{durrett}, 定义\ref{def:rho}]
         \item $\exists$某些状态，$i_0=i,i_1,\cdots,i_{n-1},i_n=j,s.t.\quad p_{i_0,i_1}\cdots p_{i_{n-1},i_n}>0$
         \item $\PP_i(\exists n\geq 0,X_n=j)>0$
     \end{enumerate}
@@ -1423,7 +1425,7 @@ $\forall i\in C^c,j\in C\overset{C\text{闭}}{\Rightarrow}j\nrightarrow i \Right
 \]
 矛盾\qed
 
-在一个不可约闭集 $C$ 中，至少有一个常返态 $i\in C$，由不可约定义和推论\ref{cor:trans_recurrent}，$\forall j\in C,j\leftrightarrow i,j$常返\qed
+在一个不可约闭集 $C$ 中，至少有一个常返态 $i\in C$，由不可约定义和推论\ref{cor:trans_recurrent}，$\forall j\in C,j\leftrightarrow i,j$常返
 
 \begin{corollary}
     状态空间 $S$ 有限，则 $S$ 中必存在一个常返态
