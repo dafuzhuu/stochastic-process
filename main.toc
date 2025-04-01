@@ -30,3 +30,6 @@
 \contentsline {subsubsection}{\numberline {2.5.2}常返与暂留是类性质}{51}{subsubsection.2.5.2}%
 \contentsline {subsubsection}{\numberline {2.5.3}状态空间分解}{53}{subsubsection.2.5.3}%
 \contentsline {subsection}{\numberline {2.6}平稳分布与特殊例子}{55}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}双随机链(Doubly Stochastic Chain)}{55}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}细致平衡条件(Detailed Balance Condition)}{56}{subsubsection.2.6.2}%
+\contentsline {subsubsection}{\numberline {2.6.3}可逆性}{57}{subsubsection.2.6.3}%

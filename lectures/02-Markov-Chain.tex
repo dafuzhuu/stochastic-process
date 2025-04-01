@@ -221,11 +221,11 @@ $\Rightarrow$
     \]
     为 $X$ 从状态 $i$ 到 $j$ 的（一步）\textbf{转移概率}，并称矩阵
     \[
-    P=\begin{pmatrix}
+    P=\begin{bmatrix}
         p_{11} & p_{12} & p_{13} & \cdots\\
         p_{21} & p_{22} & p_{23} & \cdots\\
         \vdots & \vdots & \vdots & \ddots
-    \end{pmatrix}
+    \end{bmatrix}
     \]
     为（一步）转移（概率）矩阵
 \end{definition}
@@ -1243,7 +1243,7 @@ S_y^{(k)}=\begin{cases}
 \subsubsection{状态$i$间的关系：可达与互通}
 
 \begin{definition}[可达]
-    $i,j\in S$，若 $\exists n\geq 0, s.t.p_{ij}(n)>0$，则称 $i$ 可达 $j$，记作 $i\to j$
+    $i,j\in S$，若 $\exists n\geq 0, s.t.\quad p_{ij}(n)>0$，则称 $i$ 可达 $j$，记作 $i\to j$
 
     注：$i\to i,p_{ii}(0)=1>0$ 包括在内
 \end{definition}
@@ -1257,7 +1257,7 @@ S_y^{(k)}=\begin{cases}
     \begin{enumerate}
         \item $i\to j$
         \item $0<f_{ij}=\rho_{ij}=\PP_i(T_j<\infty)$ [Durrett\cite{durrett}]
-        \item $\exists$某些状态，$i_0=i,i_1,\cdots,i_{n-1},i_n=j,s.t.p_{i_0,i_1}\cdots p_{i_{n-1},i_n}>0$
+        \item $\exists$某些状态，$i_0=i,i_1,\cdots,i_{n-1},i_n=j,s.t.\quad p_{i_0,i_1}\cdots p_{i_{n-1},i_n}>0$
         \item $\PP_i(\exists n\geq 0,X_n=j)>0$
     \end{enumerate}
 \end{theorem}
@@ -1389,7 +1389,7 @@ $\forall r\geq 0, p_{jj}(n+r+m)\overset{\text{C-K}}{\geq} p_{ji}(n)p_{ii}(r)p_{i
 \end{definition}
 
 \begin{problem}[作业6-3]
-    $C\st S$ 闭集等价于
+    证明 $C\st S$ 闭集等价于
     \[
     i\in C,i\to j\Rightarrow j\in C\quad (j\notin C\Rightarrow i\nrightarrow j)
     \]
@@ -1454,3 +1454,128 @@ $R_1\st S\backslash T$，$R_1$常返互通类
 (Step 4) 迭代
 
 \subsection{平稳分布与特殊例子}
+
+\[
+(X_n)_{n\geq 0}\sim \text{Markov}(\mu^{(0)},P)
+\]
+初始分布 $\mu^{(0)}=(\mu_i^{(0)})_{i\in S}$，其中 $\mu_i^{(0)}=\PP(X_0=i)$
+
+在 $n$ 时刻的分布，$\mu^{(n)}=(\mu_i^{(n)})_{i\in S}$，其中 $\mu_i^{(n)}=\PP(X_n=i)$
+\[
+\mu^{(n)}=\mu^{(0)}P^n
+\]
+\begin{definition}[平稳分布]
+    称概率分布 $\pi=(\pi_i)_{i\in S}$ 是转移矩阵 $P$ 的平稳分布，若
+    \[
+    \pi P=\pi
+    \]
+    注：$\mu^{(n+1)}=\pi P^{n+1}=\pi P\cdot P^n=\pi P^n=\pi P=\pi=\mu^{(0)}$
+\end{definition}
+
+\begin{problem}[作业6-4]
+    设 $(X_n)\sim \text{Markov}(\pi,P)$，$\pi$是$P$的平稳分布，证明：对固定 $m\geq 0$，有 $(X_{m+n})_{n\geq 0}\sim \text{Markov}(\pi,P)$
+\end{problem}
+
+\subsubsection{双随机链(Doubly Stochastic Chain)}
+
+回顾随机矩阵定义\ref{thm:random_matrix}，现在由行和为1，拓展到列和也为1.
+
+\begin{definition}
+    称转移矩阵 $(p_{xy})_{x,y\in S}$ 是双随机的，若 $\sum_{x\in S}p_{xy}=1$
+\end{definition}
+
+\begin{theorem}
+    设 $P=(p_{xy})_{x,y\in S}$ 为具有 $N<\infty$ 个状态的马氏链的转移概率矩阵，则均匀分布 $\pi_x=\frac{1}{N},x\in S$ 是 $P$ 的平稳分布 $\Leftrightarrow P$ 双随机  
+\end{theorem}
+
+证明：$\forall y\in S,\pi_y=\frac{1}{N}$
+\[
+(\pi P)_y=\sum_{x\in S}\pi_x p_{xy}=\frac{1}{N}\sum_{x\in S}p_{xy}
+\]
+\begin{enumerate}
+    \item $P$双随机，$(\pi P)_y=\frac{1}{N}=\pi_y,(\forall y\in S)\Rightarrow \pi P=\pi$
+    \item $(\pi P)_y=\pi_y,\forall y\in S,\frac{1}{N}\sum_{x\in S}p_{xy}=\frac{1}{N}\Rightarrow \sum_{x\in S}p_{xy}=1\Rightarrow P$双随机\qed
+\end{enumerate}
+
+\subsubsection{细致平衡条件(Detailed Balance Condition)}
+
+\begin{definition}
+    称概率分布 $\pi$ 满足DBC，若
+    \begin{equation}
+        \pi_xp_{xy}=\pi_y p_{yx}\quad (\forall x,y\in S)
+    \label{eq:dbc}
+    \end{equation}
+\end{definition}
+
+注：DBC$\stackrel{\rightarrow}{\nleftarrow} \pi P=\pi$
+
+证明：$\pi P=\pi$ $\Leftrightarrow$ $ (\pi P)_y=\pi_y,\forall y$ $\Leftrightarrow$ $\sum_{x\in S}\pi_y p_{yx}\pi_y=\sum_{x\in S}\pi_x p_{xy},\forall y$。因此
+\begin{equation}
+    \sum_{x\neq y}\pi_x p_{xy}=\sum_{x\neq y}\pi_y p_{yx}
+    \label{eq:sum_dbc}
+\end{equation}
+由 $\eqref{eq:dbc}$ 可以推出 $\eqref{eq:sum_dbc}$，但反之不然\qed
+
+\begin{example}[DBC反例]
+    $S=\{1,2,3\},N=3$
+    \[
+    P=\begin{bmatrix}
+        0.5 & 0.5 & 0\\
+        0.3 & 0.1 & 0.6\\
+        0.2 & 0.4 & 0.4
+    \end{bmatrix}
+    \]
+    $P$ 双随机，$\pi=(1/3,1/3,1/3)$ 是 $P$ 的平稳分布
+    \begin{claim}
+        $\pi$ 不满足 DBC
+    \end{claim}
+    反证：$\pi$满足DBC$\Rightarrow$ $\pi_x p_{xy}=\pi_y p_{yx}$ 与 $p_{12}=0.5\neq p_{21}=0.3$矛盾\qed
+\end{example}
+
+\begin{example}[生灭链]
+    状态空间 $S=\{l,l+1,\cdots,r-1,r\}\st N_0$，设 $P$ 满足
+    \begin{enumerate}
+        \item 一步转移不超过1，当$|x-y|\geq 2$时，$p_{xy}=0$
+        \item $p_{x,x+1}=p_x(\forall x<r)$
+        \item $p_{x,x-1}=q_x(\forall x>l)$
+        \item $p_{x,x}=1-p_x-q_x(\forall x\in S)$
+    \end{enumerate}
+    问：$P$的满足DBC的平稳分布$\pi$？rf.\eqref{eq:dbc}
+\end{example}
+
+\begin{enumerate}
+    \item $|x-y|\geq 2$时，$p_{xy}=p_{yx}=0$
+    \item $x=y$时，$p_{xy}=p_{yx},\pi_x=\pi_y$
+    \item $y=x+1$时，$(x<r),\pi_x p_{x,x+1}=\pi_{x+1}p_{x+1,x}$
+\end{enumerate}
+\[
+\pi_{x+1}=\frac{\pi_x p_{x,x+1}}{p_{x+1,x}}=\pi_x\frac{p_x}{q_{x+1}}
+\]
+\[
+\pi_{l+n}=\overbrace{\underbrace{\pi_l\frac{p_l}{q_{l+1}}}_{\pi_{l+1}} \frac{p_{l+1}}{q_{l+2}}}^{\pi_{l+2}}\cdots \frac{p_{l+n-1}}{q_{l+n}}
+\]
+令 $a_0=1,a_1=\frac{p_l}{q_{l+1}},a_2=\frac{p_l p_{l+1}}{q_{l+1} q_{l+2}},\cdots,a_{r-l}=\frac{p_lp_{l+1}\cdots p_{r-1}}{q_{l+1}q_{l+2}\cdots q_r}$，则 $\pi=(\pi_l a_0,\pi_l a_1,\cdots, \pi_l a_{r-l})$
+
+又 $\sum_{x\in S}\pi_x=1$，则
+\[
+\pi_l\sum_{0\leq n\leq r-l}a_n=1\Rightarrow \pi_l=\frac{1}{\sum_{0\leq n\leq r-l}a_n}
+\]
+记 $a:=\sum_{0\leq n\leq r-l}a_n$，则 $\pi=(\frac{a_0}{a},\frac{a_1}{a},\cdots,\frac{a_{r-l}}{a})$\qed
+
+\subsubsection{可逆性}
+
+\begin{theorem}
+    设 $(X_n)_{n\geq 0}\sim \text{Markov}(\pi,P)$，其中 $\pi$ 是 $P$ 的平稳分布。固定$n$，令 $Y_m:=X_{n-m}(0\leq m\leq n)$，则
+    \[
+    (Y_m)_{0\leq m\leq n}\sim\text{Markov}(\pi,\hat{P})
+    \]
+    其中 $\hat{P}=(\hat{p}_{ij})_{i,j\in S}$
+    \[
+    \hat{p}_{ij}=\frac{\pi_j p_{ji}}{\pi_i}
+    \]
+    这里 $\hat{p}_{ij}$ 称为对偶(dual)转移概率
+\end{theorem}
+
+\begin{corollary}
+    特别地，$\pi$ 满足 DBC 条件 $\Rightarrow$ $\hat{P}=P$
+\end{corollary}
