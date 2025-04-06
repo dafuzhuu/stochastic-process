@@ -853,7 +853,7 @@ $\quad \Rightarrow \EE T_j=\EE T_j\II_{\{T_j=\infty\}}+\EE T_j\II_{\{T_j<\infty\
     &=\sum_{n\geq 1}n f_{jj}(n)
 \end{aligned}
 \]
-\begin{definition}
+\begin{definition}\label{def:recurrent_types}
     $j$常返时
     \begin{enumerate}
         \item $\EE_j T_j<\infty$ 称$j$是正常返
@@ -1468,9 +1468,10 @@ $R_1\st S\backslash T$，$R_1$常返互通类
 \]
 \begin{definition}[平稳分布]
     称概率分布 $\pi=(\pi_i)_{i\in S}$ 是转移矩阵 $P$ 的平稳分布，若
-    \[
-    \pi P=\pi
-    \]
+    \begin{equation}
+        \pi P=\pi
+        \label{eq:stationary}
+    \end{equation}
     注：$\mu^{(n+1)}=\pi P^{n+1}=\pi P\cdot P^n=\pi P^n=\pi P=\pi=\mu^{(0)}$
 \end{definition}
 
@@ -1578,6 +1579,180 @@ $R_1\st S\backslash T$，$R_1$常返互通类
     这里 $\hat{p}_{ij}$ 称为对偶(dual)转移概率
 \end{theorem}
 
-\begin{corollary}
-    特别地，$\pi$ 满足 DBC 条件 $\Rightarrow$ $\hat{P}=P$
+证明：先验证 $(Y_m)_{0\leq m\leq n}\sim \text{Markov}(\pi,\hat{P})$，用定义/有限维分布
+
+用定义验证
+
+(Step 1) 验证 $\hat{P}$ 是随机矩阵
+\begin{enumerate}
+    \item 元素非负 $\hat{p}_{ij}\geq 0$
+    \item $\sum_{j\in S}\hat{p}_{ij}=\sum_{j\in S}\frac{\pi_j\hat{p}_{ij}}{\pi_i}=\frac{\pi_i}{\pi_i}=1$, rf.\eqref{eq:stationary}
+\end{enumerate}
+
+(Step 2) 验证初始分布。由 \eqref{eq:stationary} ，初始分布 $Y_0=X_n\sim \pi$
+
+(Step 3) 验证马氏性
+\[
+\begin{aligned}
+    \PP(Y_{m+1}=i_{m+1}|Y_m=i_m,\cdots,Y_1=i_1,Y_0=i_0)&=\frac{\PP(Y_{m+1}=i_{m+1},\cdots,Y_0=i_0)}{\PP(Y_m=i_m,\cdots,Y_0=i_0)}\\
+    &=\frac{\PP(X_{n-m-1}=i_{m+1},\cdots,X_{n-1}=i_1,X_n=i_0)}{\PP(X_{n-m}=i_m,\cdots,X_n=i_0)}\\
+    &=\frac{\pi_{i_{m+1}}P_{i_{m+1},i_m}\cdots P_{i_1,i_0}}{\pi_{i_m}P_{i_m,i_{m-1}}\cdots P_{i_1,i_0}}\\
+    &=\frac{\pi_{i_{m+1}}P_{i_{m+1},i_m}}{\pi_{i_m}}=\hat{p}_{i_m,i_{m+1}}\qed
+\end{aligned}
+\]
+\begin{corollary}[可逆性]
+    若 $P$ 的平稳分布为 $\pi$，满足 DBC 条件\eqref{eq:dbc}，则 $\hat{P}=P$。即原来的链$\overset{(d)}{=}$逆向链（记号$\overset{(d)}{=}$表示同分布）
 \end{corollary}
+证明：
+\[
+\hat{p}_{ij}=\frac{\pi_j p_{ji}}{\pi_i}\overset{\text{DBC}}{=}\frac{\pi_i p_{ij}}{\pi_i}=p_{ij}\qed
+\]
+
+\subsubsection{求$P$的平稳分布（若唯一）}
+\[
+\begin{cases}
+    \pi P=\pi\\
+    \sum_{x}\pi_x=1(\pi_x\geq 0,\forall x)
+\end{cases}\quad \Rightarrow \quad
+\begin{cases}
+    \pi(P-\II)=0\\
+    \sum_x\pi_x=1
+\end{cases}
+\]
+\begin{example}[Durrett, 1.19]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{figures/1_19.png}
+    \end{figure}
+\end{example}
+\[
+P-\II=\begin{bmatrix}
+    -0.2 & 1 & 1\\
+    0.2 & -0.4 & 0.2\\
+    0.3 & 0.3 & -0.6
+\end{bmatrix}
+\]
+\[
+\begin{cases}
+    \pi P=\pi\\
+    \sum_{x}\pi_x=1(\pi_x\geq 0,\forall x)
+\end{cases}\quad \Rightarrow \quad
+\begin{cases}
+    -0.2\pi_1+0.2\pi_2+0.3\pi_3=0\\
+    \pi_1-0.4\pi_2+0.3\pi_3=0\\
+    \pi_1+0.2\pi_2-0.6\pi_3=0\\
+    \pi_1+\pi_2+\pi_3=1
+\end{cases}
+\]
+前三个等式是线性相关的，删去一个等式
+\[
+A=\begin{bmatrix}
+    -0.2 & 1 & 1\\
+    0.2 & -0.4 & 1\\
+    0.3 & 0.3 & 1
+\end{bmatrix},\quad b=[0,0,1]
+\]
+$\pi A=b\Rightarrow \pi=bA^{-1}$，即 $A^{-1}$ 的最后一行
+
+\subsection{极限行为与平稳分布的存在唯一性}
+研究 $\displaystyle \lim_{n\to \infty}p_{ij}^{(n)}$
+\begin{enumerate}
+    \item $j$暂留 $\Rightarrow \sum_{n}p_{ij}^{(n)}<\infty,\forall i\in S\Rightarrow \lim_{n\to \infty}p_{ij}^{(n)}=0,\forall i\in S$. 下面可以把注意力放在常返上
+    \item $\lim_{n\to \infty}p_{ij}^{(n)}$不存在的反例
+    \[
+    S=\{1,2\}, P=\begin{pmatrix}
+        0&1\\
+        1&0
+    \end{pmatrix}, P^2=\begin{pmatrix}
+        1&0\\
+        0&1
+    \end{pmatrix}
+    \]
+    \[
+    P^{2n}=\begin{pmatrix}
+        1&0\\
+        0&1
+    \end{pmatrix}, P^{2n+1}=P=\begin{pmatrix}
+        0&1\\
+        1&0
+    \end{pmatrix}
+    \]
+    $p_{ij}^{(2n)}\neq p_{ij}^{(2n+1)},\forall i,j\in S$, 所以 $p_{ij}^{(n)}$ 不收敛
+\end{enumerate}
+
+\begin{definition}[周期]\label{def:cycle}
+    令 $I_x:=\{n\geq 1|P_{xx}^{(n)}>0\}$，定义 $x$ 的周期 $d(x)=\gcd(I_x)$
+    \begin{enumerate}
+        \item $d(x)>1$，称 $x$ 周期的
+        \item $d(x)=1$，称 $x$ 非周期的
+        \item $I_x=\emp$，称 $x$ 周期为 $\infty$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    称链是周期的，若所有状态是周期的
+\end{definition}
+
+\begin{theorem}[收敛定理]
+    马氏链不可约，非周期，且存在平稳分布 $\pi$，则
+    \[
+    \lim_{n\to\infty}p_{ij}^{(n)}=\pi_j\quad (\forall i,j\in S)
+    \]
+    注：找到周期不是件容易的事，我们通常讨论非周期的链
+\end{theorem}
+
+\begin{problem}[作用7-1]
+    设 $S$ 有限，$\exists i\in S$, s.t. $\lim_{n\to\infty}p_{ij}^{(n)}=\pi_j(\forall j\in S)$. 证明：$\pi=(\pi_j)_{j\in S}$是$P=(p_{ij})_{i,j\in S}$的平稳分布
+\end{problem}
+
+\begin{theorem}[渐进频率]\label{thm:asymptotic_frequency}
+    马氏链不可约，常返，则
+    \[
+    \lim_{n\to\infty}\frac{N(y)}{n}=\frac{1}{\EE_yT_y}
+    \]
+    注：\begin{enumerate}
+        \item $N_n(y)=\sum_{k=1}^n\II_{\{X_k=y\}}$($n$时刻前，访问$y$的总次数)
+        \item $\frac{N_n(y)}{n}$, $n$时刻前，访问$y$的频率/时间比例，因此 $\lim_{n\to\infty}\frac{N(y)}{n}$ 为在状态 $y$ 上花费的时间比例的极限
+        \item $\displaystyle \EE_yT_y=\begin{cases}
+            <\infty & $y\text{正常返}$\\
+            \infty & $y\text{暂留/零常返}$
+        \end{cases}$, rf.\ref{def:recurrent_types}
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}\label{thm:stationary_exists_unique}
+    马氏链不可约
+    \begin{enumerate}
+        \item (平稳分布唯一性，Durrett, Thm 1.21) 若平稳分布存在，则
+        \[
+        \pi_y=\frac{1}{\EE_yT_y}
+        \]
+        则$\pi$唯一
+        \item (平稳测度存在性) 若马氏链常返，则 $\exists$平稳测度，$\mu=(\mu_x)_{x\in S}$，且 $\mu_x>0,\forall x$
+    \end{enumerate}
+    注：$\mu=(\mu_x)_{x\in S}$ 是一个平稳测度
+    \begin{enumerate}
+        \item (测度) $\mu_x\geq 0,\forall x\in S$
+        \item $\mu^P=\mu$
+    \end{enumerate}
+\end{theorem}
+
+相对于上面的大定理，下面的推论对我们更有用
+
+\begin{corollary}
+    马氏链具有有限状态，不可约，则
+    \begin{enumerate}
+        \item 存在唯一平稳分布 $\pi=(\pi_x)_{x\in S}$，且 $\pi_x=\frac{1}{\EE_xT_x}>0,\forall x\in S$
+        \item $\lim_{n\to\infty}\frac{N_n(y)}{n}=\frac{1}{\EE_xT_x}=\pi_x$
+    \end{enumerate}
+\end{corollary}
+
+证明：
+\begin{enumerate}
+    \item $S$有限不可约，闭集$\Rightarrow$ 不可约，常返
+    \begin{enumerate}
+        \item 由定理\ref{thm:stationary_exists_unique}(2)知，存在$\mu=(\mu_x)_{x\in S},\mu_x\geq 0, \mu P=\mu$。令 $\pi_x=\frac{\mu_x}{\sum_{x\in S}\mu_x}$(正则化$\mu$)，$\pi_x>0$，且 $\pi P=\frac{1}{\sum_{x\in S}\mu_x}\mu P=\frac{1}{\sum_{x\in S}\mu_x}\mu=\pi$
+        \item 由定理\ref{thm:stationary_exists_unique}(1)知，$\pi$唯一且$\pi_x=\frac{1}{\EE_xT_x}$
+    \end{enumerate}
+    \item 由定理\ref{thm:asymptotic_frequency}\qed
+\end{enumerate}
