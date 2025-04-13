@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.6.29)  1 APR 2025 23:53
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.6.29)  13 APR 2025 18:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1156,29 +1156,29 @@ Package cleveref Info: always capitalise cross-reference names on input line 78
 Package thmtools Info: Key `mdframed' (with value `style = mdredbox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=defbox' on input line 202.
+(thmtools)             that uses `style=defbox' on input line 203.
 Package thmtools Info: Key `mdframed' (with value `style = mdpurplebox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=thmbox' on input line 203.
+(thmtools)             that uses `style=thmbox' on input line 204.
 Package thmtools Info: Key `mdframed' (with value `style = mdgreenbox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=exbox' on input line 204.
+(thmtools)             that uses `style=exbox' on input line 205.
 Package thmtools Info: Key `mdframed' (with value `style = mdorangebox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=notebox' on input line 205.
+(thmtools)             that uses `style=notebox' on input line 206.
 Package thmtools Info: Key `mdframed' (with value `style = mdazurebox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=lembox' on input line 206.
+(thmtools)             that uses `style=lembox' on input line 207.
 Package thmtools Info: Key `mdframed' (with value `style = mdyellowbox')
 (thmtools)             is not a known style key.
 (thmtools)             Will pass this to every \declaretheorem
-(thmtools)             that uses `style=exerbox' on input line 207.
+(thmtools)             that uses `style=exerbox' on input line 208.
 Package thmtools Info: Automatically pulling in `thmdef-mdframed' on input line
- 212.
+ 213.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/thmtools/thmdef-mdframed.sty
 Package: thmdef-mdframed 2023/02/17 v0.75
@@ -2012,20 +2012,20 @@ Package mdframed Info: mdframed detected package amsthm
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 451.
-[11]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 473.
+[11]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 480.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 488.
- [12]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 523.
+ [12]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 531.
@@ -2047,7 +2047,7 @@ Package mdframed Info: mdframed detected package amsthm
 (mdframed)              on input line 576.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 587.
+(mdframed)              on input line 586.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 590.
@@ -2140,14 +2140,14 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 978.
  [21]
-Overfull \hbox (13.26886pt too wide) in paragraph at lines 1003--1004
-[]\TU/simkai.ttf(0)/m/n/10.53937 然 而，| $[][] \OML/cmm/m/it/10.53937 ^^[\OT1/cmr
-/m/n/10.53937 (\OML/cmm/m/it/10.53937 X[]\OT1/cmr/m/n/10.53937 )$ \TU/simkai.tt
-f(0)/m/n/10.53937 只 是 将 每 个 $\OML/cmm/m/it/10.53937 ^^[\OT1/cmr/m/n/10.53937 (\
-OML/cmm/m/it/10.53937 X[]\OT1/cmr/m/n/10.53937 )$ \TU/simkai.ttf(0)/m/n/10.5393
-7 中 的 集 合 简 单 地 并 在 一 起，|  并 没 有 保 证 这 些 集 合 的 可 列 并 仍 然 在 $[][] \OML/cmm/m/it/
+Overfull \hbox (15.95999pt too wide) in paragraph at lines 1003--1004
+[]\TU/simkai.ttf(0)/m/n/10.53937 然 而\TU/lmr/m/n/10.53937 , $[][] \OML/cmm/m/it/
 10.53937 ^^[\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 X[]\OT1/cmr/m/n/10.53
-937 )$
+937 )$ \TU/simkai.ttf(0)/m/n/10.53937 只 是 将 每 个 $\OML/cmm/m/it/10.53937 ^^[\OT1
+/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 X[]\OT1/cmr/m/n/10.53937 )$ \TU/simka
+i.ttf(0)/m/n/10.53937 中 的 集 合 简 单 地 并 在 一 起\TU/lmr/m/n/10.53937 , \TU/simkai.tt
+f(0)/m/n/10.53937 并 没 有 保 证 这 些 集 合 的 可 列 并 仍 然 在 $[][] \OML/cmm/m/it/10.53937 
+^^[\OT1/cmr/m/n/10.53937 (\OML/cmm/m/it/10.53937 X[]\OT1/cmr/m/n/10.53937 )$
  []
 
 Package mdframed Info: mdframed detected package amsthm 
@@ -2205,10 +2205,10 @@ Package mdframed Info: mdframed detected package amsthm
 (mdframed)              on input line 5.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 14.
+(mdframed)              on input line 16.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 35.
+(mdframed)              on input line 37.
  [27]
 Overfull \hbox (10.50824pt too wide) detected at line 120
 [][]
@@ -2222,300 +2222,338 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 159.
  [29]
-Overfull \hbox (35.2005pt too wide) detected at line 203
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 209.
+ [30]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 218.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 226.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 251.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 267.
+ [31]
+Overfull \hbox (16.94618pt too wide) detected at line 287
 [][]
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 206.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 214.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 222.
-[30]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 247.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 263.
-
-Overfull \hbox (16.94618pt too wide) detected at line 283
-[][]
- []
-
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 288.
+(mdframed)              on input line 292.
 File: figures/Gambler's Ruin.png Graphic file (type bmp)
 <figures/Gambler's Ruin.png>
-[31]
 Package hyperref Info: bookmark level for unknown claim defaults to 0 on input 
-line 298.
+line 302.
+[32]
 File: figures/N=5.png Graphic file (type bmp)
 <figures/N=5.png>
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 331.
+(mdframed)              on input line 335.
 File: figures/two_stage_markov_chains.png Graphic file (type bmp)
 <figures/two_stage_markov_chains.png>
- [32]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 362.
+(mdframed)              on input line 366.
 Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
-input line 362.
+input line 366.
  [33]
 File: figures/split_steps.png Graphic file (type bmp)
 <figures/split_steps.png>
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 410.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 429.
  [34]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 415.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 434.
 File: figures/multi_steps.jpg Graphic file (type bmp)
 <figures/multi_steps.jpg>
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 458.
  [35]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 485.
+(mdframed)              on input line 464.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 504.
+(mdframed)              on input line 491.
  [36]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 523.
+(mdframed)              on input line 510.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 541.
+(mdframed)              on input line 529.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 562.
+(mdframed)              on input line 547.
  [37]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 602.
+(mdframed)              on input line 569.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 608.
+(mdframed)              on input line 609.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 615.
  [38]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 660.
+(mdframed)              on input line 667.
  [39]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 691.
- [40]
+(mdframed)              on input line 708.
+ [40] [41]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 755.
- [41]
+(mdframed)              on input line 784.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 782.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 795.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 807.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 810.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 815.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 823.
+(mdframed)              on input line 817.
  [42]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 830.
+(mdframed)              on input line 829.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 847.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 857.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 876.
+(mdframed)              on input line 874.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 883.
  [43]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 927.
+(mdframed)              on input line 906.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 926.
  [44]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 951.
+(mdframed)              on input line 954.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 980.
+(mdframed)              on input line 996.
  [45]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1013.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1027.
+(mdframed)              on input line 1039.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1032.
+(mdframed)              on input line 1068.
+ [46]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1044.
+(mdframed)              on input line 1087.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1111.
 
-[46]
+[47]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1055.
+(mdframed)              on input line 1126.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1069.
- [47]
+(mdframed)              on input line 1131.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1118.
+(mdframed)              on input line 1143.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1154.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1168.
  [48]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1204.
- [49]
+(mdframed)              on input line 1217.
+ [49] [50]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1231.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1238.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1245.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 1245.
-
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1247.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1253.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1257.
-[50]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1267.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1271.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1282.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1294.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1304.
+(mdframed)              on input line 1303.
  [51]
-Overfull \hbox (11.79015pt too wide) detected at line 1350
-[][]
- []
-
-[52]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1354.
+(mdframed)              on input line 1330.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1338.
+ [52]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1360.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1360.
+
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1362.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1368.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 1372.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1376.
+(mdframed)              on input line 1382.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1380.
+(mdframed)              on input line 1386.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1385.
+(mdframed)              on input line 1397.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1389.
+(mdframed)              on input line 1409.
+[53]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1393.
- [53]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1401.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1405.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1411.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1431.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1434.
+(mdframed)              on input line 1419.
  [54]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1469.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1477.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1486.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 1490.
+(mdframed)              on input line 1472.
  [55]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1505.
+(mdframed)              on input line 1490.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1521.
+(mdframed)              on input line 1494.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1537.
+(mdframed)              on input line 1498.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1503.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1507.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1511.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1519.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1523.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1529.
  [56]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1570.
+(mdframed)              on input line 1549.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1582.
-) [57] (./main.bbl) [58] (./main.aux)
+(mdframed)              on input line 1552.
+ [57]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1588.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1597.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1606.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1610.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1625.
+ [58]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1641.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1657.
+ [59]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1690.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1722.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1730.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1730.
+
+[60]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1741.
+File: figures/1_19.png Graphic file (type bmp)
+<figures/1_19.png>
+ [61]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1803.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1813.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1816.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1824.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1828.
+ [62]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1843.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 1863.
+) [63] (./main.bbl) [64] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 58B89700C45B08BBBDCDC4AC1530B19D;4693.
+(rerunfilecheck)             Checksum: 6C2E3C947400ADFC8E83FF9B6AA74FD5;5032.
  ) 
 Here is how much of TeX's memory you used:
- 51573 strings out of 476683
- 1264333 string characters out of 5804047
- 1871018 words of memory out of 5000000
- 70894 multiletter control sequences out of 15000+600000
+ 51633 strings out of 476683
+ 1262817 string characters out of 5804047
+ 1870018 words of memory out of 5000000
+ 70953 multiletter control sequences out of 15000+600000
  528744 words of font info for 125 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  99i,17n,99p,1035b,1207s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (58 pages).
+Output written on main.pdf (64 pages).
