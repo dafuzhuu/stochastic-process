@@ -1,0 +1,228 @@
+\subsection{类结构}
+\subsubsection{状态$i$间的关系：可达与互通}
+
+\begin{definition}[可达]
+    $i,j\in S$, 若 $\exists n\geq 0,\stt p_{ij}(n)>0$, 则称 $i$ 可达 $j$, 记作 $i\to j$
+
+    注：$i\to i,p_{ii}(0)=1>0$ 包括在内
+\end{definition}
+
+\begin{definition}[互通]
+    若 $i\to j,j\to i$ 称 $i$ 与 $j$ 互通, 记作 $i\leftrightarrow j$
+\end{definition}
+
+\begin{theorem}\label{thm:commu_equiv}
+    对不同的 $i$ 与 $j$, 下面命题等价
+    \begin{enumerate}
+        \item $i\to j$
+        \item $0<f_{ij}=\rho_{ij}=\PP_i(T_j<\infty)$ [Durrett\cite{durrett}, Def\ 1.1]
+        \item $\exists$某些状态, $i_0=i,i_1,\cdots,i_{n-1},i_n=j,\stt p_{i_0,i_1}\cdots p_{i_{n-1},i_n}>0$
+        \item $\PP_i(\exists n\geq 0,X_n=j)>0$
+    \end{enumerate}
+\end{theorem}
+
+\begin{problem}[作业6-1]
+    证明：定理\ref{thm:commu_equiv}命题的等价性, 即 $1\Leftrightarrow 2,1\Leftrightarrow 3, 1\Leftrightarrow 4$
+\end{problem}
+
+\begin{problem}[作业6-2]
+    定义 first hitting time
+    \[
+    H^j:=\min\{n\geq 0|X_n=j\}
+    \]
+    \begin{enumerate}
+        \item 证明：$H^j$ 是一个关于 $(X_n)_{n\geq 0}$ 的停时
+        \item 利用 $H^j$ 定义“可达”, 并且证明该新定义与原定义等价
+    \end{enumerate}
+\end{problem}
+
+\begin{property}[Durrett\cite{durrett}, Lem1.4]
+    若 $i\to j,j\to k$, 则 $i\to k$
+\end{property}
+
+\begin{proof}
+$i\to j\iff\exists n\geq 0,\stt p_{ij}(n)>0$
+
+$j\to k\iff\exists m\geq 0,\stt p_{jk}(m)>0$
+\[
+p_{ik}(n+m)\overset{\text{C-K}}{=}\sum_{r\in S}p_{ir}^{(n)}p_{rk}^{(m)}\geq p_{ij}^{(n)}p_{jk}^{(m)}>0,\quad \therefore i\to k
+\]
+\end{proof}
+
+\begin{property}
+    互通关系 ($\leftrightarrow$) 在 $S$ 上是等价关系, 即
+    \begin{enumerate}
+        \item (自反的) $i\leftrightarrow i$
+        \item (对称的) $i\leftrightarrow j$, 则 $j\leftrightarrow i$
+        \item (传递的) $i\leftrightarrow j, j\leftrightarrow k$, 则 $i\leftrightarrow k$
+    \end{enumerate}
+\end{property}
+
+\subsubsection{常返与暂留是类性质}
+
+\begin{lemma}[Durrett\cite{durrett}, Thm1.5\&Lem1.6]\label{lem:commu_recurrent}
+    设 $i\to j,\rho_{ij}>0$, 则
+    \begin{enumerate}
+        \item $i$ 常返的 $\Rightarrow \rho_{ji}=1(>0\Rightarrow j\to i)$ 
+        \item $\rho_{ji}<1\Rightarrow i$非常返/暂留的
+    \end{enumerate}
+    注：直观上 $(2)i\to j\overset{\text{prob}>0}{\nrightarrow}i$, 则 $i$ 暂留
+\end{lemma}
+\begin{proof}
+(1), (2)是逆否命题等价, 因此只需证一个即可. 下面证明 (2).
+
+$i\neq j,\rho_{ji}<1\Rightarrow 0<1-\rho_{ji}=1-\PP_j(T_i<\infty)=\PP_j(T_i=\infty)$
+
+为了证 $i$ 暂留, 即证 $\rho_{ii}<1$, 即 $\PP_i(T_i=\infty)>0$
+
+(Step 1) $\rho_{ij}>0,i\to j\Rightarrow \exists k\geq 1,\stt p_{ij}(k)>0$
+\[
+K:=\min\{k\geq 1|p_{ij}(k)>0\}
+\]
+由C-K方程\eqref{eq:CK}, $\exists$与 $i,j$ 不同的状态 $i_1,\cdots,i_{K-1},\stt$
+\[
+p_{i,i_1}p_{i_1,i_2}\cdots p_{i_{K-1},j}>0
+\]
+注: 已知 $\PP_j(T_i=\infty)>0$, 要证 $\PP_i(T_i=\infty)>0$, 思路是将起始点从 $i$ 挪到 $j$. 
+
+(Step 2)
+\[
+\begin{aligned}
+    \PP_i(T_i=\infty)&=\PP_i(\bigcap_{n\geq 1}\{X_n\neq i\})\\
+    &\geq \PP_i(\bigcap_{k=0}^{K-1}\{X_k=i_k\},X_K=j,\bigcap_{n\geq K+1}\{X_n\neq i\})\\
+    &=\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\},X_K=j,\bigcap_{n\geq K+1}\{X_n\neq i\})/\PP(X_0=i)\\
+    &=\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\}|X_K=j)\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j,\bigcap_{k=0}^{K-1}\{X_k=i_k\})\cdot \PP(X_K=j)/\PP(X_0=i)\\
+    &\overset{\text{Markov}}{=}\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\}|X_K=j)\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j)\cdot \PP(X_K=j)/\PP(X_0=i)\\
+    &=\underbrace{\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\},X_K=j)}_{\text{有限维分布}}\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j)/\PP(X_0=i)\\
+    &=\frac{\mu_i^{(0)}\cdot p_{i,i_1}\cdot p_{i_1,i_2}\cdots p_{i_{K-1},j}}{\mu_i^{(0)}}\cdot \lim_{m\to \infty}\PP(\bigcap_{n=K+1}^{K+m}\{X_n\neq i\}|X_K=j)
+\end{aligned}
+\]
+由(Step 1), $p_{i,i_1}\cdot p_{i_1,i_2}\cdots p_{i_{K-1},j}>0$, 因此只需证明后面概率的极限也为正，即可证明 $\PP_i(T_i=\infty)>0$.
+
+假设 $(X_n)_{n\geq 0}\sim \text{Markov}(\mu,P)$
+
+$\tau_1=0,\tau_2=K$ 为关于 $(X_n)_{n\geq 0}$ 的停时, 则由 SMP 知
+\begin{enumerate}
+    \item 在 $\tilde{\PP}(\cdot):=\PP(\cdot|X_K=j)$ 下, $(X_{K+n})_{n\geq 0}\sim \text{Markov}(\delta_j,P)$
+    \item 在 $\PP_j(\cdot):=\PP(\cdot|X_0=j)$ 下, $(X_{n})_{n\geq 0}\sim \text{Markov}(\delta_j,P)$
+\end{enumerate}
+发现在测度 $\tilde{\PP}(\cdot)$ 下的 $(X_{K+n})_{n\geq 0}$, 与测度 $\PP_j(\cdot)$ 下的 $(X_n)_{n\geq 0}$ 遵循同样的有限维分布
+\[
+\begin{aligned}
+    &\PP(\bigcap_{n=K+1}^{K+m}\{X_n\neq i\}|X_K=j)\\
+    =&\tilde{\PP}(X_{K+n}\neq i,1\leq n\leq m)\\
+    \overset{\text{SMP}}{=}&\PP_j(X_n\neq i,1\leq n\leq m)\xrightarrow{m\to\infty}\PP_j\left(\bigcap_{n\geq 1}\{X_n\neq i\}\right)=\PP_j(T_i=\infty)=1-\rho_{ji}>0
+\end{aligned}
+\]
+因此 $\PP_i(T_i=\infty)>0$
+\end{proof}
+\begin{corollary}
+    $i\to j$, $i$常返$\Rightarrow$$j$常返
+\end{corollary}
+\begin{proof}
+$i\neq j,i\to j$, $i$ 常返, 由引理\ref{lem:commu_recurrent}, 知 $\rho_{ji}=1>0$, 所以 $j\to i, i\leftrightarrow j$
+
+$\exists m,n\geq 0, \stt p_{ij}(m)>0,p_{ji}(n)>0$
+
+$\forall r\geq 0, p_{jj}(n+r+m)\overset{\text{C-K}}{\geq} p_{ji}(n)p_{ii}(r)p_{ij}(m)$
+
+两边同时求和
+\[
+\sum_{r\geq 0}p_{jj}(n+r+m)\geq p_{ji}(n)\left(\sum_{r\geq 0}p_{ii}(r)\right)p_{ij}(m)=\infty
+\]
+其中 $p_{ji}(n)>0,p_{ij}(m)>0,\sum_{r\geq 0}p_{ii}(r)=\infty$($i$常返)
+\[
+\therefore \sum_{r\geq 0}p_{jj}(r)=\infty\quad \Rightarrow j\text{常返}
+\]
+\end{proof}
+
+\begin{corollary}\label{cor:trans_recurrent}
+    若 $i\leftrightarrow j$, 则 
+    \[
+    i \text{常返} \iff j \text{常返}
+    \]
+\end{corollary}
+
+\begin{definition}[集合的不可约]
+    $C\st S,\forall i,j\in C$, 有 $i\leftrightarrow j$, 则称 $C$ 不可约
+\end{definition}
+
+\begin{definition}[链的不可约]
+    若 $S$ 不可约, 则称链不可约
+\end{definition}
+
+\begin{theorem}
+    若 $C\st S$ 不可约, 则 $C$ 中状态要么全是常返的, 要么全是暂留的
+\end{theorem}
+
+\subsubsection{状态空间分解}
+\begin{definition}[闭集]
+    $C\st S$, 若 $i\in C,j\notin C\Rightarrow p_{ij}=0$, 则称 $C$ 为闭集
+\end{definition}
+
+\begin{problem}[作业6-3]
+    证明 $C\st S$ 闭集等价于
+    \[
+    i\in C,i\to j\Rightarrow j\in C\quad (j\notin C\Rightarrow i\nrightarrow j)
+    \]
+\end{problem}
+
+\begin{example}
+    若 $\{i\}$ 闭, 则 $\forall j\neq i,p_{ij}=0\Leftrightarrow p_{ii}=1$, 称 $i$ 为吸收态
+\end{example}
+
+\begin{theorem}
+    每一个有限的不可约闭集都是常返的
+\end{theorem}
+
+证明之前先介绍一个引理
+
+\begin{lemma}
+    每一个有限闭集中都至少有一个常返态
+\end{lemma}
+
+(反证法) 设 $C$ 为有限闭集, 非常返的
+
+$\forall i\in C\Rightarrow i$暂留 $\Rightarrow \sum_{n\geq 1}p_{ji}(n)<\infty,\forall j\in S$
+\[
+\infty\overset{C\text{有限}}{>}\sum_{i\in C}\sum_{n\geq 1}p_{ji}^{(n)}=\sum_{n\geq 1}\sum_{i\in C}p_{ji}^{(n)}
+\]
+这里不是 $i\in S$ 而是 $i\in C$, 所以还要考虑 $i\in C^c$
+
+$\forall i\in C^c,j\in C\overset{C\text{闭}}{\Rightarrow}j\nrightarrow i \Rightarrow \forall n\geq 0,p_{ji}(n)=0$
+\[
+\infty>\sum_{n\geq 1}\sum_{i\in C}p_{ji}^{(n)}=\sum_{n\geq 1}\left(\sum_{i\in S}p_{ji}^{(n)}\right)=\sum_{n\geq 1}1=\infty
+\]
+矛盾\qed
+
+在一个不可约闭集 $C$ 中, 至少有一个常返态 $i\in C$, 由不可约定义和推论\ref{cor:trans_recurrent}, $\forall j\in C,j\leftrightarrow i,j$常返
+
+\begin{corollary}
+    状态空间 $S$ 有限, 则 $S$ 中必存在一个常返态
+\end{corollary}
+
+\begin{theorem}[分解定理]
+    状态空间 $S$ 可分解为
+    \[
+    S=T+R_1+R_2+\cdots
+    \]
+    其中 $T$ 中所有状态非常返, $R_r$ 为常返不可约闭集
+\end{theorem}
+\begin{proof}
+(Step 1) 首先把所有暂留态拿出来
+\[
+T:=\{j\in S|j\text{暂留}\}
+\]
+(Step 2) $i_1\in S\backslash T\neq \emp$(若$S\backslash T=\emp$, 则在Step 1结束)
+
+$i_1$ 常返, 定义 $R_1=\{j\in S|j\leftrightarrow i_1\}$
+
+$R_1\st S\backslash T$, $R_1$常返互通类
+
+(Step 3) $i_2\in S\backslash (T\cup R_1),R_2=\{j\in S|i_2\leftrightarrow j\}\Rightarrow R_2\st S\backslash (T\cup R_1)$
+
+若 $j\in R_2,j\in R_1\Rightarrow j\leftrightarrow i_2,j\leftrightarrow i_1\Rightarrow i_1\leftrightarrow i_2\Rightarrow i_2\in R_1$, 矛盾
+
+(Step 4) 迭代
+\end{proof}
+\newpage

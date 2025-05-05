@@ -1,0 +1,93 @@
+\subsection{首达时及其应用}
+
+\begin{definition}[首达时]
+    首达时(first hitting time)定义为
+    \begin{equation}
+        V_A:=\min\{n\geq 0|X_n\in A\}
+        \label{eq:FHT}
+    \end{equation}
+\end{definition}
+
+注：前面提到的首次回访时间(first passage time)是要求 $n\geq 1$, rf.\eqref{eq:def_revisit_time}.
+
+\subsubsection{击中概率(hitting time)与离出分布}
+
+\begin{definition}[击中概率]
+    击中概率定义为
+    \begin{equation}
+        h_x^A:=\PP_x(V_A<\infty)
+        \label{eq:HT}
+    \end{equation}
+    特别地，$A$为闭集，称$h_x^A$为吸收概率
+\end{definition}
+
+下面介绍 $h_x^A$ 的一个性质
+
+\begin{lemma}
+    $h^A:=(h_x^A)_{x\in S}$ 满足下列方程
+    \[
+    \begin{cases}
+        h_x^A=1 & x\in A\\
+        h_x^A=\sum_y p_{xy}h_y^A & x\notin A
+    \end{cases}
+    \]
+    其中 $x\notin A$ 的情况对应 $f(x)=f*p(x)$.
+\end{lemma}
+
+击中概率是上述方程的一个解，但我们还没验证其唯一性.
+
+证明: $x\in A\Rightarrow V_A\geq 1$, 考虑一步转移情况(one step reasoning) $\leftarrow$ 证明思想
+\[
+h_x^A=\sum_{y\in S}\PP_x(V_A<\infty, X_1=y)=\sum_{y\in S}\PP_x(V_A<\infty| X_1=y,X_0=x)\PP(X_1=y|X_0=x)
+\]
+\begin{claim}
+$\PP_x(V_A<\infty|X_1=y)=h_y^A,\forall y\in S, x\notin A$
+\end{claim}
+利用马氏性,
+\[
+\begin{aligned}
+    \PP_x(V_A<\infty| X_1=y,X_0=x) &\overset{x\notin A}{=}\PP(\bigcup_{n\geq 1}\{X_n\in A\}|X_1=y,X_0=x)\\
+    &\overset{\text{Markov}}{=}\PP(\bigcup_{n\geq 1}\{X_n\in A\}|X_1=y)\\
+    &\overset{\text{SMP}}{=}\PP_y(\bigcup_{n\geq 0}\{X_n\in A\})=\PP_y(V_A<\infty)=h_y^A\qed
+\end{aligned}
+\]
+
+\begin{example}
+    $a,b\in S,V_a:=V_{\{a\}},V_a:=V_{\{b\}}$, 考虑 $h(x)=\PP_x(V_a<V_b)$, 则 $h=(h(x))_{x\in S}$ 满足下列方程
+    \[
+    \begin{cases}
+        h(a)=1, h(b)=0\\
+        h(x)=\sum_y p_{xy}h_y & x\neq a,b
+    \end{cases}
+    \]
+\end{example}
+证明: (和上述引理证明过程一样)只需证$\PP_x(V_a<V_b|X_1=y)=h(y),\forall x\neq a,b, y\in S, \to V_a\geq 1$
+\[
+\begin{aligned}
+    \text{LHS} &=\PP_x(1\leq V_a<\infty, V_a<V_b|X_1=y)\\
+    &\overset{x\neq a,b}{=}\PP_x\left(\bigcup_{m\geq 1}(\{X_m=a\}\cap \bigcap_{1\leq k\leq m}\{X_k\neq a,b\})|X_1=y\right)\\
+    &=\PP_x\left(\sum_{m\geq 1}(\{X_m=a\}\cap \bigcap_{1\leq k\leq m}\{X_k\neq a,b\})|X_1=y\right)
+    &=\PP_y(V_a<V_b)=h(y)\qed
+\end{aligned}
+\]
+
+\begin{theorem}
+    $A,B\st S,A\cap B=\emp$, 令 $C=S-A\cup B$. 若 $C$ 有限, $\PP_x(V_A\land V_B<\infty)>0, \forall x\in C$, 则方程
+    \[
+    \begin{cases}
+        h(x)=1 & x\in A\\
+        h(x)=\sum_{y\in S}p_{xy}h(y) & x\in C\\
+        h(x)=0 & x\in B
+    \end{cases}
+    \]
+    存在唯一非负解 $h(x)=\PP_x(V_A<V_B), \forall x\in S$ (不证明)
+\end{theorem}
+
+注：\begin{enumerate}
+    \item $\PP_x(V_a\land V_b<\infty)>0\iff x\to a \text{ 或 }x\to b$
+    \item $A\cap B=\emp$ 时, $V_A\land V_B=V_{A\cup B}$
+\end{enumerate}
+
+\begin{problem}[作业8-1]
+    证明：$\PP_x(V_a\land V_b<\infty)>0\iff x\to a \text{ 或 }x\to b$
+\end{problem}

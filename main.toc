@@ -35,3 +35,5 @@
 \contentsline {subsubsection}{\numberline {2.6.3}可逆性}{60}{subsubsection.2.6.3}%
 \contentsline {subsubsection}{\numberline {2.6.4}求$P$的平稳分布（若唯一）}{61}{subsubsection.2.6.4}%
 \contentsline {subsection}{\numberline {2.7}极限行为与平稳分布的存在唯一性}{62}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}首达时及其应用}{64}{subsection.2.8}%
+\contentsline {subsubsection}{\numberline {2.8.1}击中概率(hitting time)与离出分布}{64}{subsubsection.2.8.1}%

@@ -1,0 +1,103 @@
+\subsection{极限行为与平稳分布的存在唯一性}
+研究 $\displaystyle \lim_{n\to \infty}p_{ij}^{(n)}$
+\begin{enumerate}
+    \item $j$暂留 $\Rightarrow \sum_{n}p_{ij}^{(n)}<\infty,\forall i\in S\Rightarrow \lim_{n\to \infty}p_{ij}^{(n)}=0,\forall i\in S$. 下面可以把注意力放在常返上
+    \item $\lim_{n\to \infty}p_{ij}^{(n)}$不存在的反例
+    \[
+    S=\{1,2\}, P=\begin{pmatrix}
+        0&1\\
+        1&0
+    \end{pmatrix}, P^2=\begin{pmatrix}
+        1&0\\
+        0&1
+    \end{pmatrix}
+    \]
+    \[
+    P^{2n}=\begin{pmatrix}
+        1&0\\
+        0&1
+    \end{pmatrix}, P^{2n+1}=P=\begin{pmatrix}
+        0&1\\
+        1&0
+    \end{pmatrix}
+    \]
+    $p_{ij}^{(2n)}\neq p_{ij}^{(2n+1)},\forall i,j\in S$, 所以 $p_{ij}^{(n)}$ 不收敛
+\end{enumerate}
+
+\begin{definition}[周期]\label{def:cycle}
+    令 $I_x:=\{n\geq 1|P_{xx}^{(n)}>0\}$, 定义 $x$ 的周期 $d(x)=\gcd(I_x)$
+    \begin{enumerate}
+        \item $d(x)>1$, 称 $x$ 周期的
+        \item $d(x)=1$, 称 $x$ 非周期的
+        \item $I_x=\emp$, 称 $x$ 周期为 $\infty$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    称链是周期的, 若所有状态是周期的
+\end{definition}
+
+\begin{theorem}[收敛定理]
+    马氏链不可约, 非周期, 且存在平稳分布 $\pi$, 则
+    \[
+    \lim_{n\to\infty}p_{ij}^{(n)}=\pi_j\quad (\forall i,j\in S)
+    \]
+    注：找到周期不是件容易的事, 我们通常讨论非周期的链
+\end{theorem}
+
+\begin{problem}[作用7-1]
+    设 $S$ 有限, $\exists i\in S$, \stt $\lim_{n\to\infty}p_{ij}^{(n)}=\pi_j(\forall j\in S)$. 证明：$\pi=(\pi_j)_{j\in S}$是$P=(p_{ij})_{i,j\in S}$的平稳分布
+\end{problem}
+
+\begin{theorem}[渐进频率]\label{thm:asymptotic_frequency}
+    马氏链不可约, 常返, 则
+    \[
+    \lim_{n\to\infty}\frac{N(y)}{n}=\frac{1}{\EE_yT_y}
+    \]
+    注：\begin{enumerate}
+        \item $N_n(y)=\sum_{k=1}^n\II_{\{X_k=y\}}$($n$时刻前, 访问$y$的总次数)
+        \item $\frac{N_n(y)}{n}$, $n$时刻前, 访问$y$的频率/时间比例, 因此 $\lim_{n\to\infty}\frac{N(y)}{n}$ 为在状态 $y$ 上花费的时间比例的极限
+        \item $\displaystyle \EE_yT_y=\begin{cases}
+            <\infty & $y\text{正常返}$\\
+            \infty & $y\text{暂留/零常返}$
+        \end{cases}$, rf.\ref{def:recurrent_types}
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}\label{thm:stationary_exists_unique}
+    马氏链不可约
+    \begin{enumerate}
+        \item (平稳分布唯一性, Durrett, Thm 1.21) 若平稳分布存在, 则
+        \[
+        \pi_y=\frac{1}{\EE_yT_y}
+        \]
+        则$\pi$唯一
+        \item (平稳测度存在性) 若马氏链常返, 则 $\exists$平稳测度, $\mu=(\mu_x)_{x\in S}$, 且 $\mu_x>0,\forall x$
+    \end{enumerate}
+    注：$\mu=(\mu_x)_{x\in S}$ 是一个平稳测度
+    \begin{enumerate}
+        \item (测度) $\mu_x\geq 0,\forall x\in S$
+        \item $\mu^P=\mu$
+    \end{enumerate}
+\end{theorem}
+
+相对于上面的大定理, 下面的推论对我们更有用
+
+\begin{corollary}
+    马氏链具有有限状态, 不可约, 则
+    \begin{enumerate}
+        \item 存在唯一平稳分布 $\pi=(\pi_x)_{x\in S}$, 且 $\pi_x=\frac{1}{\EE_xT_x}>0,\forall x\in S$
+        \item $\lim_{n\to\infty}\frac{N_n(y)}{n}=\frac{1}{\EE_xT_x}=\pi_x$
+    \end{enumerate}
+\end{corollary}
+
+证明：
+\begin{enumerate}
+    \item $S$有限不可约, 闭集$\Rightarrow$ 不可约, 常返
+    \begin{enumerate}
+        \item 由定理\ref{thm:stationary_exists_unique}(2)知, 存在$\mu=(\mu_x)_{x\in S},\mu_x\geq 0, \mu P=\mu$.令 $\pi_x=\frac{\mu_x}{\sum_{x\in S}\mu_x}$(正则化$\mu$), $\pi_x>0$, 且 $\pi P=\frac{1}{\sum_{x\in S}\mu_x}\mu P=\frac{1}{\sum_{x\in S}\mu_x}\mu=\pi$
+        \item 由定理\ref{thm:stationary_exists_unique}(1)知, $\pi$唯一且$\pi_x=\frac{1}{\EE_xT_x}$
+    \end{enumerate}
+    \item 由定理\ref{thm:asymptotic_frequency}\qed
+\end{enumerate}
+\newpage
