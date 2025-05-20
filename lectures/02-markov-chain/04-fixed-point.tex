@@ -201,7 +201,7 @@ p_{ij}(n)=\sum_{m=1}^n p_{jj}(n-m)\cdot f_{ij}(m)
     &=\delta_{ij}+\sum_{n=1}^{\infty}\sum_{m=1}^{\infty}\II_{\{1\leq m\leq n\}}(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))
 \end{aligned}
 \]
-【重要技巧】把 $\II_{\{1\leq m\leq n\}}(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))$ 看作 $a_{n,m}$, 由推论\ref{lem:abs_convergence}考察绝对收敛
+【重要技巧】把 $\II_{\{1\leq m\leq n\}}(s^{n-m}p_{jj}(n-m))(s^m f_{ij}(m))$ 看作 $a_{n,m}$, 由Lemma \ref{lem:abs_convergence}考察绝对收敛
 
 $0\leq s<1, |s|=s$
 
@@ -255,6 +255,13 @@ P_{jj}(s)=\frac{1}{1-F_{jj}(s)}
 \begin{problem}[作业5-1]
 证明：$j$ 暂留 $\Rightarrow \sum_{n\geq 0}p_{ij}(n)<\infty, \forall i\in S$
 \end{problem}
+\begin{proof}
+由\eqref{eq:genfunc}, 若 $s\uparrow 1$, 
+\[
+\sum_{n\geq 0}p_{ij}(n)=\delta_{ij}+\left(\sum_{n\geq 0}p_{jj}(n)\right)\left(\sum_{n\geq 0}f_{ij}(n)\right)\leq \delta_{ij}+\sum_{n\geq 0}p_{jj}(n)<\infty
+\]
+其中 $\sum_{n\geq 0}f_{ij}(n)=f_{ij}\in [0,1]$.
+\end{proof}
 
 \subsubsection{从“首次回访时间”角度判别}
 \[

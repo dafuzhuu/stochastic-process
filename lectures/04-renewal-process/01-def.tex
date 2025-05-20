@@ -1,0 +1,46 @@
+\subsection{定义}
+
+\begin{definition}
+    设 $\{\tau_k,k\geq 1\}\iidsim F(\cdot)$ 为非负随机变量列, 即 $\PP(\tau_1\leq t)=F(t)$, 其中 $F(0)=\PP(\tau_1\leq 0)=0$ 则 $0<\EE \tau_1<\infty$. 令 $T_n=\sum_{k=1}^n\tau_k,n\geq 1,T_0=0$, 则称由 $N(t)=\max\{n|T_n\leq t\}, t>0$ 定义的计数过程为更新过程.  
+\end{definition}
+注:
+\begin{enumerate}
+    \item $\tau_k$: 第$k$个灯泡的寿命/更新时间间隔序列
+    \item $T_n$: 第$n$个灯泡损坏的时刻/第$n$次更新的时刻
+    \item $N(t)$: $[0,t]$ 中灯泡的损坏个数/更新的次数
+    \[
+    N(t)=\sum_{n=1}^{\infty}n\II_{\{N(t)=n\}}=\sum_{n=1}^{\infty}n\II_{[T_n,T_{n+1})}(t)
+    \]
+\end{enumerate}
+
+\begin{lemma}\label{lem:p113-lem1}
+    $\forall t\geq 0$, 有 $N(t)<\infty$ a.s. (almost surely/几乎必然/几乎处处), 即存在零测集 $\tilde{\Omega}^c,\stt \forall \omega \in \tilde{\Omega}$, 有 $N(t)(\omega)<+\infty$, 即 \framebox{$\PP(N(t)<+\infty)=1$}.
+
+    注: 这样写的前提是 $N(t)<\infty$ 是可测集. 因为 $N(t)$ 是随机变量, 该前提成立.
+\end{lemma}
+
+注:
+\[
+    \PP(N(t)=+\infty)=\lim_{n\to +\infty}\PP(\underbrace{N(t)\geq n}_{\iff T_n\leq t})=\lim_{n\to +\infty}F^{*n}(t)
+\]
+其中 $F^{*n}$ 为 $F$ 的 $n$ 重卷积.
+
+\begin{theorem}[强大数定律]
+    $\{X_k,k\geq 1\}$ iid, $\EE |X_1|<+\infty$, 令 $S_n=\sum_{k=1}^nX_k$, 则 $\displaystyle \frac{S_n}{n}\as{n} \EE X_1$, 即存在零测集 $\displaystyle \tilde{\Omega}^c,\stt \forall \omega \in \tilde{\Omega}$, 有 $\displaystyle \lim_{n\to\infty}\frac{S_n}{n}(\omega)\as{n} \EE X_1$, 即 $\displaystyle \PP(\lim_{n\to\infty}\frac{S_n}{n}=\EE X_1)=1$.
+\end{theorem}
+注: 可列 r.v. 的极限也是 r.v., 而不可列 r.v. 的极限不一定是 r.v.
+
+\begin{proof}[证明Lem \ref{lem:p113-lem1}]
+    应用SLLN知, $T_n/n\as{n}\EE \tau_1\in (0,+\infty]$.
+
+    存在零测集 $\tilde{\Omega}^c,\stt \forall \omega \in \tilde{\Omega}$, 有
+    \[
+    \lim_{n\to\infty}\frac{T_n}{n}(\omega)=\EE \tau_1
+    \]
+    $\because \EE \tau_1>0, T_n(\omega)\approx n\EE \tau_1$. $\therefore 0\leq T_n\uparrow\Rightarrow \forall \omega\in\tilde{\Omega}$, 有 $\lim_{n\to +\infty}T_n(\omega)=+\infty$. 
+    
+    $N_t(\omega)=\max\{n\geq 0|T_n(\omega)\leq t\}$, 由于 $T_n(\omega)\to +\infty, \therefore \forall \omega\in\tilde{\Omega},\forall t\geq 0$, 至多只有有限个 $n$, 使 $T_n(\omega)\leq t$, 即至多只有有限个 $T_n(\omega)$ 落在 $[0,t]$ 上.
+
+    $\Rightarrow \forall \omega\in\tilde{\Omega},\forall t\geq 0, N_t(\omega)<+\infty$, $\Rightarrow \forall t\geq 0,N(t)<+\infty$ (a.s.)
+\end{proof}
+\newpage

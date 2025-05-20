@@ -1,8 +1,8 @@
 \subsection{极限行为与平稳分布的存在唯一性}
 研究 $\displaystyle \lim_{n\to \infty}p_{ij}^{(n)}$
 \begin{enumerate}
-    \item $j$暂留 $\Rightarrow \sum_{n}p_{ij}^{(n)}<\infty,\forall i\in S\Rightarrow \lim_{n\to \infty}p_{ij}^{(n)}=0,\forall i\in S$. 下面可以把注意力放在常返上
-    \item $\lim_{n\to \infty}p_{ij}^{(n)}$不存在的反例
+    \item 由 \eqref{eq:transient_multistep}, $j$暂留 $\displaystyle\Rightarrow \sum_{n\geq 0}p_{ij}^{(n)}<\infty,\forall i\in S\Rightarrow \lim_{n\to \infty}p_{ij}^{(n)}=0,\forall i\in S$. 下面可以把注意力放在常返上
+    \item $\displaystyle\lim_{n\to \infty}p_{ij}^{(n)}$不存在的反例
     \[
     S=\{1,2\}, P=\begin{pmatrix}
         0&1\\
@@ -31,6 +31,7 @@
         \item $d(x)=1$, 称 $x$ 非周期的
         \item $I_x=\emp$, 称 $x$ 周期为 $\infty$
     \end{enumerate}
+    注: $\gcd$ 为 greatest common divisor 最大公因数.
 \end{definition}
 
 \begin{definition}
@@ -51,53 +52,70 @@
 
 \begin{theorem}[渐进频率]\label{thm:asymptotic_frequency}
     马氏链不可约, 常返, 则
-    \[
-    \lim_{n\to\infty}\frac{N(y)}{n}=\frac{1}{\EE_yT_y}
-    \]
+    \begin{equation}
+\lim_{n\to\infty}\frac{N_n(y)}{n}=\frac{1}{\EE_yT_y}
+\end{equation}
     注：\begin{enumerate}
         \item $N_n(y)=\sum_{k=1}^n\II_{\{X_k=y\}}$($n$时刻前, 访问$y$的总次数)
-        \item $\frac{N_n(y)}{n}$, $n$时刻前, 访问$y$的频率/时间比例, 因此 $\lim_{n\to\infty}\frac{N(y)}{n}$ 为在状态 $y$ 上花费的时间比例的极限
+        \item 考虑 $\displaystyle\frac{N_n(y)}{n}$, 表示 $n$ 时刻前访问$y$的频率/时间比例, 因此 $\displaystyle\lim_{n\to\infty}\frac{N_n(y)}{n}$ 为在状态 $y$ 上花费的时间比例的极限
         \item $\displaystyle \EE_yT_y=\begin{cases}
             <\infty & $y\text{正常返}$\\
             \infty & $y\text{暂留/零常返}$
-        \end{cases}$, rf.\ref{def:recurrent_types}
+        \end{cases}$, rf. (Def \ref{def:recurrent_types}).
     \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+Durrett (3ed), Thm 1.20, p47.
+\end{proof}
 
 \begin{theorem}\label{thm:stationary_exists_unique}
     马氏链不可约
     \begin{enumerate}
         \item (平稳分布唯一性, Durrett, Thm 1.21) 若平稳分布存在, 则
-        \[
-        \pi_y=\frac{1}{\EE_yT_y}
-        \]
+        \begin{equation}
+\pi_y=\frac{1}{\EE_yT_y}
+\label{eq:thm1.21}
+\end{equation}
         则$\pi$唯一
-        \item (平稳测度存在性) 若马氏链常返, 则 $\exists$平稳测度, $\mu=(\mu_x)_{x\in S}$, 且 $\mu_x>0,\forall x$
+        \item (平稳测度存在性) 若马氏链常返, 则 $\exists$平稳测度, $\mu=(\mu_x)_{x\in S}$, 且 $\mu_x>0,\forall x$. 令 $T_x=\min\{n\geq 1|X_n=x\}$.
+        \begin{equation}
+\mu_x(y)=\sum_{n=0}^{\infty}\PP_x(X_n=y,T_x>n)
+\label{eq:stationary_measure}
+\end{equation}
     \end{enumerate}
-    注：$\mu=(\mu_x)_{x\in S}$ 是一个平稳测度
+    注：$\mu=(\mu_x)_{x\in S}$ 是一个平稳测度, 若
     \begin{enumerate}
         \item (测度) $\mu_x\geq 0,\forall x\in S$
-        \item $\mu^P=\mu$
+        \item $\mu P=\mu$
     \end{enumerate}
 \end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item \eqref{eq:thm1.21}: Durrett (3ed), Thm 1.21, p47.
+\item \eqref{eq:stationary_measure}: Durrett (3ed), Thm 1.24, p48.
+\end{enumerate}
+\end{proof}
 
 相对于上面的大定理, 下面的推论对我们更有用
 
 \begin{corollary}
     马氏链具有有限状态, 不可约, 则
     \begin{enumerate}
-        \item 存在唯一平稳分布 $\pi=(\pi_x)_{x\in S}$, 且 $\pi_x=\frac{1}{\EE_xT_x}>0,\forall x\in S$
-        \item $\lim_{n\to\infty}\frac{N_n(y)}{n}=\frac{1}{\EE_xT_x}=\pi_x$
+        \item 存在唯一平稳分布 $\pi=(\pi_x)_{x\in S}$, 且 $\displaystyle\pi_x=\frac{1}{\EE_xT_x}>0,\forall x\in S$
+        \item $\displaystyle\lim_{n\to\infty}\frac{N_n(y)}{n}=\frac{1}{\EE_xT_x}=\pi_x$
     \end{enumerate}
 \end{corollary}
 
-证明：
+\begin{proof}
 \begin{enumerate}
-    \item $S$有限不可约, 闭集$\Rightarrow$ 不可约, 常返
+    \item $S$有限不可约, 闭集$\Rightarrow$ 不可约, 常返, rf. (Thm \ref{thm:finite-close-rec}).
     \begin{enumerate}
-        \item 由定理\ref{thm:stationary_exists_unique}(2)知, 存在$\mu=(\mu_x)_{x\in S},\mu_x\geq 0, \mu P=\mu$.令 $\pi_x=\frac{\mu_x}{\sum_{x\in S}\mu_x}$(正则化$\mu$), $\pi_x>0$, 且 $\pi P=\frac{1}{\sum_{x\in S}\mu_x}\mu P=\frac{1}{\sum_{x\in S}\mu_x}\mu=\pi$
-        \item 由定理\ref{thm:stationary_exists_unique}(1)知, $\pi$唯一且$\pi_x=\frac{1}{\EE_xT_x}$
+        \item 由Thm \ref{thm:stationary_exists_unique} (2)知, 存在$\mu=(\mu_x)_{x\in S},\mu_x\geq 0, \mu P=\mu$.令 $\displaystyle\pi_x=\frac{\mu_x}{\sum_{x\in S}\mu_x}$(正则化$\mu$), $\pi_x>0$, 且 $\displaystyle\pi P=\frac{1}{\sum_{x\in S}\mu_x}\mu P=\frac{1}{\sum_{x\in S}\mu_x}\mu=\pi$
+        \item 由Thm \ref{thm:stationary_exists_unique} (1)知, $\pi$唯一且$\displaystyle\pi_x=\frac{1}{\EE_xT_x}$
     \end{enumerate}
-    \item 由定理\ref{thm:asymptotic_frequency}\qed
+    \item 由Thm \ref{thm:asymptotic_frequency}
 \end{enumerate}
+\end{proof}
 \newpage

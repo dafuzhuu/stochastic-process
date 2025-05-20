@@ -1,0 +1,204 @@
+\subsection{事件概率}
+
+\subsubsection{事件域}
+
+\begin{definition}[样本空间、事件]
+    样本点、样本空间、事件和事件的运算：
+    \begin{itemize}
+        \item 样本点 $\omega$： 一次试验的结果
+        \item 样本空间 $\Omega$： 全体样本点
+        \item 事件：$\Omega$ 的子集
+        \item 事件的运算：集合的运算, 即交并补($A\cap B, A\cup B, A^c$)
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    若 $A\cap B=\varnothing$, 则称 $A$ 与 $B$ 不相交, 更一般地, 若 $A_i\cap A_j=\varnothing (i\neq j)$, 则称 $\{A_i\}_{i\geq 1}$ 互不相交
+\end{definition}
+
+\begin{definition}[$\sigma$-代数]
+    称 $\mathcal{F}\subset 2^{\Omega}=\{A|A\subset \Omega\}$ 是一个 $\sigma$-代数/事件域（其中 $2^{\Omega}$ 表示所有 $\Omega$ 的子集构成的集合, 是一个集类）
+
+    若\begin{enumerate}
+        \item $\Omega\subset \mathcal{F}$
+        \item (对补封闭) $A\in \mathcal{F}\rightarrow A^c\in \mathcal{F}$
+        \item (对可列并封闭) $A_n\in \mathcal{F}, n\geq 1\Rightarrow \cup_{n\geq 1}A_n=\cup_{n=1}^{\infty} A_n\in\mathcal{F}$
+    \end{enumerate}
+
+    $\sigma$代数是满足以上特定条件的集类, 是由 $\Omega$ 的子集构成的集合
+
+    注：$\sigma$代数对有限交/有限并/可列交封闭
+\end{definition}
+
+现在给出了一个定义, 我们会想 “为什么定义会这样给呢”, 现在要举一些例子说明 “定义有意义”
+
+\begin{example}
+    最小的 $\sigma$代数：$\{\varnothing, \Omega\}$ 
+
+    最大的 $\sigma$代数：$2^{\Omega}$
+\end{example}
+
+以上这两个例子一个太小、一个太大, 似乎没意义, 所以叫它们 “平凡的”
+
+\begin{example}
+    $A\subset \Omega, \sigma(\{A\})=\sigma(A)=\{A, A^c, \Omega, \varnothing\}=\sigma(A^c)$
+
+    这是由 $A$ 生成的 $\sigma$代数
+\end{example}
+
+\begin{definition}[划分/分割]\label{def:partition}
+    称 $\Pi_{\Omega}:= \{\Lambda_n, n\geq 1\}$ 是 $\Omega$ 的一个分划, 若 $\Omega=\sum_{n\geq 1}\Lambda_n$
+
+    \begin{enumerate}
+        \item $\Omega=\cup_{n\geq 1}\Lambda_n$
+        \item $\{\Lambda_n\}_{n\geq 1}$ 互不相交
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    $\Omega=\sum_{n\geq 1}\Lambda_n, \Pi_{\Omega}:=\{\Lambda_n\}_{n\geq 1}$
+
+    \[
+    \sigma(\Pi_{\Omega})=\left \{\sum_{k\in J}\Lambda_k, J\subset \mathbb{N}\right \}
+    \]
+\end{example}
+
+\begin{problem}[作业1-1]
+    证明：\begin{enumerate}
+        \item $\sigma(\Pi_{\Omega})$ 是一个 $\sigma$代数
+        \item $\sigma(\Pi_{\Omega})$ 是包含集类 $\Pi_{\Omega}$ 的最小 $\sigma$代数
+    \end{enumerate}
+\end{problem}
+
+
+$(S,\mathcal{S})=(S,2^S)$: S 可列时, 取 $2^S$ 为 $\sigma$代数
+
+$(S,\mathcal{S})=(\mathbb{R},\mathcal{B}(\mathbb{R}))$: S 为实数集时, 取博雷尔集 $\mathcal{B}(\mathbb{R})$ 为 $\sigma$代数
+
+
+\subsubsection{概率测度}
+
+\begin{definition}[概率测度]\label{def:prob_measure}
+    $(\Omega, \CF)$ 称 $\PP: \mathcal{F}\rightarrow [0,1]$ 是概率测度
+    \begin{enumerate}
+        \item 非负性
+        \item 归一性
+        \item 可列可加性*
+    \end{enumerate}
+    其中, 可列可加性的表述为：设 $\{E_n, n\geq 1\}$ 是 $\CF$ 中互不相交的集合序列($E_i\cap E_j=\emp, i\neq j$), 则
+    \[
+    \PP(\cup_{n=1}^{\infty}E_n)=\sum_{n=1}^{\infty}\PP(E_n)
+    \]
+\end{definition}
+
+\begin{property}
+$\PP$ 满足有限可加性（可列可加一定有限可加, 如果既不是可列可加、也不是有限可加, 则不可测）
+\end{property}
+
+\begin{corollary}\label{cor:set_operation}
+    1. $\PP(A)=1-\PP(A^c)$
+
+    2. 若 $A\subset B$, 则 $\mathbb{B}=\mathbb{A}+\PP(BA^c)\geq \PP(A)$
+
+    3. $\PP(A\cup B)=\PP(A)+\PP(B)-\PP(A\cap B)$
+\end{corollary}
+
+\begin{remark}
+    引用知乎上\href{https://www.zhihu.com/question/25836213/answer/1204497999}{三维之外}的大白话解释可列可加性：
+
+    首先, 在我们总是习惯于处理有限相加, 而很少遇到无限相加的情况. 从测度论内容理解, 有限相加与事实（数学的）不符, 比如$(0,1)$区间有不可数个点, 每个点的测度（理解为直径吧）是$0$, 按照习惯想法（有限相加）, 直径的加和（总宽度）应该为$0$, 显然, $(0,1)$区间的宽度不可能是$0$；
+    
+    如果规定为“只要是无穷多个点相加, 其宽度就不再是$0$”的话, 还是存在矛盾, 我们知道, 区间$(0,1)$上的有理数是是无穷多个的（而且是可列的）, 那么其宽度就应该为$1$, 可是无理数还是不可数的呢——理解为无理数是有理数的无穷大量或有理数是无理数的无穷小量, 那么无理数的宽度是多少呢？即使还是$1$, 显然$(0,1)$区间的宽度不可能是$2$吧！？
+    
+    于是, 勒贝格说道：在测量长度、面积、体积时, 我们采用可列可加性, 即可列个点相加, 规定其宽度（测度）为$0$, 如果点的个数超过了可列个（这时必是连续统的）, 那么, 就不满足了——即这些点的总宽度就不是$0$了 , 而是具有了非$0$的宽度（正测度）, 当然, 具有测度的这些点是紧挨在一起的, 否则不一定有测度, 比如康托大师制造的三分集就很诡异. 
+    
+    到这里, 可列可加性事实上讲完了, 再啰嗦一下次可列可加性. 这是因为不论作为集合, 还是概率上的事件（也是集合）, 一般是存在公共元素的, 因此, 一般情形下, 当然满足次可列可加性的性质了, 可列可加性只有在集合之间的距离大于$0$或事件之间完全独立的情形下, 才会满足. 
+\end{remark}
+
+\begin{property}[次可列可加性]
+    $A_n\subset \mathcal{F}, n\geq 1$
+
+    \[
+    \PP(\bigcup_{n\geq 1}A_n)\leq \sum_{n\geq 1}\PP(A_n)
+    \]
+\end{property}
+
+证明：$\cup_{n\geq 1}A_n=\sum_{n\geq 1}B_n$, 其中 $B_1=A_1, B_2=A_2\cap (A_1)^c,\cdots , B_n=A_n\cap A_1^c\cap A_2^c\cap \cdots \cap A_{n-1}^c$
+
+$B_n\subset A_n$, 由可列可加性和Corollary \ref{cor:set_operation}(2)
+
+\begin{problem}[作业1-2]\label{exer:disjoint_union}
+证明 $\cup_{n\geq 1}A_n=\sum_{n\geq 1}B_n$
+\end{problem}
+
+证明：
+\begin{enumerate}
+    \item 先证 \(\bigcup_{n \geqslant 1} A_n \st \sum_{n \geqslant 1} B_n\). 
+
+    假设 \(x \in \bigcup_{n \geqslant 1} A_n\), 
+
+    若 \(x \in A_1\), 则 \(x \in B_1\), 
+
+    若 \(x \in A_2\) 且 \(x \notin A_1\), 则 \(x \in B_2\)
+
+    $\cdots$
+
+    若 \(x \in A_n\) 且 \(x \notin A_1\), \(x \notin A_2\), \(\ldots\), \(x \notin A_{n-1}\), 则 \(x \in B_n\)
+
+    $\forall x\in \bigcup_{n\geq 1}A_n$, 都有 $x\in \bigcup_{n\geq 1}B_n$
+
+    \(\because B_i \cap B_j = \emp,i\neq j\), \(\therefore \bigcup_{n \geqslant 1} B_n = \sum_{n \geqslant 1} B_n\), \(x \in \sum_{n \geqslant 1} B_n\). 
+
+    \item 再证 \(\sum_{n \geqslant 1} B_n \st \bigcup_{n \geqslant 1} A_n\)
+
+    假设 \(x \in \sum_{n \geqslant 1} B_n\), 则 \(\exists n_0 \in \mathbb{N}^+\), 使得 \(x \in B_{n_0}\), 
+
+    由$B$的定义
+
+    \[
+    B_{n_0} = A_{n_0} \cap \left( \bigcap_{k=1}^{n_0-1} A_k^c \right)
+    \]
+
+    \(\therefore x \in A_{n_0} \subseteq \bigcup_{n \geqslant 1} A_n\)
+
+    \(\therefore \bigcup_{n \geqslant 1} A_n = \sum_{n \geqslant 1} B_n\)\qed
+\end{enumerate}
+
+\begin{property}[连续性]\label{prt:measure_continuity}
+    (1) $A_n\uparrow$单调上升, 即$A_n\subset A_{n+1}$, $\lim_{n\rightarrow \infty}A_n=\cup_{n\geq 1}A_n$, 则 $\PP(\lim_{n\rightarrow \infty}A_n)=\lim_{n\rightarrow \infty}\PP(A_n)$
+
+    (2) $B_n\downarrow$单调下降, 即$B_n\supset B_{n+1}$, $\lim_{n\rightarrow \infty}B_n=\cap_{n\geq 1}B_n$, 则 $\PP(\lim_{n\rightarrow \infty}B_n)=\lim_{n\rightarrow \infty}\PP(B_n)$
+\end{property}
+
+证明：(1) $\cup_{n\geq 1}A_n=A_1+A_2\setminus A_1+A_3\setminus A_2+\cdots$
+
+\[
+\begin{aligned}
+    \PP(\bigcup_{n\geq 1}A_n)&=\PP(A_1)+\sum_{n\geq 1}\PP(A_{n+1}\setminus A_n)\\
+    &=\PP(A_1)+\limit{m}\sum_{n=1}^m \PP(A_{n+1}\setminus A_n)\\
+    &=\PP(A_1)+\limit{m}\sum_{n=1}^m [\PP(A_{n+1})-\PP(A_n)]\\
+    &=\PP(A_1)+\limit{m}[\PP(A_{m+1})-\PP(A_1)]\\
+    &=\limit{m} \PP(A_{m+1})\\
+    &=\limit{n} \PP(A_n)\qed
+\end{aligned}
+\]
+
+(2) $B_n\downarrow B\Rightarrow \forall n, B_{n+1}\st B_n \Rightarrow \forall B_n^c\st B_{n+1}^c$
+
+\[
+\begin{aligned}
+    \PP(B) = \PP(\cap_{n\geq 1}B_n) &= 1-\PP((\cap_{n\geq 1}B_n)^c)\\
+    &=1-\PP(\cup_{n\geq 1}B_n^c)\\
+    &=1-\PP(B_1^c\cup (\cup_{n\geq 2}(B_n^c\setminus B_{n-1}^c)))\\
+    &=1-\PP(B_1^c)-\sum_{n\geq 2}(\PP(B_n^c)-\PP(B_{n-1}^c))\\
+    &=1-\PP(B_1^c)-\limit{m}\sum_{n=2}^m(\PP(B_n^c)-\PP(B_{n-1}^c))\\
+    &=1-\PP(B_1^c)-\limit{m}(\PP(B_m^c)-\PP(B_1^c))\\
+    &=1-\PP(B_1^c)-\limit{n}\PP(B_n^c)+\PP(B_1^c)\\
+    &=1-\limit{n}\PP(B_n^c)\\
+    &=\limit{n}\PP(B_n)\qed
+\end{aligned}
+\]
+
+第二个等式用到De Morgan's Law
+
+\newpage

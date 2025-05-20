@@ -1,0 +1,237 @@
+\subsection{指数分布, 泊松分布}
+
+\subsubsection{指数分布}
+
+\begin{definition}[指数分布]
+    称随机变量 $T$ 服从 ``参数/速率$\lambda(\lambda>0)$的指数分布'', 记作 $T\sim \EXP(\lambda)$, 若分布
+    \begin{equation}
+        F_T(t)=\begin{cases}
+            1-e^{-\lambda t} & t\geq 0\\
+            0 & t<0
+        \end{cases}
+    \end{equation}
+    \begin{equation}
+        f_T(t)=\begin{cases}
+            \lambda e^{-\lambda t} & t\geq 0\\
+            0 & t<0
+        \end{cases}
+    \end{equation}
+\end{definition}
+
+\begin{property}[矩]
+$T\sim \EXP(\lambda)$, 则
+\begin{enumerate}
+    \item $\EE T=1/\lambda$
+    \item $\EE T^2=2/\lambda$
+    \item $\Var(T)=\EE T^2-(\EE T)^2=1/\lambda^2$
+\end{enumerate}
+\end{property}
+
+\begin{property}[Scaling]
+$T\sim \EXP(\lambda), S\sim \EXP(1)$, 则 $S/\lambda\overset{(d)}{=}T, S\overset{(d)}{=}\lambda T$.
+\end{property}
+
+\begin{property}[无记忆性]
+$T\sim \EXP(\lambda)$, 则 $\PP(T>t+s|T>t)=\PP(T>s)$
+
+注: 等价于 $\bar{F}(t+s)=\bar{F}(t)\bar{F}(s)$, 其中 $\bar{F}(t):=1-F(t)$.
+\end{property}
+
+\begin{property}[指数分布的排序]
+$T_i\sim \EXP(\lambda_i)$, 独立. 令 $V=\min\{T_1,T_2,\cdots,T_n\}$, $I:=\min\{i|T_i=V\}$ (随机下标)
+\begin{enumerate}
+    \item $V\sim \EXP\left(\sum_{k=1}^n\lambda_k\right)$, 即
+    \begin{equation}
+		\PP(V>t)=\exp\left(-\sum_{k=1}^n\lambda_k \cdot t\right)
+		\end{equation}
+    \item $\PP(T_i=V)=\lambda_i/(\sum_{k=1}^n\lambda_k)$
+    \item $I\ind V$
+\end{enumerate}
+\end{property}
+
+\begin{proof}
+(1) $\displaystyle\PP(V>t)=\PP(T_k>t,1\leq k\leq n)=\prod_{k=1}^n\PP(T_k>t)=\prod_{k=1}^n e^{-\lambda_k t}=\exp (-\sum_{k=1}^n\lambda_k\cdot t), t\geq 0$.
+
+(2) 设 $S\sim\EXP(\lambda), U\sim\EXP(\mu), S\ind U$
+\[
+\begin{aligned}
+    \PP(S=\min\{S,U\}) &=\PP(S\leq U)\\
+    &\xlongequal{S\ind U}\int_0^{\infty}\PP(S\leq t)f_U(t)dt\\
+    &=\int_0^{\infty}(1-e^{-\lambda t})f_U(t)dt\\
+    &=1-\int_0^{\infty}e^{-\lambda t}\mu e^{-\mu t}dt\\
+    &=1-\frac{\mu}{\lambda+\mu}\int_0^{\infty}(\lambda+\mu)e^{-(\lambda+\mu)t}dt=\frac{\lambda}{\lambda+\mu}
+\end{aligned}
+\tag{*}
+\]
+令 $S=T_i, U=\min\{T_1,\cdots,T_{i-1},T_{i+1},\cdots,T_n\}$, 由 (1) 结论, 则 $\lambda=\lambda_i,\mu=(\sum_{k=1}^n\lambda_k)-\lambda_i$. 代回 (*), 得 $\lambda_i/(\sum_{k=1}^n\lambda_k)$.
+
+(3) 令 $\tilde{V}_i:=\min\{T_1,\cdots,T_{i-1},T_{i+1},\cdots,T_n\}$.
+
+$\{I=i\}=\{T_i<\tilde{V}_i\}+\cup_{j=i+1}^n\{T_i\leq \tilde{V}_i,T_i=T_j\}$. 其中 $\{T_i<\tilde{V}_i\}$ 为唯一最小, $T_i\leq \tilde{V}_i$ 中至少一个与之相等.
+\[
+\begin{aligned}
+    \PP\left(\bigcup_{j=i+1}^n\{T_i\leq \tilde{V}_i, T_i=T_j\}\right) & \leq \sum_{j=i+1}^n\PP(T_i=T_j)\\
+    &\xlongequal{T_i\ind T_j}\sum_{j=i+1}^n \int_0^{\infty}\PP(T_i=t)f_{T_j}(t)dt=0
+\end{aligned}
+\]
+其中 $\PP(T_i=t)=0$. 由此得 $\PP(I=i)\overset{(d)}{=}\PP(T_i<\tilde{V}_i)$.
+\[
+\begin{aligned}
+    \PP(I=i,V>t)&=\PP(T_i<\tilde{V}_i,V>t)\\
+    &=\PP(\tilde{V}_i>T_i>t)\\
+    &\xlongequal{T_i\ind \tilde{V}_i}\int_0^{\infty}\PP(\tilde{V}_i>s>t)f_{T_i}(s)ds\\
+    &=\int_0^{\infty}\II_{s>t}\PP(\tilde{V}_i>s)f_{T_i}(s)ds\\
+    &=\int_t^{\infty}\exp\left(-\sum_{k\neq i}\lambda_k\cdot s\right)\cdot\lambda_i e^{-\lambda_i s}ds\\
+    &\overset{(1)}{=}\frac{\lambda_i}{\sum_{k=1}^n \lambda_k}\cdot\int_t^{\infty}\left(\sum_{k=1}^n\lambda_k\right)\exp\left(-\sum_{k=i}^n\lambda_k\cdot s\right)ds\\
+    &\xlongequal{(1,2)}\PP(V>t)\PP(I=i)
+\end{aligned}
+\]
+由 (2), $\PP(T_i=V)=\PP(T_i\leq \tilde{V}_i)=\lambda_i/(\sum_{k=1}^n \lambda_k)$. 所以 $\PP(I=i)=\PP(T_i<\tilde{V}_i)=\lambda_i/(\sum_{k=1}^n \lambda_k)$, 在测度意义上相等.
+\end{proof}
+
+\begin{theorem}[指数分布随机变量之和]
+    设 $\tau_1,\tau_2,\cdots$ 独立同分布, $\tau_1\sim\EXP(\lambda)$, 则对 $n\geq 1$, 有
+    \begin{equation}
+        T_n=\sum_{k=1}^n\tau_k\sim \Gamma (n,\lambda)
+    \end{equation}
+    即
+    \begin{equation}
+        f_{T_n}(t)=\begin{cases}
+            \lambda e^{-\lambda t}\frac{(\lambda t)^{n-1}}{(n-1)!} & t\geq 0\\
+            0 & t<0
+        \end{cases}
+    \end{equation}
+    其中 约定 $0^0=1, 0!=1$.
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+    \item $n=1$ 显然.
+    \item 假设 $n=k$ 成立. 下证 $n=k+1$ 也成立.
+    \[
+    T_{k+1}=T_k+\tau_{k+1}, T_k\ind T_{k+1}
+    \]
+    \[
+    \begin{aligned}
+        f_{T_{k+1}}(t)&=(f_{T_k}*f_{\tau_{k+1}})(t)\\
+        &=\int_0^t f_{T_k}(s)f_{\tau_{k+1}}(t-s)ds\\
+        &=\int_0^t \lambda e^{-\lambda t}\frac{(\lambda t)^{k-1}}{(k-1)!}\lambda e^{-\lambda (t-s)}ds\\
+        &=\frac{\lambda^{k+1}}{(k-1)!}e^{-\lambda t}\int_0^t s^{k-1}ds\\
+        &=\frac{\lambda^{k+1}e^{-\lambda t}}{(k-1)!}\left[\frac{s^k}{k}\bigg|^t_0\right]=\lambda e^{-\lambda t}\frac{(\lambda t)^k}{k!}
+    \end{aligned}
+    \]
+\end{enumerate}
+\end{proof}
+
+注: 概率密度函数之和的分布等于这两个密度函数的卷积. 从分布函数出发推导
+\[
+\begin{aligned}
+F_Z(z) = \mathbb{P}(X + Y \leq z)&\xlongequal{X\ind Y} \iint_{x + y \leq z} f_X(x) f_Y(y) \, dx\,dy \\
+&= \int_{-\infty}^\infty f_X(x) \left( \int_{-\infty}^{z - x} f_Y(y) \, dy \right) dx \\
+&= \int_{-\infty}^\infty f_X(x) F_Y(z - x) \, dx
+\end{aligned}
+\]
+
+对分布函数求导得到密度函数:
+\[
+\begin{aligned}
+f_Z(z) = \frac{d}{dz} F_Z(z) &= \frac{d}{dz} \int_{-\infty}^\infty f_X(x) F_Y(z - x) \, dx \\
+&= \int_{-\infty}^\infty f_X(x) \frac{d}{dz} F_Y(z - x) \, dx \\
+&= \int_{-\infty}^\infty f_X(x) f_Y(z - x) \, dx \\
+&= (f_X * f_Y)(z)
+\end{aligned}
+\]
+
+\subsubsection{泊松分布}
+
+\begin{definition}
+    称 $X$ 服从 ``均值/参数为 $\lambda(\lambda>0)$ 的泊松分布'' (记作 $X\sim \Poi(\lambda)$), 若 
+    \begin{equation}
+\PP(X=n)=e^{-\lambda}\frac{\lambda^n}{n!}
+\end{equation}
+\end{definition}
+
+\begin{property}[矩]
+$X\sim \Poi(\lambda)$, 对 $\forall k\geq 1$, 
+\begin{equation}
+\EE X(X-1)\cdots (X-k+1)=\lambda^k
+\end{equation}
+特别地, 
+\begin{enumerate}
+    \item $k=1$ 时, $\EE X=\lambda$
+    \item $\Var(X)=\EE X^2-(\EE X)^2=\EE X(X-1)+\EE X-(\EE X)^2\overset{k=2}{=}\lambda^2+(\lambda-\lambda^2)=\lambda$
+\end{enumerate}
+\end{property}
+
+\begin{proof}
+    \[
+    \begin{aligned}
+        \LHS &=\sum_{n=0}^{\infty}n(n-1)\cdots (n-k+1)e^{-\lambda}\frac{\lambda^n}{n!}\\
+        &=\sum_{n=k}^{\infty}\frac{n!}{(n-k)!}e^{-\lambda}\frac{\lambda^n}{n!}\\
+        &=\lambda^k e^{-\lambda}\sum_{n=k}^{\infty}\frac{\lambda^{n-k}}{(n-k)!}\\
+        &\xlongequal{m=n-k} \lambda^ke^{-\lambda}\sum_{m=0}^{\infty}\frac{\lambda^m}{m!}\\
+        &=\lambda^k e^{-\lambda}e^{\lambda}=\lambda^k
+    \end{aligned}
+    \]
+\end{proof}
+
+\begin{theorem}[Durrett Thm 2.4, 泊松随机变量之和]
+    $X_k\sim \Poi(\lambda_k),k\geq 1$ 独立, 则
+    \begin{equation}
+\sum_{k=1}^N X_k\sim \Poi\left(\sum_{k=1}^N \lambda_k\right)
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+    $N=2$. 
+    \[
+    \PP(X_1+X_2=n)\xlongequal{X_1\ind X_2}\sum_{m=0}^{\infty}\PP(X_1+m=n)\PP(X_2=m)
+    \]
+    公式: $\EE |g(X,Y)|<\infty, X\ind Y$, 则 $\EE g(X,Y)=\EE(\EE g(x,Y)|_{x=X})$.
+    \[
+    \begin{aligned}
+        \PP(X_1+X_2=n) &=\EE \II_{\{X_1+X_2=n\}}\\
+        &\xlongequal{X_1\ind X_2}\EE_{X_2}(\EE_{X_1} \II_{\{X_1+m=n\}}|_{m=X_2})\\
+        &=\EE_{X_2}(\PP(X_1+m=n)|_{m=X_2})\\
+        &=\sum_{m=0}^{\infty}\PP(X_1+m=n)\PP(X_2=m)
+    \end{aligned}
+    \]
+    $\EE_{X_1},\EE_{X_2}$ 表示关于 $X_1,X_2$ 求期望. 利用独立改写成卷积.
+    \[
+    \begin{aligned}
+        \PP(X_1+X_2=n) &\xlongequal{X_1\ind X_2} \sum_{m=0}^n \PP(X_1=n-m)\PP(X_2=m)\\
+        &=\sum_{m=0}^{\infty}e^{-\lambda_1}\frac{\lambda_1^{n-m}}{(n-m)!}e^{-\lambda_2}\frac{\lambda_2^m}{m!}\\
+        &=e^{-(\lambda_1+\lambda_2)}\frac{(\lambda_1+\lambda_2)^n}{n!}\cdot \sum_{m=0}^n\frac{n!}{m!(n-m)!}\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^m\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^{n-m}\\
+        &=e^{-(\lambda_1+\lambda_2)}\frac{(\lambda_1+\lambda_2)^n}{n!}
+    \end{aligned}
+    \]
+其中, 由二项式定理 $(a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^k b^{n-k}$ 知,
+    \[
+    \sum_{m=0}^n\frac{n!}{m!(n-m)!}\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^m\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^{n-m}=\left(\frac{\lambda_1}{\lambda_1+\lambda_2}+\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^n=1
+    \]
+\end{proof}
+
+\begin{theorem}[Durrett(3ed), Thm 2.5, 二项分布的泊松逼近]
+    $X_n\sim \Bi(n,\frac{\lambda}{n})\xrightarrow{n\to\infty}\Poi(\lambda), \lambda>0$. 其中 $\xrightarrow{n\to\infty}$ 表示依分布收敛.
+\end{theorem}
+
+\begin{proof}
+\[
+\begin{aligned}
+    \PP(X_n=k) &=\frac{n!}{k!(n-k)!}(\frac{\lambda}{n})^k(1-\frac{\lambda}{n})^{n-k}\\
+    &=\frac{\lambda^k}{k!}\cdot \left[\frac{n!}{(n-k)!\cdot n^k}\cdot (1-\frac{\lambda}{n})^n\cdot (1-\frac{\lambda}{n})^{-k} \right]\\
+    &=:\frac{\lambda^k}{k!}\cdot [\mc{J}_{n,1}\cdot \mc{J}_{n,2}\cdot \mc{J}_{n,3}]
+\end{aligned}
+\]
+\[
+\lim_{n\to\infty}\mc{J}_{n,1}=\lim_{n\to\infty}\frac{n(n-1)\cdots (n-k+1)}{n\cdot n\cdots n}=1
+\]
+\[
+\lim_{n\to\infty}\mc{J}_{n,2}=\lim_{n\to\infty}\left[(1+\frac{-\lambda}{n})^{n/(-\lambda)}\right]^{-\lambda}=e^{-\lambda}
+\]
+$\lim_{n\to\infty}\mc{J}_{n,3}=1^{-k}=1$. 代回得
+\[
+\lim_{n\to\infty}\PP(X_n=k)=e^{-\lambda}\cdot \frac{\lambda^k}{k!}
+\]
+\end{proof}
+\newpage

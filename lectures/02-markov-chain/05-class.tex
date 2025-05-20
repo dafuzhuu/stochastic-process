@@ -22,7 +22,7 @@
 \end{theorem}
 
 \begin{problem}[作业6-1]
-    证明：定理\ref{thm:commu_equiv}命题的等价性, 即 $1\Leftrightarrow 2,1\Leftrightarrow 3, 1\Leftrightarrow 4$
+    证明：Theorem \ref{thm:commu_equiv}命题的等价性, 即 $1\Leftrightarrow 2,1\Leftrightarrow 3, 1\Leftrightarrow 4$
 \end{problem}
 
 \begin{problem}[作业6-2]
@@ -89,11 +89,11 @@ p_{i,i_1}p_{i_1,i_2}\cdots p_{i_{K-1},j}>0
 \[
 \begin{aligned}
     \PP_i(T_i=\infty)&=\PP_i(\bigcap_{n\geq 1}\{X_n\neq i\})\\
-    &\geq \PP_i(\bigcap_{k=0}^{K-1}\{X_k=i_k\},X_K=j,\bigcap_{n\geq K+1}\{X_n\neq i\})\\
-    &=\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\},X_K=j,\bigcap_{n\geq K+1}\{X_n\neq i\})/\PP(X_0=i)\\
-    &=\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\}|X_K=j)\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j,\bigcap_{k=0}^{K-1}\{X_k=i_k\})\cdot \PP(X_K=j)/\PP(X_0=i)\\
-    &\overset{\text{Markov}}{=}\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\}|X_K=j)\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j)\cdot \PP(X_K=j)/\PP(X_0=i)\\
-    &=\underbrace{\PP(\bigcap_{k=0}^{K-1}\{X_k=i_k\},X_K=j)}_{\text{有限维分布}}\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j)/\PP(X_0=i)\\
+    &\geq \PP_i(\bigcap_{n=0}^{K-1}\{X_n=i_n\},X_K=j,\bigcap_{n\geq K+1}\{X_n\neq i\})\\
+    &=\PP(\bigcap_{n=0}^{K-1}\{X_n=i_n\},X_K=j,\bigcap_{n\geq K+1}\{X_n\neq i\})/\PP(X_0=i)\\
+    &=\PP(\bigcap_{n=0}^{K-1}\{X_n=i_n\}|X_K=j)\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j,\bigcap_{k=0}^{K-1}\{X_k=i_k\})\cdot \PP(X_K=j)/\PP(X_0=i)\\
+    &\xlongequal{\text{Markov}}\PP(\bigcap_{n=0}^{K-1}\{X_n=i_n\}|X_K=j)\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j)\cdot \PP(X_K=j)/\PP(X_0=i)\\
+    &=\underbrace{\PP(\bigcap_{n=0}^{K-1}\{X_n=i_n\},X_K=j)}_{\text{有限维分布}}\cdot \PP(\bigcap_{n\geq K+1}\{X_n\neq i\}|X_K=j)/\PP(X_0=i)\\
     &=\frac{\mu_i^{(0)}\cdot p_{i,i_1}\cdot p_{i_1,i_2}\cdots p_{i_{K-1},j}}{\mu_i^{(0)}}\cdot \lim_{m\to \infty}\PP(\bigcap_{n=K+1}^{K+m}\{X_n\neq i\}|X_K=j)
 \end{aligned}
 \]
@@ -120,7 +120,7 @@ $\tau_1=0,\tau_2=K$ 为关于 $(X_n)_{n\geq 0}$ 的停时, 则由 SMP 知
     $i\to j$, $i$常返$\Rightarrow$$j$常返
 \end{corollary}
 \begin{proof}
-$i\neq j,i\to j$, $i$ 常返, 由引理\ref{lem:commu_recurrent}, 知 $\rho_{ji}=1>0$, 所以 $j\to i, i\leftrightarrow j$
+$i\neq j,i\to j$, $i$ 常返, 由Lemma \ref{lem:commu_recurrent}, 知 $\rho_{ji}=1>0$, 所以 $j\to i, i\leftrightarrow j$
 
 $\exists m,n\geq 0, \stt p_{ij}(m)>0,p_{ji}(n)>0$
 
@@ -171,19 +171,19 @@ $\forall r\geq 0, p_{jj}(n+r+m)\overset{\text{C-K}}{\geq} p_{ji}(n)p_{ii}(r)p_{i
     若 $\{i\}$ 闭, 则 $\forall j\neq i,p_{ij}=0\Leftrightarrow p_{ii}=1$, 称 $i$ 为吸收态
 \end{example}
 
-\begin{theorem}
+\begin{theorem}\label{thm:finite-close-rec}
     每一个有限的不可约闭集都是常返的
 \end{theorem}
 
-证明之前先介绍一个引理
+证明之前先介绍一个Lemma 
 
 \begin{lemma}
     每一个有限闭集中都至少有一个常返态
 \end{lemma}
-
+\begin{proof}
 (反证法) 设 $C$ 为有限闭集, 非常返的
 
-$\forall i\in C\Rightarrow i$暂留 $\Rightarrow \sum_{n\geq 1}p_{ji}(n)<\infty,\forall j\in S$
+$\forall i\in C\Rightarrow i$暂留 $\Rightarrow \sum_{n\geq 1}p_{ji}(n)<\infty,\forall j\in S$. (由\eqref{eq:transient_multistep})
 \[
 \infty\overset{C\text{有限}}{>}\sum_{i\in C}\sum_{n\geq 1}p_{ji}^{(n)}=\sum_{n\geq 1}\sum_{i\in C}p_{ji}^{(n)}
 \]
@@ -193,9 +193,10 @@ $\forall i\in C^c,j\in C\overset{C\text{闭}}{\Rightarrow}j\nrightarrow i \Right
 \[
 \infty>\sum_{n\geq 1}\sum_{i\in C}p_{ji}^{(n)}=\sum_{n\geq 1}\left(\sum_{i\in S}p_{ji}^{(n)}\right)=\sum_{n\geq 1}1=\infty
 \]
-矛盾\qed
+矛盾
+\end{proof}
 
-在一个不可约闭集 $C$ 中, 至少有一个常返态 $i\in C$, 由不可约定义和推论\ref{cor:trans_recurrent}, $\forall j\in C,j\leftrightarrow i,j$常返
+在一个不可约闭集 $C$ 中, 至少有一个常返态 $i\in C$, 由不可约定义和Lemma \ref{cor:trans_recurrent}, $\forall j\in C,j\leftrightarrow i,j$常返
 
 \begin{corollary}
     状态空间 $S$ 有限, 则 $S$ 中必存在一个常返态

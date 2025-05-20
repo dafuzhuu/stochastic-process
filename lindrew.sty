@@ -25,7 +25,7 @@
     \usepackage[left=0.8in, top=1.6cm, bottom=2.4cm, right=0.8in]{geometry}
     \usepackage{fancyhdr}
     \pagestyle{fancy}
-    \rhead{\textbf{Andrew Lin}} % change name as necessary
+    \rhead{\textbf{Dafu Zhu}} % change name as necessary
 \else
     \usepackage[left=0.8in, top=2cm, bottom=2.4cm, right=0.8in]{geometry}
 \fi
@@ -47,6 +47,8 @@
 \usepackage{array,multirow}
 \usepackage{float}
 \usepackage{ulem}
+\usepackage{extarrows}
+\usepackage[most]{tcolorbox}
 
 \newcommand{\vocab}[1]{\textbf{\color{blue!90}\boldmath #1}}
 \newcommand{\paren}[1]{\left(#1\right)}
@@ -89,6 +91,7 @@
 % limits
 \newcommand{\limit}[1]{\lim_{#1 \to \infty}}
 \newcommand{\limitto}[2]{\lim_{#1 \to #2}}
+\newcommand{\as}[1]{\xrightarrow[#1\to\infty]{\text{a.s.}}}
 
 % Sets
 \newcommand{\series}[2]{%
@@ -99,6 +102,9 @@
 
 % Proof
 \newcommand{\QED}{\hfill \ensuremath{\Box}}
+
+% Other
+\newcommand{\iidsim}{\overset{\text{iid}}{\sim}}
 
 % differential operator (italic or roman)
 %  see also https://math.stackexchange.com/questions/1370094/notation-of-the-differential-operator
@@ -142,6 +148,16 @@
 \DeclareMathOperator{\Vector}{vec}
 \DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Poi}{Poisson}
+\DeclareMathOperator{\EXP}{EXP}
+\DeclareMathOperator{\Bi}{Binomial}
+\DeclareMathOperator{\Ber}{Bernoulli}
+\DeclareMathOperator{\Uni}{Uniform}
+\DeclareMathOperator{\LHS}{LHS}
+\DeclareMathOperator{\RHS}{RHS}
+\DeclareMathOperator{\PoiP}{PP}
+\DeclareMathOperator{\CTMC}{CTMC}
+\DeclareMathOperator{\DTMC}{DTMC}
 
 % physics
 \newcommand{\ket}[1]{\left|#1\right\rangle}
@@ -209,15 +225,15 @@
 
 
 \iflinclass
-    \declaretheorem[style = thmbox, name = Theorem]{theorem}
+    \declaretheorem[style = thmbox, name = Theorem, numberwithin = section]{theorem}
 \else
     \declaretheorem[style = thmbox, name = Theorem, numberwithin = section]{theorem}
 \fi
 
-\declaretheorem[style = lembox, name = Lemma]{lemma}
-\declaretheorem[style = lembox, name = Property]{property}
-\declaretheorem[style = lembox, name = Proposition]{proposition}
-\declaretheorem[style = thmbox, name = Corollary]{corollary}
+\declaretheorem[style = lembox, name = Lemma, numberwithin = section]{lemma}
+\declaretheorem[style = lembox, name = Property, numberwithin = section]{property}
+\declaretheorem[style = lembox, name = Proposition, numberwithin = section]{proposition}
+\declaretheorem[style = thmbox, name = Corollary, numberwithin = section]{corollary}
 \declaretheorem[style = thmbox, name = Conjecture]{conjecture}
 
 \declaretheorem[style = thmbox, name = Theorem, numbered = no]{theorem*}
@@ -226,10 +242,10 @@
 \declaretheorem[style = thmbox, name = Corollary, numbered = no]{corollary*}
 \declaretheorem[style = thmbox, name = Conjecture, numbered = no]{conjecture*}
 
-\declaretheorem[style = defbox, name = Definition]{definition}
+\declaretheorem[style = defbox, name = Definition, numberwithin = section]{definition}
 \declaretheorem[style = defbox, name = Definition, numbered = no]{definition*}
 
-\declaretheorem[style = exbox, name = Example]{example}
+\declaretheorem[style = exbox, name = Example, numberwithin = section]{example}
 \declaretheorem[style = exbox, name = Example, numbered = no]{example*}
 \declaretheorem[style = exerbox, name = Exercise]{exercise}
 \declaretheorem[style = exerbox, name = Exercise, numbered = no]{exercise*}
@@ -249,7 +265,7 @@
 \declaretheorem[style = plain, name = Solution]{solution}
 \declaretheorem[style = plain, name = Solution, numbered = no]{solution*}
 
-\declaretheorem[style = plain, name = Claim]{claim}
+\declaretheorem[style = plain, name = Claim, numberwithin = section]{claim}
 \declaretheorem[style = plain, name = Claim, numbered = no]{claim*}
 
 \declaretheorem[style=plain, name=Remark]{remark}

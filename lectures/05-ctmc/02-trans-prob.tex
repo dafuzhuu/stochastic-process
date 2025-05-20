@@ -1,0 +1,388 @@
+\subsection{转移速率矩阵与转移概率的计算}
+\subsubsection{转移概率的连续性}
+\begin{proposition}\label{prop:p122-prop1}
+    设 $\{P_t,t\geq 0\}$ 是 $S$ 上的随机半群, 则
+    \begin{enumerate}
+        \item $\forall t\geq 0,i\in S$, 有 $p_t(i,i)>0$
+        \item 若 $\exists s>0$, 使 $p_s(i,i)=1$, 则 $\forall t\geq 0,p_t(i,i)=1$
+        \item 若 $\exists s>0$, 使 $p_s(i,i)>0$, 则 $\forall t\geq s,p_t(i,i)>0$
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+    \item $\limitto{t}{0^+}p_t(i,i)=1\Rightarrow \exists\delta>0,\stt \forall t\in [0,\delta], p_t(i,i)>0$
+
+对 $\forall t\geq 0, \exists s\in [0,\delta),n\in \NN$, 有 $t=s+n\delta$. 故由 C-K 方程, 
+\[
+\begin{aligned}
+    p_t(i,i) &\geq p_{n\delta}(i,i)p_s(i,i)\\
+    &\overset{\text{C-K}}{\geq} (p_{\delta}(i,i))^np_s(i,i)>0
+\end{aligned}
+\]
+    \item $p_s(i,i)=1\Rightarrow \forall n\in \NN$, 有 $p_{ns}(i,i)\overset{\text{C-K}}{\geq}(p_s(i,i))^n=1$ ($*1$)
+    
+    (反证法) 假设 $\exists t>0,\stt p_t(i,i)<1\Rightarrow \sum_{k\neq i}p_t(i,i)>0. \exists j\neq i,\stt p_t(i,j)>0$ ($*2$).
+    
+    取 $n$ 使 $ns\geq t$, 则 
+    \[
+    \begin{aligned}
+        p_{ns}(i,i) &=1-\sum_{k\neq i}p_{ns}(i,k)\\
+        &\leq 1-p_{ns}(i,j)\\
+        &\overset{\text{C-K}}{\leq} 1-p_t(i,j)\underbrace{p_{ns,t}(j,j)}_{>0,\ \text{by}\ (1)}\\
+        &< 1\quad \text{by}\ (*2), (1)
+    \end{aligned}
+    \]
+    与 $(*1)$ 矛盾.
+    \item $p_s(i,j)>0,p_t(i,j)\geq p_s(i,j)p_{t-s}(j,j)\overset{(1)}{>}0, t\geq s$.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}\label{thm:p123-thm1}
+    $p_s(i,j)$ 关于 $t\geq 0$ 一致连续, 且对 $t\geq s\geq 0, i,j\in S$.
+    \begin{equation}
+        |p_t(i,j)-p_s(i,j) |\leq 1-p_{t-s}(i,i)
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    \[
+    \begin{aligned}
+        p_t(i,j)-p_s(i,j) &\xlongequal{\text{C-K}} \sum_{k\in S}p_{t-s}(i,k)p_s(k,j)-p_s(i,j)\\
+        &=\sum_{k\neq i}p_{t-s}(i,k) p_s(k,j)-[1-p_{t-s}(i,i)]p_s(i,j)\\
+        &=: I_1-I_2
+    \end{aligned}
+    \]
+    $I_1\leq \sum_{k\neq i}p_{t-s}(i,k)=1-p_{t-s}(i,i). I_2\leq 1-p_{t-s}(i,i)$. 
+
+    $\Rightarrow |\LHS|\leq I_1\lor I_2\leq 1-p_{t-s}(i,i)$
+\end{proof}
+
+\subsubsection{转移概率的可微性与Kolmogorov方程}
+
+由 Prop \label{prop:p122-prop1} 和 Thm \label{thm:p123-thm1} 可证可微性, 但即便如此证明也不是件简单的事, 因此只需要知道下述定理存在即可.
+
+\begin{theorem}\label{thm:p124-thm2}
+    $P_t$ 在 $t=0$ 处右导数存在, 具体地,
+    \begin{enumerate}
+        \item $\forall i\in S$, 下列极限存在.
+        \[
+        \limitto{t}{0^+}\frac{p_t(i,i)-1}{t}=q(i,i):=-\sup_{t\geq 0}\frac{1-p_t(i,i)}{t}\in [-\infty,0]
+        \]
+        \item $\forall j\neq i$, 下列极限存在
+        \[
+            \limitto{t}{0^+}\frac{p_t(i,j)}{t}=q(i,j)\in [0,+\infty)
+        \]
+        \item $\forall i\in S, \sum_{k\neq i}q(i,k)\leq -q(i,i)$
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}[密度矩阵/Q矩阵]
+    称 $S$ 上的矩阵 $Q=(q(i,j))_{i,j\in S}$ 为密度矩阵, 若
+    \begin{enumerate}
+        \item $\forall i\in S,q_i:=-q(i,i)\in [0,+\infty]$
+        \item $\forall i,j\in S,q(i,j)\in [0,+\infty)$
+        \item $\forall i\in S, \sum_{k\neq i}q(i,k)\leq q_i$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    由 Thm \ref{thm:p124-thm2} 知, $\{P_t,t\geq 0\}$ 在 $0$ 处的右导数矩阵. $Q:=P_0'=(p_0'(i,j))_{i,j\in S}$ 存在且其为密度矩阵. 称此 $Q$ 为 $\{P_t,t\geq 0\}$ 或 $X$ 的转移速率矩阵/无穷小生成元.
+\end{definition}
+
+\begin{definition}
+    若 $\forall i,q_i=|q(i,i)|=\sum_{k\neq i}q(i,j)<\infty$ 称密度矩阵 $Q$ 为保守的.
+\end{definition}
+
+$\CTMC\to \text{转移半群}\to\text{转移速率矩阵}$. 问: 已知 $Q$, 能否得到 CTMC? 这个问题类比 DTMC 则为: 已知转移矩阵, 能否得到 MC?
+
+\begin{theorem}[Kolmogorov向前/向后方程]
+    对具有保守的 $Q$ 的随机半群 $\{P_t,t\geq 0\}$ 有
+    \[
+    \begin{cases}
+        P_t'=QP_t & \text{向后}\\
+        P_0=I
+    \end{cases}
+    \quad
+    \begin{cases}
+        P_t'=P_t Q & \text{向前}\\
+        P_0=I
+    \end{cases}
+    \]
+    注: $AB\neq BA, QP_t=P_tQ$.
+\end{theorem}
+\[
+\CTMC \overset{+\mu_0}{\iff} \{P_t,t\geq 0\} \overset{P_0'}{\Rightarrow} Q\ (\text{保守的})
+\]
+反之, 保守的 $Q\Rightarrow \{P_t,t\geq 0\}$
+
+Kolmogorov方程存在唯一性的解, 可以由 $Q$ 构造 CTMC. 侯氏定理.
+
+\begin{theorem}
+    在适当的正则性条件下, 有 $Q$ 的向前方程与向后方程存在唯一解, 即 CTMC, $\{P_t,t\geq 0\}+\text{初始分布}\mu_0$, $Q$ 一一对应.
+\end{theorem}
+
+\begin{example}[例4.7]
+    $\{N(t),t\geq 0\}\PoiP(\lambda)$.
+    \[
+    p_t(i,j)=\begin{cases}
+        e^{-\lambda t}\frac{(\lambda t)^{j-i}}{(j-i)!} & j\geq i\\
+        0 & j<i
+    \end{cases}
+    \]
+    \[
+    Q=\begin{pmatrix}
+        -\lambda & \lambda & 0 & \cdots & \cdots & 0\\
+        0 & -\lambda & \lambda & 0 \cdots & 0\\
+        \vdots & \vdots & -\lambda & \lambda & \cdots\\
+        \vdots & \vdots & \vdots & \cdots & \vdots
+    \end{pmatrix}
+    \]
+    即 $Q(i,i)=-\lambda, Q(i,i+1)=\lambda$.
+\end{example}
+
+此前并未限定状态空间有限, 当状态空间有限时:
+
+\begin{corollary}
+    设状态空间 $S$ 有限, 则
+    \[
+    P_t=e^{tQ}=\sum_{n\geq 0}\frac{(tQ)^n}{n!}
+    \]
+\end{corollary}
+
+\begin{example}[两状态的MC]
+    \begin{align*}
+        \mathbf{Q}=~
+        \bordermatrix{
+        &\bf1&\bf2 \cr
+        \bf1& -\lambda  & \lambda \cr
+        \bf2& \mu & -\mu  \cr
+        }~
+    \end{align*}
+    $\lambda,\mu >0$, 求 $P_t$.
+\end{example}
+
+\begin{proof}[解]
+    由 Kolmogorov 方程, $P_t'=QP_t$, 即
+    \[
+    \begin{pmatrix}
+        p_t'(1,1) & p_t'(1,2)\\
+        p_t'(2,1) & p_t'(2,2)\\
+    \end{pmatrix}=
+    \begin{pmatrix}
+        -\lambda & \lambda\\
+        \mu & -\mu
+    \end{pmatrix}
+    \begin{pmatrix}
+        p_t(1,1) & p_t(1,2)\\
+        p_t(2,1) & p_t(2,2)
+    \end{pmatrix}
+    \]
+    \[
+    \begin{cases}
+        p_t'(1,1)=-\lambda p_t(1,1) +\lambda p_t(2,1)\\
+        p_t'(2,1)=\mu p_t(1,1)-\mu p_t(2,1)
+    \end{cases}
+    \]
+    \[
+    \begin{cases}
+        (p_t(1,1)-p_t(2,1))' =-(\lambda+\mu) (p_t(1,1)-p_t(2,1))\\
+        p_0(1,1)-p_0(2,1)=1-0=1
+    \end{cases}
+    \]
+    $p_t(1,1)-p_t(2,1)=e^{-(\lambda+\mu)t}$. 代回
+    \[
+    \begin{cases}
+        p_t'(1,1)=-\lambda e^{-(\lambda+\mu)t}\\
+        p_0(1,1)=1
+    \end{cases},\quad
+    \begin{cases}
+        p_t'(2,1)=-\mu e^{-(\lambda+\mu)t}\\
+        p_0(2,1)=0
+    \end{cases}
+    \]
+    \[
+    \begin{aligned}
+        p_t(1,1)&=\int_0^t -\lambda e^{-(\lambda +\mu)s}ds+1\\
+        &=\frac{\lambda}{\lambda +\mu}e^{-(\lambda+\mu)s}\bigg|_0^t+1=\frac{\lambda}{\lambda+\mu}e^{-(\lambda+\mu)t}+\frac{\mu}{\lambda+\mu}
+    \end{aligned}
+    \]
+    (书上答案有误, 注意)
+    \[
+    \begin{aligned}
+        p_t(2,1)&=\int_0^t \mu e^{-(\lambda +\mu)s}ds+0\\
+        &=\frac{-\mu}{\lambda +\mu}e^{-(\lambda+\mu)s}\bigg|_0^t=\frac{\mu}{\lambda+\mu}-\frac{\mu}{\lambda+\mu}e^{-(\lambda+\mu)t}
+    \end{aligned}
+    \]
+\end{proof}
+
+\subsubsection{轨道的跳跃性质}
+
+探讨 $Q$ 表示了马氏链的什么.
+
+\begin{theorem}\label{thm:p127-thm5}
+    设 $S$ 值右连续马氏链 $X:=\{X_t,t\geq 0\}$ 具有保守的转移速率矩阵 $Q=(q(i,j))_{i,j\in S}$. 定义首跳时间 $\eta:=\inf \{t>0|X_t\neq X_0\}$. 其中 $\inf \emp=+\infty$. 那么, 对 $\forall t\geq 0$, 有 $\PP_i(\eta>t)=\PP(\eta>t|X_0=i)=e^{-q_i\cdot t}$, 即在 $\PP_i=\PP(\cdot|X_0=i)$ 下, $\eta\sim \EXP(q_i)$, 其中 $q_i=-q(i,i)$.
+\end{theorem}
+
+\begin{corollary}
+    若 $q(i,i)=0$, 则 $\PP_i(\eta>t)=1, \forall t\geq 0$. 
+\end{corollary}
+由 $\{\eta=\infty\}=\cap_{n\geq 1}\{\eta >n\}, \PP_i(\eta=\infty)=1$.
+\[
+    1=\PP(\eta=\infty)=\PP(X_t=X_0,\forall t>0|X_0=i)=\PP(X_t=i,\forall t\geq 0|X_0=i)
+\]
+即 $i$ 为吸收态.
+
+
+\begin{proof}[证明 Thm \ref{thm:p127-thm5}]
+(Step 1) 先证明一个数分结论.
+\[
+\begin{aligned}
+    \limitto{s}{0^+}(p_{st}(i,i))^{1/s} 
+    &=\limitto{s}{0^+} \exp\left(
+        \frac{\ln p_{st}(i,i)}{st}\cdot t
+    \right)\\
+    &\xlongequal{\ln x\sim x-1(x\to 1)}\exp\left(
+        \limitto{s}{0^+}\frac{p_{st}(i,i)-1}{st}\cdot t
+    \right)\\
+    &=\exp (t q(i,i))=e^{-q_i t}
+\end{aligned}
+\]
+(Step 2) Claim: $\PP(\eta>t|X_0=i)=\PP(X_s=i,\forall s\in [0,t]|X_0=i)$
+
+``$\Rightarrow$'' $t<\eta =\inf\{t>0|X_t\neq i\}, X_0=i. \forall s\in [0,t],X_s=i$
+
+``$\Leftarrow$'' $X_s=i,\forall s\in [0,t]\Rightarrow X_t=i \xrightarrow{\text{右连续}} \exists \delta>0,\forall u\in [t,t+\delta], \stt X_u=i, \eta\geq t+\delta>t$.
+
+(Step 3) 
+\[
+\begin{aligned}
+    \PP_i(\eta>t)&=\PP_i(X_s=i,\forall s\in [0,t])\\
+    &\xlongequal{\text{右连续}}\PP_i(\bigcap_{n\geq 1}\{X_{kt/2^n}=i,k=0,1,\cdots,2^n\}) \quad (*)\\
+    &=\limit{n}\PP_i(X_{kt/2^n}=i,k=0,1,\cdots,2^n)\\
+    &=\limit{n}(p_{t/2^n}(i,i))^{2^n}=e^{-q_i t}
+\end{aligned}
+\]
+$(*)$ 是一个数分结论, 回去证明. $\forall s$ 可找到一列 $n$ 逼近.
+\end{proof}
+令 $T_0=0$, 归纳定义 $T_n:=\inf \{t>0|X_t\neq X_{T_{n-1}}\},n\geq 1$. $T_1$ 即上面的 $\eta$.
+
+$T_n$: 第$n$次跳跃时间 $(T_1=\eta)$
+
+\begin{lemma}
+    设右连续马氏链$X$具有保守的$Q$, 则
+    \begin{enumerate}
+        \item 在 $[0,\limit{n}T_n)$ 上, $X$的轨道为阶梯函数, 即 $X_t=X_{T_n},t\in[T_n,T_{n+1}]$.
+        \item 若 $q_i>0$, 则 $\{X_{T_n},n\geq 1\}\sim\DTMC(\hat{P})$, 其中
+        \[
+        (\hat{P})_{ij}=\hat{p}_{ij}=\frac{q(i,j)}{q(i)}(1-\delta_{ij})
+        \]
+        称 $\{X_{T_n},n\geq 1\}$ 为 $X$ 的嵌入链.
+    \end{enumerate}
+\end{lemma}
+
+(走神)
+
+\subsubsection{过程的构造}
+设 $Q=(q(i,j))_{i,j\in S}$ 为保守的密度矩阵, 其中
+\[
+q_i=-q(i,i)=\sum_{k\neq i}q(i,k)
+\]
+假定 $q(i,i)>0, \forall i\in S$, 假设没有吸收态. (实际上无需此假设也成立, 但此处为了和教材一致)
+
+定义 $\hat{P}:=(\hat{p}_{i,j})_{i,j\in S}$, 其 $\hat{p}_{ij}=\frac{q(i,j)}{q(i)}(1-\delta_{ij})$, 则 $\hat{P}$ 为随机矩阵, 并称其路径矩阵.
+
+两种看过程的角度:
+\begin{enumerate}
+    \item $X(t,\cdot)$ r.v. $\forall t\geq 0$
+    \item $X(\cdot,\omega)\in C([0,+\infty))$
+\end{enumerate}
+
+设
+\begin{enumerate}
+    \item $\{Y_n,n\geq 0\}\sim \DTMC(\mu_0,\hat{P})$
+    \item $\tau_0,\tau_1,\cdots \overset{\text{iid}}{\sim} \EXP(1)$, 注: $\tau_n/q_i\sim \EXP(q_i)$
+    \item $\{\tau_k,k\geq 0\}\ind \{Y_n,n\geq 0\}$
+\end{enumerate}
+下面构造 CTMC.
+\begin{enumerate}
+    \item $t=n$ 时, 处于状态 $Y_0$, $\eta_1=\tau_0/q(Y_0)\sim \EXP(q(i))$ 在 $\PP(\cdot|Y_0=i)$, 记 $\eta_1\sim \EXP(Y_0)$.
+    \item $t=T_1=\eta_1$ 时, 跳到状态 $Y_1$, 在 $Y_1$ 待了 $\eta_2=\tau_1/q(Y_1)\sim\EXP(Y_1)$
+    \item $t=T_2=\eta_1+\eta_2$ 时, 跳到状态 $Y_2$, 在 $Y_2$ 待了 $\eta_3=\tau_2/q(Y_2)\sim\EXP(Y_2)$
+\end{enumerate}
+由此类推, $\eta_n=\tau_{n-1}/q(Y_{n-1}),\forall n\geq 1. T_n=\sum_{k=1}^n\eta_k,T_0=0$.
+
+令 $X_t=Y_n$ (当 $t\in [T_n,T_{n+1}]$), 若
+\begin{equation}
+    \PP(\limit{n}T_n=+\infty|X_0=Y_0=i)=1
+    \label{eq:p129-**}
+\end{equation}
+称 $X$ 为以 $Q$ 为速率矩阵的跳过程, 称 $Y$ 为 $X$ 的嵌入链, $\{\eta_k,k\geq 1\}$ 为 $X$ 的等待时间序列, $T_n$ 为第 $n$ 次跳的时刻.
+
+注: $\forall t\geq 0$, 至多有限个 $n, \stt T_n\leq t$.
+
+\begin{lemma}
+    以 $Q$ 为速率矩阵的跳过程 $X$ 是一个 CTMC, 且 $X\sim \CTMC(Q)$ 以及 $P_t'=QP_t,P_t'=P_t Q$. 其中 $\{P_t,t\geq 0\}$ 是 $X$ 的转移半群.
+\end{lemma}
+
+注: $X\sim \CTMC(\mu_0,(P_t)_{t\geq 0})$ (有限维分布族)
+
+$\Rightarrow X\sim \CTMC(\mu_0,Q)$
+
+$\Leftarrow$ Kolmogorov方程的适定性
+
+$\tilde{X}\sim \text{跳过程}(\mu_0,Q)\sim \CTMC (\mu_0,(\tilde{P}_t)_{t\geq 0})$
+
+且 Kolmogorov 方程 $\tilde{P}_t'=\tilde{P}_t Q=Q \tilde{P}_t, \Rightarrow P_t=\tilde{P}_t$, 即 $X\overset{(d)}{=}\tilde{X}$.
+
+\eqref{eq:p129-**} 不好验证, 有什么好验证的充分条件使其成立吗?
+
+\begin{lemma}
+    若 $\{q_i,i\in S\}$ 有界, 则条件 \eqref{eq:p129-**} 成立. 特别地, $S$ 有限, 则条件 \eqref{eq:p129-**} 成立.
+\end{lemma}
+
+\begin{example}[纯生过程]
+    $S=\{1,2,3,\cdots\}, \lambda_1,\lambda_2,\cdots$ 为一列正数. 令 $q_i=q(i,i+1)=\lambda_i,\forall i\geq 1$, 称出生速率.
+    \[
+    Q=\begin{pmatrix}
+        -\lambda_1 & \lambda_1 & 0 & \cdots &\cdots & \cdots\\
+        0 & -\lambda_2 & \lambda_2 & 0 &\cdots & \cdots\\
+        0 & 0 & -\lambda_3 & \lambda_3 & 0 &\cdots \\
+        \vdots & \vdots & & \ddots & \ddots & 
+    \end{pmatrix}
+    \]
+\end{example}
+
+转移速率图:
+\[
+1\xrightarrow{\lambda_1} 2\xrightarrow{\lambda_2} 3 \xrightarrow{\lambda_3} 4\cdots
+\]
+Claim: \eqref{eq:p129-**} 成立 $\iff \sum_{n=1}^{\infty}1/\lambda_n=\infty$.
+\begin{enumerate}
+    \item Poisson过程 $\PoiP(\lambda)$ 为纯生过程
+    \item (Durrett Exa 4.5) $q_i=q(i,i+1)=\lambda i^p,\forall i\geq 1$
+    \[
+    \sum_{n=1}^{\infty}\frac{1}{\lambda_n}
+    =\frac{1}{\lambda}\sum_{n=1}^{\infty}\frac{1}{n^p}
+    =\begin{cases}
+        <\infty & p>1\\
+        \infty & p\leq 1
+    \end{cases}
+    \]
+    $p\in [0,1]$ 时, 可定义由 $Q$ 为速率矩阵的跳过程. $p=0$ 时为 Poisson 过程. 特别地, $p=1$ 时称为 Yule 过程.
+    \item $\sum_{n=1}^{\infty}1/\lambda_n=\infty$ 时, 嵌入链 $\{Y_n,n\geq 0\}\sim \DTMC(\hat{P})$, 其中
+    \[
+    (\hat{P})_{i,j}=\hat{p}_{i,j}=\frac{q(i,j)}{q(i)}(1-\delta_{ij})\Rightarrow \hat{p}_{i,i+1}=1
+    \]
+\end{enumerate}
+
+\begin{example}[生灭过程]
+    $S=\{0,1,2,3,\cdots\}$ 令 $q(i,i+1)=\lambda_i,\forall i\geq 0$ (出生速率). $q(i,i-1)=\alpha_i,\forall i\geq 1$ (死亡速率), 其他为0.
+    \[
+    q_i=-q(i,i)=\sum_{k\neq i}q(i,k)=\begin{cases}
+        \lambda_i+\alpha_i & i\geq 1\\
+        \lambda_i & i=0
+    \end{cases}
+    \]
+\end{example}
+转移速率图:

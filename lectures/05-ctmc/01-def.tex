@@ -1,0 +1,112 @@
+\subsection{定义}
+
+$S$ 至多为可数集 ($S\st \NN$)
+
+\begin{definition}[马氏性]
+    称 $S$ 值的过程 $\{X_t,t\geq 0\}$ 具有马氏性, 若对 $\forall n\geq 1,i,j,i_0,\cdots,i_n\in S, 0\leq s_0<s_1<\cdots<s_n<s,t>0$, 有
+    \begin{equation}
+        \PP(X_{t+s}=j|X_s=i,X_{s_k}=i_k,0\leq k\leq n)=\PP(X_{t+s}=j|X_s=i)
+    \end{equation}
+    其中, 称 $\PP(X_{t+s}=j|X_s=i)=p_{s,s+t}(i,j)$ 为转移概率.
+\end{definition}
+
+\begin{definition}[马氏链]
+    称 $\{X_t,t\geq 0\}$ 是一个连续时间马氏链 (CTMC), 若其具有马氏性, 且轨道右连续.
+\end{definition}
+
+\begin{definition}[时齐性]
+    若 CTMC, $\{X_t,t\geq 0\}$ 的转移概率具有时齐性,
+    \[
+    p_{s,s+t}(i,j)=p_{0,t}(i,j)\quad \forall i,j\in S, s,t\geq 0
+    \]
+    称过程是时齐的, 并简记 $p_t(i,j):=p_{s,s+t}(i,j)$.
+\end{definition}
+
+\begin{definition}[正则性/标准的]
+    称 $\{X_t,t\geq 0\}\sim \CTMC$ 具有正则性, 若
+    \[
+    \limitto{t}{0^+}p_t(i,j)=\delta_{ij}=\begin{cases}
+        1 & i=j\\
+        0 & i\neq j
+    \end{cases}
+    \]
+\end{definition}
+
+DTMC的最小步长为1, 因此称一步转移概率矩阵为转移概率矩阵. 但CTMC不存在最小步长, 转移概率矩阵如何给出?
+
+\begin{definition}
+    称矩阵族 $\{P_t=(p_t(i,j))_{i,j\in S},t\geq 0\}$ 为过程的 ``转移半群''.
+\end{definition}
+
+\begin{theorem}
+    $\{P_t,t\geq 0\}$ 为随机半群, 即
+    \begin{enumerate}
+        \item $\limitto{t}{0^+}P_t=P_0=\II_{S\times S}$ (单位阵)
+        \item 对每一个 $P_t$ 都是一个随机矩阵
+        \item (C-K方程/半群性质) 对 $\forall s,t\geq 0, P_{s+t}=P_s P_t$, 即
+        \[
+        p_{s+t}(i,j)=\sum_{k\in S}p_s(i,k)p_t(k,j)
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    证明结论 (3).
+    \[
+    \begin{aligned}
+        p_{t+s}(i,j) &=\PP(X_{t+s}=j|X_0=i)\\
+        &=\sum_{k\in S}\PP(X_{t+s}=j,X_s=k|X_0=i)\\
+        &=\sum_{k\in S}\PP(X_{t+s}=j|X_s=k)\PP(X_s=k|X_0=i)\\
+        &=\sum_{k\in S}p_s(i,k)p_t(k,j)
+    \end{aligned}
+    \]
+\end{proof}
+
+\begin{example}
+    Poisson过程是时齐CTMC.
+
+    $\PP(N_{t+s}=j|N_s=i)=\PP(N_{t+s}-N_s=j-i|N_s=i)=\PP(N_t=j-i)$
+    \[
+    p_t(i,j)=\begin{cases}
+        e^{-\lambda t}\frac{(\lambda t)^{j-i}}{(j-i)!} & j\geq i\\
+        0 & j<i
+    \end{cases}
+    \]
+\end{example}
+
+\begin{example}
+    $\{N(t),t\geq 0\}\sim \PoiP(\lambda)\ind \{Y_n,n\geq 1\}\sim \DTMC((u(i,j))_{i,j\in S})$, $\{X_t:=Y_{N(t)},t\geq 0\}\sim\CTMC$
+\end{example}
+
+\begin{proof}
+    Claim 1: $\displaystyle\PP(X_{t+s}=j|X_s=i)=\sum_{n\geq 0}e^{-\lambda t}\frac{(\lambda t)^n}{n!}\cdot u^{(n)}(i,j)$
+
+    先固定 $N(t)$. $\PP(X_{t+s}=j,X_s=i|N(s)=m,N(t+s)=\tilde{m})=\PP(Y_{\tilde{m}}=j,Y_m=i), 0\leq m\leq \tilde{m}$.
+    \[
+    \begin{aligned}
+        \PP(X_{t+s}=j,X_s=i)&=\sum_{0\leq m\leq \tilde{m}}
+        \PP(Y_{\tilde{m}}=j,Y_m=i)\cdot 
+        \PP(N(s)=m,N(t+s)=\tilde{m})\\
+        &=\sum_{0\leq m\leq \tilde{m}}
+        \PP(Y_{\tilde{m}}=j|Y_m=i)\PP(Y_m=i)
+        \PP(N(s)=m)\PP(N(t+s)-N(s)=\tilde{m}-m)\\
+        &=\sum_{0\leq m\leq \tilde{m}}
+        \left[
+            u^{(\tilde{m}-m)}(i,j) e^{-\lambda t}\frac{(\lambda t)^{\tilde{m}-m}}{(\tilde{m}-m)!}
+        \right]
+        \PP(Y_{N(s)}=i,N(s)=m)\\
+        &=\sum_{m\geq 0}
+        \left(
+            \sum_{n\geq 0}u^{(n)}(i,j)e^{-\lambda t}\frac{(\lambda t)^{n}}{n!}
+        \right)
+        \PP(Y_{N(s)}=i,N(s)=m)\\
+        &=\sum_{n\geq 0}u^{(n)}(i,j)e^{-\lambda t}\frac{(\lambda t)^{n}}{n!}\PP(X_s=i)
+    \end{aligned}
+    \]
+    Claim 2: $\forall n\geq 1, i,j,i_0,\cdots,i_n\in S,0\leq s_0<s_1<\cdots<s_n<s,t>0$, 有
+    \[
+    \PP(X_{t+s}=j|X_s=i,X_{s_k}=i_k,0\leq k\leq n)
+    =\sum_{n\geq 0}e^{-\lambda t}\frac{(\lambda t)^n}{n!}u^{(n)}(i,j)
+    \]
+\end{proof}
+\newpage

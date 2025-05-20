@@ -1,0 +1,46 @@
+成绩：平时（作业+考勤）+期中论文+期末
+
+\section*{概率论准备知识}
+
+概率论中, 随机变量的本质是可测函数. 
+
+\[
+X:\Omega\rightarrow S
+\]
+
+$S$ 的 $\sigma$-代数记为 $\mathcal{S}$, 是个 Borel $\sigma$-代数（由开集/闭集生成）
+
+Q: 为什么要给 $\Omega$ 一个$\sigma$-代数？
+
+A: 样本空间是抽象的, 给它$\sigma$-代数赋予它结构, 相当于对信息进行重整/提取
+
+概率测度的本质是集函数, 
+
+\[
+\text{集合}\rightarrow \text{函数}
+\]
+
+将信息具象化, 
+
+\[
+\begin{aligned}
+    \PP: &\mathcal{F}\rightarrow [0,1]\\
+    &A\rightarrow \PP(A)
+\end{aligned}
+\]
+
+随机过程：一族随机变量 $\{X_t\}_{t\in \mathbb{T}}$
+
+其中 $\mathbb{T}$ 为指标集, $X_t:\Omega\rightarrow S$
+
+\begin{example}
+$\mathbb{T}=\mathbb{N}_0$: 时间离散；$\mathbb{T}=[0,T]$: 时间连续 
+\end{example}
+
+\[
+X:(\Omega, \mathcal{F}, \PP)\rightarrow (S,\mathcal{S}, \mu_X)
+\]
+
+思考：什么是随机过程的分布$\{\mu_t\}_{t\in \mathbb{T}}$？
+
+\newpage

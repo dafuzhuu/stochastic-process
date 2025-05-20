@@ -31,17 +31,23 @@
 \end{definition}
 
 \begin{theorem}
-    设 $P=(p_{xy})_{x,y\in S}$ 为具有 $N<\infty$ 个状态的马氏链的转移概率矩阵, 则均匀分布 $\pi_x=\frac{1}{N},x\in S$ 是 $P$ 的平稳分布 $\Leftrightarrow P$ 双随机  
+    设 $P=(p_{xy})_{x,y\in S}$ 为具有 $N<\infty$ 个状态的马氏链的转移概率矩阵, 且有均匀分布 $\pi_x=\frac{1}{N},x\in S$ 则下面两个命题等价:
+\begin{enumerate}
+\item $\pi_x$ 是 $P$ 的平稳分布
+\item $P$ 双随机
+\end{enumerate} 
 \end{theorem}
 
-证明：$\forall y\in S,\pi_y=\frac{1}{N}$
+\begin{proof}
+$\forall y\in S,\pi_y=\frac{1}{N}$
 \[
 (\pi P)_y=\sum_{x\in S}\pi_x p_{xy}=\frac{1}{N}\sum_{x\in S}p_{xy}
 \]
 \begin{enumerate}
-    \item $P$双随机, $(\pi P)_y=\frac{1}{N}=\pi_y,(\forall y\in S)\Rightarrow \pi P=\pi$
-    \item $(\pi P)_y=\pi_y,\forall y\in S,\frac{1}{N}\sum_{x\in S}p_{xy}=\frac{1}{N}\Rightarrow \sum_{x\in S}p_{xy}=1\Rightarrow P$双随机\qed
+    \item $P$双随机, $(\pi P)_y=1/N=\pi_y,(\forall y\in S)\Rightarrow \pi P=\pi$
+    \item $(\pi P)_y=\pi_y,\forall y\in S,\frac{1}{N}\sum_{x\in S}p_{xy}=1/N \Rightarrow \sum_{x\in S}p_{xy}=1\Rightarrow P$双随机
 \end{enumerate}
+\end{proof}
 
 \subsubsection{细致平衡条件(Detailed Balance Condition)}
 
@@ -53,14 +59,15 @@
     \end{equation}
 \end{definition}
 
-注：DBC$\stackrel{\rightarrow}{\nleftarrow} \pi P=\pi$
-
-证明：$\pi P=\pi$ $\Leftrightarrow$ $ (\pi P)_y=\pi_y,\forall y$ $\Leftrightarrow$ $\sum_{x\in S}\pi_y p_{yx}\pi_y=\sum_{x\in S}\pi_x p_{xy},\forall y$.因此
+注：DBC 是 $\pi P=\pi$ 的充分不必要条件.
+\begin{proof}
+$\pi P=\pi\iff (\pi P)_y=\pi_y,\forall y\iff\sum_{x\in S}\pi_x p_{xy}=\pi_y,\forall y$. 由于 $\pi_y=\pi_y(\sum_{x\in S} p_{yx})=\sum_{x\in S}\pi_y p_{yx}$,
 \begin{equation}
-    \sum_{x\neq y}\pi_x p_{xy}=\sum_{x\neq y}\pi_y p_{yx}
+    \pi P=\pi\iff\sum_{x\in S}\pi_x p_{xy}=\sum_{x\in S}\pi_y p_{yx}
     \label{eq:sum_dbc}
 \end{equation}
-由 $\eqref{eq:dbc}$ 可以推出 $\eqref{eq:sum_dbc}$, 但反之不然\qed
+由 $\eqref{eq:dbc}$ 可以推出 $\eqref{eq:sum_dbc}$ 右边等式, 但反之不然.
+\end{proof}
 
 \begin{example}[DBC反例]
     $S=\{1,2,3\},N=3$
@@ -78,7 +85,7 @@
     反证：$\pi$满足DBC$\Rightarrow$ $\pi_x p_{xy}=\pi_y p_{yx}$ 与 $p_{12}=0.5\neq p_{21}=0.3$矛盾\qed
 \end{example}
 
-\begin{example}[生灭链]
+\begin{example}[生灭链]\label{exa:birth_death}
     状态空间 $S=\{l,l+1,\cdots,r-1,r\}\st N_0$, 设 $P$ 满足
     \begin{enumerate}
         \item 一步转移不超过1, 当$|x-y|\geq 2$时, $p_{xy}=0$
@@ -86,7 +93,7 @@
         \item $p_{x,x-1}=q_x(\forall x>l)$
         \item $p_{x,x}=1-p_x-q_x(\forall x\in S)$
     \end{enumerate}
-    问：$P$的满足DBC的平稳分布$\pi$？rf.\eqref{eq:dbc}
+    求出 $P$ 的满足DBC条件的平稳分布$\pi$, rf.\eqref{eq:dbc}.
 \end{example}
 
 \begin{enumerate}
@@ -100,13 +107,14 @@
 \[
 \pi_{l+n}=\overbrace{\underbrace{\pi_l\frac{p_l}{q_{l+1}}}_{\pi_{l+1}} \frac{p_{l+1}}{q_{l+2}}}^{\pi_{l+2}}\cdots \frac{p_{l+n-1}}{q_{l+n}}
 \]
-令 $a_0=1,a_1=\frac{p_l}{q_{l+1}},a_2=\frac{p_l p_{l+1}}{q_{l+1} q_{l+2}},\cdots,a_{r-l}=\frac{p_lp_{l+1}\cdots p_{r-1}}{q_{l+1}q_{l+2}\cdots q_r}$, 则 $\pi=(\pi_l a_0,\pi_l a_1,\cdots, \pi_l a_{r-l})$
-
-又 $\sum_{x\in S}\pi_x=1$, 则
+令 
+\[a_0=1,a_1=\frac{p_l}{q_{l+1}},a_2=\frac{p_l p_{l+1}}{q_{l+1} q_{l+2}},\cdots,a_{r-l}=\frac{p_lp_{l+1}\cdots p_{r-1}}{q_{l+1}q_{l+2}\cdots q_r}
+\]
+则 $\pi=(\pi_l a_0,\pi_l a_1,\cdots, \pi_l a_{r-l})$. 又 $\sum_{x\in S}\pi_x=1$, 则
 \[
 \pi_l\sum_{0\leq n\leq r-l}a_n=1\Rightarrow \pi_l=\frac{1}{\sum_{0\leq n\leq r-l}a_n}
 \]
-记 $a:=\sum_{0\leq n\leq r-l}a_n$, 则 $\pi=(\frac{a_0}{a},\frac{a_1}{a},\cdots,\frac{a_{r-l}}{a})$\qed
+记 $a:=\sum_{0\leq n\leq r-l}a_n$, 则 $\pi=(a_0/a,a_1/a,\cdots,a_{r-l}/a)$\qed
 
 \subsubsection{可逆性}
 
@@ -121,15 +129,13 @@
     \]
     这里 $\hat{p}_{ij}$ 称为对偶(dual)转移概率
 \end{theorem}
-
-证明：先验证 $(Y_m)_{0\leq m\leq n}\sim \text{Markov}(\pi,\hat{P})$, 用定义/有限维分布
-
-用定义验证
+\begin{proof}
+先验证 $(Y_m)_{0\leq m\leq n}\sim \text{Markov}(\pi,\hat{P})$, 用定义/有限维分布. 这里用定义验证.
 
 (Step 1) 验证 $\hat{P}$ 是随机矩阵
 \begin{enumerate}
     \item 元素非负 $\hat{p}_{ij}\geq 0$
-    \item $\sum_{j\in S}\hat{p}_{ij}=\sum_{j\in S}\frac{\pi_j\hat{p}_{ij}}{\pi_i}=\frac{\pi_i}{\pi_i}=1$, rf.\eqref{eq:stationary}
+    \item $\sum_{j\in S}\hat{p}_{ij}=\sum_{j\in S}(\pi_j p_{ji}/\pi_i)=\pi_i/\pi_i=1$, rf.\eqref{eq:stationary}
 \end{enumerate}
 
 (Step 2) 验证初始分布.由 \eqref{eq:stationary} , 初始分布 $Y_0=X_n\sim \pi$
@@ -140,16 +146,17 @@
     \PP(Y_{m+1}=i_{m+1}|Y_m=i_m,\cdots,Y_1=i_1,Y_0=i_0)&=\frac{\PP(Y_{m+1}=i_{m+1},\cdots,Y_0=i_0)}{\PP(Y_m=i_m,\cdots,Y_0=i_0)}\\
     &=\frac{\PP(X_{n-m-1}=i_{m+1},\cdots,X_{n-1}=i_1,X_n=i_0)}{\PP(X_{n-m}=i_m,\cdots,X_n=i_0)}\\
     &=\frac{\pi_{i_{m+1}}P_{i_{m+1},i_m}\cdots P_{i_1,i_0}}{\pi_{i_m}P_{i_m,i_{m-1}}\cdots P_{i_1,i_0}}\\
-    &=\frac{\pi_{i_{m+1}}P_{i_{m+1},i_m}}{\pi_{i_m}}=\hat{p}_{i_m,i_{m+1}}\qed
+    &=\frac{\pi_{i_{m+1}}P_{i_{m+1},i_m}}{\pi_{i_m}}=\hat{p}_{i_m,i_{m+1}}
 \end{aligned}
 \]
+\end{proof}
+
 \begin{corollary}[可逆性]
     若 $P$ 的平稳分布为 $\pi$, 满足 DBC 条件\eqref{eq:dbc}, 则 $\hat{P}=P$.即原来的链$\overset{(d)}{=}$逆向链（记号$\overset{(d)}{=}$表示同分布）
 \end{corollary}
-证明：
-\[
-\hat{p}_{ij}=\frac{\pi_j p_{ji}}{\pi_i}\overset{\text{DBC}}{=}\frac{\pi_i p_{ij}}{\pi_i}=p_{ij}\qed
-\]
+\begin{proof}
+$\hat{p}_{ij}=(\pi_j p_{ji})/\pi_i\overset{\text{DBC}}{=}(\pi_i p_{ij})/\pi_i=p_{ij}$
+\end{proof}
 
 \subsubsection{求$P$的平稳分布（若唯一）}
 \[
@@ -162,7 +169,8 @@
     \sum_x\pi_x=1
 \end{cases}
 \]
-\begin{example}[Durrett, 1.19]
+\begin{example}
+例 [Durrett, 1.19]
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.9\textwidth]{figures/1_19.png}

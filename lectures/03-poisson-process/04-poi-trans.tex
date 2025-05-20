@@ -1,0 +1,260 @@
+\subsection{泊松过程的变换}
+\begin{enumerate}
+    \item 稀释 (thining): 把一个泊松过程拆分成若干个独立的泊松过程
+    \item 叠加 (superposition): 把若干个独立的泊松过程合并成一个泊松过程
+\end{enumerate}
+
+\subsubsection{稀释/可分解性}
+
+\begin{theorem}
+    $(N(t))_{t\geq 0}\sim \PoiP(\lambda)$, $(Y_i)_{i\geq 1}$ 为 iid 的离散随机变量列, $(Y_i)_{i\geq 1}\ind (N(t))_{t\geq 0}$. $\PP(Y_i=j)=p_j,1\leq j\leq m$. 令
+    \[
+    N_j(t):=\sum_{i=1}^{N(t)}\II_{\{Y_i=j\}}, 1\leq j\leq m
+    \]
+    约定 $\sum_a^b(\cdot)=0, b<a$. 则
+    \begin{enumerate}
+        \item $N(t)=\sum_j N_j(t)$
+        \item $\{N_j(t),t\geq 0\},1\leq j\leq m$ 为相互独立的泊松过程, 且速率分别为 $\lambda p_j$
+    \end{enumerate}
+\end{theorem}
+注: $m=2$时, $\PP(Y_i=1)=p,\PP(Y_i=2)=1-p$. e.g. $N_1(t)$: $[0,t]$之间性别1的顾客数; $N_2(t)$: $[0,t]$之间性别2的顾客数.
+
+\begin{proof}
+下面证明 $N_1(t)$ 服从泊松过程, 且速率为 $\lambda p_1$.
+\begin{enumerate}
+    \item $N(0)=N_1(0)+N_2(0)=0$
+    \item (Step 1) Claim: $N_1(t)\sim\Poi(\lambda pt),p_1=p$
+    \begin{equation}
+        \PP(N_1(t)=n)=\sum_{m\geq 0}\PP(N_1(t)=n|N(t)=n+m)\PP(N(t)=n+m)
+        \label{eq:p105}
+    \end{equation}
+    $(Y_i)_{i\geq 1}\overset{\text{iid}}{\sim}(N(r))_{r\geq 0}$, $\Rightarrow (\II_{\{Y_i=1\}})_{i\geq 1}\ind (N(r))_{r\geq 0}$. 因为
+    \begin{equation}
+        \left\{\sum_{i=1}^m Y_i=n\right\}=\left\{(Y_1,\cdots,Y_m)\in \{(X_1,\cdots,X_m)\in S^m|\sum_{i=1}^m X_i=n\}\right\}
+        \label{eq:p106-1}
+    \end{equation}
+    所以
+    \begin{equation}
+        \sum_{i=1}^{n+m}\II_{\{Y_i=1\}}=n\ind (N(r))_{r\geq 0}
+        \label{eq:p106-2}
+    \end{equation}
+    由 \eqref{eq:p106-2},
+    \begin{equation}
+        \PP(\sum_{i=1}^{N(t)}\II_{\{Y_i=1\}}=n|N(t)=n+m)\xlongequal{\ind}\PP(\sum_{i=1}^{n+m}\II_{\{Y_i=1\}}=n)\xlongequal{\text{iid}}\binom{n+m}{n}p^n(1-p)^m
+        \label{eq:p106-3}
+    \end{equation}
+    其中 $\II_{\{Y_i=1\}}\sim\Ber(p)$. 将 \eqref{eq:p106-3} 代回 \eqref{eq:p105}, 得
+    \[
+    \begin{aligned}
+        \PP(N_1(t)=n) &=\sum_{m\geq 0}\frac{(n+m)!}{n!m!}p^n(1-p)^m e^{-\lambda t}\frac{(\lambda t)^{n+m}}{(n+m)!}\\
+        &=\frac{(\lambda pt)^n}{n!}e^{-\lambda t}\sum_{m\geq 0}\frac{(\lambda t(1-p))^m}{m!}\\
+        &=\frac{(\lambda pt)^n}{n!}e^{-\lambda t}e^{\lambda t(1-p)}\\
+        &=e^{-\lambda pt}\frac{(\lambda pt)^n}{n!}
+    \end{aligned}
+    \]
+    (Step 2)
+    \[
+    N_1(t+s)-N_1(s)=\sum_{i=N(s)+1}^{N(t+s)}\II_{\{Y_i=1\}}=\sum_{\tilde{i}=1}^{N(t+s)-N(s)}\II_{\{Y_{N(s)+\tilde{i}}=1\}}
+    \]
+    由 (Step 1) 的证明步骤知, 需要条件 $(Y_{N(s)+i})_{i\geq 1}\ind (N(t+s)-N(s))_{t\geq 0}$ 使得 $N(t+s)-N(s)\sim \Poi(\lambda pt)$
+    \begin{lemma}\label{lem:p106}
+        令 $Y_i^s:=Y_{N(s)+i}, N_1^s(t):=\sum_{i=1}^{N^s(t)}\II_{\{Y_i^s=1\}}$, 则
+        \begin{enumerate}
+            \item[(a)] $N_1^s(t)=N_1(t+s)-N_1(s)$
+            \item[(b)] $1^{\circ} (Y_i^s)_{i\geq 1}$, iid, $Y_i^s\overset{(d)}{=}Y_i$
+            
+            $2^{\circ} (Y_i^s)_{i\geq 1}\ind (N^s(t))_{t\geq 0}$
+            \item[(c)] $N_1^s(t)\sim \Poi(\lambda pt)$
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        \begin{enumerate}
+        \item[(a)] 因为 $N^s(t)=N(t+s)-N(s)$
+        \[
+        \begin{aligned}
+N_1^s(t)&=\sum_{i=1}^{N^s(t)}\II_{\{Y_i^s=1\}}=\sum_{i=1}^{N(t+s)-N(s)}\II_{\{Y_{N(s)+i}=1\}}\\
+&\xlongequal{\tilde{i}=N(s)+i}\sum_{\tilde{i}=N(s)+1}^{N(t+s)}\II_{\{Y_{\tilde{i}}=1\}}=N_1(t+s)-N_1(s)
+\end{aligned}
+        \]
+        \item[(b)] 
+        		 \begin{enumerate}
+            \item[$1^{\circ}$] 牢记 $(Y_i)_{i\geq 1}$ 是 iid 的
+            \[
+            \begin{aligned}
+                \PP(Y_{N(s)+i_1}=j_1, Y_{N(s)+i_2}=j_2)&= \sum_{n\geq 0}\PP(Y_{N(s)+i_1}=j_1,Y_{N(s)+i_2}=j_2|N(s)=n)\PP(N(s)=n)\\
+                &\xlongequal{\text{iid}}\sum_{n\geq 0}\PP(Y_{i_1}=j_1)\PP(Y_{i_2}=j_2)\PP(N(s)=n)\\
+                &=\PP(Y_{i_1}=j_1)\PP(Y_{i_2}=j_2)
+            \end{aligned}
+            \]
+            故 $(Y_{i_1}^s,Y_{i_2}^s)\overset{(d)}{=}(Y_{i_1},Y_{i_2})$, $(Y_i^s)_{i\geq 1}$ 相互独立
+            \item[$2^{\circ}$] $Y^s_i$ 中存在 $N(s)$, 先将其固定. 
+            \[
+            \begin{aligned}
+&\sum_{m\geq 0}\PP(Y_{N(s)+i}=j|N^s(t_1)=m_1,\cdots,N^s(t_k)=m_k,N(s)=m)\PP(N(s)=m)\\
+=&\PP(Y_{m+i}=j)\overset{1^{\circ}}{=}\PP(Y_i^s=j)
+\end{aligned}
+            \]
+            \end{enumerate}
+				\item[(c)] 由 (Step 1) 步骤, (b) 独立性满足时, $N_1(t+s)-N_1(s)\sim \Poi(\lambda pt)$. 由 (a), $N_1(t+s)-N_1(s)$ 就是 $N_1^s(t)$, 所以 $N_1^s(t)\sim \Poi(\lambda pt)$.
+        \end{enumerate}
+    \end{proof}
+    由 Lem \ref{lem:p106} (c) 知, $N_1(t+s)-N_1(s)\sim \Poi(\lambda pt)$
+    
+    \item (独立增量性) $0=t_0<t_1<t_2,0=n_0<n_1<n_2$.
+        \[
+        \begin{aligned}
+            A&:=\PP(N_1(t_j)-N_1(t_{j-1})=m_j,1\leq j\leq 2|(N(t_1),N(t_2))=(n_1,n_2))\\
+            &=\PP\left(\sum_{i=N(t_{j-1})+1}^{N(t_j)}\II_{\{Y_i=1\}}=m_j,1\leq j\leq 2\bigg|(N(t_1),N(t_2))=(n_1,n_2)\right)\\
+            &\xlongequal{\II_{\{Y_i=1\}}\ind (N(t))_{t\geq 0}}\PP\left(\sum_{i=n_{j-1}+1}^{n_j}\II_{\{Y_i=1\}}=m_j,1\leq j\leq 2\right)\\
+            &=\prod_{j=1}^2 \PP\left(\sum_{i=n_{j-1}+1}^{n_j}\II_{\{Y_i=1\}}=m_j\right)
+        \end{aligned}
+        \]
+        	最后一个等式成立是因为, $j=1,2$ 时, 求和的区间分别为 $[n_0+1,n_1],[n_1+1,n_2]$, 因此相互独立.
+        \[
+        \begin{aligned}
+            &\sum_{n_2\geq n_1\geq 0}A\cdot \PP(N(t_1)=n_1,N(t_2)=n_2)\\
+            =&\sum_{n_2\geq n_1\geq 0}\prod_{j=1}^2\PP(\sum_{i=n_{j-1}+1}^{n_j}\II_{\{Y_i=1\}}=m_j)\cdot \PP(N(t_1)-N(t_0)=n_1)\cdot \PP(N(t_2)-N(t_1)=n_2-n_1)\\
+            =&\sum_{n_2\geq n_1\geq 0}\prod_{j=1}^2\PP(\sum_{i=1}^{n_j-n_{j-1}}\II_{\{Y_i^{t_{j-1}}=1\}}=m_j)\PP(\underbrace{\displaystyle N(t_j)-N(t_{j-1})}_{N^{t_{j-1}}(t_j-t_{j-1})}=n_j-n_{j-1})\\
+            =&\sum_{n_2\geq n_1\geq 0}\prod_{j=1}^2 \PP(\sum_{i=1}^{\displaystyle  N^{t_{j-1}}(t_j-t_{j-1})}\II_{\{Y_i^{t_{j-1}}=1\}}=m_j, N(t_j)-N(t_{j-1})=n_j-n_{j-1})\\
+            =&\sum_{n_2\geq n_1\geq 0}\prod_{j=1}^2 \PP(N_1^{t_{j-1}}(t_j-t_{j-1})=m_j, N(t_j)-N(t_{j-1})=n_j-n_{j-1})\\
+            =&\sum_{n_1\geq 0}\sum_{n_2\geq 0}\II_{\{n_2\geq n_1\}}\cdot \PP(N_1(t_1)=m_1,N(t_1)=n_1)\cdot \PP(N_1(t_2)-N_1(t_1)=m_2,N(t_2)-N(t_1)=n_2-n_1)\\
+            =&\sum_{n_1\geq 0}\PP(N_1(t_1)=m_1,N(t_1)=n_1)\PP(N_1(t_2)-N_1(t_1)=m_2)\\
+            =&\PP(N_1(t_1)=m_1)\cdot \PP(N_1(t_2)-N_1(t_1)=m_2)
+        \end{aligned}
+        \]
+        也就是
+        \[
+        \PP(N_1(t_j)-N_1(t_{j-1})=m_j,1\leq j\leq 2)=\PP(N_1(t_1)=m_1)\cdot \PP(N_1(t_2)-N_1(t_1)=m_2)
+        \]
+        所以 $N_1(t_j)-N_1(t_{j-1}),j=1,2$ 相互独立.
+\end{enumerate}
+\end{proof}
+
+\subsubsection{叠加}
+
+\begin{theorem}
+    $\{N_j(t),t\geq 0\}\sim \PoiP(\lambda_j), 1\leq j\leq k$, 相互独立.
+    \begin{equation}
+        \left(\sum_{j=1}^k N_j(t)\right)_{t\geq 0}\sim \Poi\left(\sum_{j=1}^k\lambda_j\right)
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    $k=2$, 令 $N(t)=N_1(t)+N_2(t)$.
+    \begin{enumerate}
+        \item $N(0)=0$
+        \item $(N_1(t))_{t\geq 0}\ind (N_2(t))_{t\geq 0}$. 故 $\forall 0=t_0<t_1<\cdots<t_n$, 有 $(N_1(t_1),\cdots,N_1(t_n))\ind (N_2(t_1),\cdots,N_2(t_n))$.
+        \[
+        \begin{aligned}
+            &(N_1(t_1),N_1(t_2)-N_1(t_1),\cdots,N_1(t_n)-N_1(t_{n-1}))\\
+            &\ind (N_2(t_1),N_2(t_2)-N_2(t_1),\cdots,N_2(t_n)-N_2(t_{n-1}))
+        \end{aligned}
+        \]
+        $\Rightarrow N_1(t_j)-N_1(t_{j-1}),N_2(t_j)-N_2(t_{j-1}), 1\leq j\leq n$ 相互独立.
+        
+        $\Rightarrow (N_1(t_j)-N_1(t_{j-1}), N_2(t_j)-N_2(t_{j-1})), 1\leq j\leq n$ 相互独立
+        
+        $\Rightarrow N(t_j)-N(t_{j-1})=(N_1(t_j)-N_1(t_{j-1}))+(N_2(t_j)-N_2(t_{j-1})), 1\leq j\leq n$ 相互独立
+        \item $N(t+s)-N(s)=(N_1(t+s)-N_1(s))+(N_2(t+s)-N_2(s))\sim \Poi(\lambda_1 t+\lambda_2 t)$
+    \end{enumerate}
+\end{proof}
+
+\begin{example}[Durrett Exa 2.12, A Poisson Race]
+    Given a Poisson process of red arrivals with rate $\lambda$ and an independent Poisson process of green arrivals with rate $\mu$, what is the probability that we will get $6$ red arrivals before a total of $4$ green ones?
+\end{example}
+\begin{proof}[解]
+    $(N_r(t))_{t\geq 0}\sim\PoiP(\lambda), (N_g(t))_{t\geq 0}\sim \PoiP(\mu)$ 相互独立, 问: $\PP(T_4^g>T_6^r)$?
+
+    $N(t)=N_r(t)+N_g(t)\sim \PoiP(\lambda +\mu)$.
+    
+    (Step 1) $A=\{T_4^g>T_6^r\}, B=\{[0,T_9]\text{之间至少有}6\text{个红队队员}\}$. Claim: $A=B$.
+        \begin{enumerate}
+            \item ($B\st A$) $[0,T_9]$ 之间红 $\geq 6$ 个, 绿 $\leq 3$ 个. $T_6^r\leq T_9\leq T_4^g$.
+            \item ($A\st B, B^c\st A^c$) $[0,T_9]$ 之间红 $\leq 5$ 个, 绿 $\geq 4$ 个. $T_6^r\geq T_9\geq T_4^g$.
+        \end{enumerate}
+        以上用叠加. 便于下面使用稀释的定理.
+        
+  (Step 2) 将 $(N(t))_{t\geq 0}$ 按照 $(Y_i)_{i\geq 1}$ 稀释. 其中 $(Y_i)_{i\geq 1}$ iid 且 $(Y_i)_{i\geq 1}\ind (N(t))_{t\geq 0}$, $\PP(Y_i=r)=\lambda/(\lambda+\mu)$. 得到
+        \begin{enumerate}
+            \item $\tilde{N}_r(t)=\sum_{i=1}^{N(t)}\II_{\{Y_i=r\}}\sim\PoiP(\lambda)$. $\tilde{N}_g(t)=\sum_{i=1}^{N(t)}\II_{\{Y_i=g\}}\sim\PoiP(\mu)$. 两者相互独立.
+            \item $N(t)=\tilde{N}_r(t)+\tilde{N}_g(t)$
+        \end{enumerate}
+        于是 $(T_4^g, T_6^r)\overset{(d)}{=}(\tilde{T}_4^g,\tilde{T}_6^r)$. 由 $\{T_n\leq t\}=\{N(t)\geq n\}$, 将 $T$ 改写成 $N$, 则 $T,\tilde{T}$ 同分布, $N,\tilde{N}$ 同分布.
+        \[
+        \begin{aligned}
+            \PP(A) &=\PP(\tilde{T}_4^g>\tilde{T}_6^r)\\
+            &=\PP(B)=\PP(\tilde{N}_r(T_9)\geq 6)\\
+            &=\PP(\sum_{i=1}^{N(T_9)=9}\II_{\{Y_i=r\}}\geq 6)\\
+            &=\sum_{k=6}^9\binom{9}{k}\left(\frac{\lambda}{\lambda+\mu}\right)^{k}\left(\frac{\mu}{\lambda+\mu}\right)^{n-k}
+        \end{aligned}
+        \]
+\end{proof}
+
+\subsubsection{条件分布}
+
+\begin{theorem}[到达时刻的条件分布]\label{thm:2.14}
+    $\{N(t),t\geq 0\}\sim\Poi(\lambda), \{T_k,k\geq 1\}$ 为其的到达时刻序列, 则 $\forall n\geq 1$, 有
+    \begin{equation}
+        (T_1,\cdots,T_n|N(t)=n)\overset{(d)}{=}(V_1,\cdots,V_n)
+        \label{eq:p111-1}
+    \end{equation}
+    其中 $V_1\leq V_2\leq \cdots\leq V_n$ 是 $\{U_k,1\leq k\leq n\}\overset{\text{iid}}{\sim}\Uni[0,t]$ 的重排.
+\end{theorem}
+
+\begin{proof}
+    Claim: 
+    \begin{equation}
+        f_{(T_1,\cdots,T_n|N(t)=n)}(x_1,\cdots,x_n)=\frac{n!}{t^n}\cdot\II_{\{0<x_1<x_2<\cdots<x_n\}}
+        \label{eq:p111-2}
+    \end{equation}
+    为了让 $T_1=t_1, T_2=t_2,\cdots,T_n=t_n,N(t)=n$, 则 $\tau_1=t_1,\tau_2=t_2-t_1,\cdots,\tau_n=t_n-t_{n-1},\tau>t-t_n$.
+    \[
+        f_{T_1,\dots,T_n}(x_1,\dots,x_n) = \prod_{k=1}^n\lambda e^{-\lambda \tau_k}\cdot e^{-\lambda(t-t_n)}= \lambda^n e^{-\lambda t}
+    \]
+    \[
+        \PP(N(t)=n) = \frac{(\lambda t)^n}{n!} e^{-\lambda t}
+    \]
+    相除得到 \eqref{eq:p111-2}.
+    \begin{equation}
+        f_{(V_1,\cdots,V_n)}(y_1,\cdots,y_n)=\frac{n!}{t^n}\cdot\II_{\{0<y_1<y_2<\cdots<y_n\}}
+        \label{eq:p111-3}
+    \end{equation}
+    $S_n:=\{\sigma:\{1,2,\cdots,n\}\to\{1,2,\cdots,n\}|\sigma\text{双射}\}$, $A_k:=(x_k,y_k],k=1,2,\cdots,n$. 
+    
+    其中$0<x_1<y_1<x_2<y_2<\cdots<x_n<y_n\leq t$.
+    \[
+    \begin{aligned}
+        \PP(V_1\in A_1,\cdots,V_n\in A_n) &=\sum_{\sigma\in S_n}\PP(V_1\in A_1,\cdots,V_n\in A_n|U_1\in A_{\sigma(1)},\cdots,U_n\in A_{\sigma(n)})\\
+        &\quad \times \PP(U_1\in A_{\sigma(1)},\cdots,U_n\in A_{\sigma(n)})\\
+        &\xlongequal{\text{iid}}\sum_{\sigma\in S_n}\PP(U_1\in A_{\sigma(1)})\cdots \PP(U_n\in A_{\sigma(n)})\\
+        &=n!\prod_{k=1}^n \left(\frac{y_k-x_k}{t}\right)\xrightarrow{?}f_{(V_1,\cdots,V_n)}(y_1,\cdots,y_n)
+    \end{aligned}
+    \]
+    得到 \eqref{eq:p111-3}.
+\end{proof}
+
+\begin{theorem}
+    若 $0<s<t,0\leq m\leq n$, 则
+    \begin{equation}
+        \PP(N(s)=m|N(t)=n)=\binom{n}{m}\left(\frac{s}{t}\right)^m\left(1-\frac{s}{t}\right)^{n-m}
+        \label{eq:p111-4}
+    \end{equation}
+    即 $(N(s)|N(t)=n)\sim \Bi(n,\frac{s}{t})$
+\end{theorem}
+
+\begin{proof}
+    $N(s)=\max\{n|T_n\leq s\}=\sum_{k=1}^{N(s)}\II_{\{T_k\leq s\}}$.
+    \[
+    \begin{aligned}
+        \PP(N(s)=m|N(t)=n) &=\PP(\sum_{k=1}^{N(s)}\II_{\{T_k\leq s\}}=m|N(t)=n)\\
+        &\overset{\text{(i)}}{=}\PP(\sum_{k=1}^n\II_{\{V_k\leq s\}}=m)\\
+        &\overset{\text{(ii)}}{=}\binom{n}{m}\left(\frac{s}{t}\right)^m\left(1-\frac{s}{t}\right)^{n-m}
+    \end{aligned}
+    \]
+    其中 
+    
+    (i) 由 $(\II_{\{T_1\leq s\}}, \cdots,\II_{\{T_n\leq s\}}|N(t)=n)\xlongequal[\text{Thm \eqref{thm:2.14}}]{(d)}(\II_{\{V_1\leq s\}},\cdots,\II_{\{V_n\leq s\}})$. 
+    
+    (ii) 由 $\II_{\{V_k\leq s\}}\sim \Ber(s/t)$ 相互独立.
+\end{proof}
+\newpage

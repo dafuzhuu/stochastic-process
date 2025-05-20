@@ -1,0 +1,49 @@
+\subsection{复合泊松过程}
+
+\begin{definition}
+    $\{N(t),t\geq 0\}$ 是一个泊松过程, $\{Y_i\}_{i\geq 1}$ 独立同分布且 $\{Y_i\}_{i\geq 1}\ind (N(t))_{t\geq 0}$. 令
+    \[
+    S(t):=\begin{cases}
+        \sum_{i=1}^{N(t)}Y_i & N(t)\neq 0\\
+        0 & N(t)=0
+    \end{cases}
+    \]
+    则 $\{S(t)\}_{t\geq 0}$ 称为一个复合泊松过程.
+\end{definition}
+
+\begin{theorem}
+    $\{Y_i\}_{i\geq 1}$ 为独立同分布 r.v. 列, $N$ 为取非负整数值的 r.v., \framebox{$\{Y_i\}_{i\geq 1}\ind N$}. 令
+    \[
+    S=\begin{cases}
+        \sum_{i=1}^N Y_i & N\neq 0\\
+        0 & N=0
+    \end{cases}
+    \]
+    则
+    \begin{enumerate}
+        \item $\EE S=\EE N\cdot \EE Y_i$
+        \item $\Var (S)=\EE N \Var(Y_i)+\Var(N)(\EE Y_i)^2$
+        \item 特别地, 若 $N\sim \Poi(\lambda)$, 则 $\EE S=\lambda\EE Y_i,\Var(S)=\lambda[\Var(Y_i)+(\EE Y_i)^2]=\lambda \EE Y_i^2$.
+    \end{enumerate}
+\end{theorem}
+注:
+\begin{enumerate}
+    \item 若 $N=n$ 非随机, 则 $\EE S=n\EE Y_i$
+    \item 若 $N=n$ 非随机, $\Var(S)=n\Var(Y_i)$. 若 $Y_i$ 非随机, $\Var(S)=\Var(Y\cdot N)=Y^2\Var(N)$.
+\end{enumerate}
+
+\begin{proof}
+    \begin{enumerate}
+        \item 由重期望公式\eqref{eq:double-exp}, 
+        \[
+        \EE S=\EE(\EE(S|N))=\EE\left[\sum_{n\geq 0}\EE(S|N=n)\II_{\{N=n\}}\right]=\sum_{n\geq 0}\EE(S|N=n)\PP(N=n)
+        \]
+        其中 $\sum_{n\geq 0}\EE(S|N=n)\II_{\{N=n\}}$ 为一个离散随机变量. $\EE(S|N=n)$ 是一个数, 不具有随机性.
+        \[
+        \EE(S|N=n)=\EE(\sum_{i=1}^n Y_i|N=n)\xlongequal{\{Y_i\}\ind N}\EE(\sum_{i=1}^n Y_i)=n\EE Y_i
+        \]
+        所以 $\EE S=\EE N\EE Y_i$.
+        \item $\EE(S^2|N=n)=\EE[\sum_{i=1}^n Y_i]^2=\Var(\sum_{i=1}^n Y_i)+[\EE \sum_{i=1}^n Y_i]^2=n\Var(Y_i)+n^2[\EE Y_i]^2$. $\EE S^2=\EE N\cdot \Var(Y_i)+\EE N^2\cdot (\EE Y_i)^2$. $\Var(S)=\EE S^2-(\EE S)^2=\EE N\Var(Y_i)+\Var(N)(\EE Y_i)^2$
+    \end{enumerate}
+\end{proof}
+\newpage

@@ -1,0 +1,90 @@
+\subsection{条件概率与条件独立}
+
+\begin{definition}[条件概率]\label{def:con_prob}
+    $B\in \CF, \PP(B)>0$ 定义
+    \[
+    \PP(A|B)=\frac{\PP(AB)}{\PP(B)}=: \PP_B(A)\quad \forall A\in \CF
+    \]
+\end{definition}
+
+\begin{theorem}[乘法公式]\label{thm:multiply_func}
+    $\PP(AB)=\PP(A|B)\PP(B)$,
+    \begin{equation}
+    \PP(\bigcap_{k=1}^{n}A_k)=\PP(A_1)\PP(A_2|A_1)\PP(A_3|A_1A_2)\cdots \PP(A_n|\bigcap_{k=1}^{n-1}A_k)
+		\label{eq:multiply_func}
+		\end{equation}
+\end{theorem}
+
+\begin{theorem}[全概公式]\label{thm:law_total_prob}
+    (1) $\Omega=\sum_{k\geq 1}\Lambda_k$ 划分 $\PP(\Lambda_k)>0$, 则 $\forall A\in \CF,$
+    \[
+    \PP(A)=\sum_{k\geq 1}\PP(A|\Lambda_k)\PP(\Lambda_k)
+    \]
+    (2) $^\star$ 一般地, $\series{B}{n}$ 互不相交, $\PP(B)>0, \PP(\sum_{n\geq 1}B_n)=1$, 则 $\forall A\in \CF$
+    \[
+    \PP(A)=\sum_{n\geq 1}\PP(A|B_n)\PP(B_n)
+    \]
+    注：$\PP(\cdot)=1$ 不一定是全集, 但概率测度是1. 同样, $\PP(\cdot)=0$ 不一定是 $\emp$, 而是叫零测集
+\end{theorem}
+
+证明：
+
+(1) 由 $A=A\cap\Omega=A\cap (\sum_{k\geq 1}\Lambda_k)=\sum_{k\geq 1}(A\cap \Lambda_k)$, $A$ 被划分成若干不相交的集合 $A\cap \Lambda_k$, 根据可列可加性, 得到 
+
+\[
+\PP(A)=\sum_{k\geq 1}\PP(A\cap \Lambda_k)=\sum_{k\geq 1}\PP(A|\Lambda_k)\PP(\Lambda_k)
+\]
+
+(2) $\Omega=(\sum_{n\geq 1}B_n)+(\sum_{n\geq 1}B_n)^c=\sum_{n\geq 0}B_n$, 其中 $B_0=(\sum_{n\geq 1}B_n)^c$
+
+$\PP(B_0)=1-\PP(\sum_{n\geq 1}B_n)=0\rightarrow 0\leq \PP(AB_0)\leq \PP(B_0)=0$
+
+左边不等号成立是因为概率测度非负, 右边不等号成立是因为 $AB_0\st B_0$, 所以 $\PP(AB_0)=0$
+
+\[
+\begin{aligned}
+    \PP(A)&=\sum_{n\geq 0}\PP(AB_n)\quad [\text{可列可加性}]\\
+    &=\sum_{n\geq 1}\PP(AB_n)\quad [\PP(AB_0)=0]\\
+    &=\sum_{n\geq 1}\PP(A|B_n)\PP(B_n)\quad [\text{全概公式}]\qed
+\end{aligned}
+\]
+
+\begin{theorem}
+    $\PP(A)>0,\PP(B)>0$
+    \[
+    A\ind B\Leftrightarrow \PP(A|B)=\PP(A)\Leftrightarrow \PP(B|A)=\PP(B)
+    \]
+    $\PP(A|B)$ 见定义\ref{def:con_prob}
+\end{theorem}
+
+\begin{theorem}
+    $\PP_B:\CF\rightarrow [0,1]$ 也是 $(\Omega, \CF)$ 上的概率测度[定义\ref{def:prob_measure}]
+\end{theorem}
+
+\begin{property}
+$\PP(C)>0, \PP(B)>0$, 则 
+\[
+\PP_B(\cdot|C)=\PP(\cdot |BC)=\PP_{BC}(\cdot)
+\]
+$\PP_B(\cdot|C)$ 见定义\ref{def:con_prob}
+\end{property}
+
+\begin{definition}
+    称 $C$ 条件发生下, $A$ 与 $B$ 独立, 若
+    \begin{equation}
+		\PP_C(AB)=\PP_C(A)\PP_C(B)
+		\label{eq:con_indep}
+		\end{equation}
+    记为 $A\ind_C B$（条件独立）
+\end{definition}
+
+\begin{theorem}
+    $\PP(C)>0, \PP(BC)>0$ 则 $A\ind_C B \Leftrightarrow \PP_C(A|B)=\PP_C(A)$
+\end{theorem}
+\begin{proof}
+由 $A\ind_C B$, $\PP_C(AB)=\PP_C(A)\PP_C(B)$
+\[
+\PP_C(A|B)=\frac{\PP_C(AB)}{\PP_C(B)}=\PP_C(A)
+\]
+\end{proof}
+\newpage

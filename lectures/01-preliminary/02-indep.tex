@@ -1,0 +1,219 @@
+\subsection{独立性}
+
+\begin{definition}[事件间的独立性]
+    $(\Omega,\CF, \PP), A,B\in \CF$, 称 A 与 B 独立, 若 $\PP(A\cap B)=\PP(A)\PP(B)$, 记为 $A\ind B$
+\end{definition}
+
+\begin{definition}[事件间的相互独立]
+    $\series{A}{n} \subset \CF$, 称其相互独立, 若 $\forall J\subset \NN, \#J\geq 2$
+    \[
+    \PP(\bigcap_{k\in J}A_k)=\prod_{k\in J}\PP(A_k)
+    \]
+\end{definition}
+
+\begin{property}\label{prop:counter_indep}
+    $A\ind B\Rightarrow A\ind B^c, A^c \ind B, A^c\ind B^c$
+\end{property}
+
+\begin{definition}[$\sigma$代数间的独立性]\label{def:sigma_indep}
+    $(\Omega, \CF_1, \PP), (\Omega, \CF_2, \PP)$ 称 $\CF_1$ 与 $\CF_2$ 独立, 若 $\forall A_1\in \CF_1, A_2\in \CF_2$, 有 $A_1\ind A_2$, 记为 $\CF_1\ind \CF_2$
+\end{definition}
+
+\begin{definition}[$\sigma$代数间相互独立]
+    $(\Omega, \CF_k, \PP)(k\geq 1)$ 称 $\series{\CF}{k}$ 相互独立, 若 $\forall J\subset \NN, \#J\geq 2, \forall A_k\in \CF_k(k\in J)$, 有
+    \[
+    \PP(\bigcap_{k\in J}A_k)=\prod_{k\in J}P(A_k)
+    \]
+\end{definition}
+
+\begin{property}\label{prop:equiv_sigma_mutual_indep}
+    $\series{\CF}{k}$ 相互独立 $\Leftrightarrow$ $\forall A_k\in \CF_k, \PP(\cap_{k\geq 1}A_k)=\prod_{k=1}^{\infty}\PP(A_k)$
+\end{property}
+
+证明：$\Rightarrow$ 显然, $J$ 取 $\NN$ 即可, $\NN\subset \NN$
+
+$\Leftarrow$ 注意到右侧 $\forall A_k\in \CF$ 对于左侧条件 $\forall A_k\in \CF(k\in J)$ 更加一般, 所以证 $\Leftarrow$ 的过程也是从一般到特殊. 从 $\cap_{k\geq 1}A_k\rightarrow \cap_{k\in J}A_k$ 即从 $k\in\NN\rightarrow k\in J$. 思路是把 $k\in\NN$ 分成 $k\in J$ 和 $k\in J^c$, 在 $k\in J^c$ 上取 $A_k=\Omega$, 再利用性质 $\Omega\ind A$. 
+
+对于 $\forall J\st \NN$
+
+\[
+\bigcap_{k\geq 1}A_k=\left(\bigcap_{k\in J}A_k\right)\cap \left(\bigcap_{k\in J^c}\Omega\right)
+\]
+
+\[
+\begin{aligned}
+    \PP(\bigcap_{k\geq 1}A_k) &=\PP\left((\bigcap_{k\in J}A_k)\cap (\bigcap_{k\in J^c}\Omega)\right)\\
+    &=\PP(\bigcap_{k\in J}A_k)\PP(\bigcap_{k\in J^c}\Omega)\qquad [\Omega\ind A_k]\\
+    &=\PP(\bigcap_{k\in J}A_k)
+\end{aligned}
+\]
+
+\[
+\prod_{k\geq 1}\PP(A_k)=\prod_{k\in J}\PP(A_k)\cdot \prod_{k\in J^c}\PP(\Omega)=\Pi_{k\in J}\PP(A_k)
+\]
+
+又因为 $\PP(\cap_{k\geq 1}A_k)=\prod_{k=1}^{\infty}\PP(A_k)$
+
+\[
+\PP(\bigcap_{k\in J}A_k)=\prod_{k\in J}\PP(A_k)\qed
+\]
+
+\begin{definition}[离散随机变量]\label{def:discrete_rv}
+    令取值空间 $S=\series{x}{k}$ ($x_k$互不相同), $\Omega=\sum_{k\geq 1}\Lambda_k$ (划分), 则称 
+\begin{equation}
+X(\omega)=\sum_{k\geq 1}x_k\II_{\Lambda_k}(\omega), \omega\in \Omega
+\label{eq:def_drv}
+\end{equation}
+为离散随机变量. 其中
+\[
+\II_{\Lambda_k}(\omega)=\begin{cases}
+        1 & \text{if }\omega\in \Lambda_k\\
+        0 & \text{if }\omega\notin \Lambda_k
+\end{cases}
+\]
+\end{definition}
+
+这个定义的核心思想是：
+
+\begin{itemize}
+    \item 对于每个样本点 $\omega\in \Omega$, $X(\omega)$ 的取值是 $x_k$, 当且仅当 $\omega\in \Lambda_k$
+    \item 因此, $X$ 的取值由样本点 $\omega$ 所在的划分 $\Lambda_k$ 决定
+\end{itemize}
+
+由于随机变量是个可测函数 
+
+\[
+X:(\Omega, ?)\rightarrow (S,2^S)
+\]
+
+那么 $X$ 生成的 $\sigma$代数表示为 $\sigma(X):=X^{-1}(2^S)=\{X^{-1}(A)|A\in 2^S\}$
+
+\begin{property}
+$\sigma(X):=X^{-1}(2^S)$, 则
+
+\begin{enumerate}
+    \item $\sigma(X)=\sigma(\Pi_{\Omega})$ 故称 $\sigma(X)$ 为由 $X$ 生成的 $\sigma$代数. 其中 $\Pi_{\Omega}=\{\Lambda_k,k\geq 1\}, \Lambda_k=\{X=x_k\}$
+    \item $X:(\Omega,\sigma(X))\rightarrow (S,2^S)$. 这个记号的解释是 $\forall A\in 2^S, X^{-1}(A)=\{\omega\in \Omega|X(\omega)\in A\}\in \sigma(X)$
+\end{enumerate}
+\end{property}
+
+证明：要证 $\sigma(X)=\sigma(\Pi_{\Omega})$, 即证两个集合互相包含
+
+$\sigma(\Pi_X)=\{\sum_{k\in J}\Lambda_k|J\st \NN\}$ 由划分生成, $\sigma(X)=X^{-1}(2^S)$ 由 $X$ 生成
+
+下证 $\sigma(X)\st \sigma(\Pi_X)$
+
+\[
+\begin{aligned}
+    \forall A\in 2^S, X^{-1}(A)&=\{\omega|X(\omega)\in A\}\\
+    &=\sum_{x_k\in A}\{\omega\in \Omega|X(\omega)=x_k\}\\
+    &=\sum_{x_k\in A}\{X=x_k\}\\
+    &=\sum_{x_k\in A} \Lambda_k \in \sigma(\Pi_X)
+\end{aligned}
+\]
+
+第二个等式用到离散r.v.定义\ref{def:discrete_rv}
+
+下证 $\sigma(\Pi_X)\st \sigma(X)$
+
+\[
+\begin{aligned}
+    J\st \NN, \quad \sum_{k\in J}\Lambda_k&=\sum_{k\in J}\{\omega|X(\omega)=x_k\}\\
+    &=\{\omega|X(\omega)\in \{x_k,k\in J\}\}\\
+    &=X^{-1}(\{x_k,k\in J\})\in \sigma(X)
+\end{aligned}
+\]
+
+最后一个等式中 $\{x_k,k\in J\}\in 2^S$\qed
+
+\begin{example}\label{exa:indicator_sigma}
+    $X=\II_A$ 由划分的定义 $\Pi_X=\series{\Lambda}{k}, \Lambda_k=\{X=x_k\}$, 知道划分将全集分成两部分 
+    \[
+    \begin{aligned}
+        \Pi_{X}&=\{\{X=1\},\{X=0\}\}\\
+        &=\{\{\omega\in \Omega|X(\omega)=1\}, \{\omega\in \Omega|X(\omega)=0\}\}\\
+        &=\{A, A^c\}
+    \end{aligned}
+    \]
+    $\sigma(\Pi_A)=\{\emp, A,A^c, \Omega\}=\sigma(A)=\sigma(A^c)$
+
+    其中 $\sigma(\Pi_A)$ 由划分生成, $\sigma(A)$ 由 $A$ 生成, 两者相等
+
+    另外, $\sigma(X)=\sigma(\II_A)=\sigma(\Pi_X)=\{\emp, A,A^c, \Omega\}=\sigma(A)$ $\Rightarrow$ $\sigma(\II_A)=\sigma(A)$
+\end{example}
+
+\begin{definition}[离散随机变量间的独立性]\label{def:discrete_rv_indep}
+    $X:\Omega\rightarrow S_1, Y:\Omega\rightarrow S_2$ 为两离散随机变量, 称 $X\ind Y$, 若 $\sigma(X)\ind \sigma(Y)$[定义\ref{def:sigma_indep}], 即 $X^{-1}(2^{S_1})\ind X^{-1}(2^{S_2})$
+
+    即 $\forall E_1\st S_1,E_2\st S_2$, 有 $\PP(X\in E_1,Y\in E_2)=\PP(X\in E_1)\PP(Y\in E_2)$
+\end{definition}
+
+$S_1,S_2$ 分别为 $X,Y$ 的取值空间, $E_1\st S_1$ 为 $X$ 的一个取值, $X\in E_1:=\{\omega\in \Omega|X(\omega)\in E_1\}$, $E_2$ 同理
+
+\begin{theorem}\label{thm:independent_rv}
+    $X\ind Y\Leftrightarrow \forall x\in S_X,y\in S_Y\text{ 有 }\PP(X=x,Y=y)=\PP(X=x)\PP(Y=y)$
+\end{theorem}
+
+证明：$\Rightarrow$ 一般到特殊, 取 $E_1=\{x\},E_2=\{y\}$, 由 $\{x\}\in S_X, \{y\}\in S_Y$ 易证
+
+$\Leftarrow$ 
+
+\[
+\begin{aligned}
+    \PP(X\in E_1,Y\in E_2) &= \PP(\bigcup_{x\in E_1}\{X=x\}\cap \{Y\in E_2\})\\
+    &=\sum_{x\in E_1}\PP(\{X=x\}\cap \sum_{y\in E_2}\{Y=y\})\\
+    &=\sum_{x\in E_1}\sum_{y\in E_2}\PP(X=x,Y=y)\\
+    &=\sum_{x\in E_1}(\sum_{y\in E_2}\PP(X=x)\PP(Y=y))\\
+    &=\sum_{x\in E_1}\PP(X=x)\PP(Y\in E_2)\\
+    &=\PP(X\in E_1)\PP(Y\in E_2)
+\end{aligned}
+\]
+
+第一个等式中, $\{X=x\}\cap \{Y\in E_2\}$ 看作一整个集合 $\st \{X=x\}$, 因为离散、每个 $x$ 不相交, 所以这是个不交并, 由练习\ref{exer:disjoint_union}, 可以改写成加法形式. 
+
+第四个等式由条件 $\PP(X=x,Y=y)=\PP(X=x)\PP(Y=y)$ 成立. \qed
+
+\begin{theorem}
+    $X\ind Y\Leftrightarrow \forall x\in S_X,y\in S_Y, \PP(X\leq x,Y\leq y)=\PP(X\leq x)\PP(Y\leq y)$
+\end{theorem}
+
+用Theorem \ref{thm:independent_rv}证明
+
+$\Rightarrow$ 已知 $X\ind Y$, 由定义\ref{def:discrete_rv_indep}, $\forall E_1\st S_1,E_2\st S_2$, 有 $\PP(X\in E_1,Y\in E_2)=\PP(X\in E_1)\PP(Y\in E_2)$. 取 $E_1=\{\omega|X(\omega)\leq x\}, E_2=\{\omega|Y(\omega)\leq y\}$
+
+$\Leftarrow$
+\[
+\begin{aligned}
+    \PP(X=x,Y=y)&=\PP(X\leq x,Y\leq y)-\PP(X\leq x^-,Y\leq y)-\PP(X\leq x,Y\leq y^-)+\PP(X\leq x^-,Y\leq y^-)\\
+    &=\PP(X\leq x)\PP(Y\leq y)-\PP(X\leq x^-)\PP(Y\leq y)-\PP(X\leq x)\PP(Y\leq y^-)+\PP(X\leq x^-)\PP(Y\leq y^-)\\
+    &=[\PP(X\leq x)-\PP(X\leq x^-)][\PP(Y\leq y)-\PP(Y\leq y^-)]\\
+    &=\PP(X=x)\PP(Y=y)
+\end{aligned}
+\]
+其中 $x^-,y^-$ 为小于 $x,y$ 的最大值, 由于离散, $\{X\leq x\}-\{X\leq x^-\}=\{X=x\}, \{Y\leq y\}-\{Y\leq y^-\}=\{Y=y\}$
+
+\begin{definition}
+    称一列离散随机变量 $\series{X}{n}$ 相互独立, 若 $\sigma(X_n), n\geq 1$ 相互独立
+\end{definition}
+
+\begin{theorem}\label{thm:1.3}
+    $\series{A}{n}$ 事件列下列等价
+    \begin{enumerate}
+        \item $\series{A}{n}$ 相互独立
+        \item $\sigma(A_n), n\geq 1$ 相互独立
+        \item $\II_{A_n}, n\geq 1$ 相互独立
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+1. 由例题\ref{exa:indicator_sigma}, $\sigma(\II_{A_n})=\sigma(A_n)$, 所以 $(2)\Leftrightarrow (3)$
+
+2. 下证 $(2)\rightarrow (1)$, 一般到特殊, $A_n\st \sigma(A_n)$
+
+3. 下证 $(1)\rightarrow (2)$, $\sigma(A_n)=\{A_n,A_n^c, \emp, \Omega\}$, $\emp\ind A_n, \Omega\ind A_n$, 由性质\ref{prop:counter_indep}, $\emp\ind A_n^c, \Omega\ind A_n^c$
+
+由Property \ref{prop:equiv_sigma_mutual_indep}, $\forall A_k\in \sigma(A_n), \PP(\cap_{k\geq 1}A_k)=\prod_{k=1}^{\infty}\PP(A_k)$
+
+由于条件 (1), 上面等式成立 $\Rightarrow$ 满足$\sigma$代数相互独立的定义.
+\end{proof}
+
+\newpage

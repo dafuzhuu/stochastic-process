@@ -1,0 +1,103 @@
+\subsection{随机过程}
+
+\subsubsection{什么是随机过程}
+
+\begin{definition}[随机过程]
+    设 $(\Omega, \CF, \PP)$ 为概率空间, $(S,\CS)$ 为可测空间, $\TT$ 为指标集/参数集, 称随机变量族
+    \[
+    \{X_t: (\Omega,\CF,\PP)\rightarrow (S,\CS)|t\in \TT\}
+    \]
+    为 (S值) 随机过程 $X$. 其中 $(S,\CS)$ 称为 $X$ 的状态空间
+
+    注：\begin{enumerate}
+        \item $forall t\in \TT$, $X_t$ 为随机变量
+        \item $\TT$ 为时间集, $X_t$ 为过程 $X$ 在时刻 $t$ 的状态
+    \end{enumerate}
+\end{definition}
+
+\[
+\begin{array}{c|cc}
+    \TT \backslash S \st \RR & \text{离散 }(e.g.\ \NN) & \text{连续 }(e.g.\ \RR,\RR^+) \\ \hline
+    \text{可数集 }(e.g.\ \NN,\ZZ) & \multicolumn{2}{c}{\text{离散时间/参数的随机过程}} \\
+    \text{连续统 }(e.g.\ [0,T],\RR^+) & \multicolumn{2}{c}{\text{连续时间/参数的随机过程}}
+\end{array}
+\]
+
+\subsubsection{随机过程的分布}
+
+\begin{enumerate}
+    \item $\forall t\in \TT, X_t:\Omega\rightarrow S$ 为随机变量/可测映射
+    \item $X: \TT\times \Omega\rightarrow S$ 二元映射
+    \item $X:\Omega\rightarrow S^{\TT}$ 其中 $S^{\TT}=\{f|f:\TT\rightarrow \S\}$, $X:\omega\rightarrow X(\omega)=X(\cdot,\omega)$
+\end{enumerate}
+
+分布可用有限维分布族刻画
+
+\begin{definition}
+    固定样本点 $\omega$, 则 $X_{\cdot}(\omega)$ 为 $\TT\rightarrow S$ 的映射, 即 $X_{\cdot}(\omega)\in S^{\TT}$, 称 $X_{\cdot}(\omega)$ 是过程 $X$ 的一个实现/样本路径/样本函数
+\end{definition}
+
+\begin{definition}
+    $\forall n\geq 1, t_1,t_2,\cdots,t_n$ 称 
+    \[
+    (x_1,x_2,\cdots,x_n)\mapsto F_{t_1,t_2,\cdots,t_n}(x_1,x_2,\cdots,x_n)=\PP(X_{t_1}\leq x_1,\cdots, X_{t_n}\leq x_n)
+    \]
+    为 $X$ 的 $n$ 维分布
+\end{definition}
+
+\begin{definition}[过程的有限维分布族]
+    定义
+    \[
+    \{F_{t_1,t_2,\cdots,t_n}|n\geq 1,t_1,\cdots,t_n\in \TT\}
+    \]
+\end{definition}
+
+\subsubsection{随机过程的存在性}
+
+\begin{enumerate}
+    \item (抽象的) 从概率论/测度论出发去证明随机过程存在性, 不写出具体形式, 满足随机过程符合给定的有限维分布族即可
+    \item (具体的) 构造性证明
+\end{enumerate}
+
+\begin{property}
+随机过程的有限维分布族具有以下两个性质
+\begin{enumerate}
+    \item (对称性) 重排, 设 $\sigma:\{1,\cdots,n\}\rightarrow \{1,\cdots,n\}$ 为双射, 则
+    \[
+    F_{t_{\sigma(1)}, \cdots,t_{\sigma(n)}}(x_{\sigma(1)},\cdots,x_{\sigma(n)})=F_{t_1,\cdots,t_n}(x_1,\cdots,x_n)
+    \]
+    \item (相容性) $m\geq n$
+    \[
+    F_{t_1,\cdots,t_n,t_{n+1},\cdots,t_m}(x_1,\cdots,x_n,+\infty,\cdots,+\infty)=F_{t_1,\cdots,t_n}(x_1,\cdots,x_n)
+    \]
+    注：相容性类比从高维向低维的投影, $\PP(X\leq +\infty)=F_X(+\infty)=1$
+\end{enumerate}
+这两个性质是随机过程存在的必要条件
+\end{property}
+
+\begin{theorem}[Kolmogorov定理]\label{thm:Kolmogorov}
+    设分布函数族
+    \[
+    \{F_{t_1,\cdots,t_n}|t_1,\cdots,t_n\in \TT,n\geq 1\}
+    \]
+    满足\uwave{对称性}, \uwave{相容性}, 则必存在一个随机过程 $\{X_t,t\in \TT\}$ 使得上述分布函数族 $F$ 是 $X$ 的有限维分布族
+\end{theorem}
+
+\subsubsection{随机过程的基本类型}
+
+\begin{enumerate}
+    \item 离散时间马氏链（由条件概率定义）
+    \item Poisson 过程
+    \item 更新过程
+    \item 连续时间马氏链
+    \item 离散时间 Martingale （由条件期望定义）
+    \item 布朗运动
+\end{enumerate}
+
+\begin{definition}
+    对连续时间的随机过程 $\{X_t,t\in \TT\}$
+    \begin{enumerate}
+        \item 若对一切的 $t_0<t_1<\cdots<t_n$ 有 $X_{t_1}-X_{t_0},\cdots,X_{t_n}-X_{t_{n-1}}$ 相互独立, 则过程 $X$ 是独立增量过程（e.g. 布朗运动）
+        \item 若对每一个 $S\in \TT, X_{t+s}-X_t$ 对一切的 $t$ 都有相同分布, 称 $X$ 为平稳增量过程
+    \end{enumerate}
+\end{definition}
