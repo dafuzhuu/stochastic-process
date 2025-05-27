@@ -56,7 +56,7 @@ DTMC的最小步长为1, 因此称一步转移概率矩阵为转移概率矩阵.
     \begin{aligned}
         p_{t+s}(i,j) &=\PP(X_{t+s}=j|X_0=i)\\
         &=\sum_{k\in S}\PP(X_{t+s}=j,X_s=k|X_0=i)\\
-        &=\sum_{k\in S}\PP(X_{t+s}=j|X_s=k)\PP(X_s=k|X_0=i)\\
+        &=\sum_{k\in S}\PP(X_{t+s}=j|X_s=k,X_0=i)\PP(X_s=k|X_0=i)\\
         &=\sum_{k\in S}p_s(i,k)p_t(k,j)
     \end{aligned}
     \]

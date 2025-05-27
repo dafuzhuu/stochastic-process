@@ -1,0 +1,105 @@
+\subsection{定义}
+
+\begin{definition}[流]
+    称一列$\sigma$代数 $\CF_1,\CF_2,\cdots$ 为$\Omega$上的流, 若 $\CF_1\st \CF_2\st CF_3\st\cdots$
+\end{definition}
+
+\begin{definition}[适应过程]
+    称一列随机变量 $(X_n)_{n\geq 0}$ 关于流 $(\CF_n)_{n\geq 0}$ 适应的, 若 $\sigma(X_n)\st \CF_n$, 即 $X_n\in \CF_n$, $X_n$关于$\CF_n$可测.
+\end{definition}
+注: 离散 $\Rightarrow$ 默认 $\sigma$-代数由划分生成, 一系列性质在 Chap 1 中被严格证明.
+
+\begin{example}
+    设$(X_n)_{n\geq 0}$ 为一列随机变量列, 对$\forall n\geq 0$, 令 $\CF_n^X=\sigma(X_0,\cdots,X_n)=(X_0,\cdots,X_n)^{-1}(2^{S_1}\times\cdots\times 2^{S_n})$, 则 $(\CF_n^X)_{n\geq 0}$ 为一个流, 称为 $(X_n)_{n\geq 0}$ 的自然流.
+\end{example}
+
+\begin{definition}[离散鞅]\label{def:p140-def3}
+    称随机变量列 $(X_n)_{n\geq 0}$ 关于流 $(\CF_n)_{n\geq 0}$ 的鞅, 若
+    \begin{enumerate}
+        \item (可积性) $\forall n\geq 0, \EE|X_n|<\infty$
+        \item (适应性) $(X_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 适应
+        \item (鞅性) $\forall n\geq 0, \EE(X_{n+1}|\CF_n)\xlongequal{\text{a.s.}}X_n$
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    \begin{enumerate}
+        \item (Durrett, Thm 5.1) 设 $(X_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 的鞅, 则 $\EE X_n=\EE X_0$.
+        \item 设 $(X_n)_{n\geq 0}$ 为关于 $(\CF_n)_{n\geq 0}$ 适应的可积随机变量列, 则 $(X_n)_{n\geq 0}$ 为关于 $(\CF_n)_{n\geq 0}$ 的鞅 $\iff$ $\EE(X_{n+1}-X_n|\CF_n)=0,\forall n\geq 0$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $\EE X_{n+1}=\EE(\EE(X_{n+1}|\CF_n))\xlongequal{\text{鞅性}}\EE(X_n)\xlongequal{\text{迭代}}\EE X_0$
+        \item ``$\Rightarrow$'' $\EE(X_{n+1}-X_n|\CF_n)=X_n-\EE(X_n|\CF_n)\xlongequal{X_n\in \CF_n}X_n-X_n=0$. (提取已知量)
+        
+        ``$\Leftarrow$'' $\EE(X_{n+1}|\CF_n)=\EE(X_{n+1}-X_n|\CF_n)+\EE(X_n|\CF_n)=X_n$
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    常数列 $\{c_n=c,n\geq 0\}$ 关于任意流都是鞅. $c=c\II_{\Omega}, \sigma(c)=\{\emp,\Omega\}\st \CF_n$
+\end{example}
+
+\begin{definition}
+    称 $(X_n)_{n\geq 0}$ 是关于 $(Y_n)_{n\geq 0}$ 的鞅. 若 $(X_n)_{n\geq 0}$ 关于 $Y$ 的自然域流 $\CF_n^X=\sigma(Y_0,\cdots,Y_n),n\geq 0$ 是鞅.
+\end{definition}
+
+\begin{definition}
+    若 Def \ref{def:p140-def3} 中 (3) 为 ``$\leq$'' 时, 即 $\EE(X_{n+1}|\CF_n)\leq X_n$, 称为上鞅. 若为``$\geq$'' 时, 即 $\EE(X_{n+1}|\CF_n)gleq X_n$, 称为下鞅.
+\end{definition}
+
+\begin{definition}
+    \begin{enumerate}
+        \item $X$ 鞅 $\iff$ $X$ 上鞅, 下鞅
+        \item $S$ 上鞅 $\iff$ $-X$ 下鞅
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Durrett, Thm 5.9\& 5.10]
+    \begin{enumerate}
+        \item 设 $(X_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 是一个上鞅, 则 $\EE M_{n+1}\leq \EE M_n$ (期望 $\downarrow$)
+        \item 设 $(X_n)_{n\geq 0}$ 关于 $(\mc{S}_n)_{n\geq 0}$ 是一个下鞅, 则 $\EE M_{n+1}\geq \EE M_n$ (期望 $\uparrow$)
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (1) $\EE M_{n+1}=\EE(\EE(M_{n+1}|\CF_n))\leq \EE(M_n)$
+\end{proof}
+
+\begin{theorem}
+    设 $(X_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}, (\mc{S}_n)_{n\geq 0}$ 均适应的, 且关于 $(\CF_n)_{n\geq 0}$ 是鞅, $\mc{S}_n\st \CF_n (\forall n\geq 0)$, 则
+    \begin{enumerate}
+        \item $(X_n)_{n\geq 0}$ 关于 $(\mc{S}_n)_{n\geq 0}$ 也是鞅 (小流吃大流)
+        \item 特别地, $(X_n)_{n\geq 0}$ 关于其自然域流 $\CF_n^X:=\sigma(X_0,\cdots,X_n), n\geq 0$ 是鞅 
+    \end{enumerate}
+\end{theorem}
+
+注: $\Pi_1,\Pi_2$ 是 $\Omega$ 上的两个划分, $\Pi_1\st \Pi_2$, 故 $\sigma(\Pi_1)\st \sigma(\Pi_2)$, 则
+\[
+\EE\bigg(
+    \EE(
+        \underbrace{X|\sigma(\Pi_1)}_{\in \sigma(\Pi_1)\st \sigma(\Pi_2)}
+    )| \sigma(\Pi_2)
+\bigg)=\EE(X|\sigma(\Pi_1))
+\]
+\[
+\EE\bigg(
+    \EE(
+        X|\sigma(\Pi_1)
+    )| \sigma(\Pi_2)
+\bigg)=
+\EE\bigg(
+    \EE(
+        X|\sigma(\Pi_2)
+    )| \sigma(\Pi_1)
+\bigg)
+\]
+\begin{proof}
+    (1) 可积性 (关于$\CF_n$是鞅)
+
+    适应性
+
+    $\EE(X_{n+1}|\mc{S}_n)=\EE(\EE(X_{n+1}|\CF_n)|\mc{S}_n)=\EE(X_n|\mc{S}_n)=X_n$
+\end{proof}

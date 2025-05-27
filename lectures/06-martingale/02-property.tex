@@ -1,0 +1,151 @@
+\subsection{基本性质与例子}
+
+\begin{property}[Durrett, Lem 5.7]\label{prt:p142-prt1}
+设 $(M_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 是一个鞅, 则 $\forall n\geq 0$,
+\[
+\EE(M_{n+1}^2|\CF_n)-M_n^2=\EE(M_{n+1}^2-M_n^2|\CF_n)=\EE((M_{n+1}-M_n)^2|\CF_n)
+\]
+\end{property}
+
+\begin{proof}
+    \[
+    \begin{aligned}
+        \RHS &= \EE(M_{n+1}^2|\CF_n)+\EE(M_n^2|\CF_n)-2\EE(M_{n+1}\cdot M_n|\CF_n)\\
+        &=\EE(M_{n+1}^2|\CF_n)+M_n^2-2M_n\cdot \underbrace{\EE(M_{n+1}|\CF_n)}_{M_n}\\
+        &=\EE(M_{n+1}^2|\CF_n)-M_n^2
+    \end{aligned}
+    \]
+\end{proof}
+
+\begin{example}[独立随机变量之和/随机游动]
+    设 $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim}\EE X_1=\mu$, 令 $S_n=s_0+\sum_{k=1}^n X_k(n\geq 1)$, 其中 $s_0\in \RR$, 则
+    \begin{enumerate}
+        \item $\{S_n-n\mu,n\geq 1\}$ 关于 $(X_n)_{n\geq 1}$ 是一个鞅 (即关于 $(X_n)_{n\geq 1}$的自然流是一个鞅)
+        \item 记 $M_n:=S_n-n\mu$, 若另有 $\Var(X_n)=\sigma^2<\infty$, 则
+        \[
+        \tilde{M}_n=M_n^2-n\sigma^2=(S_n-n\mu)^2-n\sigma^2\quad (n\geq 1)
+        \]
+        关于 $(X_n)_{n\geq 1}$ 是鞅.
+    \end{enumerate}
+\end{example}
+
+\begin{proof}
+    \begin{enumerate}
+        \item \begin{enumerate}
+            \item $\EE|S_n|\leq s_0+\sum_{k=1}^n \EE|X_k|<\infty$
+            \item $\{\sum_{k=1}^n X_k=x\}=\{(X_1,\cdots,X_n\in \{(x_1,\cdots,x_n)|sum_{k=1}^n x_k=x\})\}\in \CF_n^X$
+            \item $\EE(M_{n+1}-M_n|\CF_n^X)=\EE(X_{n+1}|\CF_n^X)-\mu\xlongequal{X_{n+1}\ind (X_1,\cdots,X_n)}\EE(X_{n+1})-\mu=0$
+        \end{enumerate}
+        \item \begin{enumerate}
+            \item $\EE M_n^2=\EE(S_n-n\mu)^2=\EE(\sum_{k=1}^n (X_k-\mu))^2\leq (n^{2-1}\lor 1)\EE(\sum_{k=1}^n(X_k-\mu)^2)<\infty$
+            
+            数分结论:
+            \[
+            \boxed{
+                \bigg|
+                    \sum_{k=1}^n a_k
+                \bigg|^p\leq
+                (n^{p-1}\lor 1)\sum_{k=1}^n |a_k|^p, p>0
+            }
+            \]
+            \item $M_n^2\in\CF_n^X\Rightarrow \tilde{M}_n\in\CF_n^X$
+            \item 判断鞅性
+            \[
+            \begin{aligned}
+                \EE(\tilde{M}_{n+1}-\tilde{M}_n|\CF_n) &=\EE(M_{n+1}^2-M_n^2|\CF_n)-\sigma^2\\
+                &\xlongequal{\text{Prt}\ \ref{prt:p142-prt1}} \EE((M_{n+1}-M_n)^2|\CF_n^X)-\sigma^2\\
+                &=\EE((X_{n+1}-\mu)^2|\CF_n^X)-\sigma^2\\
+                &=\sigma^2-\sigma^2=0
+            \end{aligned}
+            \]
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
+
+\begin{example}[简单对称随机游走]
+    $X_n\overset{\text{iid}}{\sim} \PP(X_n=1)=\PP(X_n=-1)=1/2. \EE X_n=0, \Var(X_n)=\EE X_n^2=1$. 故 $\{\sum_{k=1}^n X_k,n\geq 1\}, \{(\sum_{k=1}^n X_k)^2-n,n\geq 1\}$ 关于 $(X_n)_{n\geq 1}$ (或 $(Y_n=\sum_{k=1}^n X_k)_{n\geq 1}$) 是鞅.
+\end{example}
+
+\begin{property}[Lem 5.8, 鞅增量的正交性]
+设 $(M_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 为鞅, 则
+\begin{enumerate}
+    \item $\EE((M_n-M_k)M_j)=0 (0\leq j\leq k<n)$
+    \item $\EE((M_n-M_k)(M_j-M_i))=0 (0<i\leq j\leq k<n)$
+    \item $\EE(M_n-M_0)^2=\sum_{k=1}^n \EE(M_k-M_{k-1})^2$
+\end{enumerate}
+\end{property}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $\LHS=\EE(\EE((M_n-M_k)M_j)|\CF_k)=\EE(M_j(\EE(M_n|\CF_k)-M_k))$. 其中 $M_j\in F_j\st \CF_k$.
+        \[
+        \begin{aligned}
+            \EE(M_n|\CF_k) &\xlongequal{k<n} \EE(\EE(M_n|\CF_{n-1})|\CF_k)\\
+            &\xlongequal{\text{鞅}} \EE(M_{n-1}|\CF_k)\\
+            &\xlongequal{\text{迭代}}\EE(M_{k+1}|\CF_k)=M_k
+        \end{aligned}
+        \]
+        注: 鞅性 $\EE(X_{n+1}|\CF_n)=X_n\iff \EE(X_n|\CF_s)=X_s(n\geq s)$
+        
+        故 $\LHS=\EE(M_j(M_k-M_k))=0$
+        \item (1) 的直接应用
+        \item 
+        \[
+        \begin{aligned}
+            \EE(M_n-M_0)^2 &=\EE(\sum_{k=1}^n (X_k-X_{k-1}))^2\\
+            &=\sum_{k=1}^n \EE(M_k-M_{k-1})^2+2\sum_{1\leq j<k\leq n}\EE(M_j-M_{j-1})(M_k-M_{k-1})\\
+            &\overset{(2)}{=}\sum_{k=1}^n \EE(M_k-M_{k-1})^2
+        \end{aligned}
+        \]
+    \end{enumerate}
+\end{proof}
+
+\begin{example}[独立随机变量之积 $\EE X_n=1$]\label{exa:p144-exa5.5}
+    设 $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim} \EE X_1=1$, 则 $M_n:=\prod_{k=1}^n X_k(n\geq 1)$, 关于 $(X_n)_{n\geq 1}$ 是鞅.
+\end{example}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $\EE |M_n|\leq \prod_{k=1}^n \EE|X_k|<\infty$
+        \item $(X_1,\cdots,X_n)\in \sigma(X_1,\cdots,X_n)\Rightarrow \prod_{k=1}^n X_k\in \sigma(X_1,\cdots,X_n)$
+        \item $\EE(M_{n+1}-M_n|\CF_n^X)=\EE((X_{n+1}-1)M_n|\CF_n^X)=M_n \EE(X_{n+1}-1)=0$
+    \end{enumerate}
+\end{proof}
+
+\begin{example}[指数鞅]\label{exa:p144-exa5.6}
+    $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim}\phi(\theta)=\EE e^{\theta X_1}<\infty$. 令 $S_n=\sum_{k=1}^n X_k$, 则 $\displaystyle M_n:=\frac{1}{(\phi(\theta))^n}\exp\{\theta S_n\}(n\geq 1)$ 关于 $(X_n)_{n\geq 1}$ 是鞅. 特别地, $\phi(0)=1$, 则 $e^{\theta S_n}(n\geq 1)$ 关于 $(X_n)_{n\geq 1}$ 为鞅.
+\end{example}
+
+\begin{proof}
+    (Step 1) $\displaystyle M_n=\prod_{k=1}^n (\frac{1}{\phi(\theta)}e^{\theta X_k})$. 令 $Y_k=\frac{1}{\phi(\theta)}e^{\theta X_k}(k\geq 1)$ 则 $\EE Y_k=1$. 由例 \ref{exa:p144-exa5.5}, $(M_n)_{n\geq 1}$ 关于 $(Y_n)_{n\geq 1}$ 是鞅.
+
+    (Step 2) Claim: $\sigma(X_1,\cdots,X_n)=\sigma(Y_1,\cdots,Y_n)$, 即 $F_n^X=F_n^Y(\forall n\geq 1)$
+\end{proof}
+
+\begin{example}[赌徒破产]
+    $\PP(X_1=1)=p, \PP(X_1=-1)=1-p,p\in (0,1),p\neq \frac{1}{2}$
+\end{example}
+
+$\theta=\ln(\frac{1-p}{p})$, 则
+\[
+\begin{aligned}
+    \phi(\theta)=\EE e^{\theta X_n}&=e^{\theta}\cdot p+e^{-\theta}(1-p)\\
+    &=(\frac{1-p}{p})p+(\frac{1-p}{p})^{-1}(1-p)\\
+    &=(1-p)+p=1<\infty
+\end{aligned}
+\]
+由例 \ref{exa:p144-exa5.6}, $e^{\theta S_n}=(\frac{1-p}{p})^{S_n}$ 关于 $(X_n)_{n\geq 1}$ 是鞅.
+
+\begin{lemma}[Jensen不等式]
+    \begin{enumerate}
+        \item $\EE (\phi(X)|A)\geq \phi(\EE(X|A))$
+        \item \[
+            \begin{aligned}
+                \EE(\phi(X)|\sigma(\Pi))&=\sum_{\Lambda\in \Pi}\EE(\phi(X)|\Lambda)\II_{\Lambda}\\
+                &\geq \sum_{\Lambda\in \Pi} \phi(\EE(X|\Lambda))\II_{\Lambda}\\
+                &=\phi(\EE(X|\sigma(\Pi)))
+            \end{aligned}
+        \]
+        注: 可以看出 $\EE(\phi(X)|\sigma(\Pi))$ 是随机变量, 因为 $\II_{\Lambda}$ 是随机变量.
+    \end{enumerate}
+\end{lemma}

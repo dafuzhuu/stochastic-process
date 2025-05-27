@@ -64,3 +64,11 @@
 \contentsline {subsubsection}{\numberline {5.2.2}转移概率的可微性与Kolmogorov方程}{104}{subsubsection.5.2.2}%
 \contentsline {subsubsection}{\numberline {5.2.3}轨道的跳跃性质}{106}{subsubsection.5.2.3}%
 \contentsline {subsubsection}{\numberline {5.2.4}过程的构造}{107}{subsubsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.3}平稳分布与极限行为}{111}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}平稳分布}{111}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}极限行为}{112}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}细致平衡条件(DBC)}{112}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}访问频率/渐进频率}{114}{subsubsection.5.3.4}%
+\contentsline {section}{\numberline {6}离散鞅}{115}{section.6}%
+\contentsline {subsection}{\numberline {6.1}定义}{115}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}基本性质与例子}{116}{subsection.6.2}%
