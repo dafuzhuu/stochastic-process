@@ -1,0 +1,86 @@
+\subsection{赌博策略与停时}
+
+\begin{enumerate}
+    \item 鞅变换/离散型随机积分
+    \item 可选停时定理
+\end{enumerate}
+
+\begin{definition}
+    \begin{enumerate}
+        \item 过程 $(H_n)_{n\geq 1}$ 关于 $(\CF_n)_{n\geq 1}$ 为可料过程 (或赌博策略), 若 $H_n\in \CF_{n-1}(\forall n\geq 1)$
+        \item 过程 $(H_n)_{n\geq 1}$ 关于过程 $(X_n)_{n\geq 1}$ 为可料的, 若 $(H_n)_{n\geq 1}$ 关于 $\CF_n^X:=\sigma(X_0,X_1,\cdots,X_n) (n\geq 0)$ 可料
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[鞅变换/离散型随机积分]
+设 $(M_n)_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 是上鞅, $(H_n)_{n\geq 1}$ 关于 $(X_n)_{n\geq 0}$ 是可料的. $0\leq H_n\leq c_n$, 其中 $c_n$ 是只与 $n$ 有关的常数. 设 $W_0\in \sigma(X_0), \EE|W_0|<\infty$, 令 $W_n:=W_0+\sum_{m=1}^n H_m(M_m-M_{m-1})(n\geq 0)$, 则 $(W_n)_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 的上鞅.
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}
+        \item (可积性)
+        \[
+        \begin{aligned}
+            \EE |W_n| &\leq \EE |W_0|+\sum_{m=1}^n \EE |H_m||M_m-M_{m-1}|\\
+            &\leq \EE |W_0|+\sum_{m=1}^n c_m (\EE |M_m|+ \EE |M_{m-1}|)\\
+            &<\infty
+        \end{aligned}
+        \]
+        \item (适应性) 令 $\CF_n^X:=\sigma(X_0,X_1,\cdots,X_n), \forall n\geq 0$. $H_m\in \CF_{m-1}^X$.
+        
+        Claim: $M_m\in \CF_m^X, M_{m-1}\in \CF_{m-1}^X\st \CF_m^X \Rightarrow M_m-M_{m-1}\in \CF_m^X$.
+        \begin{proof}
+        \[
+        \begin{aligned}
+            \sigma(M_{m-1},M_m) &=(M_{m-1}, M_m)^{-1}(\mc{Z}\times \mc{Z})\\
+            &=\{(M_{m-1}, M_m)^{-1}(A_1\times A_2)|A_1\times A_2\st \mc{Z}^2\}\\
+            &=\{M_{m-1}^{-1}(A_1)\cap M_m^{-1}(A_2)|A_1\st \mc{Z}, A_2\st \mc{Z}\}\\
+            &\st \CF_m^X
+        \end{aligned}
+        \]
+        \[
+        \begin{aligned}
+            \{M_m-M_{m-1}=x\} &=\{(M_{m-1}, M_m)\in \{x_1,x_2\in \mc{Z}^2|x_2-x_1=x\}\}\\
+            &=(M_{m-1}, M_m)^{-1}(\mc{Z}\times (\mc{Z}+x))\\
+            &\in \sigma(M_{m-1}, M_m)\st \CF_m^X
+        \end{aligned}
+        \]
+        \end{proof}
+        $\therefore H_m(M_m-M_{m-1})\in \CF_m^X \Rightarrow W_n\in \CF_n^X$.
+        \item $(M_n)_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅 $\Rightarrow \EE(M_m-M_{m-1}|\CF_{m-1}^X)\leq 0, W_n-W_{n-1}=H_n(M_n-M_{n-1})$.
+        \[
+        \EE(W_n-W_{n-1}|\CF_{n-1}^X)\xlongequal{H_n\in \CF_{n-1}^X}\underbrace{H_n}_{\geq 0}\EE(\underbrace{M_n-M_{n-1}}_{\leq 0}|\CF_{n-1}^X)\leq 0
+        \]
+        注: $(H\cdot M)_n=:W_n$
+    \end{enumerate}
+\end{proof}
+
+回顾: $M$ 鞅 $\Rightarrow \EE M_n=\EE M_0$
+
+Q: $\EE M_{\tau}\overset{?}{=}\EE M_0$
+
+回顾 (离散停时): 设 $\tau: \{0,1,2,\cdots\}\cup \{+\infty\}$ 为一随机变量, 称 $\tau$ 关于 $(\CF_n)_{n\geq 0}$ 为一停时, 若 $\{\tau=n\}\in \CF_n(0\leq n<\infty)$.
+
+\begin{property}
+\begin{enumerate}
+    \item $\{\tau \geq m\}=\{\tau <m\}^c=\{\tau\leq m-1\}^c=(\cup_{k=0}^{m-1}\{\tau >k\})^c\in \CF_{m-1}$
+    \item $\{\tau >m\}=\{\tau\geq m+1\}\in \CF_m$
+\end{enumerate}
+\end{property}
+
+\begin{theorem}[可选停时定理]
+    设 $(M_n)_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅, $\tau$ 关于 $(X_n)_{n\geq 0}$ 为一个停时, 则
+    \begin{enumerate}
+        \item 停止过程 $(M_{\tau\land n})_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅, 故 $\EE M_{\tau\land n}\leq \EE M_0$.
+        \item 特别地, 若 $\tau$ 是有界停时, 即存在常数 $K$ 使 $\tau\leq K$, 则 $\EE M_{\tau}=\EE M_{\tau\land K}\leq \EE M_0$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (1) $M_{\tau\land n}=\sum_{k=1}^{\tau\land n}(M_k-M_{k-1})+M_0=\sum_{k=1}^n \II_{\{k\leq \tau\}}(M_k-M_{k-1})+M_0$
+
+    令 $H_k:=\II_{\{k\leq \tau\}}$, 则 $M_{\tau\land n}=(H\cdot M)_n$. 因 $\{k
+    leq \tau\}\in \CF_{k-1}^X\Rightarrow H_k\in \CF_{k-1}^X$. 故由鞅变换知 $(M_{\tau\land n})_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅.
+\end{proof}
+
+练习: 写出下鞅, 鞅版本的定理并证明.

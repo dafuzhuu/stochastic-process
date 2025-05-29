@@ -147,5 +147,28 @@ $\theta=\ln(\frac{1-p}{p})$, 则
             \end{aligned}
         \]
         注: 可以看出 $\EE(\phi(X)|\sigma(\Pi))$ 是随机变量, 因为 $\II_{\Lambda}$ 是随机变量.
+        \item $\EE(\phi(X)|\CF)\geq \phi(\EE(X|\CF))$
     \end{enumerate}
 \end{lemma}
+
+\begin{property}[Lem 5.6 凸函数变换]
+设 $(X_n)_{n\geq 1}$ 关于 $(\CF_n)_{n\geq 1}$ 为适应过程, $\phi$ 为凸函数, 且 $\EE |\phi(X_n)|<\infty (\forall n\geq 1)$, 则
+\begin{enumerate}
+    \item 若 $(X_n)_{n\geq 1}$ 关于 $(\CF_n)_{n\geq 1}$ 为鞅, 则 $(\phi(X_n))_{n\geq 1}$ 关于 $(\CF_n)_{n\geq 1}$ 为下鞅
+    \item 若 $(X_n)_{n\geq 1}$ 关于 $(\CF_n)_{n\geq 1}$ 为下鞅, $\phi$ 非降, 则 $(\phi(X_n))_{n\geq 1}$ 关于 $(\CF_n)_{n\geq 1}$ 为下鞅
+\end{enumerate}
+\end{property}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $\EE (\phi(X_{n+1})|\CF_n)\geq \phi(\EE(X_{n+1}|\CF_n))\xlongequal{\text{鞅}}\phi(X_n)$
+        \item $\EE(\phi(X_{n+1})|\CF_n)\geq \phi(\EE(X_{n+1}|\CF_n))\geq \phi(X_n)$. 第二个不等号成立因为 $X$ 为下鞅且 $\phi\uparrow$
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    \begin{enumerate}
+        \item $(X_n)_{n\geq 1}$ 鞅 $\Rightarrow$ $(|X_n|)_{n\geq 1}$ 为下鞅 $\xrightarrow[p>1]{\EE |X_n|^p<\infty} (|X_n|^p)_{n\geq 1}$ 为下鞅
+        \item $(X_n)_{n\geq 1}$ 下鞅 $\Rightarrow$ $X_n^+:=X_n\lor 0$ 为下鞅
+    \end{enumerate} 
+\end{corollary}

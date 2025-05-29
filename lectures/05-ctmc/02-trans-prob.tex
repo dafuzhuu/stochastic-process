@@ -133,9 +133,9 @@ Kolmogorov方程存在唯一性的解, 可以由 $Q$ 构造 CTMC. 侯氏定理.
     \[
     Q=\begin{pmatrix}
         -\lambda & \lambda & 0 & \cdots & \cdots & 0\\
-        0 & -\lambda & \lambda & 0 \cdots & 0\\
-        \vdots & \vdots & -\lambda & \lambda & \cdots\\
-        \vdots & \vdots & \vdots & \cdots & \vdots
+        0 & -\lambda & \lambda & 0 & \cdots & 0\\
+        \vdots & \vdots & -\lambda & \lambda & \cdots & 0\\
+        \vdots & \vdots & \vdots & \vdots & \cdots & \vdots
     \end{pmatrix}
     \]
     即 $Q(i,i)=-\lambda, Q(i,i+1)=\lambda$.
@@ -228,20 +228,20 @@ Kolmogorov方程存在唯一性的解, 可以由 $Q$ 构造 CTMC. 侯氏定理.
 \end{corollary}
 由 $\{\eta=\infty\}=\cap_{n\geq 1}\{\eta >n\}, \PP_i(\eta=\infty)=1$.
 \[
-    1=\PP(\eta=\infty)=\PP(X_t=X_0,\forall t>0|X_0=i)=\PP(X_t=i,\forall t\geq 0|X_0=i)
+    1=\PP_i(\eta=\infty)=\PP(X_t=X_0,\forall t>0|X_0=i)=\PP(X_t=i,\forall t\geq 0|X_0=i)
 \]
 即 $i$ 为吸收态.
 
 
 \begin{proof}[证明 Thm \ref{thm:p127-thm5}]
-(Step 1) 先证明一个数分结论.
+(Step 1) 
 \[
 \begin{aligned}
     \limitto{s}{0^+}(p_{st}(i,i))^{1/s} 
     &=\limitto{s}{0^+} \exp\left(
         \frac{\ln p_{st}(i,i)}{st}\cdot t
     \right)\\
-    &\xlongequal{\ln x\sim x-1(x\to 1)}\exp\left(
+    &\xlongequal[x\to 1]{\ln x\sim x-1}\exp\left(
         \limitto{s}{0^+}\frac{p_{st}(i,i)-1}{st}\cdot t
     \right)\\
     &=\exp (t q(i,i))=e^{-q_i t}

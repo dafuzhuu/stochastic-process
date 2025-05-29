@@ -1,3 +1,4 @@
+\thispagestyle {empty}
 \contentsline {section}{\numberline {1}概率论准备知识}{4}{section.1}%
 \contentsline {subsection}{\numberline {1.1}事件概率}{5}{subsection.1.1}%
 \contentsline {subsubsection}{\numberline {1.1.1}事件域}{5}{subsubsection.1.1.1}%
@@ -72,3 +73,4 @@
 \contentsline {section}{\numberline {6}离散鞅}{115}{section.6}%
 \contentsline {subsection}{\numberline {6.1}定义}{115}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}基本性质与例子}{116}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}赌博策略与停时}{119}{subsection.6.3}%
