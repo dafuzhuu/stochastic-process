@@ -1,0 +1,264 @@
+\subsection{鞅停时定理及其应用}
+
+\begin{theorem}[鞅停时定理]\label{thm:p150-thm5.14}
+    设 $(M_n)_{n\geq 0}$ 为关于 $(X_n)_{n\geq 0}$ 的鞅, $\tau$ 关于 $(X_n)_{n\geq 0}$ 的停时, $\PP(\tau<\infty)=1$ (有限停时), 存在常数 $K>0$, 使得 $|M_{\tau\land n}|\leq K (\forall n\geq 0)$, 则 $\EE M_{\tau}=\EE M_0$.
+\end{theorem}
+
+\begin{proof}
+    (Step 1) Claim: $|M_{\tau}|\II_{\{\tau<\infty\}}\leq K\II_{\{\tau<\infty\}}$
+
+    $M_{\tau}\II_{\{\tau<\infty\}}=\sum_{n=0}^{\infty}M_{\tau}\II_{\{\tau=n\}}=\sum_{n=0}^{\infty} M_{\tau\land n}\II_{\{\tau=n\}}$
+
+    $|M_{\tau}\II_{\{\tau<\infty\}}|\leq K\sum_{n=0}^{\infty}\II_{\{\tau=n\}}=K\II_{\{\tau<\infty\}}$
+
+    (Step 2) 形如 $A=B$ 等式的两种证明思路: 
+    \begin{enumerate}
+        \item $A\geq B, A\leq B$
+        \item $|A-B|=0$
+    \end{enumerate}
+    由可选停时定理 \ref{thm:p149-thm5.13}, $\EE M_{\tau\land n}=\EE M_0$,
+    \[
+    \begin{aligned}
+        |\EE M_{\tau}-\EE M_0| &= |\EE M_{\tau} -\EE M_{\tau\land n}|\\
+        &\leq \EE |M_{\tau} - M_{\tau\land n}|\\
+        &\leq \EE |M_{\tau}-M_{\tau\land n}\II_{\{\tau\leq n\}}|+\EE |M_{\tau\land n}\II_{\{\tau>n\}}|\\
+        &\leq \EE |M_{\tau}-M_{\tau}\II_{\{\tau\leq n\}}|+K\EE \II_{\{\tau>n\}}\\
+        &=\EE |M_{\tau}\II_{\{\tau >n\}}| +K\PP(\tau>n)\\
+        &\overset{\text{(Step 1)}}{\leq} 2K\PP(\tau>n)\xrightarrow{n\to\infty}2K\PP(\tau=\infty)=0
+    \end{aligned}
+    \]
+\end{proof}
+
+\subsubsection{应用: 离出分布}
+
+首达时 $V_a:=\min\{n\geq 0|X_n=a\}$. $\tau=\min\{n\geq 0|X_n\notin (a,b)\}=V_a\land V_b$
+
+\begin{example}[公平游戏中的赌徒破产]\label{exa:p151-exa1}
+    设 $X_1,X_2,\cdots\overset{\text{iid}}{\sim} \PP(X_1=1)=\PP(X_1=-1)=1/2$. 记 $\CF_n=\sigma(X_1,\cdots, X_n), \forall n\geq 1, \CF_0:=\{\emp, \Omega\}$. 令 $S_n=x+\sum_{k=1}^n X_k (n\geq 0, x\in \ZZ)$, 则 $\EE X_1=0$.
+
+    故由例 \ref{exa:p142-exa5.2} 知, $(S_n)_{n\geq 0}$ 在 $\PP(\cdot| S_0=x)$ 下关于 $(\CF_n)_{n\geq 0}$ 为鞅. (证明作为作业, 方法同例 \ref{exa:p142-exa5.2})
+\end{example}
+
+\begin{proof}[解]
+(1) 令 $\tau:=\min\{n\geq 0|S_n\notin (a,b)\}$, 其中 $a<x<b,a,b\in\ZZ$
+
+Claim 1:
+\begin{enumerate}
+    \item $\tau=\min\{n\geq 0| S_n=a\ \text{或}\ b\}, S_{\tau}=a\ \text{或}\ b$
+    \item $\tau=V_a\land V_b$, 其中 $V_a=\min\{n\geq 0|S_n=a\}$
+\end{enumerate} 
+
+Claim 2: $\tau$ 关于 $(\CF_n)_{n\geq 0}$ 为停时.
+\begin{enumerate}
+    \item $\{\tau=0\}=\{S_0=x\notin (a,b)\}=\emp\in \CF_0$
+    \item $\forall n\geq 1, \{\tau=n\}=\{S_k\in (a,b),1\leq k\leq n-1\}\cap \{S_n\notin (a,b)\}\in \sigma(X_1,\cdots,X_n)=\CF_n$
+\end{enumerate}
+
+Claim 3: $\PP_x(\tau<\infty)=1$, 即 $\PP_x(\tau=\infty)=0$. 
+
+注意 $\{\tau=\infty\}=\cap_{n\geq 1}\{\tau\geq n\}=\cap_{n\geq 1}\{\tau\geq nK\},K\geq 0$ 
+
+时刻 $\tau$ 前, 在 $(a,b)$ 内即 $[a+1,b-1]$ 内移动, 长度为 $|b-a|-1$ 步. 注意到, 无论从 $(a,b)$ 中哪个点出发, 一直往一个方向走 $|b-a|$ 步时, 一定在 $(a,b)$ 外.
+
+考察 $\{\tau>n|b-a|\}$. 因为 $\{S_m\in (a,b)\}\cap \{X_{m+k}=1,1\leq k\leq |b-a|\}\st \{S_{m+|b-a|}\notin (a,b)\}\cap \{S_m\in (a,b)\}$, 所以
+\begin{enumerate}
+    \item $n=1$ 时,
+    \[
+    \begin{aligned}
+        \{\tau>|b-a|\} &\st \{S_0\in (a,b)\} \cap\{S_{|b-a|}\in (a,b)\} \\
+        &\st \{S_0\in (a,b)\} \cap \{X_k=1,1\leq k\leq |b-a|\}^c
+    \end{aligned}
+    \]
+    $A\st B\Rightarrow B^c\st A^c$, 即 $\Omega\backslash B\st \Omega\backslash A$. $A\cap C\st B\cap C\Rightarrow C\backslash (B\cap C)\st C\backslash (A\cap C)$
+    \item $n=2$ 时,
+    \[
+    \begin{aligned}
+        \{\tau>2|b-a|\} &\st \{S_{|b-a|}\in (a,b)\}\cap \{S_{2|b-a|}\in (a,b)\}\\
+        &\st \{S_{|b-a|}\in (a,b)\} \cap \{X_{|b-a|+k}=1,1\leq k\leq |b-a|\}^c
+    \end{aligned}
+    \]
+    $\{\tau>2|b-a|\}\st \{\tau>|b-a|\}\st\{X_k=1,1\leq k\leq |b-a|\}^c$
+    \item 迭代得 $\{\tau>n|b-a|\}\st\cap_{m=0}^{n-1}\{X_{m|b-a|+k}=1,1\leq k\leq |b-a|\}^c$
+    
+    又因 $\PP_x(X_{m|b-a|+k}=1,1\leq k\leq |b-a|)=\frac{1}{2^{|b-a|}}$, 故
+    \[
+    \PP_x(\tau> n|b-a|)\leq\prod_{m=0}^{n-1}(1-\frac{1}{2^{|b-a|}})=(1-\frac{1}{2^{|b-a|}})^n\xrightarrow{n\to\infty}0
+    \]
+    \[
+    \PP_x(\tau=\infty)=\limit{n}\PP_x(\tau>n|b-a|)=0
+    \]
+\end{enumerate}
+
+(2) Claim: $\{S_{\tau\land n}\}$ 有界, 即存在常数 $K$, 使 $|S_{\tau\land n}|\leq K (\forall n\geq 0)$
+\begin{proof}
+    \[
+    \begin{aligned}
+        |S_{\tau\land n}| &= |S_{\tau\land n}|\II_{\{\tau\leq n\}}+|S_{\tau\land n}|\II_{\{\tau> n\}}\\
+        &=|S_{\tau}|\II_{\{\tau\leq n\}}+|S_n|\II_{\{\tau> n\}}\\
+        &\leq |a|\lor |b|
+    \end{aligned}
+    \]
+\end{proof}
+
+(3) 求 $\PP_x(V_a<V_b), \PP_x(V_b<V_a)$. (离出分布)
+
+注意到 $\PP_x(V_a<V_b)=\PP_x(\tau=V_a)=\PP_x(S_{\tau}=a)$. 应用鞅停时定理 \ref{thm:p150-thm5.14} 知, 
+\[
+x=\EE_x S_0=\EE_x S_{\tau}=a\PP_x(S_{\tau}=a)+b\PP_x(S_{\tau}=b)
+\]
+又 $\PP_x(S_{\tau}=a)+\PP_x(S_{\tau}=b)=1$. 联立方程, 解得
+\[
+\PP_x(S_{\tau}=a)=\frac{b-x}{b-a}, \ \PP_x(S_{\tau}=b)=\frac{x-a}{b-a}
+\]
+\end{proof}
+
+\begin{example}[不公平赌博的赌徒破产]
+    设 $X_1,X_2,\cdots \overset{\text{iid}}{\sim} \PP(X_1=1)=p\neq \frac{1}{2}, \PP(X_1=-1)=q=1-p$. 记 $\CF_n=\sigma(X_1,\cdots,X_n),n\geq 1,\CF_0=\{\emp,\Omega\}$. 令 $S_n=x+\sum_{k=1}^n X_k (n\geq 0, x\in \ZZ). \tau=\min\{n\geq 0|S_n\notin (a,b)\}, a<x<b, a,b\in \ZZ$.
+
+    求 $\PP_x(V_a<V_b), \PP_x(V_b<V_a)$. 其中 $V_a=\min\{n\geq 0| S_n=a\}$.
+\end{example}
+
+\begin{proof}[解]
+令 $M_n:=(\frac{q}{p})^{S_n}(\forall n\geq 0)$. 由例 \ref{exa:p145-exa5.3} 知, $(M_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 为鞅.
+\begin{enumerate}
+    \item[(1)] 类比例 \ref{exa:p151-exa1} 易证 $\tau$ 关于 $(\CF_n)_{n\geq 0}$ 为停时, 且
+    \begin{enumerate}
+        \item[$1^{\circ}$] $S_{\tau}=a$ 或 $b$
+        \item[$2^{\circ}$] $\PP_x(\tau>n|b-a|)\leq (1-p^{|b-a|})^n\xrightarrow{n\to\infty}0$  
+    \end{enumerate}
+    $\PP_x(\tau=\infty)=0$, 即 $\tau$ 为有限停时.
+    \item[(2)] Claim: $(|M_n|)_{n\geq 0}$ 有界.
+    
+    $\tau\land n\leq \tau\Rightarrow S_{\tau\land n}\in [a,b]$
+    \[
+    |M_{\tau\land n}|=\left(\frac{q}{p}\right)^{S_{\tau\land n}}\leq \sup_{y\in [a,b]}\left(\frac{q}{p}\right)^y\quad \forall n\geq 0
+    \]
+    \item[(3)] $\PP_x(V_a<V_b)=\PP_x(\tau=V_a)=\PP_x(S_{\tau}=a)$
+    \begin{enumerate}
+        \item[$1^{\circ}$] 应用鞅停时定理, 得
+        \[
+        \begin{aligned}
+            \left(\frac{q}{p}\right)^x &=\EE_x M_0 =\EE_x M_{\tau}\\
+            &=\EE_x \left(\frac{q}{p}\right)^{S_{\tau}}=\left(\frac{q}{p}\right)^a\PP_x(S_{\tau}=a)+\left(\frac{q}{p}\right)^b\PP_x(S_{\tau}=b)
+        \end{aligned}
+        \]
+        \item[$2^{\circ}$] $\PP_x(S_{\tau}=a)+\PP_x(S_{\tau}=b)=1$
+        \[
+        \PP_x(V_a<V_b)=\PP_x(S_{\tau}=a)=\frac{(q/p)^b-(q/p)^x}{(q/p)^b-(q/p)^a}
+        \]
+        \[
+        \PP_x(V_b<V_a)=\PP_x(S_{\tau}=b)=\frac{(q/p)^x-(q/p)^a}{(q/p)^b-(q/p)^a}
+        \]
+    \end{enumerate}
+\end{enumerate}
+\end{proof}
+
+\begin{example}[赌博的持续时间]\label{exa:p155-exa3}
+    设 $X_1,X_2,\cdots \overset{\text{iid}}{\sim} \PP_x(X_1=1)=p, \PP_x(X_1=-1)=q=1-p$. 记 $\CF_n=\CF_n^X(n\geq 1),\CF_0=\{\emp,\Omega\}$. 令 $S_n=x+\sum_{k=1}^n X_k (\forall n\geq 0, x\in \mathbb{Z}), \tau=\min\{n\geq 0|S_n\notin (a,b)\}(a<x<b,a,b\in\mathbb{Z})$. 求 $\EE_x \tau$.
+\end{example}
+
+\begin{proof}[解]
+(Case 1) $p=1/2$时, $\EE X_1=0, \Var(X_1)=1$, 故由例 \ref{exa:p142-exa5.2} 知 $\tilde{M}_n:=(S_n)^2-n(\forall n\geq 0)$ 在 $\PP_x$ 下关于 $(\CF_n)_{n\geq 0}$ 为鞅. 由例 \ref{exa:p151-exa1} 知, $\PP_x(\tau=\infty)=0$.
+
+因为无法判断 $\tilde{M}_n$ 的停止过程有界, 不能应用鞅停时定理. 用可选停时定理代替,
+\[
+\EE_x \tilde{M}_n\xlongequal{\text{Thm }\ref{thm:p149-thm5.13}}\EE_x \tilde{M}_{\tau\land n}=\EE_x(S_{\tau\land n}^n-\tau\land n)
+\]
+
+(Step 1) Claim: (1) $\limit{n}\EE_x(S_{\tau\land n}^2)=\EE_x(S_{\tau}^2)$. (2) $\limit{n}\EE_x (\tau\land n)=\EE_x(\tau)$.
+
+注: 由断言, $\EE_x \tilde{M}_0=\EE_x \tilde{M}_n$ (用可选停时定理+取极限, 实现鞅停时定理的作用)
+\begin{proof}
+    (1) 先证 $\limit{n}\EE_x(S_{\tau\land n}^2)=\EE_x(S_{\tau}^2)$.
+    \begin{enumerate}
+        \item[(i)] $\tau\leq n$ 时,
+        \[
+        \begin{aligned}
+            \EE_x(S_{\tau\land n}^2\II_{\{\tau\leq n\}}) &=\EE_x(S_{\tau}^2\II_{\{\tau\leq n\}})\\
+            &=a^2\PP_x(S_{\tau}=a,\tau\leq n)+b^2\PP_x(S_{\tau}=b,\tau\leq n)\\
+            &\xrightarrow{n\to\infty}a^2\PP_x(S_{\tau}=a)+b^2\PP_x(S_{\tau}=b)=\EE_x(S_{\tau})
+        \end{aligned}
+        \]
+        \item[(ii)] $\tau>n$ 时,
+        \[
+        \begin{aligned}
+        \EE_x(S_{\tau\land n}^2\II_{\{\tau>n\}}) &=\EE_x(S_n^2\II_{\{\tau>n\}})\\
+        &\leq \left(|a|\lor |b|\right)^2 \EE_x\II_{\tau>n}\\
+        &=\left(|a|\lor |b|\right)^2 \PP_x(\tau>n)\\
+        &\xrightarrow{x\to\infty}\left(|a|\lor |b|\right)^2 \PP_x(\tau=\infty)=0
+        \end{aligned}
+        \]
+    \end{enumerate}
+    (2) 
+    \[
+    \begin{aligned}
+        \EE_x(\tau\land n)&=\sum_{k=1}^{\infty} \PP_x(\tau\land n\geq k)=\sum_{k=1}^{n}\PP_x(\tau\land n\geq k)\\
+        &=\sum_{k=1}^{n}\PP_x(\tau\geq k,n\geq k)=\sum_{k=1}^n\PP_x(\tau\geq k)\\
+        &\xrightarrow{n\to\infty}\sum_{k=1}^{\infty}\PP_x(\tau\geq k)=\EE_x(\tau)
+    \end{aligned}
+    \]
+    最后一个等式成立是因为 $\PP_x(\tau=\infty)=0$.
+\end{proof}
+
+(Step 2) 由 (Step 1) 知, $x^2=\EE_x(S_{\tau}^2)-\EE_x(\tau)$.
+\[
+\begin{aligned}
+    \EE_x\tau &=\EE_x(S_{\tau}^2)-x^2\\
+    &=-x^2 +a^2\PP_x(S_{\tau}=a)+b^2 \PP_x(S_{\tau}=b)\\
+    &=-x^2+a^2\cdot \frac{b-x}{b-a}+b^2\cdot \frac{x-a}{b-a}=-ab
+\end{aligned}
+\] 
+
+(Case 2) $p\neq 1/2$ 时, $\EE X_1=p-q=:\mu$. 故由例 \ref{exa:p142-exa5.2} 知, $M_n:=S_n-n\mu(\forall n\geq 0)$ 在 $\PP_x$ 下关于 $(\CF_n)_{n\geq 0}$ 为鞅. 由例 \ref{exa:p151-exa1} 知, $\PP_x(\tau=\infty)=0$.
+\[
+x=\EE_x M_0\xlongequal{\text{Thm } \ref{thm:p149-thm5.13}}=\EE_x M_{\tau\land n}=\EE_x(S_{\tau\land n})-\mu \EE_x(\tau\land n)
+\]
+类似 (Case 1) 可证: $\limit{n}\EE_x(S_{\tau\land n})=\EE_x(S_{\tau})$. $\limit{n}\EE_x (\tau\land n)=\EE_x(\tau)$. 故
+\[
+\EE_x(\tau)=\frac{\EE_x(S_{\tau})-x}{p-q}
+\]
+\[
+\begin{aligned}
+    \EE_x\tau&=\frac{1}{p-q}[a\cdot\PP_x(S_{\tau}=a)+b\cdot\PP_x(S_{\tau}=b)]-\frac{x}{p-q}\\
+    &=\frac{1}{p-q}\left[
+        a\cdot \frac{(q/p)^b-(q/b)^x}{(q/p)^b-(q/p)^a}+b\cdot \frac{(q/p)^x-(q/b)^a}{(q/p)^b-(q/p)^a}
+    \right]-\frac{x}{p-q}
+\end{aligned}
+\]
+\end{proof}
+
+\begin{theorem}[Wald等式]\label{thm:p158-thm5.15}
+    设 $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim}\EE X_1=\mu$, $T$ 关于 $(X_n)_{n\geq 1}$ 为停时, 且 $\EE T<\infty$, 则
+    \[
+    \EE\left(
+        \sum_{k=1}^T X_k
+    \right)=\EE T\cdot \EE X_1
+    \]
+    注: $\{\tau=n\}\in \sigma(X_1,\cdots,X_n)\ind \{X_{n+1},X_{n+2},\cdots\}$
+\end{theorem}
+
+\begin{corollary}
+    设 $\{N(t),t\geq 0\}$ 为更新过程, 其间隔时间序列为 $\{\tau_k,k\geq 1\}$ 更新时间序列 $\{T_n,n\geq 0\}$, 则
+    \[
+    \EE(T_{N(t)+1})=\EE \left(
+        \sum_{k=1}^{N(t)+1}\tau_k
+    \right)=\EE (\tau_1)\EE(N(t)+1)
+    \]
+\end{corollary}
+
+\begin{proof}
+    \[
+    \begin{aligned}
+        \{N(t)+1=n\} &=\{N(t)=n-1\}=\{T_{n-1}\leq t< T_n\}\\
+        &=\left\{
+            \sum_{k=1}^{n-1}\tau_k\leq t<\sum_{k=1}^n\tau_k
+        \right\}\in\sigma(\tau_1,\cdots,\tau_n)
+    \end{aligned}
+    \]
+    $N(t)+1$ 关于 $(\tau_k)_{k\geq 1}$ 为停时.
+
+    应用 Thm \ref{thm:p158-thm5.15} 得到想要的结论.
+
+    注: $\{N(t)=n\}=\{T_n\leq t<T_{n+1}\}$ 与 $\tau_{n+1}$ 有关, 故 $N(t)$ 关于 $(\tau_k)_{k\geq 1}$ 不是停时.
+\end{proof}
+\newpage

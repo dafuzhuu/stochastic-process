@@ -1,0 +1,26 @@
+\begin{definition}
+    称 $(B_t)_{t\geq 0}$ 为方差为 $\sigma^2$ 的布朗运动, 若
+    \begin{enumerate}
+        \item $B_0=0$, 且 $\forall \omega\in\Omega, t\to B_t(\omega)$ 连续 (轨道连续)
+        \item (独立增量性) $\forall t_1<t_2<\cdots<t_n$, 有 $B_{t_2}-B_{t_1}, B_{t_3}-B_{t_2}, \cdots, B_{t_n}-B_{t_{n-1}}$ 相互独立
+        \item $B_{t+s}-B_t\xlongequal{(d)}B_s\sim \mc{N}(0,\sigma^2 s),\ \forall s>0$
+        
+        特别地, $\sigma^2=1$ 则称 $B$ 为标准布朗运动.
+    \end{enumerate}
+\end{definition}
+
+自行证明下面性质:
+\begin{property}
+$Cov(B_s,B_t)=s\land t$
+\end{property}
+
+\begin{property}[尺度性质]
+$B$ 为标准布朗运动,
+\begin{enumerate}
+    \item $\forall \alpha>0$, $(\alpha B_t)_{t\geq 0}$ 为方差为 $\alpha^2$ 的布朗运动
+    \item $\forall c>0, (\sqrt{c}B_t/c)_{t\geq 0}$ 为标准布朗运动
+    
+    注: $\sqrt c$ 为空间尺度变换, $1/c$ 为时间尺度变换
+    \item $\forall c>0,(B_{ct})_{t\geq 0}$ 为方差为 $c$ 的布朗运动
+\end{enumerate}
+\end{property}

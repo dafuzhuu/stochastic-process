@@ -74,3 +74,7 @@
 \contentsline {subsection}{\numberline {6.1}定义}{115}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}基本性质与例子}{116}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}赌博策略与停时}{119}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}鞅停时定理及其应用}{121}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}应用: 离出分布}{122}{subsubsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.5}Doob极大值不等式与鞅收敛定理}{126}{subsection.6.5}%
+\contentsline {section}{\numberline {7}布朗运动}{130}{section.7}%

@@ -12,7 +12,7 @@
     \end{enumerate}
 \end{definition}
 
-\begin{theorem}[鞅变换/离散型随机积分]
+\begin{theorem}[鞅变换/离散型随机积分]\label{thm:martingale-transform}
 设 $(M_n)_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 是上鞅, $(H_n)_{n\geq 1}$ 关于 $(X_n)_{n\geq 0}$ 是可料的. $0\leq H_n\leq c_n$, 其中 $c_n$ 是只与 $n$ 有关的常数. 设 $W_0\in \sigma(X_0), \EE|W_0|<\infty$, 令 $W_n:=W_0+\sum_{m=1}^n H_m(M_m-M_{m-1})(n\geq 0)$, 则 $(W_n)_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 的上鞅.
 \end{theorem}
 
@@ -32,16 +32,16 @@
         \begin{proof}
         \[
         \begin{aligned}
-            \sigma(M_{m-1},M_m) &=(M_{m-1}, M_m)^{-1}(\mc{Z}\times \mc{Z})\\
-            &=\{(M_{m-1}, M_m)^{-1}(A_1\times A_2)|A_1\times A_2\st \mc{Z}^2\}\\
-            &=\{M_{m-1}^{-1}(A_1)\cap M_m^{-1}(A_2)|A_1\st \mc{Z}, A_2\st \mc{Z}\}\\
+            \sigma(M_{m-1},M_m) &=(M_{m-1}, M_m)^{-1}(\ZZ\times \ZZ)\\
+            &=\{(M_{m-1}, M_m)^{-1}(A_1\times A_2)|A_1\times A_2\st \ZZ^2\}\\
+            &=\{M_{m-1}^{-1}(A_1)\cap M_m^{-1}(A_2)|A_1\st \ZZ, A_2\st \ZZ\}\\
             &\st \CF_m^X
         \end{aligned}
         \]
         \[
         \begin{aligned}
-            \{M_m-M_{m-1}=x\} &=\{(M_{m-1}, M_m)\in \{x_1,x_2\in \mc{Z}^2|x_2-x_1=x\}\}\\
-            &=(M_{m-1}, M_m)^{-1}(\mc{Z}\times (\mc{Z}+x))\\
+            \{M_m-M_{m-1}=x\} &=\{(M_{m-1}, M_m)\in \{x_1,x_2\in \ZZ^2|x_2-x_1=x\}\}\\
+            &=(M_{m-1}, M_m)^{-1}(\ZZ\times (\ZZ+x))\\
             &\in \sigma(M_{m-1}, M_m)\st \CF_m^X
         \end{aligned}
         \]
@@ -61,14 +61,14 @@ Q: $\EE M_{\tau}\overset{?}{=}\EE M_0$
 
 回顾 (离散停时): 设 $\tau: \{0,1,2,\cdots\}\cup \{+\infty\}$ 为一随机变量, 称 $\tau$ 关于 $(\CF_n)_{n\geq 0}$ 为一停时, 若 $\{\tau=n\}\in \CF_n(0\leq n<\infty)$.
 
-\begin{property}
+\begin{property}\label{prt:prt6.4}
 \begin{enumerate}
-    \item $\{\tau \geq m\}=\{\tau <m\}^c=\{\tau\leq m-1\}^c=(\cup_{k=0}^{m-1}\{\tau >k\})^c\in \CF_{m-1}$
+    \item $\{\tau \geq m\}=\{\tau <m\}^c=\{\tau\leq m-1\}^c=(\cup_{k=0}^{m-1}\{\tau \leq k\})^c\in \CF_{m-1}$
     \item $\{\tau >m\}=\{\tau\geq m+1\}\in \CF_m$
 \end{enumerate}
 \end{property}
 
-\begin{theorem}[可选停时定理]
+\begin{theorem}[可选停时定理]\label{thm:p149-thm5.13}
     设 $(M_n)_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅, $\tau$ 关于 $(X_n)_{n\geq 0}$ 为一个停时, 则
     \begin{enumerate}
         \item 停止过程 $(M_{\tau\land n})_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅, 故 $\EE M_{\tau\land n}\leq \EE M_0$.
@@ -79,8 +79,10 @@ Q: $\EE M_{\tau}\overset{?}{=}\EE M_0$
 \begin{proof}
     (1) $M_{\tau\land n}=\sum_{k=1}^{\tau\land n}(M_k-M_{k-1})+M_0=\sum_{k=1}^n \II_{\{k\leq \tau\}}(M_k-M_{k-1})+M_0$
 
-    令 $H_k:=\II_{\{k\leq \tau\}}$, 则 $M_{\tau\land n}=(H\cdot M)_n$. 因 $\{k
-    leq \tau\}\in \CF_{k-1}^X\Rightarrow H_k\in \CF_{k-1}^X$. 故由鞅变换知 $(M_{\tau\land n})_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅.
+    令 $H_k:=\II_{\{k\leq \tau\}}$, 则 $M_{\tau\land n}=(H\cdot M)_n$. 因 Prt \ref{prt:prt6.4}, $\{\tau\geq k\}\in \CF_{k-1}^X\Rightarrow H_k\in \CF_{k-1}^X$. 故由鞅变换定理 \ref{thm:martingale-transform} 知 $(M_{\tau\land n})_{n\geq 0}$ 关于 $(X_n)_{n\geq 0}$ 为上鞅.
+
+    (2) 为 (1) 的特殊情况.
 \end{proof}
 
 练习: 写出下鞅, 鞅版本的定理并证明.
+

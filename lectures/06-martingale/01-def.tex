@@ -47,7 +47,7 @@
 \end{definition}
 
 \begin{definition}
-    若 Def \ref{def:p140-def3} 中 (3) 为 ``$\leq$'' 时, 即 $\EE(X_{n+1}|\CF_n)\leq X_n$, 称为上鞅. 若为``$\geq$'' 时, 即 $\EE(X_{n+1}|\CF_n)gleq X_n$, 称为下鞅.
+    若 Def \ref{def:p140-def3} 中 (3) 为 ``$\leq$'' 时, 即 $\EE(X_{n+1}|\CF_n)\leq X_n$, 称为上鞅. 若为``$\geq$'' 时, 即 $\EE(X_{n+1}|\CF_n)\geq X_n$, 称为下鞅.
 \end{definition}
 
 \begin{definition}
@@ -97,9 +97,9 @@
 \bigg)
 \]
 \begin{proof}
-    (1) 可积性 (关于$\CF_n$是鞅)
+    (1) (可积性): $X$关于$\CF_n$是鞅 $\Rightarrow$ $\EE|X|<\infty$
 
-    适应性
+    (适应性) $X$ 关于 $\mc{S}$ 适应
 
-    $\EE(X_{n+1}|\mc{S}_n)=\EE(\EE(X_{n+1}|\CF_n)|\mc{S}_n)=\EE(X_n|\mc{S}_n)=X_n$
+    (鞅性) $\EE(X_{n+1}|\mc{S}_n)=\EE(\EE(X_{n+1}|\CF_n)|\mc{S}_n)=\EE(X_n|\mc{S}_n)=X_n$
 \end{proof}

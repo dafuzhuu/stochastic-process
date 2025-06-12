@@ -17,7 +17,7 @@
     \]
 \end{proof}
 
-\begin{example}[独立随机变量之和/随机游动]
+\begin{example}[独立随机变量之和/随机游动]\label{exa:p142-exa5.2}
     设 $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim}\EE X_1=\mu$, 令 $S_n=s_0+\sum_{k=1}^n X_k(n\geq 1)$, 其中 $s_0\in \RR$, 则
     \begin{enumerate}
         \item $\{S_n-n\mu,n\geq 1\}$ 关于 $(X_n)_{n\geq 1}$ 是一个鞅 (即关于 $(X_n)_{n\geq 1}$的自然流是一个鞅)
@@ -33,7 +33,7 @@
     \begin{enumerate}
         \item \begin{enumerate}
             \item $\EE|S_n|\leq s_0+\sum_{k=1}^n \EE|X_k|<\infty$
-            \item $\{\sum_{k=1}^n X_k=x\}=\{(X_1,\cdots,X_n\in \{(x_1,\cdots,x_n)|sum_{k=1}^n x_k=x\})\}\in \CF_n^X$
+            \item $\{\sum_{k=1}^n X_k=x\}=\{(X_1,\cdots,X_n)\in \{(x_1,\cdots,x_n)|\sum_{k=1}^n x_k=x\})\}\in \CF_n^X$
             \item $\EE(M_{n+1}-M_n|\CF_n^X)=\EE(X_{n+1}|\CF_n^X)-\mu\xlongequal{X_{n+1}\ind (X_1,\cdots,X_n)}\EE(X_{n+1})-\mu=0$
         \end{enumerate}
         \item \begin{enumerate}
@@ -63,8 +63,10 @@
 \end{proof}
 
 \begin{example}[简单对称随机游走]
-    $X_n\overset{\text{iid}}{\sim} \PP(X_n=1)=\PP(X_n=-1)=1/2. \EE X_n=0, \Var(X_n)=\EE X_n^2=1$. 故 $\{\sum_{k=1}^n X_k,n\geq 1\}, \{(\sum_{k=1}^n X_k)^2-n,n\geq 1\}$ 关于 $(X_n)_{n\geq 1}$ (或 $(Y_n=\sum_{k=1}^n X_k)_{n\geq 1}$) 是鞅.
+    $X_n\overset{\text{iid}}{\sim} \PP(X_n=1)=\PP(X_n=-1)=1/2.\ \EE X_n=0, \Var(X_n)=\EE X_n^2=1$.
 \end{example}
+
+由例\ref{exa:p142-exa5.2}, 故 $\{\sum_{k=1}^n X_k,n\geq 1\}, \{(\sum_{k=1}^n X_k)^2-n,n\geq 1\}$ 关于 $(X_n)_{n\geq 1}$ 或 $(Y_n=\sum_{k=1}^n X_k)_{n\geq 1}$ 是鞅.
 
 \begin{property}[Lem 5.8, 鞅增量的正交性]
 设 $(M_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 为鞅, 则
@@ -77,7 +79,7 @@
 
 \begin{proof}
     \begin{enumerate}
-        \item $\LHS=\EE(\EE((M_n-M_k)M_j)|\CF_k)=\EE(M_j(\EE(M_n|\CF_k)-M_k))$. 其中 $M_j\in F_j\st \CF_k$.
+        \item $\LHS=\EE(\EE((M_n-M_k)M_j)|\CF_k)=\EE(M_j(\EE(M_n|\CF_k)-M_k))$. 其中 $M_j\in \CF_j\st \CF_k$.
         \[
         \begin{aligned}
             \EE(M_n|\CF_k) &\xlongequal{k<n} \EE(\EE(M_n|\CF_{n-1})|\CF_k)\\
@@ -92,7 +94,7 @@
         \item 
         \[
         \begin{aligned}
-            \EE(M_n-M_0)^2 &=\EE(\sum_{k=1}^n (X_k-X_{k-1}))^2\\
+            \EE(M_n-M_0)^2 &=\EE(\sum_{k=1}^n (M_k-M_{k-1}))^2\\
             &=\sum_{k=1}^n \EE(M_k-M_{k-1})^2+2\sum_{1\leq j<k\leq n}\EE(M_j-M_{j-1})(M_k-M_{k-1})\\
             &\overset{(2)}{=}\sum_{k=1}^n \EE(M_k-M_{k-1})^2
         \end{aligned}
@@ -122,7 +124,7 @@
     (Step 2) Claim: $\sigma(X_1,\cdots,X_n)=\sigma(Y_1,\cdots,Y_n)$, 即 $F_n^X=F_n^Y(\forall n\geq 1)$
 \end{proof}
 
-\begin{example}[赌徒破产]
+\begin{example}[赌徒破产]\label{exa:p145-exa5.3}
     $\PP(X_1=1)=p, \PP(X_1=-1)=1-p,p\in (0,1),p\neq \frac{1}{2}$
 \end{example}
 
