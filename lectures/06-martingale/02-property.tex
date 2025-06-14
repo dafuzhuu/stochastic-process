@@ -17,6 +17,15 @@
     \]
 \end{proof}
 
+\begin{lemma}\label{lem:p117}
+\[
+\bigg|
+    \sum_{k=1}^n a_k
+\bigg|^p\leq
+(n^{p-1}\lor 1)\sum_{k=1}^n |a_k|^p, p>0
+\]
+\end{lemma}
+
 \begin{example}[独立随机变量之和/随机游动]\label{exa:p142-exa5.2}
     设 $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim}\EE X_1=\mu$, 令 $S_n=s_0+\sum_{k=1}^n X_k(n\geq 1)$, 其中 $s_0\in \RR$, 则
     \begin{enumerate}
@@ -33,21 +42,11 @@
     \begin{enumerate}
         \item \begin{enumerate}
             \item $\EE|S_n|\leq s_0+\sum_{k=1}^n \EE|X_k|<\infty$
-            \item $\{\sum_{k=1}^n X_k=x\}=\{(X_1,\cdots,X_n)\in \{(x_1,\cdots,x_n)|\sum_{k=1}^n x_k=x\})\}\in \CF_n^X$
+            \item $\{\sum_{k=1}^n X_k=x\}=\{(X_1,\cdots,X_n)\in \{(x_1,\cdots,x_n)|\sum_{k=1}^n x_k=x\}\}\in \CF_n^X$
             \item $\EE(M_{n+1}-M_n|\CF_n^X)=\EE(X_{n+1}|\CF_n^X)-\mu\xlongequal{X_{n+1}\ind (X_1,\cdots,X_n)}\EE(X_{n+1})-\mu=0$
         \end{enumerate}
         \item \begin{enumerate}
-            \item $\EE M_n^2=\EE(S_n-n\mu)^2=\EE(\sum_{k=1}^n (X_k-\mu))^2\leq (n^{2-1}\lor 1)\EE(\sum_{k=1}^n(X_k-\mu)^2)<\infty$
-            
-            数分结论:
-            \[
-            \boxed{
-                \bigg|
-                    \sum_{k=1}^n a_k
-                \bigg|^p\leq
-                (n^{p-1}\lor 1)\sum_{k=1}^n |a_k|^p, p>0
-            }
-            \]
+            \item 由 Lem \ref{lem:p117}, $\EE M_n^2=\EE(S_n-n\mu)^2=s_0^2+\EE(\sum_{k=1}^n (X_k-\mu))^2\leq s_0^2+(n^{2-1}\lor 1)\EE(\sum_{k=1}^n(X_k-\mu)^2)<\infty$
             \item $M_n^2\in\CF_n^X\Rightarrow \tilde{M}_n\in\CF_n^X$
             \item 判断鞅性
             \[
@@ -94,7 +93,7 @@
         \item 
         \[
         \begin{aligned}
-            \EE(M_n-M_0)^2 &=\EE(\sum_{k=1}^n (M_k-M_{k-1}))^2\\
+            \EE(M_n-M_0)^2 &=\EE\left(\sum_{k=1}^n (M_k-M_{k-1})\right)^2\\
             &=\sum_{k=1}^n \EE(M_k-M_{k-1})^2+2\sum_{1\leq j<k\leq n}\EE(M_j-M_{j-1})(M_k-M_{k-1})\\
             &\overset{(2)}{=}\sum_{k=1}^n \EE(M_k-M_{k-1})^2
         \end{aligned}
@@ -115,39 +114,30 @@
 \end{proof}
 
 \begin{example}[指数鞅]\label{exa:p144-exa5.6}
-    $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim}\phi(\theta)=\EE e^{\theta X_1}<\infty$. 令 $S_n=\sum_{k=1}^n X_k$, 则 $\displaystyle M_n:=\frac{1}{(\phi(\theta))^n}\exp\{\theta S_n\}(n\geq 1)$ 关于 $(X_n)_{n\geq 1}$ 是鞅. 特别地, $\phi(0)=1$, 则 $e^{\theta S_n}(n\geq 1)$ 关于 $(X_n)_{n\geq 1}$ 为鞅.
+    $(X_n)_{n\geq 1}\overset{\text{iid}}{\sim}\phi(\theta)=\EE e^{\theta X_1}<\infty$. 令 $S_n=\sum_{k=1}^n X_k$, 则 $\displaystyle M_n:=\frac{1}{(\phi(\theta))^n}\exp\{\theta S_n\}(n\geq 1)$ 关于 $(X_n)_{n\geq 1}$ 是鞅. 特别地, $\phi(\theta)=1$, 则 $e^{\theta S_n}(n\geq 1)$ 关于 $(X_n)_{n\geq 1}$ 为鞅.
 \end{example}
 
 \begin{proof}
-    (Step 1) $\displaystyle M_n=\prod_{k=1}^n (\frac{1}{\phi(\theta)}e^{\theta X_k})$. 令 $Y_k=\frac{1}{\phi(\theta)}e^{\theta X_k}(k\geq 1)$ 则 $\EE Y_k=1$. 由例 \ref{exa:p144-exa5.5}, $(M_n)_{n\geq 1}$ 关于 $(Y_n)_{n\geq 1}$ 是鞅.
+    (Step 1) $M_n=\prod_{k=1}^n (\frac{1}{\phi(\theta)}e^{\theta X_k})$. 令 $Y_k=\frac{1}{\phi(\theta)}e^{\theta X_k}(k\geq 1)$ 则 $\EE Y_k=1$. 由例 \ref{exa:p144-exa5.5}, $(M_n)_{n\geq 1}$ 关于 $(Y_n)_{n\geq 1}$ 是鞅.
 
-    (Step 2) Claim: $\sigma(X_1,\cdots,X_n)=\sigma(Y_1,\cdots,Y_n)$, 即 $F_n^X=F_n^Y(\forall n\geq 1)$
+    (Step 2) Claim: $\sigma(X_1,\cdots,X_n)=\sigma(Y_1,\cdots,Y_n)$, 即 $\CF_n^X=\CF_n^Y(\forall n\geq 1)$.
+    
+    因为 $f(x)=\frac{1}{\phi(\theta)}e^{\theta x}$ 单调且存在反函数 $f^{-1}(y)=\frac{1}{\theta}\ln(y\phi(\theta))$, 是单射, $X_k$ 与 $Y_k$ 一一对应. 
 \end{proof}
 
 \begin{example}[赌徒破产]\label{exa:p145-exa5.3}
-    $\PP(X_1=1)=p, \PP(X_1=-1)=1-p,p\in (0,1),p\neq \frac{1}{2}$
+    $\PP(X_1=1)=p, \PP(X_1=-1)=1-p,p\in (0,1),p\neq \frac{1}{2}$. $S_n:=\sum_{k=1}^n X_k$.
 \end{example}
 
-$\theta=\ln(\frac{1-p}{p})$, 则
-\[
-\begin{aligned}
-    \phi(\theta)=\EE e^{\theta X_n}&=e^{\theta}\cdot p+e^{-\theta}(1-p)\\
-    &=(\frac{1-p}{p})p+(\frac{1-p}{p})^{-1}(1-p)\\
-    &=(1-p)+p=1<\infty
-\end{aligned}
-\]
+$\theta=\ln(\frac{1-p}{p})$, 则 $\phi(\theta)=\EE e^{\theta X_n}=e^{\theta}\cdot p+e^{-\theta}(1-p)=\frac{1-p}{p}\cdot p+\frac{p}{1-p}\cdot (1-p)=1<\infty$. 
+
 由例 \ref{exa:p144-exa5.6}, $e^{\theta S_n}=(\frac{1-p}{p})^{S_n}$ 关于 $(X_n)_{n\geq 1}$ 是鞅.
 
 \begin{lemma}[Jensen不等式]
     \begin{enumerate}
         \item $\EE (\phi(X)|A)\geq \phi(\EE(X|A))$
-        \item \[
-            \begin{aligned}
-                \EE(\phi(X)|\sigma(\Pi))&=\sum_{\Lambda\in \Pi}\EE(\phi(X)|\Lambda)\II_{\Lambda}\\
-                &\geq \sum_{\Lambda\in \Pi} \phi(\EE(X|\Lambda))\II_{\Lambda}\\
-                &=\phi(\EE(X|\sigma(\Pi)))
-            \end{aligned}
-        \]
+        \item $\EE(\phi(X)|\sigma(\Pi))=\sum_{\Lambda\in \Pi}\EE(\phi(X)|\Lambda)\II_{\Lambda}\geq \sum_{\Lambda\in \Pi} \phi(\EE(X|\Lambda))\II_{\Lambda}=\phi(\EE(X|\sigma(\Pi)))$.
+        
         注: 可以看出 $\EE(\phi(X)|\sigma(\Pi))$ 是随机变量, 因为 $\II_{\Lambda}$ 是随机变量.
         \item $\EE(\phi(X)|\CF)\geq \phi(\EE(X|\CF))$
     \end{enumerate}

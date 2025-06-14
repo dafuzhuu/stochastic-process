@@ -22,14 +22,14 @@
         \[
         \begin{aligned}
             \EE |W_n| &\leq \EE |W_0|+\sum_{m=1}^n \EE |H_m||M_m-M_{m-1}|\\
-            &\leq \EE |W_0|+\sum_{m=1}^n c_m (\EE |M_m|+ \EE |M_{m-1}|)\\
-            &<\infty
+            &\leq \EE |W_0|+\sum_{m=1}^n c_m (\EE |M_m|+ \EE |M_{m-1}|)<\infty
         \end{aligned}
         \]
         \item (适应性) 令 $\CF_n^X:=\sigma(X_0,X_1,\cdots,X_n), \forall n\geq 0$. $H_m\in \CF_{m-1}^X$.
         
         Claim: $M_m\in \CF_m^X, M_{m-1}\in \CF_{m-1}^X\st \CF_m^X \Rightarrow M_m-M_{m-1}\in \CF_m^X$.
         \begin{proof}
+        由 Def \ref{def:multi_rv_con_exp},
         \[
         \begin{aligned}
             \sigma(M_{m-1},M_m) &=(M_{m-1}, M_m)^{-1}(\ZZ\times \ZZ)\\

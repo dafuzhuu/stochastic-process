@@ -15,18 +15,18 @@
 因为 $\sup$ 是凸函数, 由Jensen不等式, $\EE X_0=\sup_{n\geq 0}\EE(X_0)\leq \EE(\sup_{n\geq 0} X_n)$. 由此可知Doob不等式的结论比Markov不等式更强.
 
 \begin{proof}
-    令 $T=\min\{n\geq 0|X_n>\lambda\}$, 则
+    令 $\tau=\min\{n\geq 0|X_n>\lambda\}$, 则
     \begin{enumerate}
-        \item $\{\tau=n\}=\{X_n>\lambda, X_k\leq \lambda,0\leq k\leq n-1\}\in\CF_n^X (\forall n\geq 0)$, 即 $T$ 关于 $(\CF_n^X)_{n\geq 0}$ 为停时.
-        \item $\PP(\sup_{n\geq 0}X_n>\lambda)=\PP(\exists n\geq 0, X_n>\lambda)=\PP(T<\infty)=\limit{n}\PP(T\leq n)\ (*)$. 
+        \item $\{\tau=n\}=\{X_n>\lambda, X_k\leq \lambda,0\leq k\leq n-1\}\in\CF_n^X (\forall n\geq 0)$, 即 $\tau$ 关于 $(\CF_n^X)_{n\geq 0}$ 为停时.
+        \item $\PP(\sup_{n\geq 0}X_n>\lambda)=\PP(\exists n\geq 0, X_n>\lambda)=\PP(\tau<\infty)=\limit{n}\PP(\tau\leq n)\ (*)$. 
     \end{enumerate}
-    (Step 1) 下证: $\PP(T\leq n)\leq \EE X_0/\lambda \ (\forall n\geq 0)$
+    (Step 1) 下证: $\PP(\tau\leq n)\leq \EE X_0/\lambda \ (\forall n\geq 0)$
 
     由 Thm \ref{thm:p149-thm5.13} 知, $(X_{\tau\land n})_{n\geq 0}$ 也为上鞅.
     \[
-    \EE X_0 \geq \EE X_{\tau\land n}=\EE (X_T\II_{\{T\leq n\}})+\EE(X_n\II_{\{T>n\}})\geq \lambda \PP(T\leq n)
+    \EE X_0 \geq \EE X_{\tau\land n}=\EE (X_{\tau}\II_{\{\tau\leq n\}})+\EE(X_n\II_{\{\tau>n\}})\geq \lambda \PP(\tau\leq n)
     \]
-    $\PP(T\leq n)\leq \EE X_0/\lambda, \forall n\geq 0$.
+    $\PP(\tau\leq n)\leq \EE X_0/\lambda, \forall n\geq 0$.
 
     (Step 2) 由 (Step 1) 和 $(*)$ 即得 $\PP(\sup_{n\geq 0} X_n\geq \lambda)\leq \EE X_0/\lambda$
 \end{proof}
@@ -35,31 +35,34 @@
     设 $(Y_n)_{n\geq 0}$ 为非负下鞅, $\lambda>0$, 则对每一个 $N$, 有
     \[
     \PP(\max_{0\leq k\leq N}Y_k\geq \lambda)\leq \frac{1}{\lambda}\EE\left(
-        Y_N\II_{\{\max_{0\leq k\leq N}Y_k\geq \lambda\}}
+        Y_N\II_{\displaystyle\{\max_{0\leq k\leq N}Y_k\geq \lambda\}}
     \right)\leq \frac{1}{\lambda}\EE (Y_N)
     \]
 \end{theorem}
 
-注:
+注: 由Markov不等式,
 \[
 \PP(\max_{0\leq k\leq N}Y_k\geq \lambda)\leq \EE\left(
-    \frac{\max_{0\leq k\leq N}Y_N}{\lambda}\II_{\{\max_{0\leq k\leq N}Y_k\geq \lambda\}}=:\zeta
+    \frac{\max_{0\leq k\leq N}Y_N}{\lambda}\II_{\displaystyle\{\max_{0\leq k\leq N}Y_k\geq \lambda\}}=:\zeta
 \right)
 \]
-而 $\lambda^{-1}\EE(Y_N\II_{\{\max_{0\leq k\leq N}Y_k\geq \lambda\}})\leq \zeta$, 说明 Doob不等式是很强的结果.
+而 $\lambda^{-1}\EE(Y_N\II_{\displaystyle\{\max_{0\leq k\leq N}Y_k\geq \lambda\}})\leq \zeta$, 说明 Doob不等式是很强的结果.
 
 \begin{proof}
     只需证第一个不等式. 令 $\tau=\min\{n\geq 0|Y_n\geq \lambda\}$, 则
 \begin{enumerate}
-    \item $\tau$ 关于 $(\CF_n^Y)_{n\geq 0}$ 为停时 (自己写)
-    \item $\{\max_{0\leq k\leq N}Y_k\geq \lambda\}=\{\tau\leq N\}=\sum_{k=0}^N\{\tau=k\}$
+    \item $\tau$ 关于 $(\CF_n^Y)_{n\geq 0}$ 为停时
+    \[
+    \{\tau=n\}=\{Y_n\geq \lambda,Y_k<\lambda,1\leq k\leq n-1\}\in\CF_n^X
+    \]
+    \item $\displaystyle\{\max_{0\leq k\leq N}Y_k\geq \lambda\}=\{\tau\leq N\}=\sum_{k=0}^N\{\tau=k\}$
     \[
     \begin{aligned}
         \lambda \times \RHS &=\EE(Y_N\II_{\{\tau\leq N\}})
         =\sum_{k=0}^N \EE(Y_N\II_{\{\tau=k\}})\\
         &=\sum_{k=0}^N \EE(\EE(Y_N\II_{\{\tau=k\}}|\CF_k^Y))\\
         &=\sum_{k=0}^N \EE(\II_{\{\tau=k\}}\cdot \EE(Y_N|\CF_k^Y))\\
-        &\geq \sum_{k=0}^N \EE(\II_{\{\tau=k\}}Y_k)\quad (\text{下鞅是下降的})\\
+        &\geq \sum_{k=0}^N \EE(\II_{\{\tau=k\}}Y_k)\\
         &\geq \lambda \sum_{k=0}^N\EE(\II_{\{\tau=k\}})=\lambda \PP(\tau\leq N)=\lambda\times \LHS
     \end{aligned}
     \]
@@ -116,7 +119,7 @@ X_n\in \left\{
 \]
 因此
 \[
-\EE(X_{n+1}|\CF_n^X)=\sum_{(x_0,\cdots,x_n)\\\in S_0\times \cdots\times S_n}\EE(X_{n+1}|(X_0,\cdots,X_n)\in (x_0,\cdots,x_n))\II_{\{(X_0,\cdots,X_n)=(x_0,\cdots,x_n)\}}
+\EE(X_{n+1}|\CF_n^X)=\sum_{\substack{(x_0,\cdots,x_n)\\ \in S_0\times \cdots\times S_n}}\EE(X_{n+1}|(X_0,\cdots,X_n)= (x_0,\cdots,x_n))\II_{\{(X_0,\cdots,X_n)=(x_0,\cdots,x_n)\}}
 \]
 关于 $\sigma$-代数的条件期望是变量; 关于集合的条件期望是实数, 随机性表现在示性函数上.
 
@@ -149,9 +152,10 @@ X_{n+1}\xlongequal{1^\circ}\frac{R_{n+1}}{n+k+1}\xlongequal{2^\circ}\frac{R_n}{n
 \tag{*1}
 \]
 (Step 3) 由 $(*1)$ 有
-
-$\displaystyle\EE(X_{n+1}|\CF_n^X)=\sum_{(x_0,\cdots,x_n)\\\in S_0\times \cdots\times S_n}
-x_n\II_{\{(X_0,\cdots,X_n)=(x_0,\cdots,x_n)\}}=X_n\quad (\forall n\geq 0)$
+\[
+\EE(X_{n+1}|\CF_n^X)=\sum_{\substack{(x_0,\cdots,x_n)\\ \in S_0\times \cdots\times S_n}}
+x_n\II_{\{(X_0,\cdots,X_n)=(x_0,\cdots,x_n)\}}=X_n\quad (\forall n\geq 0)
+\]
 \end{proof}
 
 (2) 由 (1) 知 $X_n(n\geq 0)$ 是非负鞅, 因此是非负上鞅. 故由 Cor \ref{cor:p160-cor} 知, $X_{\infty}:=\limit{n}X_n<\infty$ (a.s.). 问: 当 $k=2$ 时, 求 $X_{\infty}$ 的分布.

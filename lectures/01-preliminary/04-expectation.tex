@@ -131,11 +131,15 @@ X=\sum_{x\in S}x\II_{\{X=x\}}=\sum_{k\geq 1}x_k\II_{\Lambda_k}
     \]
 \end{theorem}
 
-\begin{theorem}
+\begin{theorem}\label{thm:thm1.11}
     若 $X\geq 0$ 取整数值, 则 $\EE (X)=\sum_{k\geq 1}\PP(X\geq k)$
 \end{theorem}
-
-证明：
+\begin{proof}
+\[
+\sum_{k=1}^{\infty}\PP(X\geq k)=\sum_{k=1}^{\infty}\sum_{l=k}^{\infty}\PP(X=l)=\sum_{l=1}^{\infty}\sum_{k=1}^l \PP(X=l)=\sum_{l=1}^{\infty}l\cdot \PP(X=l)=\sum_{l=0}^{\infty}l\cdot \PP(X=l)=\EE(X)
+\]
+其中第二个等号求和能交换是由于 Fubini 定理.
+\end{proof}
 
 \subsubsection{条件期望}
 
@@ -219,8 +223,8 @@ $\EE(aX+bY|\sigma(\Pi))=a\EE(X|\sigma(\Pi))+b\EE(Y|\sigma(\Pi))$
     \[
     \begin{aligned}
         \EE(X|\{\emp,\Omega\})&=\EE(X|\sigma(\Omega))\\
-        &=\II_{\Omega}\EE(X|\Omega)\qquad [\text{定义\eqref{def:part_con_exp}}]\\
-        &=\sum_{x\in S}x\PP(X=x|\Omega)\qquad [\text{定义\eqref{def:set_con_exp}}, \Omega\ind X]\\
+        &\xlongequal{\text{Def \ref{def:part_con_exp}}}\II_{\Omega}\EE(X|\Omega)\\
+        &\xlongequal{\text{Def \ref{def:set_con_exp}}, \Omega\ind X}\sum_{x\in S}x\PP(X=x|\Omega)\\
         &=\sum_{x\in S}x\PP(X=x)\\
         &=\EE(X)
     \end{aligned}
@@ -450,13 +454,13 @@ $\EE(Y|X_1,\cdots,X_n)$
 
 怎样把 \(\bigcup_{k=1}^{\infty} \sigma(X_k)\) 变成$\sigma$代数？
 
-\begin{definition}[多个离散随机变量的条件期望]\label{def:multi_rv_con_exp}
+\begin{definition}[多个离散随机变量生成的$\sigma$-代数]\label{def:multi_rv_con_exp}
     定义由离散随机变量 $X_1,\cdots,X_n$ 生成的 $\sigma$代数
     \[
     \begin{aligned}
         \sigma(X_1,\cdots,X_n)&:=(X_1,\cdots,X_n)^{-1}(2^{S_1}\times \cdots \times 2^{S_n})\\
         &:=\{\underbrace{(X_1,\cdots,X_n)^{-1}(A_1\times\cdots\times A_n)}_{\text{柱集}}|A_1\times\cdots\times A_n\st \underbrace{S_1\times\cdots\times S_n}_{\text{乘积空间}}\}\\
-        &=\{\bigcap_{k=1}^{\infty}X_k^{-1}(A_k)|A_k\in 2^{S_k},1\leq k\leq n\}
+        &=\left\{\bigcap_{k=1}^{\infty}X_k^{-1}(A_k)|A_k\in 2^{S_k},1\leq k\leq n\right\}
     \end{aligned}
     \]
 \end{definition}
@@ -470,7 +474,7 @@ $\EE(Y|X_1,\cdots,X_n)$
     \begin{enumerate}
         \item $\Pi_{(X_1,\cdots,X_n)}$ 是 $\Omega$ 的划分, 且
         \[
-            \sigma(\Pi_{(X_1,cdots,X_n)})=\left \{\sum_{\substack{(i_1,\cdots ,i_n) \\ \in J_1\times \cdots \times J_n}} (\Lambda_{1,i_1}\cap \cdots \cap \Lambda_{1,i_n})|J_k\st \NN,1\leq k\leq n\right \}
+            \sigma(\Pi_{(X_1,\cdots,X_n)})=\left \{\sum_{\substack{(i_1,\cdots ,i_n) \\ \in J_1\times \cdots \times J_n}} (\Lambda_{1,i_1}\cap \cdots \cap \Lambda_{1,i_n})|J_k\st \NN,1\leq k\leq n\right \}
         \]
         \item $\sigma(X_1,\cdots,X_n)=\sigma(\Pi_{(X_1,\cdots ,X_n)})$（即定义\ref{def:multi_rv_con_exp}是有意义的, well-defined, make sense, 良定义）
     \end{enumerate}

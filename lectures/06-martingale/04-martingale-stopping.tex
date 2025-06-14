@@ -34,13 +34,15 @@
 首达时 $V_a:=\min\{n\geq 0|X_n=a\}$. $\tau=\min\{n\geq 0|X_n\notin (a,b)\}=V_a\land V_b$
 
 \begin{example}[公平游戏中的赌徒破产]\label{exa:p151-exa1}
-    设 $X_1,X_2,\cdots\overset{\text{iid}}{\sim} \PP(X_1=1)=\PP(X_1=-1)=1/2$. 记 $\CF_n=\sigma(X_1,\cdots, X_n), \forall n\geq 1, \CF_0:=\{\emp, \Omega\}$. 令 $S_n=x+\sum_{k=1}^n X_k (n\geq 0, x\in \ZZ)$, 则 $\EE X_1=0$.
-
-    故由例 \ref{exa:p142-exa5.2} 知, $(S_n)_{n\geq 0}$ 在 $\PP(\cdot| S_0=x)$ 下关于 $(\CF_n)_{n\geq 0}$ 为鞅. (证明作为作业, 方法同例 \ref{exa:p142-exa5.2})
+    设 $X_1,X_2,\cdots\overset{\text{iid}}{\sim} \PP(X_1=1)=\PP(X_1=-1)=1/2$. 记 $\CF_n=\sigma(X_1,\cdots, X_n), \forall n\geq 1, \CF_0:=\{\emp, \Omega\}$. 令 $S_n=x+\sum_{k=1}^n X_k (n\geq 0, x\in \ZZ)$, 则 $\EE X_1=0$. 求 $\PP_x(V_a<V_b), \PP_x(V_b<V_a)$. (离出分布)
 \end{example}
 
 \begin{proof}[解]
-(1) 令 $\tau:=\min\{n\geq 0|S_n\notin (a,b)\}$, 其中 $a<x<b,a,b\in\ZZ$
+为了应用鞅停时定理, 要分别证明其条件: 为鞅, 有限停时, 停止过程有界.
+
+由例 \ref{exa:p142-exa5.2} 知, $(S_n)_{n\geq 0}$ 在 $\PP(\cdot| S_0=x)$ 下关于 $(\CF_n)_{n\geq 0}$ 为鞅. (证明作为作业, 方法同例 \ref{exa:p142-exa5.2})
+
+(1) 令 $\tau:=\min\{n\geq 0|S_n\notin (a,b)\}$, 其中 $a<x<b,a,b\in\ZZ$. 下面证 $\tau$ 为有限停时.
 
 Claim 1:
 \begin{enumerate}
@@ -98,6 +100,7 @@ Claim 3: $\PP_x(\tau<\infty)=1$, 即 $\PP_x(\tau=\infty)=0$.
         &\leq |a|\lor |b|
     \end{aligned}
     \]
+当 $\tau\leq n$ 时, $S_{\tau}=a$ 或 $b$. 当 $\tau>n$ 时, $S_n\in (a,b)$.
 \end{proof}
 
 (3) 求 $\PP_x(V_a<V_b), \PP_x(V_b<V_a)$. (离出分布)
@@ -119,7 +122,9 @@ x=\EE_x S_0=\EE_x S_{\tau}=a\PP_x(S_{\tau}=a)+b\PP_x(S_{\tau}=b)
 \end{example}
 
 \begin{proof}[解]
-令 $M_n:=(\frac{q}{p})^{S_n}(\forall n\geq 0)$. 由例 \ref{exa:p145-exa5.3} 知, $(M_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 为鞅.
+$\theta=\ln(\frac{1-p}{p})$, 由例 \ref{exa:p145-exa5.3} 知, $e^{\theta S_n}$ 为鞅.
+
+令 $M_n:=(\frac{q}{p})^{S_n}(\forall n\geq 0)$, 故 $(M_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 为鞅.
 \begin{enumerate}
     \item[(1)] 类比例 \ref{exa:p151-exa1} 易证 $\tau$ 关于 $(\CF_n)_{n\geq 0}$ 为停时, 且
     \begin{enumerate}
@@ -162,12 +167,12 @@ x=\EE_x S_0=\EE_x S_{\tau}=a\PP_x(S_{\tau}=a)+b\PP_x(S_{\tau}=b)
 
 因为无法判断 $\tilde{M}_n$ 的停止过程有界, 不能应用鞅停时定理. 用可选停时定理代替,
 \[
-\EE_x \tilde{M}_n\xlongequal{\text{Thm }\ref{thm:p149-thm5.13}}\EE_x \tilde{M}_{\tau\land n}=\EE_x(S_{\tau\land n}^n-\tau\land n)
+\EE_x \tilde{M}_n\xlongequal{\text{Thm }\ref{thm:p149-thm5.13}}\EE_x \tilde{M}_{\tau\land n}=\EE_x(S_{\tau\land n}^2-\tau\land n)
 \]
 
 (Step 1) Claim: (1) $\limit{n}\EE_x(S_{\tau\land n}^2)=\EE_x(S_{\tau}^2)$. (2) $\limit{n}\EE_x (\tau\land n)=\EE_x(\tau)$.
 
-注: 由断言, $\EE_x \tilde{M}_0=\EE_x \tilde{M}_n$ (用可选停时定理+取极限, 实现鞅停时定理的作用)
+注: 由断言, $\EE_x \tilde{M}_0=\EE_x \tilde{M}_{\tau}$ (用可选停时定理+取极限, 实现鞅停时定理的作用)
 \begin{proof}
     (1) 先证 $\limit{n}\EE_x(S_{\tau\land n}^2)=\EE_x(S_{\tau}^2)$.
     \begin{enumerate}
@@ -189,7 +194,7 @@ x=\EE_x S_0=\EE_x S_{\tau}=a\PP_x(S_{\tau}=a)+b\PP_x(S_{\tau}=b)
         \end{aligned}
         \]
     \end{enumerate}
-    (2) 
+    (2) 由 Thm \ref{thm:thm1.11},
     \[
     \begin{aligned}
         \EE_x(\tau\land n)&=\sum_{k=1}^{\infty} \PP_x(\tau\land n\geq k)=\sum_{k=1}^{n}\PP_x(\tau\land n\geq k)\\
@@ -211,7 +216,7 @@ x=\EE_x S_0=\EE_x S_{\tau}=a\PP_x(S_{\tau}=a)+b\PP_x(S_{\tau}=b)
 
 (Case 2) $p\neq 1/2$ 时, $\EE X_1=p-q=:\mu$. 故由例 \ref{exa:p142-exa5.2} 知, $M_n:=S_n-n\mu(\forall n\geq 0)$ 在 $\PP_x$ 下关于 $(\CF_n)_{n\geq 0}$ 为鞅. 由例 \ref{exa:p151-exa1} 知, $\PP_x(\tau=\infty)=0$.
 \[
-x=\EE_x M_0\xlongequal{\text{Thm } \ref{thm:p149-thm5.13}}=\EE_x M_{\tau\land n}=\EE_x(S_{\tau\land n})-\mu \EE_x(\tau\land n)
+x=\EE_x M_0\xlongequal{\text{Thm } \ref{thm:p149-thm5.13}}\EE_x M_{\tau\land n}=\EE_x(S_{\tau\land n})-\mu \EE_x(\tau\land n)
 \]
 类似 (Case 1) 可证: $\limit{n}\EE_x(S_{\tau\land n})=\EE_x(S_{\tau})$. $\limit{n}\EE_x (\tau\land n)=\EE_x(\tau)$. 故
 \[

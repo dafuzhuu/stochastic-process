@@ -9,8 +9,8 @@
 \end{definition}
 注: 离散 $\Rightarrow$ 默认 $\sigma$-代数由划分生成, 一系列性质在 Chap 1 中被严格证明.
 
-\begin{example}
-    设$(X_n)_{n\geq 0}$ 为一列随机变量列, 对$\forall n\geq 0$, 令 $\CF_n^X=\sigma(X_0,\cdots,X_n)=(X_0,\cdots,X_n)^{-1}(2^{S_1}\times\cdots\times 2^{S_n})$, 则 $(\CF_n^X)_{n\geq 0}$ 为一个流, 称为 $(X_n)_{n\geq 0}$ 的自然流.
+\begin{example}[自然流]
+    设$(X_n)_{n\geq 0}$ 为一列随机变量列, 对$\forall n\geq 0$, 由 Def \ref{def:multi_rv_con_exp}, 令 $\CF_n^X=\sigma(X_0,\cdots,X_n)=(X_0,\cdots,X_n)^{-1}(2^{S_0}\times\cdots\times 2^{S_n})$, 则 $(\CF_n^X)_{n\geq 0}$ 为一个流, 称为 $(X_n)_{n\geq 0}$ 的自然流.
 \end{example}
 
 \begin{definition}[离散鞅]\label{def:p140-def3}
@@ -25,7 +25,9 @@
 \begin{theorem}
     \begin{enumerate}
         \item (Durrett, Thm 5.1) 设 $(X_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 的鞅, 则 $\EE X_n=\EE X_0$.
-        \item 设 $(X_n)_{n\geq 0}$ 为关于 $(\CF_n)_{n\geq 0}$ 适应的可积随机变量列, 则 $(X_n)_{n\geq 0}$ 为关于 $(\CF_n)_{n\geq 0}$ 的鞅 $\iff$ $\EE(X_{n+1}-X_n|\CF_n)=0,\forall n\geq 0$.
+        \item 设 $(X_n)_{n\geq 0}$ 为关于 $(\CF_n)_{n\geq 0}$ 适应的可积随机变量列, 则 
+        
+        $(X_n)_{n\geq 0}$ 为关于 $(\CF_n)_{n\geq 0}$ 的鞅 $\iff$ $\EE(X_{n+1}-X_n|\CF_n)=0,\forall n\geq 0$.
     \end{enumerate}
 \end{theorem}
 
@@ -43,7 +45,7 @@
 \end{example}
 
 \begin{definition}
-    称 $(X_n)_{n\geq 0}$ 是关于 $(Y_n)_{n\geq 0}$ 的鞅. 若 $(X_n)_{n\geq 0}$ 关于 $Y$ 的自然域流 $\CF_n^X=\sigma(Y_0,\cdots,Y_n),n\geq 0$ 是鞅.
+    称 $(X_n)_{n\geq 0}$ 是关于 $(Y_n)_{n\geq 0}$ 的鞅. 若 $(X_n)_{n\geq 0}$ 关于 $Y$ 的自然域流 $\CF_n^Y=\sigma(Y_0,\cdots,Y_n),n\geq 0$ 是鞅.
 \end{definition}
 
 \begin{definition}
@@ -53,19 +55,19 @@
 \begin{definition}
     \begin{enumerate}
         \item $X$ 鞅 $\iff$ $X$ 上鞅, 下鞅
-        \item $S$ 上鞅 $\iff$ $-X$ 下鞅
+        \item $X$ 上鞅 $\iff$ $-X$ 下鞅
     \end{enumerate}
 \end{definition}
 
 \begin{theorem}[Durrett, Thm 5.9\& 5.10]
     \begin{enumerate}
-        \item 设 $(X_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 是一个上鞅, 则 $\EE M_{n+1}\leq \EE M_n$ (期望 $\downarrow$)
-        \item 设 $(X_n)_{n\geq 0}$ 关于 $(\mc{S}_n)_{n\geq 0}$ 是一个下鞅, 则 $\EE M_{n+1}\geq \EE M_n$ (期望 $\uparrow$)
+        \item 设 $(M_n)_{n\geq 0}$ 关于 $(\CF_n)_{n\geq 0}$ 是一个上鞅, 则 $\EE M_{n+1}\leq \EE M_n$ (期望 $\downarrow$)
+        \item 设 $(M_n)_{n\geq 0}$ 关于 $(\mc{S}_n)_{n\geq 0}$ 是一个下鞅, 则 $\EE M_{n+1}\geq \EE M_n$ (期望 $\uparrow$)
     \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-    (1) $\EE M_{n+1}=\EE(\EE(M_{n+1}|\CF_n))\leq \EE(M_n)$
+    (1) $\EE M_{n+1}=\EE(\EE(M_{n+1}|\CF_n))\leq \EE(M_n)$. (2) 同理.
 \end{proof}
 
 \begin{theorem}
@@ -81,25 +83,25 @@
 \EE\bigg(
     \EE(
         \underbrace{X|\sigma(\Pi_1)}_{\in \sigma(\Pi_1)\st \sigma(\Pi_2)}
-    )| \sigma(\Pi_2)
+    )\bigg| \sigma(\Pi_2)
 \bigg)=\EE(X|\sigma(\Pi_1))
 \]
 \[
 \EE\bigg(
     \EE(
         X|\sigma(\Pi_1)
-    )| \sigma(\Pi_2)
+    )\bigg| \sigma(\Pi_2)
 \bigg)=
 \EE\bigg(
     \EE(
         X|\sigma(\Pi_2)
-    )| \sigma(\Pi_1)
+    )\bigg| \sigma(\Pi_1)
 \bigg)
 \]
 \begin{proof}
-    (1) (可积性): $X$关于$\CF_n$是鞅 $\Rightarrow$ $\EE|X|<\infty$
+    (1) (可积性) $X$关于$\CF_n$是鞅 $\Rightarrow$ $\EE|X|<\infty$
 
     (适应性) $X$ 关于 $\mc{S}$ 适应
 
-    (鞅性) $\EE(X_{n+1}|\mc{S}_n)=\EE(\EE(X_{n+1}|\CF_n)|\mc{S}_n)=\EE(X_n|\mc{S}_n)=X_n$
+    (鞅性) $\EE(X_{n+1}|\mc{S}_n)=\EE(\EE(X_{n+1}|\mc{S}_n|\mc{F}_n)=\EE(\EE(X_{n+1}|\CF_n)|\mc{S}_n)=\EE(X_n|\mc{S}_n)=X_n$
 \end{proof}
